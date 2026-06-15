@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "OzzContextGen.CLI": {
+      "commandName": "Project",
+      "commandLineArgs": "-s ..\\..\\..\\..\\. -o ..\\..\\..\\..\\..\\contextgen.md"
+    }
+  }
+}

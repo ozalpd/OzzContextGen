@@ -26,12 +26,11 @@ The initial version will focus on a graphical interface. CLI execution may be ad
 - Select a solution directory or local repository
 - Scan code files by folder, extension, or naming pattern
 - Group files into context categories
-- Generate one or more Markdown files
+- Generates a Markdown file
 - Include file paths and fenced code blocks
 - Support configurable include and exclude rules
 - Preview generated context before saving
 - Regenerate context files when source code changes
-- Future support for CLI-style startup parameters
 
 ## Example Output Files
 
@@ -42,15 +41,19 @@ Examples of generated Markdown context files:
 - `myapp-services.md`
 - `myapp-frontend.md`
 
-## Future CLI Support
+## CLI Support
 
-Although OzzContextGen is initially a GUI application, future versions may support command-line startup parameters.
+OzzContextGen supports command-line startup parameters.
 
-Example future usage:
+Example usage:
 
 ```bash
-OzzContextGen --source "C:\Projects\TradeJournal" --config "contextgen.json" --output "C:\LLMContext"
+OzzContextGen --source "C:\Projects\TradeJournal" --output "C:\LLMContext"
 ```
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for a full history of notable changes.
 
 ## License
 

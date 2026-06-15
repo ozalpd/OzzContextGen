@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../CHANGELOG.md" />
+    <File Path="../README.md" />
+  </Folder>
+  <Project Path="OzzContextGen.CLI/OzzContextGen.CLI.csproj" />
+  <Project Path="OzzContextGen.Core/OzzContextGen.Core.csproj" />
+  <Project Path="OzzContextGen.i18n/OzzContextGen.i18n.csproj" />
+</Solution>
