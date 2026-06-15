@@ -192,4 +192,7 @@
   <data name="HelpDescription" xml:space="preserve">
     <value>Bu yardım ekranını gösterir</value>
   </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Hazır</value>
+  </data>
 </root>

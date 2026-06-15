@@ -6,11 +6,7 @@
 
         public CodeCrawler(params string[] suffixes)
         {
-            Suffixes = new(StringComparer.OrdinalIgnoreCase);
-            foreach (var suffix in suffixes)
-            {
-                Suffixes.Add(suffix);
-            }
+            Suffixes = new(suffixes, StringComparer.OrdinalIgnoreCase);
 
             ExcludedFolders = new(StringComparer.OrdinalIgnoreCase)
             {
