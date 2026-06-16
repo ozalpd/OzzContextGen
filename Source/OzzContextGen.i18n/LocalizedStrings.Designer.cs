@@ -61,6 +61,33 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analyze Changes.
+        /// </summary>
+        public static string AnalyzeChanges {
+            get {
+                return ResourceManager.GetString("AnalyzeChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse....
+        /// </summary>
+        public static string Browse {
+            get {
+                return ResourceManager.GetString("Browse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully completed Packing and Profile update.
+        /// </summary>
+        public static string CompletedProfilePacking {
+            get {
+                return ResourceManager.GetString("CompletedProfilePacking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Full path of the Context State Profile file.
         /// </summary>
         public static string ConfigDescription {
@@ -75,6 +102,15 @@ namespace OzzContextGen.i18n {
         public static string ExampleUsage {
             get {
                 return ResourceManager.GetString("ExampleUsage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Path.
+        /// </summary>
+        public static string FilePath {
+            get {
+                return ResourceManager.GetString("FilePath", resourceCulture);
             }
         }
         
@@ -115,6 +151,24 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error: Select a valid source folder.
+        /// </summary>
+        public static string InvalidSourceFolder {
+            get {
+                return ResourceManager.GetString("InvalidSourceFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Markdown File (*.md)|*.md.
+        /// </summary>
+        public static string MarkdownFileFilter {
+            get {
+                return ResourceManager.GetString("MarkdownFileFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Missing required parameter.
         /// </summary>
         public static string MissingParameter {
@@ -124,11 +178,29 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error: No files selected for packing.
+        /// </summary>
+        public static string NoFilesSelectedForPacking {
+            get {
+                return ResourceManager.GetString("NoFilesSelectedForPacking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disables Context State Profile tracking and packs everything from scratch.
         /// </summary>
         public static string NoHistoryDescription {
             get {
                 return ResourceManager.GetString("NoHistoryDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open/Create....
+        /// </summary>
+        public static string OpenCreate {
+            get {
+                return ResourceManager.GetString("OpenCreate", resourceCulture);
             }
         }
         
@@ -160,11 +232,38 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Output (.md):.
+        /// </summary>
+        public static string OutputFile {
+            get {
+                return ResourceManager.GetString("OutputFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pack.
+        /// </summary>
+        public static string Pack {
+            get {
+                return ResourceManager.GetString("Pack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Packaging process completed successfully..
         /// </summary>
         public static string PackagingCompleted {
             get {
                 return ResourceManager.GetString("PackagingCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pack Context (generate .md).
+        /// </summary>
+        public static string PackContext {
+            get {
+                return ResourceManager.GetString("PackContext", resourceCulture);
             }
         }
         
@@ -183,6 +282,24 @@ namespace OzzContextGen.i18n {
         public static string ProcessingFile {
             get {
                 return ResourceManager.GetString("ProcessingFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile (.ctxgen):.
+        /// </summary>
+        public static string ProfileFile {
+            get {
+                return ResourceManager.GetString("ProfileFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OzzContext Profile (*.ctxgen)|*.ctxgen.
+        /// </summary>
+        public static string ProfileFileFilter {
+            get {
+                return ResourceManager.GetString("ProfileFileFilter", resourceCulture);
             }
         }
         
@@ -214,11 +331,29 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scanning folder and analyzing changes.
+        /// </summary>
+        public static string ScanningAnalyzingChanges {
+            get {
+                return ResourceManager.GetString("ScanningAnalyzingChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scanning file list....
         /// </summary>
         public static string ScanningFiles {
             get {
                 return ResourceManager.GetString("ScanningFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scanning is finished. Listed {0} files.
+        /// </summary>
+        public static string ScanningFinished {
+            get {
+                return ResourceManager.GetString("ScanningFinished", resourceCulture);
             }
         }
         
@@ -232,11 +367,29 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Target....
+        /// </summary>
+        public static string SelectTarget {
+            get {
+                return ResourceManager.GetString("SelectTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The root folder path of the project&apos;s source code.
         /// </summary>
         public static string SourceDescription {
             get {
                 return ResourceManager.GetString("SourceDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source Folder:.
+        /// </summary>
+        public static string SourceFolder {
+            get {
+                return ResourceManager.GetString("SourceFolder", resourceCulture);
             }
         }
         
@@ -250,11 +403,38 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error: Please specify output path.
+        /// </summary>
+        public static string SpecifyOutputPath {
+            get {
+                return ResourceManager.GetString("SpecifyOutputPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Starting OzzContextGen....
         /// </summary>
         public static string Starting {
             get {
                 return ResourceManager.GetString("Starting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting packing process.
+        /// </summary>
+        public static string StartingPackingProcess {
+            get {
+                return ResourceManager.GetString("StartingPackingProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
             }
         }
         

@@ -6,4 +6,5 @@
   <Project Path="OzzContextGen.CLI/OzzContextGen.CLI.csproj" />
   <Project Path="OzzContextGen.Core/OzzContextGen.Core.csproj" />
   <Project Path="OzzContextGen.i18n/OzzContextGen.i18n.csproj" />
+  <Project Path="OzzContextGen.WPF/OzzContextGen.WPF.csproj" />
 </Solution>

@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.0.1] - 2025-07-15
+## [0.0.2] - 2026-06-17
+
+### Added
+- Add WPF GUI for context packing with MVVM. Introduced a new OzzContextGen.WPF project featuring a WPF MVVM-based UI for selecting source, profile, and output files, visualizing file changes, and packing selected files.
+
+### Changed
+- Refactored `PackerEngine` to separate file scanning and packing.
+
+## [0.0.1] - 2026-06-15
 
 ### Added
 - `CodeCrawler` — scans solution directories and local repositories for source files

@@ -195,4 +195,64 @@
   <data name="Ready" xml:space="preserve">
     <value>Ready</value>
   </data>
+  <data name="MarkdownFileFilter" xml:space="preserve">
+    <value>Markdown File (*.md)|*.md</value>
+  </data>
+  <data name="ProfileFileFilter" xml:space="preserve">
+    <value>OzzContext Profile (*.ctxgen)|*.ctxgen</value>
+  </data>
+  <data name="CompletedProfilePacking" xml:space="preserve">
+    <value>Successfully completed Packing and Profile update</value>
+  </data>
+  <data name="SpecifyOutputPath" xml:space="preserve">
+    <value>Error: Please specify output path</value>
+  </data>
+  <data name="StartingPackingProcess" xml:space="preserve">
+    <value>Starting packing process</value>
+  </data>
+  <data name="NoFilesSelectedForPacking" xml:space="preserve">
+    <value>Error: No files selected for packing</value>
+  </data>
+  <data name="ScanningAnalyzingChanges" xml:space="preserve">
+    <value>Scanning folder and analyzing changes</value>
+  </data>
+  <data name="InvalidSourceFolder" xml:space="preserve">
+    <value>Error: Select a valid source folder</value>
+  </data>
+  <data name="ScanningFinished" xml:space="preserve">
+    <value>Scanning is finished. Listed {0} files</value>
+  </data>
+  <data name="SourceFolder" xml:space="preserve">
+    <value>Source Folder:</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="ProfileFile" xml:space="preserve">
+    <value>Profile (.ctxgen):</value>
+  </data>
+  <data name="OpenCreate" xml:space="preserve">
+    <value>Open/Create...</value>
+  </data>
+  <data name="OutputFile" xml:space="preserve">
+    <value>Output (.md):</value>
+  </data>
+  <data name="SelectTarget" xml:space="preserve">
+    <value>Select Target...</value>
+  </data>
+  <data name="Pack" xml:space="preserve">
+    <value>Pack</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="FilePath" xml:space="preserve">
+    <value>File Path</value>
+  </data>
+  <data name="PackContext" xml:space="preserve">
+    <value>Pack Context (generate .md)</value>
+  </data>
+  <data name="AnalyzeChanges" xml:space="preserve">
+    <value>Analyze Changes</value>
+  </data>
 </root>

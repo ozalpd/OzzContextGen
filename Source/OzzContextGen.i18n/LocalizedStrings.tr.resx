@@ -195,4 +195,64 @@
   <data name="Ready" xml:space="preserve">
     <value>Hazır</value>
   </data>
+  <data name="MarkdownFileFilter" xml:space="preserve">
+    <value>Markdown Dosyası (*.md)|*.md</value>
+  </data>
+  <data name="ProfileFileFilter" xml:space="preserve">
+    <value>OzzContext Profile (*.ctxgen)|*.ctxgen</value>
+  </data>
+  <data name="CompletedProfilePacking" xml:space="preserve">
+    <value>Paketleme ve Profil güncelleme başarıyla tamamlandı</value>
+  </data>
+  <data name="SpecifyOutputPath" xml:space="preserve">
+    <value>Hata: Lütfen bir çıktı dosyası yolu belirleyin</value>
+  </data>
+  <data name="StartingPackingProcess" xml:space="preserve">
+    <value>Paketleme işlemi başlatılıyor</value>
+  </data>
+  <data name="NoFilesSelectedForPacking" xml:space="preserve">
+    <value>Hata: Paketlemek için hiçbir dosya seçilmedi</value>
+  </data>
+  <data name="ScanningAnalyzingChanges" xml:space="preserve">
+    <value>Klasör taranıyor ve farklar analiz ediliyor</value>
+  </data>
+  <data name="InvalidSourceFolder" xml:space="preserve">
+    <value>Hata: Geçerli bir kaynak klasör seçiniz</value>
+  </data>
+  <data name="ScanningFinished" xml:space="preserve">
+    <value>Tarama bitti. {0} dosya listelendi</value>
+  </data>
+  <data name="SourceFolder" xml:space="preserve">
+    <value>Kaynak Klasör:</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Gözat...</value>
+  </data>
+  <data name="ProfileFile" xml:space="preserve">
+    <value>Profil (.ctxgen):</value>
+  </data>
+  <data name="OpenCreate" xml:space="preserve">
+    <value>Aç/Oluştur...</value>
+  </data>
+  <data name="OutputFile" xml:space="preserve">
+    <value>Çıktı (.md):</value>
+  </data>
+  <data name="SelectTarget" xml:space="preserve">
+    <value>Hedef Seç...</value>
+  </data>
+  <data name="Pack" xml:space="preserve">
+    <value>Paketle</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Durum</value>
+  </data>
+  <data name="FilePath" xml:space="preserve">
+    <value>Dosya Yolu</value>
+  </data>
+  <data name="PackContext" xml:space="preserve">
+    <value>Bağlamı Paketle (.md Üret)</value>
+  </data>
+  <data name="AnalyzeChanges" xml:space="preserve">
+    <value>Farkları Tara</value>
+  </data>
 </root>

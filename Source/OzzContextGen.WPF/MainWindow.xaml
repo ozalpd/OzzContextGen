@@ -1,0 +1,105 @@
+﻿<Window x:Class="OzzContextGen.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels="clr-namespace:OzzContextGen.WPF.ViewModels"
+        xmlns:i18n="clr-namespace:OzzContextGen.i18n;assembly=OzzContextGen.i18n"
+        xmlns:local="clr-namespace:OzzContextGen.WPF"
+        mc:Ignorable="d"
+        Title="OzzContextGen - LLM Context Packer" Height="800" Width="800"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Üst Seçim Alanı -->
+            <RowDefinition Height="*"/>
+            <!-- Ana Dosya Listesi (DataGrid) -->
+            <RowDefinition Height="Auto"/>
+            <!-- Alt İşlem Butonları -->
+            <RowDefinition Height="Auto"/>
+            <!-- Durum Çubuğu (Status Bar) -->
+        </Grid.RowDefinitions>
+
+        <!-- 1. ÜST SEÇİM ALANI (Klasör ve Profil Seçimleri) -->
+        <GroupBox Header="Profil ve Dizin Ayarları" Grid.Row="0" Padding="5" Margin="0,0,0,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Kaynak Klasör -->
+                <TextBlock Text="{x:Static i18n:LocalizedStrings.SourceFolder}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Text="{Binding SourcePath, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
+                <Button Content="{x:Static i18n:LocalizedStrings.Browse}" Command="{Binding BrowseSourceCommand}" Grid.Row="0" Grid.Column="2" Padding="10,2" Margin="5"/>
+
+                <!-- Profil Dosyası (.ctxgen) -->
+                <TextBlock Text="{x:Static i18n:LocalizedStrings.ProfileFile}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Text="{Binding ProfilePath, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
+                <Button Content="{x:Static i18n:LocalizedStrings.OpenCreate}" Command="{Binding BrowseProfileCommand}" Grid.Row="1" Grid.Column="2" Padding="10,2" Margin="5"/>
+ 
+                <!-- Çıktı Dosyası (.md) -->
+                <TextBlock Text="{x:Static i18n:LocalizedStrings.OutputFile}" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Text="{Binding OutputPath, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
+                <Button Content="{x:Static i18n:LocalizedStrings.SelectTarget}" Command="{Binding BrowseOutputCommand}" Grid.Row="2" Grid.Column="2" Padding="10,2" Margin="5"/>
+            </Grid>
+        </GroupBox>
+
+        <!-- 2. ANA DOSYA LİSTESİ (DataGrid) -->
+        <Grid Grid.Row="1" Margin="0,0,0,10">
+            <DataGrid ItemsSource="{Binding TrackedFiles}" AutoGenerateColumns="False" CanUserAddRows="False" AlternatingRowBackground="#F5F5F5" GridLinesVisibility="Horizontal">
+                <DataGrid.Columns>
+                    <!-- Seçim Checkbox'ı -->
+                    <DataGridCheckBoxColumn Header="{x:Static i18n:LocalizedStrings.Pack}" Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" Width="70"/>
+
+                    <!-- Değişim Tipi (Yeni, Değişti, Aynı vb.) -->
+                    <DataGridTextColumn Header="{x:Static i18n:LocalizedStrings.Status}" Binding="{Binding ChangeType}" Width="100" IsReadOnly="True">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="New">
+                                        <Setter Property="Foreground" Value="Green"/>
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="Modified">
+                                        <Setter Property="Foreground" Value="OrangeRed"/>
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="Deleted">
+                                        <Setter Property="Foreground" Value="Gray"/>
+                                        <Setter Property="FontStyle" Value="Italic"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!-- Göreceli Dosya Yolu -->
+                    <DataGridTextColumn Header="{x:Static i18n:LocalizedStrings.FilePath}" Binding="{Binding RelativePath}" Width="*" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!-- 3. ALT İŞLEM BUTONLARI -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2" Margin="0,0,0,10">
+            <Button Content="{x:Static i18n:LocalizedStrings.AnalyzeChanges}" Command="{Binding AnalyzeChangesCommand}" Padding="20,5" Margin="5,0"/>
+            <Button Content="{x:Static i18n:LocalizedStrings.PackContext}" Command="{Binding PackCommand}" Padding="20,5" Margin="5,0" FontWeight="Bold" Background="#007ACC" Foreground="White"/>
+        </StackPanel>
+
+        <!-- 4. DURUM ÇUBUĞU (Status Bar) -->
+        <StatusBar Grid.Row="3" Background="#EEEEEE">
+            <StatusBarItem>
+                <TextBlock Text="{Binding StatusMessage}" />
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+
+</Window>
