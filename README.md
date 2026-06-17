@@ -48,7 +48,13 @@ OzzContextGen supports command-line startup parameters.
 Example usage:
 
 ```bash
-OzzContextGen --source "C:\Projects\TradeJournal" --output "C:\LLMContext"
+OzzContextGen --source "C:\Projects\TradeJournal" --output "C:\LLMContext.md"
+```
+
+Or
+
+```bash
+OzzContextGen --s "C:\Projects\TradeJournal" --o "C:\LLMContext.md"
 ```
 
 ## Changelog

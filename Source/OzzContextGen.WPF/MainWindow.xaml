@@ -45,7 +45,7 @@
                 <TextBlock Text="{x:Static i18n:LocalizedStrings.ProfileFile}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
                 <TextBox Text="{Binding ProfilePath, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
                 <Button Content="{x:Static i18n:LocalizedStrings.OpenCreate}" Command="{Binding BrowseProfileCommand}" Grid.Row="1" Grid.Column="2" Padding="10,2" Margin="5"/>
- 
+
                 <!-- Çıktı Dosyası (.md) -->
                 <TextBlock Text="{x:Static i18n:LocalizedStrings.OutputFile}" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
                 <TextBox Text="{Binding OutputPath, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
@@ -55,7 +55,10 @@
 
         <!-- 2. ANA DOSYA LİSTESİ (DataGrid) -->
         <Grid Grid.Row="1" Margin="0,0,0,10">
-            <DataGrid ItemsSource="{Binding TrackedFiles}" AutoGenerateColumns="False" CanUserAddRows="False" AlternatingRowBackground="#F5F5F5" GridLinesVisibility="Horizontal">
+            <DataGrid AlternatingRowBackground="#F5F5F5" GridLinesVisibility="Horizontal"
+                      ItemsSource="{Binding TrackedFiles}"
+                      SelectedItem="{Binding SelectedFile, Mode=TwoWay}"
+                      AutoGenerateColumns="False" CanUserAddRows="False">
                 <DataGrid.Columns>
                     <!-- Seçim Checkbox'ı -->
                     <DataGridCheckBoxColumn Header="{x:Static i18n:LocalizedStrings.Pack}" Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" Width="70"/>
@@ -91,7 +94,22 @@
         <!-- 3. ALT İŞLEM BUTONLARI -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2" Margin="0,0,0,10">
             <Button Content="{x:Static i18n:LocalizedStrings.AnalyzeChanges}" Command="{Binding AnalyzeChangesCommand}" Padding="20,5" Margin="5,0"/>
-            <Button Content="{x:Static i18n:LocalizedStrings.PackContext}" Command="{Binding PackCommand}" Padding="20,5" Margin="5,0" FontWeight="Bold" Background="#007ACC" Foreground="White"/>
+            <Button Content="{x:Static i18n:LocalizedStrings.PackContext}"
+                    Command="{Binding PackCommand}"
+                    Padding="20,5" Margin="5,0" FontWeight="Bold">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#007ACC"/>
+                        <Setter Property="Foreground" Value="#F8F8F8"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#005A9E"/>
+                                <Setter Property="Foreground" Value="#A0A0A0"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </StackPanel>
 
         <!-- 4. DURUM ÇUBUĞU (Status Bar) -->

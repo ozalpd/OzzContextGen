@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Refactored `PackerEngine` to separate file scanning and packing.
+- Refactored `MainViewModel` to use strongly-typed `RelayCommand` properties and dynamic `CanExecute` logic.
+- Added `SelectedFile` binding and event handling for `DataGrid` selection.
+- Improved `PackContext` button styling and feedback.
 
 ## [0.0.1] - 2026-06-15
 

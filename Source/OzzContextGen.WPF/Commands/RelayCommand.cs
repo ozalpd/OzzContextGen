@@ -20,6 +20,11 @@ namespace OzzContextGen.WPF.Commands
             return _canExecute?.Invoke() ?? true;
         }
 
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
+
         public void Execute(object? parameter)
         {
             _execute();
