@@ -10,8 +10,9 @@
         Title="OzzContextGen - LLM Context Packer" Height="800" Width="800"
         WindowStartupLocation="CenterScreen">
 
-    <Grid Margin="10">
+    <Grid Margin="0">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <!-- Üst Seçim Alanı -->
             <RowDefinition Height="*"/>
@@ -21,9 +22,32 @@
             <RowDefinition Height="Auto"/>
             <!-- Durum Çubuğu (Status Bar) -->
         </Grid.RowDefinitions>
-
+        <ToolBar Grid.Row="0">
+            <Button Style="{StaticResource IconButtonStyle-28x24}"
+                    ToolTip="{x:Static i18n:LocalizedStrings.OpenProfile}"
+                    Command="{Binding OpenProfileCommand}">
+                <Viewbox Width="18" Height="18">
+                    <Path Margin="0">
+                        <Path.Style>
+                            <Style TargetType="Path">
+                                <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                <Setter Property="Data" Value="{StaticResource folder2-open}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=Button}}" Value="False">
+                                        <Setter Property="Fill" Value="#808890"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}" Value="True">
+                                        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </Viewbox>
+            </Button>
+        </ToolBar>
         <!-- 1. ÜST SEÇİM ALANI (Klasör ve Profil Seçimleri) -->
-        <GroupBox Header="Profil ve Dizin Ayarları" Grid.Row="0" Padding="5" Margin="0,0,0,10">
+        <GroupBox Header="Profil ve Dizin Ayarları" Grid.Row="1" Padding="5" Margin="6">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -44,7 +68,8 @@
                 <!-- Profil Dosyası (.ctxgen) -->
                 <TextBlock Text="{x:Static i18n:LocalizedStrings.ProfileFile}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
                 <TextBox Text="{Binding ProfilePath, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
-                <Button Content="{x:Static i18n:LocalizedStrings.OpenCreate}" Command="{Binding BrowseProfileCommand}" Grid.Row="1" Grid.Column="2" Padding="10,2" Margin="5"/>
+                <Button Content="{x:Static i18n:LocalizedStrings.OpenCreate}" Command="{Binding OpenProfileCommand}"
+                        Grid.Row="1" Grid.Column="2" Padding="10,2" Margin="5" ToolTip="{x:Static i18n:LocalizedStrings.OpenProfile}"/>
 
                 <!-- Çıktı Dosyası (.md) -->
                 <TextBlock Text="{x:Static i18n:LocalizedStrings.OutputFile}" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
@@ -54,7 +79,7 @@
         </GroupBox>
 
         <!-- 2. ANA DOSYA LİSTESİ (DataGrid) -->
-        <Grid Grid.Row="1" Margin="0,0,0,10">
+        <Grid Grid.Row="2" Margin="6">
             <DataGrid AlternatingRowBackground="#F5F5F5" GridLinesVisibility="Horizontal"
                       ItemsSource="{Binding TrackedFiles}"
                       SelectedItem="{Binding SelectedFile, Mode=TwoWay}"
@@ -92,7 +117,7 @@
         </Grid>
 
         <!-- 3. ALT İŞLEM BUTONLARI -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2" Margin="0,0,0,10">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="3" Margin="0,0,0,10">
             <Button Content="{x:Static i18n:LocalizedStrings.AnalyzeChanges}" Command="{Binding AnalyzeChangesCommand}" Padding="20,5" Margin="5,0"/>
             <Button Content="{x:Static i18n:LocalizedStrings.PackContext}"
                     Command="{Binding PackCommand}"
@@ -113,7 +138,7 @@
         </StackPanel>
 
         <!-- 4. DURUM ÇUBUĞU (Status Bar) -->
-        <StatusBar Grid.Row="3" Background="#EEEEEE">
+        <StatusBar Grid.Row="4" Background="#EEEEEE">
             <StatusBarItem>
                 <TextBlock Text="{Binding StatusMessage}" />
             </StatusBarItem>

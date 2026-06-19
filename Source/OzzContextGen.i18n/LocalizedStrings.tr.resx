@@ -255,4 +255,7 @@
   <data name="AnalyzeChanges" xml:space="preserve">
     <value>Farkları Tara</value>
   </data>
+  <data name="OpenProfile" xml:space="preserve">
+    <value>Aç, OzzContext Profili (.ctxgen)</value>
+  </data>
 </root>

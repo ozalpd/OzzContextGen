@@ -205,6 +205,15 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open an OzzContext Profile (.ctxgen).
+        /// </summary>
+        public static string OpenProfile {
+            get {
+                return ResourceManager.GetString("OpenProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Operation completed successfully.
         /// </summary>
         public static string OperationCompleted {

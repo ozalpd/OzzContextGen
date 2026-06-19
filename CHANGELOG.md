@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.3] - 2026-06-20
+
+### Added
+- `Styles.xaml` — shared WPF resource dictionary with reusable control styles: validation-aware `TextBox` and `ComboBox` styles (inline error display, red border on error, tooltip), a read-only `TextBox` style, right-aligned and read-only `TextBlock` styles, and two icon `Button` sizes (22×18, 28×24).
+- `BootstrapIcons.xaml` — Bootstrap Icons v1.13.1 (MIT) as WPF `Geometry` resources, available application-wide for use in `Path` elements.
+
 ## [0.0.2] - 2026-06-17
 
 ### Added
@@ -27,5 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CLI entry point with `--source` and `--output` startup parameters
 - Localization support (English and Turkish) via `OzzContextGen.i18n`
 
-[Unreleased]: https://github.com/ozalpd/OzzContextGen/compare/v0.0.1...HEAD
+[Unreleased]: https://github.com/ozalpd/OzzContextGen/compare/v0.0.3...HEAD
+[0.0.3]: https://github.com/ozalpd/OzzContextGen/compare/v0.0.2...v0.0.3
+[0.0.2]: https://github.com/ozalpd/OzzContextGen/compare/v0.0.1...v0.0.2
+[0.0.1]: https://github.com/ozalpd/OzzContextGen/releases/tag/v0.0.1
 [0.0.1]: https://github.com/ozalpd/OzzContextGen/releases/tag/v0.0.1

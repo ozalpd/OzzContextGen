@@ -12,14 +12,11 @@ OzzContextGen solves this by allowing developers to select a local solution or r
 
 ## Application Type
 
-OzzContextGen is planned as a desktop GUI application.
+OzzContextGen is a desktop GUI application built with **WPF** (.NET 10).
 
-Possible UI technologies include:
+The UI uses an MVVM architecture and ships with a shared resource dictionary (`Styles.xaml`) for consistent control styling across views, including validation-aware TextBox and ComboBox styles. Icons are provided by [Bootstrap Icons v1.13.1](https://icons.getbootstrap.com) (MIT), exposed as WPF `Geometry` resources in `BootstrapIcons.xaml`.
 
-- WPF
-- .NET MAUI
-
-The initial version will focus on a graphical interface. CLI execution may be added later through startup parameters for automated or scripted usage.
+CLI execution is also supported via startup parameters for automated or scripted usage.
 
 ## Planned Features
 

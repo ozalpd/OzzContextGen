@@ -20,7 +20,7 @@ public class MainViewModel : AbstractViewModel
 
         BrowseSourceCommand = new RelayCommand(BrowseSource);
         BrowseOutputCommand = new RelayCommand(BrowseOutput);
-        BrowseProfileCommand = new RelayCommand(BrowseProfile);
+        OpenProfileCommand = new RelayCommand(async () => await OpenProfile());
         AnalyzeChangesCommand = new RelayCommand(async () => await AnalyzeChangesAsync());
         PackCommand = new RelayCommand(async () => await PackContextAsync(), CanPack);
 
@@ -31,7 +31,7 @@ public class MainViewModel : AbstractViewModel
 
     public RelayCommand BrowseSourceCommand { get; }
     public RelayCommand BrowseOutputCommand { get; }
-    public RelayCommand BrowseProfileCommand { get; }
+    public RelayCommand OpenProfileCommand { get; }
     public RelayCommand AnalyzeChangesCommand { get; }
     public RelayCommand PackCommand { get; }
 
@@ -122,13 +122,15 @@ public class MainViewModel : AbstractViewModel
         }
     }
 
-    private void BrowseProfile()
+    private async Task OpenProfile()
     {
         var dialog = new Microsoft.Win32.OpenFileDialog { Filter = LocalizedStrings.ProfileFileFilter };
         if (dialog.ShowDialog() == true)
         {
             ProfilePath = dialog.FileName;
         }
+        var profile = await _stateService.LoadProfileAsync(ProfilePath);
+        SourcePath = profile.TargetSourcePath;
     }
 
     private async Task AnalyzeChangesAsync()

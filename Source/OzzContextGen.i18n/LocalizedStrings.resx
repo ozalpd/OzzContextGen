@@ -255,4 +255,7 @@
   <data name="AnalyzeChanges" xml:space="preserve">
     <value>Analyze Changes</value>
   </data>
+  <data name="OpenProfile" xml:space="preserve">
+    <value>Open an OzzContext Profile (.ctxgen)</value>
+  </data>
 </root>
