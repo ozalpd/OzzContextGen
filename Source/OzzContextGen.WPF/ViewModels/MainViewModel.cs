@@ -105,7 +105,6 @@ public class MainViewModel : AbstractViewModel
 
     private void BrowseSource()
     {
-        // Klasör seçme diyalog kutusu (Ookii.Dialogs veya WinForms FolderBrowserDialog kullanılabilir)
         var dialog = new FolderBrowserDialog();
         if (dialog.ShowDialog() == DialogResult.OK)
         {
@@ -145,12 +144,15 @@ public class MainViewModel : AbstractViewModel
         TrackedFiles.Clear();
 
         // 1. Mevcut profil varsa yükle, yoksa yeni oluştur
+        // 1. Load existing profile if available, otherwise create a new one
         var profile = string.IsNullOrEmpty(ProfilePath)
             ? new ContextStateProfile()
             : await _stateService.LoadProfileAsync(ProfilePath);
 
         // 2. Çekirdek motordan dosya listesini al ve analiz et
         // PackerEngine'deki recursive tarama mantığıyla diskteki güncel listeyi simüle ediyoruz
+        // 2. Get the file list from the core engine and analyze it
+        // We simulate the current list on disk using the recursive scanning logic in PackerEngine
 
         var codeCrawler = new CodeCrawler(".cs");
         var csFiles = codeCrawler.GetCodeFiles(SourcePath).ToList();
@@ -178,6 +180,7 @@ public class MainViewModel : AbstractViewModel
         StatusMessage = $"{LocalizedStrings.StartingPackingProcess}";
 
         // Sadece GUI üzerinde kullanıcının check attığı (seçtiği) dosyaları filtreliyoruz
+        // We are filtering only the files selected by the user on the GUI
         var selectedFiles = TrackedFiles.Where(f => f.IsSelected).Select(f => f.AbsolutePath).ToList();
 
         if (!selectedFiles.Any())
@@ -186,16 +189,17 @@ public class MainViewModel : AbstractViewModel
             return;
         }
 
-        // PackerEngine'i tetikliyoruz (UI kilitlenmesin diye async)
+        // Triggering PackerEngine (async to avoid UI freezing)
         string markdownResult = await PackerEngine.PackSourceCodeAsync(selectedFiles, SourcePath, message =>
         {
-            StatusMessage = message; // İlerleme durumunu anlık olarak alt barda gösteriyoruz
+            StatusMessage = message; // Displaying the progress status in real-time
         });
 
-        // Dosyayı yaz
+        // Write the file
         await File.WriteAllTextAsync(OutputPath, markdownResult, System.Text.Encoding.UTF8);
 
         // Eğer profil yolu varsa .ctxgen dosyasını da güncelle
+        // If a profile path exists, also update the .ctxgen file
         if (!string.IsNullOrEmpty(ProfilePath))
         {
             var updatedTrackedFiles = TrackedFiles.ToDictionary(

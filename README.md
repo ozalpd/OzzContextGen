@@ -1,6 +1,6 @@
 # OzzContextGen
 
-OzzContextGen is a GUI-first developer utility that scans code files from a solution directory or local repository and generates structured Markdown context files for use with LLM chats.
+OzzContextGen is a developer utility that scans source code files from a solution directory or local repository and generates structured Markdown context documents for use with LLM chats.
 
 It helps developers package relevant source code into organized, attachable context documents such as models, repository contracts, services, and other project layers.
 
@@ -12,22 +12,50 @@ OzzContextGen solves this by allowing developers to select a local solution or r
 
 ## Application Type
 
-OzzContextGen is a desktop GUI application built with **WPF** (.NET 10).
+OzzContextGen is a multi-frontend desktop utility targeting **.NET 10**.
 
-The UI uses an MVVM architecture and ships with a shared resource dictionary (`Styles.xaml`) for consistent control styling across views, including validation-aware TextBox and ComboBox styles. Icons are provided by [Bootstrap Icons v1.13.1](https://icons.getbootstrap.com) (MIT), exposed as WPF `Geometry` resources in `BootstrapIcons.xaml`.
+| Frontend | Status | Technology |
+|---|---|---|
+| `OzzContextGen.WPF` | ✅ Available | WPF, MVVM |
+| `OzzContextGen.MAUI` | 🔜 Planned | .NET MAUI |
+| `OzzContextGen.CLI` | ✅ Available | Console |
 
-CLI execution is also supported via startup parameters for automated or scripted usage.
+The core scanning and packing logic lives in `OzzContextGen.Core`, which is **platform-agnostic** and shared by all frontends. `OzzContextGen.i18n` provides shared localization (English and Turkish) across all projects.
+
+The WPF frontend uses MVVM and ships with a shared `Styles.xaml` resource dictionary and [Bootstrap Icons v1.13.1](https://icons.getbootstrap.com) (MIT) as WPF `Geometry` resources in `BootstrapIcons.xaml`. The MAUI frontend will mirror the same MVVM structure.
+
+## Project Structure
+
+```
+OzzContextGen/
+├── Source/
+│   ├── OzzContextGen.Core/       # Platform-agnostic: scanning, packing, state
+│   │   ├── CodeCrawler.cs
+│   │   ├── PackerEngine.cs
+│   │   ├── StateService.cs
+│   │   └── Models/StateModels.cs
+│   ├── OzzContextGen.CLI/        # Command-line frontend
+│   ├── OzzContextGen.WPF/        # WPF desktop frontend (MVVM)
+│   ├── OzzContextGen.MAUI/       # .NET MAUI frontend (planned)
+│   └── OzzContextGen.i18n/       # Shared localization (en, tr)
+├── CHANGELOG.md
+└── README.md
+```
+
+## Features
+
+- Select a solution directory or local repository as the source
+- Scan code files by folder, extension, or naming pattern
+- Group files into context categories via `.ctxgen` profile files
+- Generate a single Markdown file with fenced code blocks per file
+- Include relative file paths as section headers
 
 ## Planned Features
 
-- Select a solution directory or local repository
-- Scan code files by folder, extension, or naming pattern
-- Group files into context categories
-- Generates a Markdown file
-- Include file paths and fenced code blocks
-- Support configurable include and exclude rules
+- Configurable include and exclude rules
 - Preview generated context before saving
-- Regenerate context files when source code changes
+- Regenerate context files automatically when source code changes
+- **Source trimming** — optionally strip comments (`TrimComments`) and/or XML documentation lines (`TrimXmlDocs`) from packed output to reduce file size and token count
 
 ## Example Output Files
 
@@ -42,17 +70,24 @@ Examples of generated Markdown context files:
 
 OzzContextGen supports command-line startup parameters.
 
-Example usage:
-
 ```bash
 OzzContextGen --source "C:\Projects\TradeJournal" --output "C:\LLMContext.md"
 ```
 
-Or
+Short aliases are also supported:
 
 ```bash
-OzzContextGen --s "C:\Projects\TradeJournal" --o "C:\LLMContext.md"
+OzzContextGen -s "C:\Projects\TradeJournal" -o "C:\LLMContext.md"
 ```
+
+Additional parameters:
+
+| Parameter | Alias | Description |
+|---|---|---|
+| `--source` | `-s` | Root directory of the project to scan |
+| `--output` | `-o` | Path for the generated Markdown file |
+| `--config` | `-c` | Path to a `.ctxgen` profile file |
+| `--nohistory` | `-n` | Skip loading previous scan state |
 
 ## Changelog
 
@@ -61,3 +96,4 @@ See [CHANGELOG.md](CHANGELOG.md) for a full history of notable changes.
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
+
