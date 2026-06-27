@@ -279,4 +279,10 @@
   <data name="Excluded" xml:space="preserve">
     <value>Excluded</value>
   </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>File Size</value>
+  </data>
+  <data name="ContextNote" xml:space="preserve">
+    <value>Context Note</value>
+  </data>
 </root>

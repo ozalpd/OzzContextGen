@@ -78,45 +78,65 @@
             </Grid>
         </GroupBox>
 
-        <!-- 2. ANA DOSYA LİSTESİ (DataGrid) -->
+        <!-- DataGrid & Detail Panel -->
         <Grid Grid.Row="2" Margin="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
             <DataGrid AlternatingRowBackground="#F5F5F5" GridLinesVisibility="Horizontal"
                       ItemsSource="{Binding TrackedFiles}"
                       SelectedItem="{Binding SelectedFile, Mode=TwoWay}"
                       AutoGenerateColumns="False" CanUserAddRows="False">
                 <DataGrid.Columns>
-                    <!-- Seçim Checkbox'ı -->
-                    <DataGridCheckBoxColumn Header="{x:Static i18n:LocalizedStrings.Pack}" Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" Width="70"/>
-
-                    <!-- Değişim Tipi (Yeni, Değişti, Aynı vb.) -->
-                    <DataGridTextColumn Header="{x:Static i18n:LocalizedStrings.Status}" Binding="{Binding ChangeType}" Width="100" IsReadOnly="True">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock">
-                                <Style.Triggers>
-                                    <Trigger Property="Text" Value="New">
-                                        <Setter Property="Foreground" Value="Green"/>
-                                        <Setter Property="FontWeight" Value="Bold"/>
-                                    </Trigger>
-                                    <Trigger Property="Text" Value="Modified">
-                                        <Setter Property="Foreground" Value="OrangeRed"/>
-                                        <Setter Property="FontWeight" Value="Bold"/>
-                                    </Trigger>
-                                    <Trigger Property="Text" Value="Deleted">
-                                        <Setter Property="Foreground" Value="Gray"/>
-                                        <Setter Property="FontStyle" Value="Italic"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-
-                    <!-- Göreceli Dosya Yolu -->
-                    <DataGridTextColumn Header="{x:Static i18n:LocalizedStrings.FilePath}" Binding="{Binding RelativePath}" Width="*" IsReadOnly="True"/>
+                    <DataGridCheckBoxColumn Header="{x:Static i18n:LocalizedStrings.Pack}"
+                                            Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" Width="70"/>
+                    <DataGridTextColumn Header="{x:Static i18n:LocalizedStrings.Status}"
+                                        Binding="{Binding ChangeType}" Width="100" IsReadOnly="True"
+                                        ElementStyle="{StaticResource StatusTextBlockStyle}"/>
+                    <DataGridTextColumn Header="{x:Static i18n:LocalizedStrings.FilePath}"
+                                        Binding="{Binding RelativePath}" Width="*" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
+            <Border Grid.Column="1" Margin="2,0" Padding="6" DataContext="{Binding SelectedFile}"
+                    Background="#F0F0F0" BorderBrush="#CCCCCC" BorderThickness="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{x:Static i18n:LocalizedStrings.FilePath}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                    <TextBlock Text=":" Grid.Row="0" Grid.Column="1" Margin="2"/>
+                    <TextBlock Text="{Binding RelativePath}" Grid.Row="0" Grid.Column="2" Background="White" Padding="4,2,0,2" Margin="1"/>
+
+                    <TextBlock Text="{x:Static i18n:LocalizedStrings.Status}" Grid.Row="1" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                    <TextBlock Text=":" Grid.Row="1" Grid.Column="1" Margin="2"/>
+                    <TextBlock Text="{Binding ChangeType}" Grid.Row="1" Grid.Column="2" Background="White" Padding="4,2,0,2" Margin="1"/>
+
+                    <TextBlock Text="{x:Static i18n:LocalizedStrings.FileSize}" Grid.Row="2" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                    <TextBlock Text=":" Grid.Row="2" Grid.Column="1" Margin="2"/>
+                    <TextBlock Text="{Binding FileSize}" Grid.Row="2" Grid.Column="2" Background="White" Padding="4,2,0,2" Margin="1"/>
+
+                    <TextBlock Text="{x:Static i18n:LocalizedStrings.Pack}" Grid.Row="3" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                    <TextBlock Text=":" Grid.Row="3" Grid.Column="1" Margin="2"/>
+                    <CheckBox IsChecked="{Binding IsSelected}" Grid.Row="3" Grid.Column="2" Background="White" Margin="0,4"/>
+
+                    <TextBlock Text="{x:Static i18n:LocalizedStrings.ContextNote}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                    <TextBlock Text=":" Grid.Row="4" Grid.Column="1" Margin="2"/>
+                    <TextBox Text="{Binding ContextNote}" Grid.Row="4" Grid.Column="2" Margin="1" TextWrapping="Wrap"/>
+                </Grid>
+            </Border>
         </Grid>
 
-        <!-- 3. ALT İŞLEM BUTONLARI -->
+        <!-- Action Buttons -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="3" Margin="0,0,0,10">
             <Button Content="{x:Static i18n:LocalizedStrings.AnalyzeChanges}" Command="{Binding AnalyzeChangesCommand}" Padding="20,5" Margin="5,0"/>
             <Button Content="{x:Static i18n:LocalizedStrings.PackContext}"
@@ -137,7 +157,7 @@
             </Button>
         </StackPanel>
 
-        <!-- 4. DURUM ÇUBUĞU (Status Bar) -->
+        <!-- Status Bar -->
         <StatusBar Grid.Row="4" Background="#EEEEEE">
             <StatusBarItem>
                 <TextBlock Text="{Binding StatusMessage}" />

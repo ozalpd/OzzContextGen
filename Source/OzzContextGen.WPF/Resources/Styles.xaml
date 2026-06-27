@@ -128,6 +128,24 @@
         <Setter Property="Background" Value="#EDEDED"/>
     </Style>
 
+
+    <Style x:Key="StatusTextBlockStyle" TargetType="TextBlock">
+        <Style.Triggers>
+            <Trigger Property="Text" Value="New">
+                <Setter Property="Foreground" Value="Green"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Trigger>
+            <Trigger Property="Text" Value="Modified">
+                <Setter Property="Foreground" Value="OrangeRed"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Trigger>
+            <Trigger Property="Text" Value="Deleted">
+                <Setter Property="Foreground" Value="Gray"/>
+                <Setter Property="FontStyle" Value="Italic"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!-- Button Style: toolbar icon button 22x18 -->
     <Style x:Key="IconButtonStyle-22x18" TargetType="Button">
         <Setter Property="Width" Value="22"/>

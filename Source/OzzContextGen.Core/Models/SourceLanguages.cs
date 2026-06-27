@@ -1,4 +1,4 @@
-namespace OzzContextGen.Core;
+namespace OzzContextGen.Core.Models;
 
 /// <summary>
 /// Registry of known <see cref="SourceLanguage"/> definitions, keyed by file suffix.

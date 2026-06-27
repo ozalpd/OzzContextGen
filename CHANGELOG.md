@@ -10,6 +10,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Planned
 - **Source trimming** — `TrimComments` and `TrimXmlDocs` options on `PackerEngine` to optionally strip inline/block comments and XML documentation lines, reducing output size and token count.
 
+## [0.1.2] - 2026-06-27
+
+### Changed
+- Replace FileStateInfo with FileContextEntry (adds ContextNote)
+- Move/split model records into Models/ directory
+- Add Helpers/FileExtensions.cs for file size formatting
+- WPF: DataGrid status coloring, file detail panel, context note editing
+- Add localized strings for file size and context note (en/tr)
+- PackerEngine outputs context notes in Markdown
+
 ## [0.1.1] - 2026-06-27
 
 ### Added
@@ -21,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refactored `FileChangeSummary` to inherit from `FileContextEntry`.
 - Enhanced `SourceLanguages` to support `.resx` and `.ctxgen` files.
 - Updated `PackerEngine` to operate on `FileContextEntry` objects.
+- Relocating the `FileChangeSummary` record and its logic from `StateModels.cs` to a new `FileChangeSummary.cs` file.
 
 ## [0.1.0] - 2026-06-27
 

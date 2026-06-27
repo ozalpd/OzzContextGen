@@ -279,4 +279,10 @@
   <data name="Excluded" xml:space="preserve">
     <value>Hariç Tutulan</value>
   </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>Dosya Boyu</value>
+  </data>
+  <data name="ContextNote" xml:space="preserve">
+    <value>Bağlam Notu</value>
+  </data>
 </root>

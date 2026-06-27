@@ -32,13 +32,16 @@ OzzContextGen/
 │   ├── OzzContextGen.Core/       # Platform-agnostic: scanning, packing, state
 │   │   ├── CodeCrawler.cs
 │   │   ├── PackerEngine.cs
-│   │   ├── SourceLanguage.cs
-│   │   ├── SourceLanguages.cs
 │   │   ├── StateService.cs
+│   │   ├── Helpers/
+│   │   │   └── FileExtensions.cs
 │   │   └── Models/
 │   │       ├── ContextStateProfile.cs
+│   │       ├── Enums.cs
+│   │       ├── FileChangeSummary.cs
 │   │       ├── FileContextEntry.cs
-│   │       └── StateModels.cs
+│   │       ├── SourceLanguage.cs
+│   │       └── SourceLanguages.cs
 │   ├── OzzContextGen.CLI/        # Command-line frontend
 │   ├── OzzContextGen.WPF/        # WPF desktop frontend (MVVM)
 │   ├── OzzContextGen.MAUI/       # .NET MAUI frontend (planned)

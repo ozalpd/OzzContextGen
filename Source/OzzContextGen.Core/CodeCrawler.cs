@@ -1,5 +1,11 @@
 ﻿namespace OzzContextGen.Core
 {
+    /// <summary>
+    /// The CodeCrawler class is responsible for recursively scanning a specified directory and collecting all files that match
+    /// certain file suffixes (e.g., ".cs" for C# source files). It also allows for the exclusion of specific folders (like "bin",
+    /// "obj", ".git", etc.) to avoid unnecessary files during the scan. The class provides a method to retrieve the absolute
+    /// paths of all matching source files found in the directory and its subdirectories.
+    /// </summary>
     public class CodeCrawler
     {
         public CodeCrawler() : this(".cs") { }

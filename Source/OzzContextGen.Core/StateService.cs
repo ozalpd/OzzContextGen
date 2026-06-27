@@ -54,6 +54,9 @@ public class StateService
                     RelativePath = relativePath,
                     AbsolutePath = filePath,
                     Change = isModified ? ChangeType.Modified : ChangeType.Unchanged,
+                    ContextNote = oldState.ContextNote,
+                    FileSize = fileInfo.Length,
+                    LastWriteTime = fileInfo.LastWriteTime,
                     IsSelected = oldState.IsSelected // Kullanıcının önceki seçim tercihini koru
                 });
             }

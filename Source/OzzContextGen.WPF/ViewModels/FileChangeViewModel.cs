@@ -1,4 +1,5 @@
-﻿using OzzContextGen.Core.Models;
+﻿using OzzContextGen.Core.Helpers;
+using OzzContextGen.Core.Models;
 using System.IO;
 
 namespace OzzContextGen.WPF.ViewModels
@@ -15,6 +16,9 @@ namespace OzzContextGen.WPF.ViewModels
         public string RelativePath => _summary.RelativePath;
         public string AbsolutePath => _summary.AbsolutePath;
         public string ChangeType => _summary.Change.ToString();
+
+        public string FileSize => _summary.FileSize.ToFileSize();
+
 
         public string ContextNote
         {
@@ -42,7 +46,8 @@ namespace OzzContextGen.WPF.ViewModels
             {
                 RelativePath = RelativePath,
                 LastWriteTime = File.GetLastWriteTime(AbsolutePath),
-                FileSize = new FileInfo(AbsolutePath).Length,
+                FileSize = _summary.Change != Core.Models.ChangeType.Deleted
+                         ? new FileInfo(AbsolutePath).Length : 0,
                 IsSelected = IsSelected,
                 ContextNote = ContextNote
             };

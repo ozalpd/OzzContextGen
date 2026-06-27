@@ -1,4 +1,4 @@
-namespace OzzContextGen.Core;
+namespace OzzContextGen.Core.Models;
 
 /// <summary>
 /// Describes a source file type: its file suffix, Markdown fence language identifier,

@@ -97,6 +97,15 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Context Note.
+        /// </summary>
+        public static string ContextNote {
+            get {
+                return ResourceManager.GetString("ContextNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deleted.
         /// </summary>
         public static string Deleted {
@@ -129,6 +138,15 @@ namespace OzzContextGen.i18n {
         public static string FilePath {
             get {
                 return ResourceManager.GetString("FilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Size.
+        /// </summary>
+        public static string FileSize {
+            get {
+                return ResourceManager.GetString("FileSize", resourceCulture);
             }
         }
         

@@ -13,12 +13,16 @@ Source/
 ├── OzzContextGen.Core/        # Platform-agnostic: scanning, packing, state
 │   ├── CodeCrawler.cs             # Recursive file scanner (suffixes driven by SourceLanguages)
 │   ├── PackerEngine.cs            # Markdown generator; resolves fence via SourceLanguages.TryGet
-│   ├── SourceLanguage.cs          # Record: Suffix, MarkdownFence, comment delimiters, XmlDocPrefix
-│   ├── SourceLanguages.cs         # Static registry of 13 built-in SourceLanguage definitions
 │   ├── StateService.cs            # .ctxgen profile load/save + file-change diff
+│   ├── Helpers/
+│   │   └── FileExtensions.cs          # File-size formatting extension methods
 │   └── Models/
-│       ├── ContextStateProfile.cs     # Root profile record (own file); includes SelectedSuffixes
-│       └── StateModels.cs             # FileStateInfo, FileChangeSummary, ChangeType
+│       ├── ContextStateProfile.cs     # Root profile record; includes SelectedSuffixes
+│       ├── Enums.cs                   # ChangeType enum (New / Modified / Unchanged / Deleted)
+│       ├── FileChangeSummary.cs       # Diff result record; inherits FileContextEntry
+│       ├── FileContextEntry.cs        # Per-file state snapshot (RelativePath, timestamps, IsSelected, ContextNote)
+│       ├── SourceLanguage.cs          # Record: Suffix, MarkdownFence, comment delimiters, XmlDocPrefix
+│       └── SourceLanguages.cs         # Static registry of 14 built-in SourceLanguage definitions
 ├── OzzContextGen.CLI/         # Console frontend (-s, -o, -c, -n flags)
 ├── OzzContextGen.WPF/         # WPF MVVM frontend
 │   ├── ViewModels/                # AbstractViewModel, MainViewModel, FileChangeViewModel
@@ -50,11 +54,11 @@ Source/
 ## Implemented Features
 
 - Recursive source file scanning with configurable suffixes and excluded folder list (`CodeCrawler`)
-- `SourceLanguage` record + `SourceLanguages` static registry — 13 built-in file type definitions mapping suffix → Markdown fence + comment delimiters + `XmlDocPrefix`
+- `SourceLanguage` record + `SourceLanguages` static registry — 14 built-in file type definitions mapping suffix → Markdown fence + comment delimiters + `XmlDocPrefix`
 - Single Markdown output with per-file fenced code blocks; fence language resolved dynamically via `SourceLanguages.TryGet` (`PackerEngine`)
 - Profile-aware `PackerEngine` overload — uses `ContextStateProfile.SelectedSuffixes` (falls back to all registered suffixes when empty)
 - `.ctxgen` JSON profile files with `SelectedSuffixes` persisting the user’s file-type selection between sessions (`StateService`, `ContextStateProfile`)
-- File-change diff analysis: New / Modified / Unchanged / Deleted (`StateService.AnalyzeChanges`)
+- File-change diff analysis: New / Modified / Unchanged / Deleted (`StateService.AnalyzeChanges`); per-file state stored as `FileContextEntry` (includes `ContextNote` for optional per-file annotations)
 - WPF MVVM GUI: browse source, open/save profile, analyze changes, pack context; round-trips `ProfileName` and `SelectedSuffixes` on save
 - CLI: `--source`, `--output`, `--config`, `--nohistory` parameters
 
