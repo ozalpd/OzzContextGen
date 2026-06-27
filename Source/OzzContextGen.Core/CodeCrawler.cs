@@ -23,10 +23,11 @@
         public HashSet<string> ExcludedFolders { get; }
 
         /// <summary>
-        /// Recursively scans the specified directory and returns a list of all C# source files (.cs), excluding certain folders.
+        /// Recursively scans the specified directory and returns all files whose extension
+        /// matches one of the configured <see cref="Suffixes"/>, excluding <see cref="ExcludedFolders"/>.
         /// </summary>
         /// <param name="path">The root directory to start scanning from.</param>
-        /// <returns>A list of file paths for all C# source files found.</returns>
+        /// <returns>A list of absolute file paths for all matching source files found.</returns>
         public IEnumerable<string> GetCodeFiles(string path)
         {
             var files = new List<string>();

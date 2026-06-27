@@ -13,6 +13,7 @@ public class MainViewModel : AbstractViewModel
 {
     private readonly PackerEngine _packerEngine;
     private readonly StateService _stateService;
+    private ContextStateProfile _currentProfile = new();
     public MainViewModel()
     {
         _packerEngine = new PackerEngine();
@@ -129,6 +130,7 @@ public class MainViewModel : AbstractViewModel
             ProfilePath = dialog.FileName;
         }
         var profile = await _stateService.LoadProfileAsync(ProfilePath);
+        _currentProfile = profile;
         SourcePath = profile.TargetSourcePath;
     }
 
@@ -149,12 +151,17 @@ public class MainViewModel : AbstractViewModel
             ? new ContextStateProfile()
             : await _stateService.LoadProfileAsync(ProfilePath);
 
+        _currentProfile = profile;
+
         // 2. Çekirdek motordan dosya listesini al ve analiz et
         // PackerEngine'deki recursive tarama mantığıyla diskteki güncel listeyi simüle ediyoruz
         // 2. Get the file list from the core engine and analyze it
         // We simulate the current list on disk using the recursive scanning logic in PackerEngine
 
-        var codeCrawler = new CodeCrawler(".cs");
+        var suffixes = profile.SelectedSuffixes.Count > 0
+            ? profile.SelectedSuffixes.ToArray()
+            : SourceLanguages.All.Keys.ToArray();
+        var codeCrawler = new CodeCrawler(suffixes);
         var csFiles = codeCrawler.GetCodeFiles(SourcePath).ToList();
 
         var changes = _stateService.AnalyzeChanges(SourcePath, profile, csFiles);
@@ -214,9 +221,11 @@ public class MainViewModel : AbstractViewModel
 
             var newProfile = new ContextStateProfile
             {
+                ProfileName = _currentProfile.ProfileName,
                 TargetSourcePath = SourcePath,
                 LastPackedAt = DateTime.Now,
-                TrackedFiles = updatedTrackedFiles
+                TrackedFiles = updatedTrackedFiles,
+                SelectedSuffixes = _currentProfile.SelectedSuffixes
             };
 
             await _stateService.SaveProfileAsync(ProfilePath, newProfile);

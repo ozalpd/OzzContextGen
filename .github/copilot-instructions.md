@@ -20,16 +20,18 @@ OzzContextGen is a .NET 10 developer utility that scans source code files and ge
 
 | Type | Responsibility |
 |---|---|
-| `CodeCrawler` | Recursively scans a directory for files matching configured suffixes. Excludes `bin`, `obj`, `.git`, `.vs`, `packages`, `node_modules`. |
-| `PackerEngine` | Produces a single Markdown document with fenced code blocks and relative-path headers for each file. Planned: `TrimComments` and `TrimXmlDocs` flags for source trimming. |
+| `CodeCrawler` | Recursively scans a directory for files matching configured suffixes. Excludes `bin`, `obj`, `.git`, `.vs`, `packages`, `node_modules`. Suffixes are driven by `SourceLanguages.All.Keys` by default. |
+| `PackerEngine` | Produces a single Markdown document with fenced code blocks and relative-path headers. Resolves the fence language via `SourceLanguages.TryGet`. Profile-aware overload uses `ContextStateProfile.SelectedSuffixes`. Planned: `TrimComments` and `TrimXmlDocs` flags for source trimming. |
+| `SourceLanguage` | Immutable record describing one file type: `Suffix`, `MarkdownFence`, `LineComment`, `BlockCommentStart`, `BlockCommentEnd`, `XmlDocPrefix`. |
+| `SourceLanguages` | Static registry of 13 built-in `SourceLanguage` definitions, keyed by suffix (case-insensitive). Exposes `All` dictionary and `TryGet(suffix)`. |
 | `StateService` | Loads/saves `.ctxgen` JSON profile files and computes `FileChangeSummary` diffs. |
-| `ContextStateProfile` | Root profile model (record). Contains `TrackedFiles` dictionary keyed by relative path. |
+| `ContextStateProfile` | Root profile model (record, own file). Contains `TrackedFiles`, `SelectedSuffixes` (persisted suffix selection), `ProfileName`, `TargetSourcePath`, `LastPackedAt`. |
 | `FileStateInfo` | Per-file state snapshot (record): relative path, last write time, file size, selection flag. |
 | `FileChangeSummary` | Diff result per file: `ChangeType` (New / Modified / Unchanged / Deleted) + `IsSelected`. |
 
 ### Profile Files
 
-Scan state is persisted as `.ctxgen` files (JSON). `StateService.LoadProfileAsync` / `SaveProfileAsync` handle serialization.
+Scan state is persisted as `.ctxgen` files (JSON). `StateService.LoadProfileAsync` / `SaveProfileAsync` handle serialization. `ContextStateProfile` lives in its own file (`Models/ContextStateProfile.cs`). The `SelectedSuffixes` property stores the user’s suffix selection per profile; an empty list means all `SourceLanguages`-registered suffixes are used.
 
 ## Key Constraints
 

@@ -11,15 +11,19 @@ OzzContextGen scans source code files in a local directory or repository and gen
 ```
 Source/
 ├── OzzContextGen.Core/        # Platform-agnostic: scanning, packing, state
-│   ├── CodeCrawler.cs         # Recursive file scanner (configurable suffixes + excluded folders)
-│   ├── PackerEngine.cs        # Markdown generator (fenced code blocks, relative-path headers)
-│   ├── StateService.cs        # .ctxgen profile load/save + file-change diff
-│   └── Models/StateModels.cs  # Domain records: ContextStateProfile, FileStateInfo, FileChangeSummary
+│   ├── CodeCrawler.cs             # Recursive file scanner (suffixes driven by SourceLanguages)
+│   ├── PackerEngine.cs            # Markdown generator; resolves fence via SourceLanguages.TryGet
+│   ├── SourceLanguage.cs          # Record: Suffix, MarkdownFence, comment delimiters, XmlDocPrefix
+│   ├── SourceLanguages.cs         # Static registry of 13 built-in SourceLanguage definitions
+│   ├── StateService.cs            # .ctxgen profile load/save + file-change diff
+│   └── Models/
+│       ├── ContextStateProfile.cs     # Root profile record (own file); includes SelectedSuffixes
+│       └── StateModels.cs             # FileStateInfo, FileChangeSummary, ChangeType
 ├── OzzContextGen.CLI/         # Console frontend (-s, -o, -c, -n flags)
 ├── OzzContextGen.WPF/         # WPF MVVM frontend
-│   ├── ViewModels/            # AbstractViewModel, MainViewModel, FileChangeViewModel
+│   ├── ViewModels/                # AbstractViewModel, MainViewModel, FileChangeViewModel
 │   ├── Commands/RelayCommand.cs
-│   └── Resources/             # Styles.xaml, BootstrapIcons.xaml
+│   └── Resources/                 # Styles.xaml, BootstrapIcons.xaml
 ├── OzzContextGen.MAUI/        # .NET MAUI frontend (planned — does not exist yet)
 └── OzzContextGen.i18n/        # Shared .resx localization (en + tr)
 ```
@@ -46,10 +50,12 @@ Source/
 ## Implemented Features
 
 - Recursive source file scanning with configurable suffixes and excluded folder list (`CodeCrawler`)
-- Single Markdown output with fenced code blocks and relative file-path headers (`PackerEngine`)
-- `.ctxgen` JSON profile files for persisting scan state between sessions (`StateService`)
+- `SourceLanguage` record + `SourceLanguages` static registry — 13 built-in file type definitions mapping suffix → Markdown fence + comment delimiters + `XmlDocPrefix`
+- Single Markdown output with per-file fenced code blocks; fence language resolved dynamically via `SourceLanguages.TryGet` (`PackerEngine`)
+- Profile-aware `PackerEngine` overload — uses `ContextStateProfile.SelectedSuffixes` (falls back to all registered suffixes when empty)
+- `.ctxgen` JSON profile files with `SelectedSuffixes` persisting the user’s file-type selection between sessions (`StateService`, `ContextStateProfile`)
 - File-change diff analysis: New / Modified / Unchanged / Deleted (`StateService.AnalyzeChanges`)
-- WPF MVVM GUI: browse source, open/save profile, analyze changes, pack context
+- WPF MVVM GUI: browse source, open/save profile, analyze changes, pack context; round-trips `ProfileName` and `SelectedSuffixes` on save
 - CLI: `--source`, `--output`, `--config`, `--nohistory` parameters
 
 ## Planned Features (Not Yet Implemented)

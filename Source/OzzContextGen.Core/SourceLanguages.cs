@@ -1,0 +1,144 @@
+namespace OzzContextGen.Core;
+
+/// <summary>
+/// Registry of known <see cref="SourceLanguage"/> definitions, keyed by file suffix.
+/// Used by <see cref="PackerEngine"/> to resolve the correct Markdown fence and comment
+/// delimiters for each source file.
+/// </summary>
+public static class SourceLanguages
+{
+    public static readonly SourceLanguage CSharp = new()
+    {
+        Suffix = ".cs",
+        MarkdownFence = "csharp",
+        LineComment = "//",
+        BlockCommentStart = "/*",
+        BlockCommentEnd = "*/",
+        XmlDocPrefix = "///"
+    };
+
+    public static readonly SourceLanguage Xaml = new()
+    {
+        Suffix = ".xaml",
+        MarkdownFence = "xml",
+        BlockCommentStart = "<!--",
+        BlockCommentEnd = "-->"
+    };
+
+    public static readonly SourceLanguage Html = new()
+    {
+        Suffix = ".html",
+        MarkdownFence = "html",
+        BlockCommentStart = "<!--",
+        BlockCommentEnd = "-->"
+    };
+
+    public static readonly SourceLanguage CssHtml = new()
+    {
+        Suffix = ".cshtml",
+        MarkdownFence = "html",
+        LineComment = "//",
+        BlockCommentStart = "/*",
+        BlockCommentEnd = "*/"
+    };
+
+    public static readonly SourceLanguage Sql = new()
+    {
+        Suffix = ".sql",
+        MarkdownFence = "sql",
+        LineComment = "--",
+        BlockCommentStart = "/*",
+        BlockCommentEnd = "*/"
+    };
+
+    public static readonly SourceLanguage JavaScript = new()
+    {
+        Suffix = ".js",
+        MarkdownFence = "javascript",
+        LineComment = "//",
+        BlockCommentStart = "/*",
+        BlockCommentEnd = "*/"
+    };
+
+    public static readonly SourceLanguage TypeScript = new()
+    {
+        Suffix = ".ts",
+        MarkdownFence = "typescript",
+        LineComment = "//",
+        BlockCommentStart = "/*",
+        BlockCommentEnd = "*/",
+        XmlDocPrefix = "///"
+    };
+
+    public static readonly SourceLanguage Css = new()
+    {
+        Suffix = ".css",
+        MarkdownFence = "css",
+        BlockCommentStart = "/*",
+        BlockCommentEnd = "*/"
+    };
+
+    public static readonly SourceLanguage Json = new()
+    {
+        Suffix = ".json",
+        MarkdownFence = "json"
+    };
+
+    public static readonly SourceLanguage Xml = new()
+    {
+        Suffix = ".xml",
+        MarkdownFence = "xml",
+        BlockCommentStart = "<!--",
+        BlockCommentEnd = "-->"
+    };
+
+    public static readonly SourceLanguage Markdown = new()
+    {
+        Suffix = ".md",
+        MarkdownFence = "markdown"
+    };
+
+    public static readonly SourceLanguage Python = new()
+    {
+        Suffix = ".py",
+        MarkdownFence = "python",
+        LineComment = "#",
+        BlockCommentStart = "\"\"\"",
+        BlockCommentEnd = "\"\"\""
+    };
+
+    public static readonly SourceLanguage PineScript = new()
+    {
+        Suffix = ".pine",
+        MarkdownFence = "pine",
+        LineComment = "//"
+    };
+
+    private static readonly Dictionary<string, SourceLanguage> _map =
+        new(StringComparer.OrdinalIgnoreCase)
+        {
+            [".cs"]     = CSharp,
+            [".xaml"]   = Xaml,
+            [".html"]   = Html,
+            [".cshtml"] = CssHtml,
+            [".sql"]    = Sql,
+            [".js"]     = JavaScript,
+            [".ts"]     = TypeScript,
+            [".css"]    = Css,
+            [".json"]   = Json,
+            [".xml"]    = Xml,
+            [".md"]     = Markdown,
+            [".py"]     = Python,
+            [".pine"]   = PineScript,
+        };
+
+    /// <summary>All registered language definitions, keyed by suffix (case-insensitive).</summary>
+    public static IReadOnlyDictionary<string, SourceLanguage> All => _map;
+
+    /// <summary>
+    /// Returns the <see cref="SourceLanguage"/> for the given file suffix, or <c>null</c>
+    /// if the suffix is not registered.
+    /// </summary>
+    public static SourceLanguage? TryGet(string suffix)
+        => _map.TryGetValue(suffix, out var lang) ? lang : null;
+}

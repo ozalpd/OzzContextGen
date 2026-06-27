@@ -32,8 +32,12 @@ OzzContextGen/
 │   ├── OzzContextGen.Core/       # Platform-agnostic: scanning, packing, state
 │   │   ├── CodeCrawler.cs
 │   │   ├── PackerEngine.cs
+│   │   ├── SourceLanguage.cs
+│   │   ├── SourceLanguages.cs
 │   │   ├── StateService.cs
-│   │   └── Models/StateModels.cs
+│   │   └── Models/
+│   │       ├── ContextStateProfile.cs
+│   │       └── StateModels.cs
 │   ├── OzzContextGen.CLI/        # Command-line frontend
 │   ├── OzzContextGen.WPF/        # WPF desktop frontend (MVVM)
 │   ├── OzzContextGen.MAUI/       # .NET MAUI frontend (planned)
@@ -49,6 +53,27 @@ OzzContextGen/
 - Group files into context categories via `.ctxgen` profile files
 - Generate a single Markdown file with fenced code blocks per file
 - Include relative file paths as section headers
+- Per-profile file type selection — choose which suffixes each `.ctxgen` profile scans; persisted between sessions
+
+## Supported File Types
+
+OzzContextGen recognises the following file types out of the box. Each is scanned automatically and wrapped in the correct Markdown fence in the output. Comment delimiters are stored for the planned **source trimming** feature.
+
+| Suffix | Markdown Fence | Line Comment | Block Comment | XML Doc |
+|---|---|---|---|---|
+| `.cs` | `csharp` | `//` | `/* */` | `///` |
+| `.xaml` | `xml` | — | `<!-- -->` | — |
+| `.html` | `html` | — | `<!-- -->` | — |
+| `.cshtml` | `html` | `//` | `/* */` | — |
+| `.sql` | `sql` | `--` | `/* */` | — |
+| `.js` | `javascript` | `//` | `/* */` | — |
+| `.ts` | `typescript` | `//` | `/* */` | `///` |
+| `.css` | `css` | — | `/* */` | — |
+| `.json` | `json` | — | — | — |
+| `.xml` | `xml` | — | `<!-- -->` | — |
+| `.md` | `markdown` | — | — | — |
+| `.py` | `python` | `#` | `""" """` | — |
+| `.pine` | `pine` | `//` | — | — |
 
 ## Planned Features
 

@@ -1,15 +1,5 @@
 ﻿namespace OzzContextGen.Core.Models;
 
-// .ctxgen dosyasının ana gövdesi
-public record ContextStateProfile
-{
-    public string ProfileName { get; init; } = "Default Profile";
-    public string TargetSourcePath { get; init; } = string.Empty;
-    public DateTime LastPackedAt { get; init; }
-    public Dictionary<string, FileStateInfo> TrackedFiles { get; init; } = new();
-}
-
-// Her bir dosyanın durum bilgisi
 public record FileStateInfo
 {
     public string RelativePath { get; init; } = string.Empty;
