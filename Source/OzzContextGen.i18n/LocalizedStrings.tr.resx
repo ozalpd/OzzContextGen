@@ -258,4 +258,25 @@
   <data name="OpenProfile" xml:space="preserve">
     <value>Aç, OzzContext Profili (.ctxgen)</value>
   </data>
+  <data name="New" xml:space="preserve">
+    <value>Yeni</value>
+  </data>
+  <data name="Modified" xml:space="preserve">
+    <value>Güncellenmiş</value>
+  </data>
+  <data name="Unchanged" xml:space="preserve">
+    <value>Değişmemiş</value>
+  </data>
+  <data name="Deleted" xml:space="preserve">
+    <value>Silinmiş</value>
+  </data>
+  <data name="FullPack" xml:space="preserve">
+    <value>Tam İçerik</value>
+  </data>
+  <data name="MetadataOnly" xml:space="preserve">
+    <value>Sadece Meta Veri</value>
+  </data>
+  <data name="Excluded" xml:space="preserve">
+    <value>Hariç Tutulan</value>
+  </data>
 </root>

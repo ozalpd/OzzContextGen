@@ -37,6 +37,7 @@ OzzContextGen/
 │   │   ├── StateService.cs
 │   │   └── Models/
 │   │       ├── ContextStateProfile.cs
+│   │       ├── FileContextEntry.cs
 │   │       └── StateModels.cs
 │   ├── OzzContextGen.CLI/        # Command-line frontend
 │   ├── OzzContextGen.WPF/        # WPF desktop frontend (MVVM)
@@ -74,6 +75,8 @@ OzzContextGen recognises the following file types out of the box. Each is scanne
 | `.md` | `markdown` | — | — | — |
 | `.py` | `python` | `#` | `""" """` | — |
 | `.pine` | `pine` | `//` | — | — |
+| `.resx` | `xml` | — | `<!-- -->` | — |
+| `.ctxgen` | `json` | — | — | — |
 
 ## Planned Features
 

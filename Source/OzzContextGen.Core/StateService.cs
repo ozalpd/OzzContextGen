@@ -54,7 +54,7 @@ public class StateService
                     RelativePath = relativePath,
                     AbsolutePath = filePath,
                     Change = isModified ? ChangeType.Modified : ChangeType.Unchanged,
-                    IsSelected = oldState.IsSelectedForPacking // Kullanıcının önceki seçim tercihini koru
+                    IsSelected = oldState.IsSelected // Kullanıcının önceki seçim tercihini koru
                 });
             }
             else

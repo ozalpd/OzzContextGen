@@ -10,6 +10,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Planned
 - **Source trimming** — `TrimComments` and `TrimXmlDocs` options on `PackerEngine` to optionally strip inline/block comments and XML documentation lines, reducing output size and token count.
 
+## [0.1.1] - 2026-06-27
+
+### Added
+- Added `FileInclusionMode` enum for future packaging options with localized new file state strings.
+
+### Changed
+- Replaced `FileStateInfo` with `FileContextEntry` across the codebase, adding support for context notes and selection state.
+- Updated `ContextStateProfile`, `StateService`, `MainViewModel`, and `FileChangeViewModel` to use the new model.
+- Refactored `FileChangeSummary` to inherit from `FileContextEntry`.
+- Enhanced `SourceLanguages` to support `.resx` and `.ctxgen` files.
+- Updated `PackerEngine` to operate on `FileContextEntry` objects.
+
 ## [0.1.0] - 2026-06-27
 
 ### Added

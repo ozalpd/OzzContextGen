@@ -258,4 +258,25 @@
   <data name="OpenProfile" xml:space="preserve">
     <value>Open an OzzContext Profile (.ctxgen)</value>
   </data>
+  <data name="New" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="Modified" xml:space="preserve">
+    <value>Modified</value>
+  </data>
+  <data name="Unchanged" xml:space="preserve">
+    <value>Unchanged</value>
+  </data>
+  <data name="Deleted" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
+  <data name="FullPack" xml:space="preserve">
+    <value>Full Pack</value>
+  </data>
+  <data name="MetadataOnly" xml:space="preserve">
+    <value>Metadata Only</value>
+  </data>
+  <data name="Excluded" xml:space="preserve">
+    <value>Excluded</value>
+  </data>
 </root>

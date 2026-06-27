@@ -1,4 +1,5 @@
 ﻿using OzzContextGen.Core.Models;
+using System.IO;
 
 namespace OzzContextGen.WPF.ViewModels
 {
@@ -15,6 +16,16 @@ namespace OzzContextGen.WPF.ViewModels
         public string AbsolutePath => _summary.AbsolutePath;
         public string ChangeType => _summary.Change.ToString();
 
+        public string ContextNote
+        {
+            get => _summary.ContextNote;
+            set
+            {
+                _summary.ContextNote = value;
+                RaisePropertyChanged(nameof(ContextNote));
+            }
+        }
+
         public bool IsSelected
         {
             get => _summary.IsSelected;
@@ -23,6 +34,18 @@ namespace OzzContextGen.WPF.ViewModels
                 _summary.IsSelected = value;
                 RaisePropertyChanged(nameof(IsSelected));
             }
+        }
+
+        public FileContextEntry ToFileContextEntry()
+        {
+            return new FileContextEntry
+            {
+                RelativePath = RelativePath,
+                LastWriteTime = File.GetLastWriteTime(AbsolutePath),
+                FileSize = new FileInfo(AbsolutePath).Length,
+                IsSelected = IsSelected,
+                ContextNote = ContextNote
+            };
         }
     }
 }

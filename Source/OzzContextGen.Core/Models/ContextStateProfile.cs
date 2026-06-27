@@ -24,7 +24,7 @@ public record ContextStateProfile
     /// Used by <see cref="StateService.AnalyzeChanges"/> to compute
     /// New / Modified / Unchanged / Deleted diffs on the next run.
     /// </summary>
-    public Dictionary<string, FileStateInfo> TrackedFiles { get; init; } = new();
+    public Dictionary<string, FileContextEntry> TrackedFiles { get; init; } = new();
 
     /// <summary>
     /// File suffixes to scan for this profile (e.g. <c>".cs"</c>, <c>".xaml"</c>).

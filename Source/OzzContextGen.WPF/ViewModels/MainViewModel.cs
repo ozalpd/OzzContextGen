@@ -188,7 +188,7 @@ public class MainViewModel : AbstractViewModel
 
         // Sadece GUI üzerinde kullanıcının check attığı (seçtiği) dosyaları filtreliyoruz
         // We are filtering only the files selected by the user on the GUI
-        var selectedFiles = TrackedFiles.Where(f => f.IsSelected).Select(f => f.AbsolutePath).ToList();
+        var selectedFiles = TrackedFiles.Where(f => f.IsSelected).Select(f => f.ToFileContextEntry()).ToList();
 
         if (!selectedFiles.Any())
         {
@@ -211,13 +211,7 @@ public class MainViewModel : AbstractViewModel
         {
             var updatedTrackedFiles = TrackedFiles.ToDictionary(
                 f => f.RelativePath,
-                f => new FileStateInfo
-                {
-                    RelativePath = f.RelativePath,
-                    LastWriteTime = File.GetLastWriteTime(f.AbsolutePath),
-                    FileSize = new FileInfo(f.AbsolutePath).Length,
-                    IsSelectedForPacking = f.IsSelected
-                });
+                f => f.ToFileContextEntry());
 
             var newProfile = new ContextStateProfile
             {

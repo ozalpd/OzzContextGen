@@ -97,11 +97,29 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deleted.
+        /// </summary>
+        public static string Deleted {
+            get {
+                return ResourceManager.GetString("Deleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Example Usage (Task Scheduler or Terminal).
         /// </summary>
         public static string ExampleUsage {
             get {
                 return ResourceManager.GetString("ExampleUsage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excluded.
+        /// </summary>
+        public static string Excluded {
+            get {
+                return ResourceManager.GetString("Excluded", resourceCulture);
             }
         }
         
@@ -120,6 +138,15 @@ namespace OzzContextGen.i18n {
         public static string FoundFiles {
             get {
                 return ResourceManager.GetString("FoundFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full Pack.
+        /// </summary>
+        public static string FullPack {
+            get {
+                return ResourceManager.GetString("FullPack", resourceCulture);
             }
         }
         
@@ -169,11 +196,38 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Metadata Only.
+        /// </summary>
+        public static string MetadataOnly {
+            get {
+                return ResourceManager.GetString("MetadataOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Missing required parameter.
         /// </summary>
         public static string MissingParameter {
             get {
                 return ResourceManager.GetString("MissingParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modified.
+        /// </summary>
+        public static string Modified {
+            get {
+                return ResourceManager.GetString("Modified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        public static string New {
+            get {
+                return ResourceManager.GetString("New", resourceCulture);
             }
         }
         
@@ -453,6 +507,15 @@ namespace OzzContextGen.i18n {
         public static string SystemError {
             get {
                 return ResourceManager.GetString("SystemError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unchanged.
+        /// </summary>
+        public static string Unchanged {
+            get {
+                return ResourceManager.GetString("Unchanged", resourceCulture);
             }
         }
         

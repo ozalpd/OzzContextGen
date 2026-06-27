@@ -114,6 +114,20 @@ public static class SourceLanguages
         LineComment = "//"
     };
 
+    public static readonly SourceLanguage Resx = new()
+    {
+        Suffix = ".resx",
+        MarkdownFence = "xml",
+        BlockCommentStart = "<!--",
+        BlockCommentEnd = "-->"
+    };
+
+    public static readonly SourceLanguage CtxGen = new()
+    {
+        Suffix = ".ctxgen",
+        MarkdownFence = "json"
+    };
+
     private static readonly Dictionary<string, SourceLanguage> _map =
         new(StringComparer.OrdinalIgnoreCase)
         {
@@ -130,6 +144,8 @@ public static class SourceLanguages
             [".md"]     = Markdown,
             [".py"]     = Python,
             [".pine"]   = PineScript,
+            [".resx"]   = Resx,
+            [".ctxgen"] = CtxGen,
         };
 
     /// <summary>All registered language definitions, keyed by suffix (case-insensitive).</summary>

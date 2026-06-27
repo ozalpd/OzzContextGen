@@ -22,36 +22,12 @@ namespace OzzContextGen.Core
             progressAction?.Invoke(LocalizedStrings.ScanningFiles);
 
             var codeCrawler = new CodeCrawler(SourceLanguages.All.Keys.ToArray());
-            var codeFiles = codeCrawler.GetCodeFiles(sourcePath).ToList();
+            var codeFiles = codeCrawler.GetCodeFiles(sourcePath).Select(f => new FileContextEntry() { RelativePath = Path.GetRelativePath(sourcePath, f) }).ToList();
 
             return await PackSourceCodeAsync(codeFiles, sourcePath, progressAction);
         }
 
-        /// <summary>
-        /// Scans <paramref name="sourcePath"/> using the suffix selection stored in <paramref name="profile"/>.
-        /// When <see cref="ContextStateProfile.SelectedSuffixes"/> is empty, all suffixes registered in
-        /// <see cref="SourceLanguages"/> are used.
-        /// </summary>
-        public async Task<string> PackSourceCodeAsync(string sourcePath, ContextStateProfile profile, Action<string>? progressAction = null)
-        {
-            if (!Directory.Exists(sourcePath))
-            {
-                throw new DirectoryNotFoundException(string.Format(LocalizedStrings.SourceFolderNotFound, sourcePath));
-            }
-
-            progressAction?.Invoke(LocalizedStrings.ScanningFiles);
-
-            var suffixes = profile.SelectedSuffixes.Count > 0
-                ? profile.SelectedSuffixes.ToArray()
-                : SourceLanguages.All.Keys.ToArray();
-
-            var codeCrawler = new CodeCrawler(suffixes);
-            var codeFiles = codeCrawler.GetCodeFiles(sourcePath).ToList();
-
-            return await PackSourceCodeAsync(codeFiles, sourcePath, progressAction);
-        }
-
-        public static async Task<string> PackSourceCodeAsync(List<string> codeFiles, string sourcePath, Action<string>? progressAction)
+        public static async Task<string> PackSourceCodeAsync(List<FileContextEntry> codeFiles, string sourcePath, Action<string>? progressAction)
         {
             progressAction?.Invoke(string.Format(LocalizedStrings.FoundFiles, codeFiles.Count));
 
@@ -68,10 +44,10 @@ namespace OzzContextGen.Core
             foreach (var filePath in codeFiles)
             {
                 // Notify the user which file is being processed via GUI or CLI
-                string relativePath = Path.GetRelativePath(sourcePath, filePath);
+                string relativePath = filePath.RelativePath;
                 progressAction?.Invoke(string.Format(LocalizedStrings.ProcessingFile, relativePath));
 
-                string suffix = Path.GetExtension(filePath);
+                string suffix = Path.GetExtension(relativePath);
                 string fence = SourceLanguages.TryGet(suffix)?.MarkdownFence ?? "text";
 
                 sb.AppendLine($"## FILE: {relativePath}");
@@ -80,7 +56,7 @@ namespace OzzContextGen.Core
                 try
                 {
                     // Read the file asynchronously to prevent UI blocking in large projects
-                    string content = await File.ReadAllTextAsync(filePath, Encoding.UTF8);
+                    string content = await File.ReadAllTextAsync(Path.Combine(sourcePath, filePath.RelativePath), Encoding.UTF8);
                     sb.AppendLine(content);
                 }
                 catch (Exception ex)
