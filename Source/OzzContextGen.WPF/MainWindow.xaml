@@ -18,8 +18,6 @@
             <RowDefinition Height="*"/>
             <!-- Ana Dosya Listesi (DataGrid) -->
             <RowDefinition Height="Auto"/>
-            <!-- Alt İşlem Butonları -->
-            <RowDefinition Height="Auto"/>
             <!-- Durum Çubuğu (Status Bar) -->
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0">
@@ -45,6 +43,50 @@
                     </Path>
                 </Viewbox>
             </Button>
+            <Button Style="{StaticResource IconButtonStyle-28x24}"
+                    Command="{Binding AnalyzeChangesCommand}"
+                    ToolTip="{x:Static i18n:LocalizedStrings.AnalyzeChanges}">
+                <Viewbox Width="18" Height="18">
+                    <Path Margin="0">
+                        <Path.Style>
+                            <Style TargetType="Path">
+                                <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                <Setter Property="Data" Value="{StaticResource arrow-repeat}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=Button}}" Value="False">
+                                        <Setter Property="Fill" Value="#808890"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}" Value="True">
+                                        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </Viewbox>
+            </Button>
+            <Button Padding="8,3" Margin="3,0" FontWeight="Bold"
+                    Command="{Binding PackCommand}"
+                    Content="{x:Static i18n:LocalizedStrings.Pack}"
+                    ToolTip="{x:Static i18n:LocalizedStrings.PackContext}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#007ACC"/>
+                        <Setter Property="Foreground" Value="#F8F8F8"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#005A9E"/>
+                                <Setter Property="Foreground" Value="#A0A0A0"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#A0A0A0"/>
+                                <Setter Property="Foreground" Value="#D8D8D8"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
         </ToolBar>
         <!-- 1. ÜST SEÇİM ALANI (Klasör ve Profil Seçimleri) -->
         <GroupBox Header="Profil ve Dizin Ayarları" Grid.Row="1" Padding="5" Margin="6">
@@ -90,7 +132,7 @@
                       AutoGenerateColumns="False" CanUserAddRows="False">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Header="{x:Static i18n:LocalizedStrings.Pack}"
-                                            Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" Width="70"/>
+                                            Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" Width="40"/>
                     <DataGridTextColumn Header="{x:Static i18n:LocalizedStrings.Status}"
                                         Binding="{Binding ChangeType}" Width="100" IsReadOnly="True"
                                         ElementStyle="{StaticResource StatusTextBlockStyle}"/>
@@ -99,7 +141,7 @@
                 </DataGrid.Columns>
             </DataGrid>
             <Border Grid.Column="1" Margin="2,0" Padding="6" DataContext="{Binding SelectedFile}"
-                    Background="#F0F0F0" BorderBrush="#CCCCCC" BorderThickness="1">
+                    Background="#F0F0F0" BorderBrush="#484848" BorderThickness="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -136,29 +178,8 @@
             </Border>
         </Grid>
 
-        <!-- Action Buttons -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="3" Margin="0,0,0,10">
-            <Button Content="{x:Static i18n:LocalizedStrings.AnalyzeChanges}" Command="{Binding AnalyzeChangesCommand}" Padding="20,5" Margin="5,0"/>
-            <Button Content="{x:Static i18n:LocalizedStrings.PackContext}"
-                    Command="{Binding PackCommand}"
-                    Padding="20,5" Margin="5,0" FontWeight="Bold">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="#007ACC"/>
-                        <Setter Property="Foreground" Value="#F8F8F8"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#005A9E"/>
-                                <Setter Property="Foreground" Value="#A0A0A0"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-        </StackPanel>
-
         <!-- Status Bar -->
-        <StatusBar Grid.Row="4" Background="#EEEEEE">
+        <StatusBar Grid.Row="3" Background="#EEEEEE">
             <StatusBarItem>
                 <TextBlock Text="{Binding StatusMessage}" />
             </StatusBarItem>
