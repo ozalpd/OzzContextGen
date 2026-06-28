@@ -6,9 +6,13 @@
         xmlns:viewmodels="clr-namespace:OzzContextGen.WPF.ViewModels"
         xmlns:i18n="clr-namespace:OzzContextGen.i18n;assembly=OzzContextGen.i18n"
         xmlns:local="clr-namespace:OzzContextGen.WPF"
+        xmlns:helpers="clr-namespace:OzzContextGen.WPF.Helpers"
         mc:Ignorable="d"
         Title="OzzContextGen - LLM Context Packer" Height="800" Width="800"
         WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <helpers:BindingProxy x:Key="proxy" Data="{Binding}"/>
+    </Window.Resources>
 
     <Grid Margin="0">
         <Grid.RowDefinitions>
@@ -65,18 +69,67 @@
                     </Path>
                 </Viewbox>
             </Button>
-            <Button Padding="8,3" Margin="3,0" FontWeight="Bold"
+            <Button Style="{StaticResource IconButtonStyle-38x24}"
+                    Command="{Binding RemoveDeletedFilesCommand}"
+                    ToolTip="{x:Static i18n:LocalizedStrings.RemoveDeletedFiles}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                    <Viewbox Width="15" Height="15">
+                        <Path Margin="1,-2,-1,0" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-45"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                            <Path.Style>
+                                <Style TargetType="Path">
+                                    <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                    <Setter Property="Data" Value="{StaticResource file-earmark-x}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=Button}}" Value="False">
+                                            <Setter Property="Fill" Value="#808890"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}" Value="True">
+                                            <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Path.Style>
+                        </Path>
+                    </Viewbox>
+                    <Viewbox Width="18" Height="18">
+                        <Path Margin="-4,0,0,0">
+                            <Path.Style>
+                                <Style TargetType="Path">
+                                    <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                    <Setter Property="Data" Value="{StaticResource trash}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=Button}}" Value="False">
+                                            <Setter Property="Fill" Value="#808890"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}" Value="True">
+                                            <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Path.Style>
+                        </Path>
+                    </Viewbox>
+                </StackPanel>
+            </Button>
+            <Button x:Name="PackButton" Padding="8,3" Margin="3,0" FontWeight="Bold"
                     Command="{Binding PackCommand}"
-                    Content="{x:Static i18n:LocalizedStrings.Pack}"
                     ToolTip="{x:Static i18n:LocalizedStrings.PackContext}">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="#007ACC"/>
-                        <Setter Property="Foreground" Value="#F8F8F8"/>
+                        <Setter Property="Foreground" Value="#F0F0F0"/>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="#005A9E"/>
-                                <Setter Property="Foreground" Value="#A0A0A0"/>
+                                <Setter Property="Foreground" Value="#007ACC"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter Property="Background" Value="#A0A0A0"/>
@@ -85,8 +138,20 @@
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="{x:Static i18n:LocalizedStrings.Pack}" Margin="0,0,4,0"/>
+                    <Viewbox Width="18" Height="18">
+                        <Path Margin="2,0,0,0">
+                            <Path.Style>
+                                <Style TargetType="Path">
+                                    <Setter Property="Fill" Value="{Binding Foreground, ElementName=PackButton}"/>
+                                    <Setter Property="Data" Value="{StaticResource box-seam-fill}"/>
+                                </Style>
+                            </Path.Style>
+                        </Path>
+                    </Viewbox>
+                </StackPanel>
             </Button>
-
         </ToolBar>
         <!-- 1. ÜST SEÇİM ALANI (Klasör ve Profil Seçimleri) -->
         <GroupBox Header="Profil ve Dizin Ayarları" Grid.Row="1" Padding="5" Margin="6">
@@ -126,13 +191,22 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid AlternatingRowBackground="#F5F5F5" GridLinesVisibility="Horizontal"
+            <DataGrid x:Name="FileGrid" AlternatingRowBackground="#F5F5F5" GridLinesVisibility="Horizontal"
                       ItemsSource="{Binding TrackedFiles}"
                       SelectedItem="{Binding SelectedFile, Mode=TwoWay}"
                       AutoGenerateColumns="False" CanUserAddRows="False">
                 <DataGrid.Columns>
-                    <DataGridCheckBoxColumn Header="{x:Static i18n:LocalizedStrings.Pack}"
-                                            Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" Width="40"/>
+                    <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" Width="80">
+                        <DataGridCheckBoxColumn.Header>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="{x:Static i18n:LocalizedStrings.Pack}" />
+                                <CheckBox Margin="4,0,0,0"
+                                          IsChecked="{Binding Data.IsAllSelected, Source={StaticResource proxy}, Mode=OneWay}"
+                                          Command="{Binding Data.ToggleAllSelectedCommand, Source={StaticResource proxy}}" IsThreeState="True" />
+                            </StackPanel>
+                        </DataGridCheckBoxColumn.Header>
+
+                    </DataGridCheckBoxColumn>
                     <DataGridTextColumn Header="{x:Static i18n:LocalizedStrings.Status}"
                                         Binding="{Binding ChangeType}" Width="100" IsReadOnly="True"
                                         ElementStyle="{StaticResource StatusTextBlockStyle}"/>

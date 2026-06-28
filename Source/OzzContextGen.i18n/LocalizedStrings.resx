@@ -285,4 +285,7 @@
   <data name="ContextNote" xml:space="preserve">
     <value>Context Note</value>
   </data>
+  <data name="RemoveDeletedFiles" xml:space="preserve">
+    <value>Remove deleted files from list</value>
+  </data>
 </root>

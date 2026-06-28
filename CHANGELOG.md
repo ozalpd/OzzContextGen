@@ -10,15 +10,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Planned
 - **Source trimming** — `TrimComments` and `TrimXmlDocs` options on `PackerEngine` to optionally strip inline/block comments and XML documentation lines, reducing output size and token count.
 
+## [0.1.3] - 2026-06-28
+
+### Added
+- Added "Remove deleted files" toolbar button with icon and localization
+- Added `BindingProxy` helper for DataGrid header binding
+- Implemented select all/none/indeterminate checkbox in DataGrid header
+
+### Changed
+- Synced selection state and commands in MainViewModel
+
 ## [0.1.2] - 2026-06-27
 
 ### Changed
-- Replace FileStateInfo with FileContextEntry (adds ContextNote)
-- Move/split model records into Models/ directory
-- Add Helpers/FileExtensions.cs for file size formatting
+- Replaced `FileStateInfo` with `FileContextEntry` (adds `ContextNote`)
+- Moved/split model records into `Models/` directory
+- Added `Helpers/FileExtensions.cs` for file size formatting
 - WPF: DataGrid status coloring, file detail panel, context note editing
-- Add localized strings for file size and context note (en/tr)
-- PackerEngine outputs context notes in Markdown
+- Added localized strings for file size and context note (en/tr)
+- `PackerEngine` outputs context notes in Markdown
 
 ## [0.1.1] - 2026-06-27
 

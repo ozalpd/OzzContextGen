@@ -285,4 +285,7 @@
   <data name="ContextNote" xml:space="preserve">
     <value>Bağlam Notu</value>
   </data>
+  <data name="RemoveDeletedFiles" xml:space="preserve">
+    <value>Silinmiş dosyaları listeden çıkart</value>
+  </data>
 </root>

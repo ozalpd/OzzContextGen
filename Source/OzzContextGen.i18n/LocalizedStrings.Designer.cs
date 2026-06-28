@@ -394,6 +394,15 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove deleted files from list.
+        /// </summary>
+        public static string RemoveDeletedFiles {
+            get {
+                return ResourceManager.GetString("RemoveDeletedFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Required Parameters.
         /// </summary>
         public static string RequiredParameters {

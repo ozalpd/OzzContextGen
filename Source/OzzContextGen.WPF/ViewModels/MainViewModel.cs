@@ -22,21 +22,43 @@ public class MainViewModel : AbstractViewModel
         BrowseSourceCommand = new RelayCommand(BrowseSource);
         BrowseOutputCommand = new RelayCommand(BrowseOutput);
         OpenProfileCommand = new RelayCommand(async () => await OpenProfile());
-        AnalyzeChangesCommand = new RelayCommand(async () => await AnalyzeChangesAsync());
+        AnalyzeChangesCommand = new RelayCommand(async () => await AnalyzeChangesAsync(), CanAnalyzeChanges);
         PackCommand = new RelayCommand(async () => await PackContextAsync(), CanPack);
+        RemoveDeletedFilesCommand = new RelayCommand(RemoveDeletedFilesFromTrackedList, () => TrackedFiles.Any(f => f.IsDeleted));
+        ToggleAllSelectedCommand = new RelayCommand(ToggleAllSelected, CanToggleAllSelected);
 
         PropertyChanged += OnPropertyChanged;
-        TrackedFiles.CollectionChanged += OnCollectionChanged;
+        TrackedFiles.CollectionChanged += OnTrackedFilesCollectionChanged;
     }
-
 
     public RelayCommand BrowseSourceCommand { get; }
     public RelayCommand BrowseOutputCommand { get; }
     public RelayCommand OpenProfileCommand { get; }
     public RelayCommand AnalyzeChangesCommand { get; }
     public RelayCommand PackCommand { get; }
+    public RelayCommand RemoveDeletedFilesCommand { get; }
+    public RelayCommand ToggleAllSelectedCommand { get; }
 
 
+
+
+    public bool? IsAllSelected
+    {
+        get
+        {
+            if (TrackedFiles.Count == 0)
+                return false;
+
+            bool allSelected = TrackedFiles.All(f => f.IsSelected);
+            bool noneSelected = TrackedFiles.All(f => !f.IsSelected);
+
+            if (allSelected)
+                return true;
+            if (noneSelected)
+                return false;
+            return null;
+        }
+    }
 
     public string OutputPath
     {
@@ -100,6 +122,7 @@ public class MainViewModel : AbstractViewModel
         {
             _sourcePath = value;
             RaisePropertyChanged(nameof(SourcePath));
+            AnalyzeChangesCommand.RaiseCanExecuteChanged();
         }
     }
     private string _sourcePath = string.Empty;
@@ -134,9 +157,11 @@ public class MainViewModel : AbstractViewModel
         SourcePath = profile.TargetSourcePath;
     }
 
+    private bool CanAnalyzeChanges() => !string.IsNullOrEmpty(SourcePath) && Directory.Exists(SourcePath);
+
     private async Task AnalyzeChangesAsync()
     {
-        if (string.IsNullOrEmpty(SourcePath) || !Directory.Exists(SourcePath))
+        if (!CanAnalyzeChanges())
         {
             StatusMessage = $"{LocalizedStrings.InvalidSourceFolder}";
             return;
@@ -228,9 +253,65 @@ public class MainViewModel : AbstractViewModel
         StatusMessage = $"✓ {LocalizedStrings.CompletedProfilePacking}!";
     }
 
+
+    private void RemoveDeletedFilesFromTrackedList()
+    {
+        var deletedFiles = TrackedFiles.Where(f => f.IsDeleted).ToList();
+        foreach (var file in deletedFiles)
+        {
+            TrackedFiles.Remove(file);
+        }
+    }
+
+
+    public bool CanToggleAllSelected() => TrackedFiles.Count > 0;
+
+    private void ToggleAllSelected()
+    {
+        bool isSelected = !IsAllSelected.GetValueOrDefault();
+        foreach (var file in TrackedFiles)
+        {
+            file.IsSelected = isSelected;
+        }
+        RaisePropertyChanged(nameof(IsAllSelected));
+    }
+
+    private void OnTrackedFilesCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (e.OldItems != null)
+        {
+            foreach (FileChangeViewModel item in e.OldItems)
+            {
+                item.PropertyChanged -= OnFileItemPropertyChanged;
+            }
+        }
+
+        if (e.NewItems != null)
+        {
+            foreach (FileChangeViewModel item in e.NewItems)
+            {
+                item.PropertyChanged += OnFileItemPropertyChanged;
+            }
+        }
+
+        OnCollectionChanged(sender, e);
+    }
+
     private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
+        RaisePropertyChanged(nameof(IsAllSelected));
         PackCommand.RaiseCanExecuteChanged();
+        ToggleAllSelectedCommand.RaiseCanExecuteChanged();
+        RemoveDeletedFilesCommand.RaiseCanExecuteChanged();
+    }
+
+    private void OnFileItemPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(FileChangeViewModel.IsSelected))
+        {
+            RaisePropertyChanged(nameof(IsAllSelected));
+            PackCommand.RaiseCanExecuteChanged();
+        }
     }
 
     private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -239,6 +320,8 @@ public class MainViewModel : AbstractViewModel
         {
             case nameof(TrackedFiles):
                 PackCommand.RaiseCanExecuteChanged();
+                ToggleAllSelectedCommand.RaiseCanExecuteChanged();
+                RemoveDeletedFilesCommand.RaiseCanExecuteChanged();
                 break;
         }
     }
@@ -247,6 +330,7 @@ public class MainViewModel : AbstractViewModel
     {
         if (e.PropertyName == nameof(FileChangeViewModel.IsSelected))
         {
+            RaisePropertyChanged(nameof(IsAllSelected));
             PackCommand.RaiseCanExecuteChanged();
         }
     }
