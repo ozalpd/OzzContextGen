@@ -151,7 +151,7 @@
     <value>Required Parameters</value>
   </data>
   <data name="SavingProfile" xml:space="preserve">
-    <value>Saving profile state</value>
+    <value>Saving profile state...</value>
   </data>
   <data name="ScanningFiles" xml:space="preserve">
     <value>Scanning file list...</value>
@@ -290,5 +290,14 @@
   </data>
   <data name="PackingMode" xml:space="preserve">
     <value>Packing Mode</value>
+  </data>
+  <data name="ProfileSavedSuccessfully" xml:space="preserve">
+    <value>Profile save d successfully.</value>
+  </data>
+  <data name="ProfileSaveCancelled" xml:space="preserve">
+    <value>Profile save cancelled...</value>
+  </data>
+  <data name="SaveProfile" xml:space="preserve">
+    <value>Save Profile</value>
   </data>
 </root>

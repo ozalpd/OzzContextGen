@@ -69,6 +69,28 @@
                     </Path>
                 </Viewbox>
             </Button>
+            <Button Style="{StaticResource IconButtonStyle-28x24}"
+                    Command="{Binding SaveProfileCommand}"
+                    ToolTip="{x:Static i18n:LocalizedStrings.SaveProfile}">
+                <Viewbox Width="18" Height="18">
+                    <Path Margin="0">
+                        <Path.Style>
+                            <Style TargetType="Path">
+                                <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                <Setter Property="Data" Value="{StaticResource floppy}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=Button}}" Value="False">
+                                        <Setter Property="Fill" Value="#808890"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}" Value="True">
+                                        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </Viewbox>
+            </Button>
             <Button Style="{StaticResource IconButtonStyle-38x24}"
                     Command="{Binding RemoveDeletedFilesCommand}"
                     ToolTip="{x:Static i18n:LocalizedStrings.RemoveDeletedFiles}">
@@ -171,17 +193,16 @@
                 <TextBlock Text="{x:Static i18n:LocalizedStrings.SourceFolder}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
                 <TextBox Text="{Binding SourcePath, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
                 <Button Content="{x:Static i18n:LocalizedStrings.Browse}" Command="{Binding BrowseSourceCommand}" Grid.Row="0" Grid.Column="2" Padding="10,2" Margin="5"/>
+                <!-- Çıktı Dosyası (.md) -->
+                <TextBlock Text="{x:Static i18n:LocalizedStrings.OutputFile}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Text="{Binding OutputPath, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
+                <Button Content="{x:Static i18n:LocalizedStrings.SelectTarget}" Command="{Binding BrowseOutputCommand}" Grid.Row="1" Grid.Column="2" Padding="10,2" Margin="5"/>
 
                 <!-- Profil Dosyası (.ctxgen) -->
-                <TextBlock Text="{x:Static i18n:LocalizedStrings.ProfileFile}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
-                <TextBox Text="{Binding ProfilePath, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
-                <Button Content="{x:Static i18n:LocalizedStrings.OpenCreate}" Command="{Binding OpenProfileCommand}"
-                        Grid.Row="1" Grid.Column="2" Padding="10,2" Margin="5" ToolTip="{x:Static i18n:LocalizedStrings.OpenProfile}"/>
+                <TextBlock Text="{x:Static i18n:LocalizedStrings.ProfileFile}" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Text="{Binding ProfilePath, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"
+                         Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalAlignment="Center"/>
 
-                <!-- Çıktı Dosyası (.md) -->
-                <TextBlock Text="{x:Static i18n:LocalizedStrings.OutputFile}" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
-                <TextBox Text="{Binding OutputPath, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
-                <Button Content="{x:Static i18n:LocalizedStrings.SelectTarget}" Command="{Binding BrowseOutputCommand}" Grid.Row="2" Grid.Column="2" Padding="10,2" Margin="5"/>
             </Grid>
         </GroupBox>
 
@@ -253,7 +274,7 @@
 
                     <TextBlock Text="{x:Static i18n:LocalizedStrings.ContextNote}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
                     <TextBlock Text=":" Grid.Row="4" Grid.Column="1" Margin="2"/>
-                    <TextBox Text="{Binding ContextNote}" Grid.Row="4" Grid.Column="2" Margin="1" TextWrapping="Wrap"/>
+                    <TextBox Text="{Binding ContextNote, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="2" Margin="1" TextWrapping="Wrap"/>
                 </Grid>
             </Border>
         </Grid>

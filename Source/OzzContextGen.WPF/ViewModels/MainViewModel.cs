@@ -27,6 +27,7 @@ public class MainViewModel : AbstractViewModel
         AnalyzeChangesCommand = new RelayCommand(async () => await AnalyzeChangesAsync(), CanAnalyzeChanges);
         PackCommand = new RelayCommand(async () => await PackContextAsync(), CanPack);
         RemoveDeletedFilesCommand = new RelayCommand(RemoveDeletedFilesFromTrackedList, () => TrackedFiles.Any(f => f.IsDeleted));
+        SaveProfileCommand = new RelayCommand(async () => await SaveProfileAsync(), CanSaveProfile);
         ToggleAllSelectedCommand = new RelayCommand(ToggleAllSelected, CanToggleAllSelected);
 
         PackingModeModeValues = GetValues<PackingMode>();
@@ -41,6 +42,7 @@ public class MainViewModel : AbstractViewModel
     public RelayCommand AnalyzeChangesCommand { get; }
     public RelayCommand PackCommand { get; }
     public RelayCommand RemoveDeletedFilesCommand { get; }
+    public RelayCommand SaveProfileCommand { get; }
     public RelayCommand ToggleAllSelectedCommand { get; }
 
 
@@ -202,6 +204,7 @@ public class MainViewModel : AbstractViewModel
         }
 
         StatusMessage = string.Format(LocalizedStrings.ScanningFinished, TrackedFiles.Count);
+        SaveProfileCommand.RaiseCanExecuteChanged();
     }
 
     private bool CanPack() => !string.IsNullOrEmpty(OutputPath) && TrackedFiles.Any(f => f.IsSelected);
@@ -256,6 +259,39 @@ public class MainViewModel : AbstractViewModel
         }
 
         StatusMessage = $"✓ {LocalizedStrings.CompletedProfilePacking}!";
+    }
+
+
+    private bool CanSaveProfile() => TrackedFiles.Count > 0;
+
+    private async Task SaveProfileAsync()
+    {
+        if (string.IsNullOrEmpty(ProfilePath))
+        {
+            var dialog = new Microsoft.Win32.SaveFileDialog { Filter = LocalizedStrings.ProfileFileFilter };
+            if (dialog.ShowDialog() == true)
+            {
+                ProfilePath = dialog.FileName;
+            }
+            else
+            {
+                StatusMessage = $"{LocalizedStrings.ProfileSaveCancelled}.";
+                return;
+            }
+        }
+        var updatedTrackedFiles = TrackedFiles.ToDictionary(
+            f => f.RelativePath,
+            f => f.ToFileContextEntry());
+        var newProfile = new ContextStateProfile
+        {
+            ProfileName = _currentProfile.ProfileName,
+            TargetSourcePath = SourcePath,
+            LastPackedAt = _currentProfile.LastPackedAt,
+            TrackedFiles = updatedTrackedFiles,
+            SelectedSuffixes = _currentProfile.SelectedSuffixes
+        };
+        await _stateService.SaveProfileAsync(ProfilePath, newProfile);
+        StatusMessage = $"{LocalizedStrings.ProfileSavedSuccessfully}.";
     }
 
 

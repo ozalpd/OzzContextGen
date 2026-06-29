@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Refactor `FileContextEntry` to use `PackingMode`; `IsSelected` is now a computed property in the view model.
 - Show app version in window title via new `AppVersion` helper.
+- Added a save button to `MainWindow's` toolbar and `SaveProfileCommand` to `MainViewModel`.
 
 ## [0.1.3] - 2026-06-28
 

@@ -394,6 +394,24 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile save cancelled....
+        /// </summary>
+        public static string ProfileSaveCancelled {
+            get {
+                return ResourceManager.GetString("ProfileSaveCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile save d successfully..
+        /// </summary>
+        public static string ProfileSavedSuccessfully {
+            get {
+                return ResourceManager.GetString("ProfileSavedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ready.
         /// </summary>
         public static string Ready {
@@ -421,7 +439,16 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Saving profile state.
+        ///   Looks up a localized string similar to Save Profile.
+        /// </summary>
+        public static string SaveProfile {
+            get {
+                return ResourceManager.GetString("SaveProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving profile state....
         /// </summary>
         public static string SavingProfile {
             get {

@@ -151,7 +151,7 @@
     <value>Zorunlu Parametreler</value>
   </data>
   <data name="SavingProfile" xml:space="preserve">
-    <value>Profil durumu kaydediliyor</value>
+    <value>Profil durumu kaydediliyor...</value>
   </data>
   <data name="ScanningFiles" xml:space="preserve">
     <value>Dosya listesi taranıyor...</value>
@@ -290,5 +290,14 @@
   </data>
   <data name="PackingMode" xml:space="preserve">
     <value>Paketleme Modu</value>
+  </data>
+  <data name="ProfileSavedSuccessfully" xml:space="preserve">
+    <value>Profil başarıyla kaydedildi.</value>
+  </data>
+  <data name="ProfileSaveCancelled" xml:space="preserve">
+    <value>Profil kaydı gerçekleşmedi...</value>
+  </data>
+  <data name="SaveProfile" xml:space="preserve">
+    <value>Profili Kaydet</value>
   </data>
 </root>
