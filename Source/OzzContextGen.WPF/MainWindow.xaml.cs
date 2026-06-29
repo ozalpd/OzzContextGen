@@ -9,11 +9,27 @@ namespace OzzContextGen.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly AppSettings _appSettings = AppSettings.GetAppSettings();
+
         public MainWindow()
         {
             InitializeComponent();
+            SourceInitialized += MainWindow_SourceInitialized;
+            Closing += MainWindow_Closing;
+        }
+
+        private async void MainWindow_SourceInitialized(object? sender, EventArgs e)
+        {
+            SourceInitialized -= MainWindow_SourceInitialized;
             Title = $"OzzContextGen - LLM Context Packer - v{AppVersion.Version}";
             this.DataContext = new MainViewModel();
+            _appSettings.MainWindowPosition.SetWindowPositions(this);
+        }
+
+        private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _appSettings.MainWindowPosition.GetWindowPositions(this);
+            _appSettings.Save();
         }
     }
 }

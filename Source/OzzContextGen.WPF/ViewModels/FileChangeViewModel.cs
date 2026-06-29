@@ -37,6 +37,7 @@ namespace OzzContextGen.WPF.ViewModels
             set
             {
                 _summary.PackingMode = value;
+                RaisePropertyChanged(nameof(IsSelected));
                 RaisePropertyChanged(nameof(PackingMode));
             }
         }

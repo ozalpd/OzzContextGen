@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added new property `PackingMode` to model type `FileContextEntry` and view model `FileChangeViewModel`.
 - Added Packing Mode combo box to WPF UI for user selection. Update `PackerEngine` to respect `PackingMode` for file output. Persist `PackingMode` in `StateService` and `FileChangeSummary`.
 - Added `EnumExtensions` and `EnumValueItem<T>` for localized, ordered enum binding.
+- Added `AppSettings` for saving window position and UI culture to AppData. `MainWindow` now loads/saves position and culture.
 
 ### Changed
 - Refactor `FileContextEntry` to use `PackingMode`; `IsSelected` is now a computed property in the view model.

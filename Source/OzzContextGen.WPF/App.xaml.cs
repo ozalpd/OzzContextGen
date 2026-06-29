@@ -1,5 +1,5 @@
-﻿using System.Configuration;
-using System.Data;
+﻿using OzzContextGen.WPF.Models;
+using System.Globalization;
 using System.Windows;
 
 namespace OzzContextGen.WPF
@@ -9,6 +9,16 @@ namespace OzzContextGen.WPF
     /// </summary>
     public partial class App : System.Windows.Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            var settings = AppSettings.GetAppSettings();
 
+            if (!string.IsNullOrWhiteSpace(settings.UiCulture))
+            {
+                var culture = new CultureInfo(settings.UiCulture);
+                Thread.CurrentThread.CurrentUICulture = culture;
+                Thread.CurrentThread.CurrentCulture = culture;
+            }
+        }
     }
 }
