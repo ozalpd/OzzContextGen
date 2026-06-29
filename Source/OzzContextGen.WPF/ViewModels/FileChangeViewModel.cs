@@ -31,13 +31,32 @@ namespace OzzContextGen.WPF.ViewModels
             }
         }
 
-        public bool IsSelected
+        public PackingMode PackingMode
         {
-            get => _summary.IsSelected;
+            get => _summary.PackingMode;
             set
             {
-                _summary.IsSelected = value;
+                _summary.PackingMode = value;
+                RaisePropertyChanged(nameof(PackingMode));
+            }
+        }
+
+        public bool IsSelected
+        {
+            get => _summary.PackingMode > PackingMode.Excluded;
+            set
+            {
+                if (value && _summary.PackingMode == PackingMode.Excluded)
+                {
+                    _summary.PackingMode = _summary.GetDefaultPackingMode();
+                }
+                else if (!value)
+                {
+                    _summary.PackingMode = PackingMode.Excluded;
+                }
+
                 RaisePropertyChanged(nameof(IsSelected));
+                RaisePropertyChanged(nameof(PackingMode));
             }
         }
 
@@ -49,7 +68,7 @@ namespace OzzContextGen.WPF.ViewModels
                 LastWriteTime = File.GetLastWriteTime(AbsolutePath),
                 FileSize = _summary.Change != Core.Models.ChangeType.Deleted
                          ? new FileInfo(AbsolutePath).Length : 0,
-                IsSelected = IsSelected,
+                PackingMode = PackingMode,
                 ContextNote = ContextNote
             };
         }

@@ -13,7 +13,7 @@ public record FileChangeSummary : FileContextEntry
             RelativePath = this.RelativePath,
             LastWriteTime = this.LastWriteTime,
             FileSize = this.FileSize,
-            IsSelected = this.IsSelected,
+            PackingMode = this.PackingMode,
             ContextNote = this.ContextNote
         };
     }

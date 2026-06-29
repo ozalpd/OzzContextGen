@@ -1,4 +1,5 @@
-﻿using OzzContextGen.WPF.ViewModels;
+﻿using OzzContextGen.WPF.Models;
+using OzzContextGen.WPF.ViewModels;
 using System.Windows;
 
 namespace OzzContextGen.WPF
@@ -11,6 +12,7 @@ namespace OzzContextGen.WPF
         public MainWindow()
         {
             InitializeComponent();
+            Title = $"OzzContextGen - LLM Context Packer - v{AppVersion.Version}";
             this.DataContext = new MainViewModel();
         }
     }

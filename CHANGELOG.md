@@ -10,6 +10,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Planned
 - **Source trimming** — `TrimComments` and `TrimXmlDocs` options on `PackerEngine` to optionally strip inline/block comments and XML documentation lines, reducing output size and token count.
 
+## [0.1.4] - 2026-06-29
+
+### Added
+- Added new property `PackingMode` to model type `FileContextEntry` and view model `FileChangeViewModel`.
+- Added Packing Mode combo box to WPF UI for user selection. Update `PackerEngine` to respect `PackingMode` for file output. Persist `PackingMode` in `StateService` and `FileChangeSummary`.
+- Added `EnumExtensions` and `EnumValueItem<T>` for localized, ordered enum binding.
+
+### Changed
+- Refactor `FileContextEntry` to use `PackingMode`; `IsSelected` is now a computed property in the view model.
+- Show app version in window title via new `AppVersion` helper.
+
 ## [0.1.3] - 2026-06-28
 
 ### Added

@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:OzzContextGen.WPF"
         xmlns:helpers="clr-namespace:OzzContextGen.WPF.Helpers"
         mc:Ignorable="d"
-        Title="OzzContextGen - LLM Context Packer" Height="800" Width="800"
+        Title="OzzContextGen - LLM Context Packer" Width="800" Height="800" MinWidth="640" MinHeight="480"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <helpers:BindingProxy x:Key="proxy" Data="{Binding}"/>
@@ -198,7 +198,7 @@
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" Width="80">
                         <DataGridCheckBoxColumn.Header>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                 <TextBlock Text="{x:Static i18n:LocalizedStrings.Pack}" />
                                 <CheckBox Margin="4,0,0,0"
                                           IsChecked="{Binding Data.IsAllSelected, Source={StaticResource proxy}, Mode=OneWay}"
@@ -207,6 +207,12 @@
                         </DataGridCheckBoxColumn.Header>
 
                     </DataGridCheckBoxColumn>
+                    <DataGridComboBoxColumn Header="{x:Static i18n:LocalizedStrings.PackingMode}"
+                                            SelectedValueBinding="{Binding PackingMode, Mode=TwoWay}"
+                                            DisplayMemberPath="DisplayValue"
+                                            SelectedValuePath="Value"
+                                            ItemsSource="{Binding Data.PackingModeModeValues, Source={StaticResource proxy}}"
+                                            Width="96"/>
                     <DataGridTextColumn Header="{x:Static i18n:LocalizedStrings.Status}"
                                         Binding="{Binding ChangeType}" Width="100" IsReadOnly="True"
                                         ElementStyle="{StaticResource StatusTextBlockStyle}"/>

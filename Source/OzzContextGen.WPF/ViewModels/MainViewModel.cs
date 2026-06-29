@@ -1,4 +1,5 @@
 ﻿using OzzContextGen.Core;
+using OzzContextGen.Core.Helpers;
 using OzzContextGen.Core.Models;
 using OzzContextGen.i18n;
 using OzzContextGen.WPF.Commands;
@@ -6,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
+using static OzzContextGen.Core.Helpers.EnumExtensions;
 
 namespace OzzContextGen.WPF.ViewModels;
 
@@ -27,6 +29,8 @@ public class MainViewModel : AbstractViewModel
         RemoveDeletedFilesCommand = new RelayCommand(RemoveDeletedFilesFromTrackedList, () => TrackedFiles.Any(f => f.IsDeleted));
         ToggleAllSelectedCommand = new RelayCommand(ToggleAllSelected, CanToggleAllSelected);
 
+        PackingModeModeValues = GetValues<PackingMode>();
+
         PropertyChanged += OnPropertyChanged;
         TrackedFiles.CollectionChanged += OnTrackedFilesCollectionChanged;
     }
@@ -40,6 +44,7 @@ public class MainViewModel : AbstractViewModel
     public RelayCommand ToggleAllSelectedCommand { get; }
 
 
+    public IEnumerable<EnumValueItem<PackingMode>> PackingModeModeValues { get; private set; } = Array.Empty<EnumValueItem<PackingMode>>();
 
 
     public bool? IsAllSelected

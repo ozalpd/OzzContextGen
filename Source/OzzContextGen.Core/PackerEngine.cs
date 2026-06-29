@@ -49,6 +49,9 @@ public class PackerEngine
             // Notify the user which file is being processed via GUI or CLI
             string relativePath = file.RelativePath;
             progressAction?.Invoke(string.Format(LocalizedStrings.ProcessingFile, relativePath));
+            if (file.PackingMode == PackingMode.Excluded)
+                continue; // Skip excluded files
+
 
             sb.AppendLine($"## FILE: {relativePath}");
 
@@ -56,13 +59,33 @@ public class PackerEngine
             {
                 sb.AppendLine($"**Note:** {file.ContextNote}");
             }
+
+            if (file.PackingMode == PackingMode.MetadataOnly)
+            {
+                if (string.IsNullOrWhiteSpace(file.ContextNote))
+                {
+                    sb.AppendLine($"**Packing Mode:** Metadata Only");
+                    sb.AppendLine();
+                }
+                continue; // Skip reading the file content
+            }
+
+
+            string fullPath = Path.Combine(sourcePath, relativePath);
+            if (!File.Exists(fullPath))
+            {
+                sb.AppendLine($"**ERROR:** File not found at path: {relativePath}");
+                sb.AppendLine();
+                continue;
+            }
+
             string suffix = Path.GetExtension(relativePath);
             string fence = SourceLanguages.TryGet(suffix)?.MarkdownFence ?? "text";
 
             try
             {
                 // Read the file asynchronously to prevent UI blocking in large projects
-                string content = await File.ReadAllTextAsync(Path.Combine(sourcePath, file.RelativePath), Encoding.UTF8);
+                string content = await File.ReadAllTextAsync(fullPath, Encoding.UTF8);
 
                 // Exceptions likely to be thrown during files are being read, so we put fence after reading the file
                 sb.AppendLine($"```{fence}");

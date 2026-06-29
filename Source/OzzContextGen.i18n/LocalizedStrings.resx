@@ -288,4 +288,7 @@
   <data name="RemoveDeletedFiles" xml:space="preserve">
     <value>Remove deleted files from list</value>
   </data>
+  <data name="PackingMode" xml:space="preserve">
+    <value>Packing Mode</value>
+  </data>
 </root>

@@ -349,6 +349,15 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Packing Mode.
+        /// </summary>
+        public static string PackingMode {
+            get {
+                return ResourceManager.GetString("PackingMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parameter Error.
         /// </summary>
         public static string ParameterError {
