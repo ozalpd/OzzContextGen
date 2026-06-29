@@ -6,6 +6,8 @@ This file provides guidance for AI coding agents (OpenAI Codex, Claude, etc.) wo
 
 OzzContextGen scans source code files in a local directory or repository and generates a single structured Markdown document (context pack) for use in LLM chat sessions. It supports multiple frontends (WPF desktop, .NET MAUI, CLI) backed by a shared platform-agnostic core library.
 
+**The generated output is consumed by LLMs, not humans.** Human readability is not a goal. When working on `PackerEngine` or any output-formatting code, optimise for token efficiency and LLM parseability — not visual prettiness. Concreteness over whitespace, no decorative separators, no padding.
+
 ## Repository Layout
 
 ```
@@ -23,14 +25,16 @@ Source/
 │       ├── FileChangeSummary.cs       # Diff result record; inherits FileContextEntry
 │       ├── FileContextEntry.cs        # Per-file metadata: RelativePath, LastWriteTime, FileSize, ContextNote, InclusionMode (lazy-defaults by size)
 │       ├── SourceLanguage.cs          # Record: Suffix, MarkdownFence, comment delimiters, XmlDocPrefix
-│       └── SourceLanguages.cs         # Static registry of 14 built-in SourceLanguage definitions
+│       └── SourceLanguages.cs         # Static registry of 30 built-in SourceLanguage definitions
 ├── OzzContextGen.CLI/         # Console frontend (-s, -o, -c, -n flags)
 ├── OzzContextGen.WPF/         # WPF MVVM frontend
 │   ├── Commands/RelayCommand.cs       # Sync/async ICommand with optional CanExecute
 │   ├── Helpers/
 │   │   └── BindingProxy.cs            # Freezable bridge for bindings outside the visual tree (e.g. DataGridColumn.Header)
 │   ├── Models/
-│   │   └── AppVersion.cs              # Static helper; exposes Version, FullVersion, Product, Copyright, Description from assembly metadata
+│   │   ├── AppSettings.cs             # Singleton; persists UiCulture + MainWindowPosition to %AppData%/OzzContextGen/wpfsettings.json
+│   │   ├── AppVersion.cs              # Static helper; exposes Version, FullVersion, Product, Copyright, Description from assembly metadata
+│   │   └── WindowPosition.cs          # Window geometry (Top/Left/Width/Height); GetWindowPositions/SetWindowPositions helpers; namespace TD.WPF.Models
 │   ├── ViewModels/                    # AbstractViewModel, MainViewModel, FileChangeViewModel
 │   └── Resources/                     # Styles.xaml, BootstrapIcons.xaml
 ├── OzzContextGen.MAUI/        # .NET MAUI frontend (planned — does not exist yet)

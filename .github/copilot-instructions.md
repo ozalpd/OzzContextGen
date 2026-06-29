@@ -4,6 +4,8 @@
 
 OzzContextGen is a .NET 10 developer utility that scans source code files and generates structured Markdown context documents for use with LLM chats. It has multiple frontends (WPF, MAUI, CLI) backed by a shared platform-agnostic core.
 
+**The output is consumed by LLMs, not humans.** Human readability is not a goal. When touching `PackerEngine` or any output-formatting code, prefer token efficiency over visual formatting — no decorative separators, no padding, no unnecessary whitespace.
+
 ## Architecture
 
 ### Projects
@@ -23,7 +25,7 @@ OzzContextGen is a .NET 10 developer utility that scans source code files and ge
 | `CodeCrawler` | Recursively scans a directory for files matching configured suffixes. Excludes `bin`, `obj`, `.git`, `.vs`, `packages`, `node_modules`. Suffixes are driven by `SourceLanguages.All.Keys` by default. |
 | `PackerEngine` | Produces a single Markdown document with fenced code blocks and relative-path headers. Resolves the fence language via `SourceLanguages.TryGet`. Profile-aware overload uses `ContextStateProfile.SelectedSuffixes`. Planned: `TrimComments` and `TrimXmlDocs` flags for source trimming. |
 | `SourceLanguage` | Immutable record describing one file type: `Suffix`, `MarkdownFence`, `LineComment`, `BlockCommentStart`, `BlockCommentEnd`, `XmlDocPrefix`. |
-| `SourceLanguages` | Static registry of 14 built-in `SourceLanguage` definitions, keyed by suffix (case-insensitive). Exposes `All` dictionary and `TryGet(suffix)`. |
+| `SourceLanguages` | Static registry of 30 built-in `SourceLanguage` definitions, keyed by suffix (case-insensitive). Exposes `All` dictionary and `TryGet(suffix)`. |
 | `StateService` | Loads/saves `.ctxgen` JSON profile files and computes `FileChangeSummary` diffs. |
 | `ContextStateProfile` | Root profile model (record, own file). Contains `TrackedFiles`, `SelectedSuffixes` (persisted suffix selection), `ProfileName`, `TargetSourcePath`, `LastPackedAt`. |
 | `FileContextEntry` | Per-file metadata record: `RelativePath`, `LastWriteTime`, `FileSize`, `ContextNote`, `InclusionMode` (lazy-defaults to `FullPack` / `MetadataOnly` based on file size). |
@@ -59,6 +61,8 @@ Scan state is persisted as `.ctxgen` files (JSON). `StateService.LoadProfileAsyn
 - Icons: `Resources/BootstrapIcons.xaml` — Bootstrap Icons v1.13.1 (MIT) as `Geometry` resources for use in `Path` elements.
 - `BindingProxy` (`Helpers/BindingProxy.cs`): `Freezable` subclass that bridges bindings for elements outside the visual tree (e.g. `DataGridColumn.Header`). Declare as a `Window.Resources` entry with `Data="{Binding}"`.
 - `AppVersion` (`Models/AppVersion.cs`): Internal static class; exposes `Version`, `FullVersion`, `Product`, `Copyright`, `Description` read from assembly metadata.
+- `AppSettings` (`Models/AppSettings.cs`): Singleton (thread-safe lazy init); persists `UiCulture` and `MainWindowPosition` as JSON to `%AppData%/OzzContextGen/wpfsettings.json`. Call `GetAppSettings()` to read, `Save()` to write.
+- `WindowPosition` (`Models/WindowPosition.cs`): Holds window geometry (`Top`, `Left`, `Width`, `Height`). `GetWindowPositions(window)` captures current state; `SetWindowPositions(window)` restores it with virtual-screen boundary clamping. Namespace: `TD.WPF.Models`.
 
 ## MAUI Frontend Notes (Planned)
 

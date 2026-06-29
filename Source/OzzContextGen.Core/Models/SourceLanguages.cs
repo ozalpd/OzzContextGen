@@ -128,6 +128,127 @@ public static class SourceLanguages
         MarkdownFence = "json"
     };
 
+    public static readonly SourceLanguage CsProj = new()
+    {
+        Suffix = ".csproj",
+        MarkdownFence = "xml",
+        BlockCommentStart = "<!--",
+        BlockCommentEnd = "-->"
+    };
+
+    public static readonly SourceLanguage Sln = new()
+    {
+        Suffix = ".sln",
+        MarkdownFence = "text"
+    };
+
+    public static readonly SourceLanguage SlnX = new()
+    {
+        Suffix = ".slnx",
+        MarkdownFence = "xml",
+        BlockCommentStart = "<!--",
+        BlockCommentEnd = "-->"
+    };
+
+    // C++
+    public static readonly SourceLanguage Cpp = new()
+    {
+        Suffix = ".cpp",
+        MarkdownFence = "cpp",
+        LineComment = "//",
+        BlockCommentStart = "/*",
+        BlockCommentEnd = "*/"
+    };
+
+    public static readonly SourceLanguage CppHeader = new()
+    {
+        Suffix = ".h",
+        MarkdownFence = "cpp",
+        LineComment = "//",
+        BlockCommentStart = "/*",
+        BlockCommentEnd = "*/"
+    };
+
+    // Shaders (Unity + Unreal)
+    public static readonly SourceLanguage Hlsl = new()
+    {
+        Suffix = ".hlsl",
+        MarkdownFence = "hlsl",
+        LineComment = "//",
+        BlockCommentStart = "/*",
+        BlockCommentEnd = "*/"
+    };
+
+    public static readonly SourceLanguage UnityShader = new()
+    {
+        Suffix = ".shader",
+        MarkdownFence = "hlsl",
+        LineComment = "//",
+        BlockCommentStart = "/*",
+        BlockCommentEnd = "*/"
+    };
+
+    public static readonly SourceLanguage UnrealShaderFile = new()
+    {
+        Suffix = ".usf",
+        MarkdownFence = "hlsl",
+        LineComment = "//",
+        BlockCommentStart = "/*",
+        BlockCommentEnd = "*/"
+    };
+
+    public static readonly SourceLanguage UnrealShaderHeader = new()
+    {
+        Suffix = ".ush",
+        MarkdownFence = "hlsl",
+        LineComment = "//",
+        BlockCommentStart = "/*",
+        BlockCommentEnd = "*/"
+    };
+
+    // Unity UI Toolkit
+    public static readonly SourceLanguage UnityUxml = new()
+    {
+        Suffix = ".uxml",
+        MarkdownFence = "xml",
+        BlockCommentStart = "<!--",
+        BlockCommentEnd = "-->"
+    };
+
+    public static readonly SourceLanguage UnityUss = new()
+    {
+        Suffix = ".uss",
+        MarkdownFence = "css",
+        BlockCommentStart = "/*",
+        BlockCommentEnd = "*/"
+    };
+
+    // Unreal + Unity project descriptors and config
+    public static readonly SourceLanguage UnrealProject = new()
+    {
+        Suffix = ".uproject",
+        MarkdownFence = "json"
+    };
+
+    public static readonly SourceLanguage UnrealPlugin = new()
+    {
+        Suffix = ".uplugin",
+        MarkdownFence = "json"
+    };
+
+    public static readonly SourceLanguage UnityAsmDef = new()
+    {
+        Suffix = ".asmdef",
+        MarkdownFence = "json"
+    };
+
+    public static readonly SourceLanguage IniConfig = new()
+    {
+        Suffix = ".ini",
+        MarkdownFence = "ini",
+        LineComment = ";"
+    };
+
     private static readonly Dictionary<string, SourceLanguage> _map =
         new(StringComparer.OrdinalIgnoreCase)
         {
@@ -146,6 +267,21 @@ public static class SourceLanguages
             [".pine"]   = PineScript,
             [".resx"]   = Resx,
             [".ctxgen"] = CtxGen,
+            [".csproj"]   = CsProj,
+            [".sln"]      = Sln,
+            [".slnx"]     = SlnX,
+            [".cpp"]      = Cpp,
+            [".h"]        = CppHeader,
+            [".hlsl"]     = Hlsl,
+            [".shader"]   = UnityShader,
+            [".usf"]      = UnrealShaderFile,
+            [".ush"]      = UnrealShaderHeader,
+            [".uxml"]     = UnityUxml,
+            [".uss"]      = UnityUss,
+            [".uproject"] = UnrealProject,
+            [".uplugin"]  = UnrealPlugin,
+            [".asmdef"]   = UnityAsmDef,
+            [".ini"]      = IniConfig,
         };
 
     /// <summary>All registered language definitions, keyed by suffix (case-insensitive).</summary>

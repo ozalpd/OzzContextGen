@@ -50,7 +50,9 @@ OzzContextGen/
 │   │   ├── Helpers/
 │   │   │   └── BindingProxy.cs
 │   │   ├── Models/
-│   │   │   └── AppVersion.cs
+│   │   │   ├── AppSettings.cs
+│   │   │   ├── AppVersion.cs
+│   │   │   └── WindowPosition.cs
 │   │   ├── ViewModels/
 │   │   │   ├── AbstractViewModel.cs
 │   │   │   ├── FileChangeViewModel.cs
@@ -94,6 +96,21 @@ OzzContextGen recognises the following file types out of the box. Each is scanne
 | `.pine` | `pine` | `//` | — | — |
 | `.resx` | `xml` | — | `<!-- -->` | — |
 | `.ctxgen` | `json` | — | — | — |
+| `.csproj` | `xml` | — | `<!-- -->` | — |
+| `.sln` | `text` | — | — | — |
+| `.slnx` | `xml` | — | `<!-- -->` | — |
+| `.cpp` | `cpp` | `//` | `/* */` | — |
+| `.h` | `cpp` | `//` | `/* */` | — |
+| `.hlsl` | `hlsl` | `//` | `/* */` | — |
+| `.shader` | `hlsl` | `//` | `/* */` | — |
+| `.usf` | `hlsl` | `//` | `/* */` | — |
+| `.ush` | `hlsl` | `//` | `/* */` | — |
+| `.uxml` | `xml` | — | `<!-- -->` | — |
+| `.uss` | `css` | — | `/* */` | — |
+| `.uproject` | `json` | — | — | — |
+| `.uplugin` | `json` | — | — | — |
+| `.asmdef` | `json` | — | — | — |
+| `.ini` | `ini` | `;` | — | — |
 
 ## Planned Features
 
