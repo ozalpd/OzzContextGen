@@ -15,19 +15,24 @@ Source/
 │   ├── PackerEngine.cs            # Markdown generator; resolves fence via SourceLanguages.TryGet
 │   ├── StateService.cs            # .ctxgen profile load/save + file-change diff
 │   ├── Helpers/
-│   │   └── FileExtensions.cs          # File-size formatting extension methods
+│   │   ├── EnumExtensions.cs          # Extension methods on Enum: GetDisplayValue, GetAttribute<T>, GetValues<T>, GetOrderedValues<T>, GetDisplayOrder; includes EnumValueItem<T>
+│   │   └── FileExtensions.cs          # ToFileSize extension on int/long (Bytes / KB / MB / GB)
 │   └── Models/
 │       ├── ContextStateProfile.cs     # Root profile record; includes SelectedSuffixes
-│       ├── Enums.cs                   # ChangeType enum (New / Modified / Unchanged / Deleted)
+│       ├── Enums.cs                   # ChangeType (New/Modified/Unchanged/Deleted) + FileInclusionMode (FullPack/MetadataOnly/Excluded)
 │       ├── FileChangeSummary.cs       # Diff result record; inherits FileContextEntry
-│       ├── FileContextEntry.cs        # Per-file state snapshot (RelativePath, timestamps, IsSelected, ContextNote)
+│       ├── FileContextEntry.cs        # Per-file metadata: RelativePath, LastWriteTime, FileSize, ContextNote, InclusionMode (lazy-defaults by size)
 │       ├── SourceLanguage.cs          # Record: Suffix, MarkdownFence, comment delimiters, XmlDocPrefix
 │       └── SourceLanguages.cs         # Static registry of 14 built-in SourceLanguage definitions
 ├── OzzContextGen.CLI/         # Console frontend (-s, -o, -c, -n flags)
 ├── OzzContextGen.WPF/         # WPF MVVM frontend
-│   ├── ViewModels/                # AbstractViewModel, MainViewModel, FileChangeViewModel
-│   ├── Commands/RelayCommand.cs
-│   └── Resources/                 # Styles.xaml, BootstrapIcons.xaml
+│   ├── Commands/RelayCommand.cs       # Sync/async ICommand with optional CanExecute
+│   ├── Helpers/
+│   │   └── BindingProxy.cs            # Freezable bridge for bindings outside the visual tree (e.g. DataGridColumn.Header)
+│   ├── Models/
+│   │   └── AppVersion.cs              # Static helper; exposes Version, FullVersion, Product, Copyright, Description from assembly metadata
+│   ├── ViewModels/                    # AbstractViewModel, MainViewModel, FileChangeViewModel
+│   └── Resources/                     # Styles.xaml, BootstrapIcons.xaml
 ├── OzzContextGen.MAUI/        # .NET MAUI frontend (planned — does not exist yet)
 └── OzzContextGen.i18n/        # Shared .resx localization (en + tr)
 ```

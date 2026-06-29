@@ -23,11 +23,14 @@ OzzContextGen is a .NET 10 developer utility that scans source code files and ge
 | `CodeCrawler` | Recursively scans a directory for files matching configured suffixes. Excludes `bin`, `obj`, `.git`, `.vs`, `packages`, `node_modules`. Suffixes are driven by `SourceLanguages.All.Keys` by default. |
 | `PackerEngine` | Produces a single Markdown document with fenced code blocks and relative-path headers. Resolves the fence language via `SourceLanguages.TryGet`. Profile-aware overload uses `ContextStateProfile.SelectedSuffixes`. Planned: `TrimComments` and `TrimXmlDocs` flags for source trimming. |
 | `SourceLanguage` | Immutable record describing one file type: `Suffix`, `MarkdownFence`, `LineComment`, `BlockCommentStart`, `BlockCommentEnd`, `XmlDocPrefix`. |
-| `SourceLanguages` | Static registry of 13 built-in `SourceLanguage` definitions, keyed by suffix (case-insensitive). Exposes `All` dictionary and `TryGet(suffix)`. |
+| `SourceLanguages` | Static registry of 14 built-in `SourceLanguage` definitions, keyed by suffix (case-insensitive). Exposes `All` dictionary and `TryGet(suffix)`. |
 | `StateService` | Loads/saves `.ctxgen` JSON profile files and computes `FileChangeSummary` diffs. |
 | `ContextStateProfile` | Root profile model (record, own file). Contains `TrackedFiles`, `SelectedSuffixes` (persisted suffix selection), `ProfileName`, `TargetSourcePath`, `LastPackedAt`. |
-| `FileStateInfo` | Per-file state snapshot (record): relative path, last write time, file size, selection flag. |
-| `FileChangeSummary` | Diff result per file: `ChangeType` (New / Modified / Unchanged / Deleted) + `IsSelected`. |
+| `FileContextEntry` | Per-file metadata record: `RelativePath`, `LastWriteTime`, `FileSize`, `ContextNote`, `InclusionMode` (lazy-defaults to `FullPack` / `MetadataOnly` based on file size). |
+| `FileChangeSummary` | Diff result per file: `ChangeType` (New / Modified / Unchanged / Deleted) + `InclusionMode`. Inherits `FileContextEntry`. |
+| `EnumValueItem<T>` | Pairs an enum value with its localized display string; used for binding enum collections to UI controls. |
+| `EnumExtensions` | Extension methods on `Enum`: `GetDisplayValue`, `GetAttribute<T>`, `GetValues<T>`, `GetOrderedValues<T>`, `GetDisplayOrder`. All are `this Enum` extensions. |
+| `FileExtensions` | Extension methods on `int`/`long`: `ToFileSize()` — formats bytes to human-readable string (Bytes / KB / MB / GB). |
 
 ### Profile Files
 
@@ -54,6 +57,8 @@ Scan state is persisted as `.ctxgen` files (JSON). `StateService.LoadProfileAsyn
 - `RelayCommand` supports sync and async delegates with optional `CanExecute`.
 - Shared styles: `Resources/Styles.xaml` — validation-aware TextBox/ComboBox styles, read-only styles, icon Button sizes.
 - Icons: `Resources/BootstrapIcons.xaml` — Bootstrap Icons v1.13.1 (MIT) as `Geometry` resources for use in `Path` elements.
+- `BindingProxy` (`Helpers/BindingProxy.cs`): `Freezable` subclass that bridges bindings for elements outside the visual tree (e.g. `DataGridColumn.Header`). Declare as a `Window.Resources` entry with `Data="{Binding}"`.
+- `AppVersion` (`Models/AppVersion.cs`): Internal static class; exposes `Version`, `FullVersion`, `Product`, `Copyright`, `Description` read from assembly metadata.
 
 ## MAUI Frontend Notes (Planned)
 

@@ -34,6 +34,7 @@ OzzContextGen/
 │   │   ├── PackerEngine.cs
 │   │   ├── StateService.cs
 │   │   ├── Helpers/
+│   │   │   ├── EnumExtensions.cs
 │   │   │   └── FileExtensions.cs
 │   │   └── Models/
 │   │       ├── ContextStateProfile.cs
@@ -44,6 +45,19 @@ OzzContextGen/
 │   │       └── SourceLanguages.cs
 │   ├── OzzContextGen.CLI/        # Command-line frontend
 │   ├── OzzContextGen.WPF/        # WPF desktop frontend (MVVM)
+│   │   ├── Commands/
+│   │   │   └── RelayCommand.cs
+│   │   ├── Helpers/
+│   │   │   └── BindingProxy.cs
+│   │   ├── Models/
+│   │   │   └── AppVersion.cs
+│   │   ├── ViewModels/
+│   │   │   ├── AbstractViewModel.cs
+│   │   │   ├── FileChangeViewModel.cs
+│   │   │   └── MainViewModel.cs
+│   │   └── Resources/
+│   │       ├── BootstrapIcons.xaml
+│   │       └── Styles.xaml
 │   ├── OzzContextGen.MAUI/       # .NET MAUI frontend (planned)
 │   └── OzzContextGen.i18n/       # Shared localization (en, tr)
 ├── CHANGELOG.md
