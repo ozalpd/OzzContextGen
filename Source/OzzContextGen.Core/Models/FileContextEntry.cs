@@ -15,6 +15,10 @@ public record FileContextEntry
     /// <summary>File size in bytes; drives the default <see cref="PackingMode"/>.</summary>
     public long FileSize { get; init; }
 
+
+    /// <summary>Optional free-text note injected into the markdown output alongside this file.</summary>
+    public string ContextNote { get; set; } = string.Empty;
+
     /// <summary>
     /// Controls how this file is packed into the markdown output.
     /// Lazy-initialized via <see cref="GetDefaultPackingMode"/> if not explicitly set.
@@ -40,9 +44,20 @@ public record FileContextEntry
     /// </summary>
     public PackingMode GetDefaultPackingMode()
     {
+        foreach (var (suffix, note) in nonFullPacks)
+        {
+            if (RelativePath.EndsWith(suffix, StringComparison.OrdinalIgnoreCase))
+            {
+                if (string.IsNullOrWhiteSpace(ContextNote))
+                {
+                    ContextNote = note;
+                }
+                return PackingMode.MetadataOnly;
+            }
+        }
+
         return FileSize < 32678 ? PackingMode.FullPack : PackingMode.MetadataOnly;
     }
 
-    /// <summary>Optional free-text note injected into the markdown output alongside this file.</summary>
-    public string ContextNote { get; set; } = string.Empty;
+    private static readonly (string, string)[] nonFullPacks = new (string, string)[] { (".resx", "This file contains localizable resources.") };
 }

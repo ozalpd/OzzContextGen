@@ -252,8 +252,11 @@ public static class SourceLanguages
     private static readonly Dictionary<string, SourceLanguage> _map =
         new(StringComparer.OrdinalIgnoreCase)
         {
-            [".cs"]     = CSharp,
+            [".sln"]    = Sln,
+            [".slnx"]   = SlnX,
+            [".csproj"] = CsProj,
             [".xaml"]   = Xaml,
+            [".cs"]     = CSharp,
             [".html"]   = Html,
             [".cshtml"] = CssHtml,
             [".sql"]    = Sql,
@@ -267,9 +270,6 @@ public static class SourceLanguages
             [".pine"]   = PineScript,
             [".resx"]   = Resx,
             [".ctxgen"] = CtxGen,
-            [".csproj"]   = CsProj,
-            [".sln"]      = Sln,
-            [".slnx"]     = SlnX,
             [".cpp"]      = Cpp,
             [".h"]        = CppHeader,
             [".hlsl"]     = Hlsl,

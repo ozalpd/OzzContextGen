@@ -10,6 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Planned
 - **Source trimming** — `TrimComments` and `TrimXmlDocs` options on `PackerEngine` to optionally strip inline/block comments and XML documentation lines, reducing output size and token count.
 
+## [0.1.5] - 2026-06-30
+
+### Added
+- Added new application icon and WPF window icon.
+
+### Changed
+- Auto-assign note and `MetadataOnly` mode for `.resx` files in `GetDefaultPackingMode`.
+- Reorder and deduplicate `SourceLanguages` suffix mappings.
+
 ## [0.1.4] - 2026-06-29
 
 ### Added
