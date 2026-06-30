@@ -19,6 +19,8 @@ namespace OzzContextGen.WPF.ViewModels
 
         public string FileSize => _summary.FileSize.ToFileSize();
 
+        public long FileSizeInBytes => _summary.FileSize;
+
         public bool IsDeleted => _summary.Change == Core.Models.ChangeType.Deleted;
 
         public string ContextNote

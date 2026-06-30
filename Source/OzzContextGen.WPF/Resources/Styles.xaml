@@ -1,6 +1,27 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+
+    <Style x:Key="FileSizeCellStyleLight" TargetType="DataGridCell">
+        <Setter Property="Foreground" Value="#484848"/>
+        <Setter Property="Background" Value="{Binding FileSizeInBytes, Converter={StaticResource FileSizeToLightBG}}"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Foreground" Value="#000000"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="PackingModeCellStyleLight" TargetType="DataGridCell">
+        <Setter Property="Foreground" Value="#484848"/>
+        <Setter Property="Background" Value="{Binding PackingMode, Converter={StaticResource PackingModeToColor}}"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Foreground" Value="#000000"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!-- TextBox Style: Disabled when bound to null, with validation error display -->
     <Style x:Key="DisabledWhenNullTextBoxStyle" TargetType="TextBox">
         <Setter Property="Margin" Value="0,0,0,8"/>

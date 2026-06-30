@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Auto-assign note and `MetadataOnly` mode for `.resx` files in `GetDefaultPackingMode`.
 - Reorder and deduplicate `SourceLanguages` suffix mappings.
+- Updated `MainWindow` DataGrid to show a color-coded FileSize column and apply packing mode coloring with newly added WPF value converters and cell styles for file size and packing mode coloring.
 
 ## [0.1.4] - 2026-06-29
 

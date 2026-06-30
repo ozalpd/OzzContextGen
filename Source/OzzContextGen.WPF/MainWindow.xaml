@@ -233,10 +233,14 @@
                                             DisplayMemberPath="DisplayValue"
                                             SelectedValuePath="Value"
                                             ItemsSource="{Binding Data.PackingModeModeValues, Source={StaticResource proxy}}"
-                                            Width="96"/>
+                                            Width="96"
+                                            CellStyle="{StaticResource PackingModeCellStyleLight}"/>
                     <DataGridTextColumn Header="{x:Static i18n:LocalizedStrings.Status}"
                                         Binding="{Binding ChangeType}" Width="100" IsReadOnly="True"
                                         ElementStyle="{StaticResource StatusTextBlockStyle}"/>
+                    <DataGridTextColumn Header="{x:Static i18n:LocalizedStrings.FileSize}"
+                                        Binding="{Binding FileSize}" Width="100" IsReadOnly="True"
+                                        CellStyle="{StaticResource FileSizeCellStyleLight}"/>
                     <DataGridTextColumn Header="{x:Static i18n:LocalizedStrings.FilePath}"
                                         Binding="{Binding RelativePath}" Width="*" IsReadOnly="True"/>
                 </DataGrid.Columns>

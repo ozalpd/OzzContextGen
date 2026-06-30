@@ -1,0 +1,6 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:OzzContextGen.WPF.Converters">
+    <converters:FileSizeToColor x:Key="FileSizeToLightBG" BlueLevel="32" MaxLevel="255" MinFileSize="512" MaxFileSize="32768"/>
+    <converters:PackingModeToColor x:Key="PackingModeToColor"/>
+</ResourceDictionary>
