@@ -6,7 +6,7 @@
         xmlns:viewmodels="clr-namespace:OzzContextGen.WPF.ViewModels"
         xmlns:i18n="clr-namespace:OzzContextGen.i18n;assembly=OzzContextGen.i18n"
         xmlns:local="clr-namespace:OzzContextGen.WPF"
-        xmlns:helpers="clr-namespace:OzzContextGen.WPF.Helpers"
+        xmlns:helpers="clr-namespace:OzzWpf.Core.Helpers;assembly=OzzWpf.Core"
         mc:Ignorable="d"
         Title="OzzContextGen - LLM Context Packer" Width="1080" Height="800" MinWidth="680" MinHeight="520"
         WindowStartupLocation="CenterScreen" Icon="/Assets/CtxGen-Icon-02-64.png">

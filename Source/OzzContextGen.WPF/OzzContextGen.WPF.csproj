@@ -7,12 +7,16 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
-		<Version>0.1.5</Version>
+		<Version>0.1.6</Version>
 		<ApplicationIcon>Assets\CtxGen-Icon-02-256.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
 	  <None Remove="CtxGen-Icon-02-64.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4078.44" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -22,6 +26,9 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\OzzContextGen.Core\OzzContextGen.Core.csproj" />
+		<ProjectReference Include="..\OzzContextGen.i18n\OzzContextGen.i18n.csproj" />
+		<ProjectReference Include="..\OzzMarkdown\OzzMarkdown.Core\OzzMarkdown.Core.csproj" />
+		<ProjectReference Include="..\OzzMarkdown\OzzWpf.Core\OzzWpf.Core.csproj" />
 	</ItemGroup>
 
 </Project>

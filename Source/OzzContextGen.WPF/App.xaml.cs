@@ -19,6 +19,8 @@ namespace OzzContextGen.WPF
                 Thread.CurrentThread.CurrentUICulture = culture;
                 Thread.CurrentThread.CurrentCulture = culture;
             }
+
+            Environment.SetEnvironmentVariable("WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS", "--disable-features=msWebView2EnableDrm");
         }
     }
 }

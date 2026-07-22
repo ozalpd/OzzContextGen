@@ -47,6 +47,8 @@ OzzContextGen/
 │   ├── OzzContextGen.WPF/        # WPF desktop frontend (MVVM)
 │   │   ├── Commands/
 │   │   │   └── RelayCommand.cs
+│   │   ├── Controls/
+│   │   │   └── MarkdownViewer.xaml
 │   │   ├── Helpers/
 │   │   │   └── BindingProxy.cs
 │   │   ├── Models/
@@ -57,9 +59,17 @@ OzzContextGen/
 │   │   │   ├── AbstractViewModel.cs
 │   │   │   ├── FileChangeViewModel.cs
 │   │   │   └── MainViewModel.cs
+│   │   ├── Views/
+│   │   │   ├── MainWindow.xaml
+│   │   │   └── MarkdownView.xaml
 │   │   └── Resources/
 │   │       ├── BootstrapIcons.xaml
 │   │       └── Styles.xaml
+│   ├── OzzMarkdown/              # Git submodule — github.com/ozalpd/OzzMarkdown
+│   │   └── OzzMarkdown.Core/     # Markdown-to-HTML rendering library
+│   │       ├── MarkdownHtmlRenderer.cs
+│   │       ├── MarkdownTheme.cs
+│   │       └── MarkdownThemeProvider.cs
 │   ├── OzzContextGen.MAUI/       # .NET MAUI frontend (planned)
 │   └── OzzContextGen.i18n/       # Shared localization (en, tr)
 ├── CHANGELOG.md
@@ -82,21 +92,21 @@ OzzContextGen recognises the following file types out of the box. Each is scanne
 | Suffix | Markdown Fence | Line Comment | Block Comment | XML Doc |
 |---|---|---|---|---|
 | `.cs` | `csharp` | `//` | `/* */` | `///` |
-| `.xaml` | `xml` | — | `<!-- -->` | — |
-| `.html` | `html` | — | `<!-- -->` | — |
 | `.cshtml` | `html` | `//` | `/* */` | — |
-| `.sql` | `sql` | `--` | `/* */` | — |
-| `.js` | `javascript` | `//` | `/* */` | — |
-| `.ts` | `typescript` | `//` | `/* */` | `///` |
 | `.css` | `css` | — | `/* */` | — |
+| `.js` | `javascript` | `//` | `/* */` | — |
 | `.json` | `json` | — | — | — |
+| `.html` | `html` | — | `<!-- -->` | — |
+| `.sql` | `sql` | `--` | `/* */` | — |
+| `.ts` | `typescript` | `//` | `/* */` | `///` |
+| `.xaml` | `xml` | — | `<!-- -->` | — |
 | `.xml` | `xml` | — | `<!-- -->` | — |
-| `.md` | `markdown` | — | — | — |
-| `.py` | `python` | `#` | `""" """` | — |
-| `.pine` | `pine` | `//` | — | — |
-| `.resx` | `xml` | — | `<!-- -->` | — |
 | `.ctxgen` | `json` | — | — | — |
+| `.md` | `markdown` | — | — | — |
+| `.pine` | `pine` | `//` | — | — |
+| `.py` | `python` | `#` | `""" """` | — |
 | `.csproj` | `xml` | — | `<!-- -->` | — |
+| `.resx` | `xml` | — | `<!-- -->` | — |
 | `.sln` | `text` | — | — | — |
 | `.slnx` | `xml` | — | `<!-- -->` | — |
 | `.cpp` | `cpp` | `//` | `/* */` | — |

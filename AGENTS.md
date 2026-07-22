@@ -29,6 +29,8 @@ Source/
 ├── OzzContextGen.CLI/         # Console frontend (-s, -o, -c, -n flags)
 ├── OzzContextGen.WPF/         # WPF MVVM frontend
 │   ├── Commands/RelayCommand.cs       # Sync/async ICommand with optional CanExecute
+│   ├── Controls/
+│   │   └── MarkdownViewer.xaml        # Uses MarkdownHtmlRenderer from OzzMarkdown.Core
 │   ├── Helpers/
 │   │   └── BindingProxy.cs            # Freezable bridge for bindings outside the visual tree (e.g. DataGridColumn.Header)
 │   ├── Models/
@@ -36,7 +38,14 @@ Source/
 │   │   ├── AppVersion.cs              # Static helper; exposes Version, FullVersion, Product, Copyright, Description from assembly metadata
 │   │   └── WindowPosition.cs          # Window geometry (Top/Left/Width/Height); GetWindowPositions/SetWindowPositions helpers; namespace TD.WPF.Models
 │   ├── ViewModels/                    # AbstractViewModel, MainViewModel, FileChangeViewModel
+│   ├── Views/
+│   │   └── MarkdownView.xaml
 │   └── Resources/                     # Styles.xaml, BootstrapIcons.xaml
+├── OzzMarkdown/               # Git submodule — github.com/ozalpd/OzzMarkdown
+│   └── OzzMarkdown.Core/          # Markdown-to-HTML rendering library (Markdig-based)
+│       ├── MarkdownHtmlRenderer.cs    # Renders markdown to a temp HTML file, returns virtual URL; handles WebView2 2MB NavigateToString limit
+│       ├── MarkdownTheme.cs           # Theme model (CSS string)
+│       └── MarkdownThemeProvider.cs   # Provides built-in themes by name
 ├── OzzContextGen.MAUI/        # .NET MAUI frontend (planned — does not exist yet)
 └── OzzContextGen.i18n/        # Shared .resx localization (en + tr)
 ```

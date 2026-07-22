@@ -10,6 +10,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Planned
 - **Source trimming** — `TrimComments` and `TrimXmlDocs` options on `PackerEngine` to optionally strip inline/block comments and XML documentation lines, reducing output size and token count.
 
+## [0.1.6] - 2026-07-22
+
+### Added
+- Added `OzzMarkdown` as a submodule and projects `OzzWpf.Core` and `OzzMarkdown.Core` reference to `OzzContextGen.WPF`.
+- Added `MarkdownView` to display Markdown content in a WPF window using `OzzMarkdown.Core` for rendering.
+- Added `SelectedTheme` for markdown preview to `AppSettings`.
+
+### Changed
+- Updated `MainViewModel` to show preview after packing.
+
 ## [0.1.5] - 2026-06-30
 
 ### Added

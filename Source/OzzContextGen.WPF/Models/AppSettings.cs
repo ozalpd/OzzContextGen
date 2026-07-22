@@ -1,11 +1,11 @@
-﻿using System.IO;
+﻿using OzzWpf.Core.Models;
+using System.IO;
 using System.Text.Json;
-using TD.WPF.Models;
 using static System.Environment;
 
 namespace OzzContextGen.WPF.Models;
 
-public class AppSettings
+public class AppSettings : AbstractAppSettings
 {
     private static AppSettings? _instance;
     private static readonly object _syncRoot = new();
@@ -14,17 +14,12 @@ public class AppSettings
     private static string settingsFileName = "wpfsettings.json";
 
 
+    public override string GetSettingsFolderName() => ozzContextGen;
+    
     /// <summary>
-    /// Gets or sets the position and size of the main application window.
+    /// Gets or sets the position and size of the Markdown preview window.
     /// </summary>
-    public WindowPosition MainWindowPosition { get; set; } = new WindowPosition();
-
-    /// <summary>
-    /// Gets or sets the BCP-47 culture name used for the application UI (e.g. <c>"en-US"</c>, <c>"tr-TR"</c>).
-    /// </summary>
-    /// <remarks>When empty, the operating system's current culture is used.</remarks>
-    public string UiCulture { get; set; } = string.Empty;
-
+    public WindowPosition MarkdownWindowPosition { get; set; } = new WindowPosition();
 
     public static AppSettings GetAppSettings()
     {

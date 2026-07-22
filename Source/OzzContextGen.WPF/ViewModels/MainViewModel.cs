@@ -2,11 +2,14 @@
 using OzzContextGen.Core.Helpers;
 using OzzContextGen.Core.Models;
 using OzzContextGen.i18n;
-using OzzContextGen.WPF.Commands;
+using OzzContextGen.WPF.Views;
+using OzzWpf.Core.Commands;
+using OzzWpf.Core.ViewModels;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
+using System.Windows;
 using static OzzContextGen.Core.Helpers.EnumExtensions;
 
 namespace OzzContextGen.WPF.ViewModels;
@@ -258,6 +261,7 @@ public class MainViewModel : AbstractViewModel
             await _stateService.SaveProfileAsync(ProfilePath, newProfile);
         }
 
+        ShowMarkdown(markdownResult);
         StatusMessage = $"✓ {LocalizedStrings.CompletedProfilePacking}!";
     }
 
@@ -304,6 +308,28 @@ public class MainViewModel : AbstractViewModel
         }
     }
 
+
+    private void ShowMarkdown(string markdownContent)
+    {
+        if (markdownView == null)
+        {
+            markdownView = new MarkdownView();
+            markdownView.GenerateToc = true;
+        }
+        else if (markdownView.WindowState == WindowState.Minimized)
+        {
+            markdownView.WindowState = WindowState.Normal;
+        }
+
+        markdownView.LoadMarkdown(markdownContent);
+        markdownView.Show();
+    }
+    MarkdownView markdownView;
+
+    public void Shutdown()
+    {
+        markdownView?.Close();
+    }
 
     public bool CanToggleAllSelected() => TrackedFiles.Count > 0;
 

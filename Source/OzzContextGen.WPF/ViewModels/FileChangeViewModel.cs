@@ -1,5 +1,6 @@
 ﻿using OzzContextGen.Core.Helpers;
 using OzzContextGen.Core.Models;
+using OzzWpf.Core.ViewModels;
 using System.IO;
 
 namespace OzzContextGen.WPF.ViewModels

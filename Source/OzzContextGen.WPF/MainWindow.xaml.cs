@@ -1,5 +1,6 @@
 ﻿using OzzContextGen.WPF.Models;
 using OzzContextGen.WPF.ViewModels;
+using OzzWpf.Core.Models;
 using System.Windows;
 
 namespace OzzContextGen.WPF
@@ -28,6 +29,10 @@ namespace OzzContextGen.WPF
 
         private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (DataContext is MainViewModel viewModel)
+            {
+                viewModel.Shutdown();
+            }
             _appSettings.MainWindowPosition.GetWindowPositions(this);
             _appSettings.Save();
         }
