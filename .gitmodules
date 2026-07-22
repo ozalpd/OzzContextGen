@@ -1,0 +1,3 @@
+[submodule "Source/OzzMarkdown"]
+	path = Source/OzzMarkdown
+	url = https://github.com/ozalpd/OzzMarkdown.git
