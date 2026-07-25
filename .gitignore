@@ -21,6 +21,7 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+[Ii]nstallers/
 
 # Visual Studio cache/options directory
 .vs/

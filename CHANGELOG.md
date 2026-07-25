@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Added `.iss` (Inno Setup) and `.bat` (Batch) file types to `SourceLanguages`.
+
+### Fixed
+- Fixed `AppVersion` (in `OzzWpf.Core`) reporting its own assembly's version instead of the hosting application's; now uses `Assembly.GetEntryAssembly()` with a fallback to `Assembly.GetExecutingAssembly()`.
+
 ### Planned
 - **Source trimming** — `TrimComments` and `TrimXmlDocs` options on `PackerEngine` to optionally strip inline/block comments and XML documentation lines, reducing output size and token count.
 

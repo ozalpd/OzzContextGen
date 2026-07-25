@@ -249,6 +249,20 @@ public static class SourceLanguages
         LineComment = ";"
     };
 
+    public static readonly SourceLanguage InnoSetup = new()
+    {
+        Suffix = ".iss",
+        MarkdownFence = "inno",
+        LineComment = ";"
+    };
+
+    public static readonly SourceLanguage Batch = new()
+    {
+        Suffix = ".bat",
+        MarkdownFence = "bat",
+        LineComment = "REM"
+    };
+
     private static readonly Dictionary<string, SourceLanguage> _map =
         new(StringComparer.OrdinalIgnoreCase)
         {
@@ -282,6 +296,8 @@ public static class SourceLanguages
             [".uplugin"]  = UnrealPlugin,
             [".asmdef"]   = UnityAsmDef,
             [".ini"]      = IniConfig,
+            [".iss"]      = InnoSetup,
+            [".bat"]      = Batch,
         };
 
     /// <summary>All registered language definitions, keyed by suffix (case-insensitive).</summary>

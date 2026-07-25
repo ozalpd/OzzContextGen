@@ -22,7 +22,7 @@ OzzContextGen is a multi-frontend desktop utility targeting **.NET 10**.
 
 The core scanning and packing logic lives in `OzzContextGen.Core`, which is **platform-agnostic** and shared by all frontends. `OzzContextGen.i18n` provides shared localization (English and Turkish) across all projects.
 
-The WPF frontend uses MVVM and ships with a shared `Styles.xaml` resource dictionary and [Bootstrap Icons v1.13.1](https://icons.getbootstrap.com) (MIT) as WPF `Geometry` resources in `BootstrapIcons.xaml`. The MAUI frontend will mirror the same MVVM structure.
+The WPF frontend uses MVVM and ships with a shared `Styles.xaml` resource dictionary. Shared, reusable WPF assets — [Bootstrap Icons v1.13.1](https://icons.getbootstrap.com) (MIT) as `Geometry` resources in `BootstrapIcons.xaml`, plus `AppVersion` — live in `OzzWpf.Core` (from the `OzzMarkdown` submodule) so they can be reused by other WPF-based frontends. The MAUI frontend will mirror the same MVVM structure.
 
 ## Project Structure
 
@@ -53,7 +53,6 @@ OzzContextGen/
 │   │   │   └── BindingProxy.cs
 │   │   ├── Models/
 │   │   │   ├── AppSettings.cs
-│   │   │   ├── AppVersion.cs
 │   │   │   └── WindowPosition.cs
 │   │   ├── ViewModels/
 │   │   │   ├── AbstractViewModel.cs
@@ -63,13 +62,17 @@ OzzContextGen/
 │   │   │   ├── MainWindow.xaml
 │   │   │   └── MarkdownView.xaml
 │   │   └── Resources/
-│   │       ├── BootstrapIcons.xaml
 │   │       └── Styles.xaml
 │   ├── OzzMarkdown/              # Git submodule — github.com/ozalpd/OzzMarkdown
-│   │   └── OzzMarkdown.Core/     # Markdown-to-HTML rendering library
-│   │       ├── MarkdownHtmlRenderer.cs
-│   │       ├── MarkdownTheme.cs
-│   │       └── MarkdownThemeProvider.cs
+│   │   ├── OzzMarkdown.Core/     # Markdown-to-HTML rendering library
+│   │   │   ├── MarkdownHtmlRenderer.cs
+│   │   │   ├── MarkdownTheme.cs
+│   │   │   └── MarkdownThemeProvider.cs
+│   │   └── OzzWpf.Core/           # Shared WPF assets reused across frontends
+│   │       ├── Models/
+│   │       │   └── AppVersion.cs
+│   │       └── Resources/
+│   │           └── BootstrapIcons.xaml
 │   ├── OzzContextGen.MAUI/       # .NET MAUI frontend (planned)
 │   └── OzzContextGen.i18n/       # Shared localization (en, tr)
 ├── CHANGELOG.md
@@ -121,6 +124,8 @@ OzzContextGen recognises the following file types out of the box. Each is scanne
 | `.uplugin` | `json` | — | — | — |
 | `.asmdef` | `json` | — | — | — |
 | `.ini` | `ini` | `;` | — | — |
+| `.iss` | `inno` | `;` | — | — |
+| `.bat` | `bat` | `REM` | — | — |
 
 ## Planned Features
 
