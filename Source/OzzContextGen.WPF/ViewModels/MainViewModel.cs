@@ -210,10 +210,13 @@ public class MainViewModel : AbstractViewModel
         SaveProfileCommand.RaiseCanExecuteChanged();
     }
 
-    private bool CanPack() => !string.IsNullOrEmpty(OutputPath) && TrackedFiles.Any(f => f.IsSelected);
+    private bool CanPack() => TrackedFiles.Any(f => f.IsSelected);
 
     private async Task PackContextAsync()
     {
+        if (string.IsNullOrEmpty(OutputPath))
+            BrowseOutput();
+
         if (string.IsNullOrEmpty(OutputPath))
         {
             StatusMessage = $"{LocalizedStrings.SpecifyOutputPath}.";

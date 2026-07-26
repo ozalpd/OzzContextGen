@@ -5,10 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
 ## [Unreleased]
 
 ### Added
-- Added `.iss` (Inno Setup) and `.bat` (Batch) file types to `SourceLanguages`.
+- Added Batch and Pascal language definitions to PrismJS for improved code block highlighting. Updated minified assets accordingly.
+
+### Changed
+- `MainViewModel`: Packing allowed if files are selected; prompts for output path if missing.
+- Refined link colors in all built-in Markdown themes for better consistency and accessibility.
+- Added `.iss` (Inno Setup) and `.bat` (Batch) to SourceLanguages, expanding built-in types to 32.
+- Moved AppVersion to OzzWpf.Core/Models, improved version reporting using Assembly.GetEntryAssembly() with fallback.
 
 ### Fixed
 - Fixed `AppVersion` (in `OzzWpf.Core`) reporting its own assembly's version instead of the hosting application's; now uses `Assembly.GetEntryAssembly()` with a fallback to `Assembly.GetExecutingAssembly()`.
