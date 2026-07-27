@@ -1,6 +1,6 @@
 ﻿using OzzContextGen.WPF.Models;
 using OzzContextGen.WPF.ViewModels;
-using OzzWpf.Core.Models;
+using OzzMarkdown.Core.Models;
 using System.Windows;
 
 namespace OzzContextGen.WPF
