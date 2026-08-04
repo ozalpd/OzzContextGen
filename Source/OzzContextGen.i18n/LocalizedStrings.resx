@@ -300,4 +300,7 @@
   <data name="SaveProfile" xml:space="preserve">
     <value>Save Profile</value>
   </data>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
 </root>

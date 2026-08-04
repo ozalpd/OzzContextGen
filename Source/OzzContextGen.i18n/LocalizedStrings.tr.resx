@@ -300,4 +300,7 @@
   <data name="SaveProfile" xml:space="preserve">
     <value>Profili Kaydet</value>
   </data>
+  <data name="About" xml:space="preserve">
+    <value>Hakkında</value>
+  </data>
 </root>

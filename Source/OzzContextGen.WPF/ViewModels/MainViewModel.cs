@@ -2,8 +2,12 @@
 using OzzContextGen.Core.Helpers;
 using OzzContextGen.Core.Models;
 using OzzContextGen.i18n;
+using OzzContextGen.WPF.Models;
 using OzzContextGen.WPF.Views;
+using OzzMarkdown.Core.Extensions;
+using OzzMarkdown.Core.Models;
 using OzzWpf.Core.Commands;
+using OzzWpf.Core.Dialogs;
 using OzzWpf.Core.ViewModels;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -19,6 +23,8 @@ public class MainViewModel : AbstractViewModel
     private readonly PackerEngine _packerEngine;
     private readonly StateService _stateService;
     private ContextStateProfile _currentProfile = new();
+    private ReleaseSource _releaseSource = new ReleaseSource();
+
     public MainViewModel()
     {
         _packerEngine = new PackerEngine();
@@ -33,10 +39,14 @@ public class MainViewModel : AbstractViewModel
         SaveProfileCommand = new RelayCommand(async () => await SaveProfileAsync(), CanSaveProfile);
         ToggleAllSelectedCommand = new RelayCommand(ToggleAllSelected, CanToggleAllSelected);
 
+        CheckForUpdatesCommand = new RelayCommand(async () => await CheckForUpdatesAsync());
+        ShowAboutCommand = new RelayCommand(ShowAboutDialog);
         PackingModeModeValues = GetValues<PackingMode>();
 
         PropertyChanged += OnPropertyChanged;
         TrackedFiles.CollectionChanged += OnTrackedFilesCollectionChanged;
+
+        //_ = Task.Run(CheckForUpdatesAsync);
     }
 
     public RelayCommand BrowseSourceCommand { get; }
@@ -46,11 +56,28 @@ public class MainViewModel : AbstractViewModel
     public RelayCommand PackCommand { get; }
     public RelayCommand RemoveDeletedFilesCommand { get; }
     public RelayCommand SaveProfileCommand { get; }
+    public RelayCommand CheckForUpdatesCommand { get; }
+    public RelayCommand ShowAboutCommand { get; }
     public RelayCommand ToggleAllSelectedCommand { get; }
 
 
     public IEnumerable<EnumValueItem<PackingMode>> PackingModeModeValues { get; private set; } = Array.Empty<EnumValueItem<PackingMode>>();
 
+
+
+    public bool HasNewerVersion
+    {
+        get => _hasNewerVersion;
+        set
+        {
+            if (_hasNewerVersion != value)
+            {
+                _hasNewerVersion = value;
+                RaisePropertyChanged(nameof(HasNewerVersion));
+            }
+        }
+    }
+    private bool _hasNewerVersion;
 
     public bool? IsAllSelected
     {
@@ -69,6 +96,9 @@ public class MainViewModel : AbstractViewModel
             return null;
         }
     }
+
+    public GitHubRelease? LatestRelease { get; private set; }
+
 
     public string OutputPath
     {
@@ -403,5 +433,36 @@ public class MainViewModel : AbstractViewModel
             RaisePropertyChanged(nameof(IsAllSelected));
             PackCommand.RaiseCanExecuteChanged();
         }
+    }
+
+    private async Task CheckForUpdatesAsync()
+    {
+        try
+        {
+            LatestRelease = await _releaseSource.GetGitHubReleaseAsync();
+            if (LatestRelease != null && !string.IsNullOrEmpty(LatestRelease.TagName))
+            {
+                // Compare the current version with the latest release version
+                Version currentVersion = new Version(_releaseSource.CurrentVersion);
+                Version latestVersion = new Version(LatestRelease.TagName.TrimStart('v'));
+                HasNewerVersion = latestVersion > currentVersion;
+            }
+        }
+        catch (Exception ex)
+        {
+            // Handle exceptions (e.g., log them or show a message to the user)
+        }
+    }
+
+    private void ShowAboutDialog()
+    {
+        var aboutDialog = new AboutDialog(_releaseSource);
+        var app = System.Windows.Application.Current;
+        if (app?.MainWindow != null)
+        {
+            aboutDialog.Owner = app.MainWindow;
+        }
+        aboutDialog.LoadHighResolutionIcon("pack://application:,,,/OzzContextGen.WPF;component/Assets/CtxGen-Icon-02-256.ico");
+        aboutDialog.ShowDialog();
     }
 }

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Added an About button to the main toolbar with a localized tooltip.
 - Added Batch and Pascal language definitions to PrismJS for improved code block highlighting. Updated minified assets accordingly.
 
 ### Changed
