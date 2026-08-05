@@ -11,10 +11,15 @@ namespace OzzContextGen.WPF
     public partial class MainWindow : Window
     {
         private readonly AppSettings _appSettings = AppSettings.GetAppSettings();
+        private MainViewModel _viewModel;
+        private readonly string? _filePathToOpen;
 
-        public MainWindow()
+        public MainWindow() : this(null) { }
+
+        public MainWindow(string? filePathToOpen)
         {
             InitializeComponent();
+            _filePathToOpen = filePathToOpen;
             SourceInitialized += MainWindow_SourceInitialized;
             Closing += MainWindow_Closing;
         }
@@ -23,8 +28,15 @@ namespace OzzContextGen.WPF
         {
             SourceInitialized -= MainWindow_SourceInitialized;
             Title = $"OzzContextGen - LLM Context Packer - v{AppVersion.Version}";
-            this.DataContext = new MainViewModel();
+            _viewModel = new MainViewModel();
+            this.DataContext = _viewModel;
             _appSettings.MainWindowPosition.SetWindowPositions(this);
+
+            if (!string.IsNullOrEmpty(_filePathToOpen))
+            {
+                _viewModel.ProfilePath = _filePathToOpen;
+                _ = _viewModel.OpenProfile(showDialog: false);
+            }
         }
 
         private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)

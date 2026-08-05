@@ -303,4 +303,7 @@
   <data name="About" xml:space="preserve">
     <value>Hakkında</value>
   </data>
+  <data name="ProfileFileNotFound" xml:space="preserve">
+    <value>Profil Dosyası Bulunamadı!</value>
+  </data>
 </root>

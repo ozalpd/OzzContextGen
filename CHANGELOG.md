@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added an About button to the main toolbar with a localized tooltip.
 - Added Batch and Pascal language definitions to PrismJS for improved code block highlighting. Updated minified assets accordingly.
+- Added support for opening a profile file passed by the OS (e.g. via double-click on an associated `.md` file): `App.OnStartup` now reads the launch arguments and passes the file path to a new `MainWindow(string? filePathToOpen)` constructor overload, which loads it through a new `MainViewModel.OpenProfile` method once the view model is initialized.
 
 ### Changed
 - `MainViewModel`: Packing allowed if files are selected; prompts for output path if missing.

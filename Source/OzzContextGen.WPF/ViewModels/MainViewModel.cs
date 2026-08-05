@@ -185,13 +185,22 @@ public class MainViewModel : AbstractViewModel
         }
     }
 
-    private async Task OpenProfile()
+    public async Task OpenProfile(bool showDialog = true)
     {
-        var dialog = new Microsoft.Win32.OpenFileDialog { Filter = LocalizedStrings.ProfileFileFilter };
-        if (dialog.ShowDialog() == true)
+        if (showDialog)
         {
-            ProfilePath = dialog.FileName;
+            var dialog = new Microsoft.Win32.OpenFileDialog { Filter = LocalizedStrings.ProfileFileFilter };
+            if (dialog.ShowDialog() == true)
+            {
+                ProfilePath = dialog.FileName;
+            }
         }
+        else if (string.IsNullOrEmpty(ProfilePath) || !File.Exists(ProfilePath))
+        {
+            StatusMessage = $"{LocalizedStrings.ProfileFileNotFound}.";
+            return;
+        }
+
         var profile = await _stateService.LoadProfileAsync(ProfilePath);
         _currentProfile = profile;
         SourcePath = profile.TargetSourcePath;

@@ -403,6 +403,15 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile File Not Found!.
+        /// </summary>
+        public static string ProfileFileNotFound {
+            get {
+                return ResourceManager.GetString("ProfileFileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profile save cancelled....
         /// </summary>
         public static string ProfileSaveCancelled {
