@@ -8,20 +8,16 @@
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
 		<Version>0.1.6</Version>
-		<ApplicationIcon>Assets\CtxGen-Icon-02-256.ico</ApplicationIcon>
+		<ApplicationIcon>Assets\CtxGen-Icon.ico</ApplicationIcon>
 	</PropertyGroup>
-
-	<ItemGroup>
-	  <None Remove="CtxGen-Icon-02-64.png" />
-	</ItemGroup>
 
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4078.44" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Resource Include="Assets\CtxGen-Icon-02-256.ico" />
-		<Resource Include="Assets\CtxGen-Icon-02-64.png" />
+		<Resource Include="Assets\CtxGen-Icon.ico" />
+		<Resource Include="Assets\CtxGen-Icon-832.png" />
 	</ItemGroup>
 
 	<ItemGroup>

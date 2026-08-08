@@ -9,7 +9,7 @@
         xmlns:helpers="clr-namespace:OzzWpf.Core.Helpers;assembly=OzzWpf.Core"
         mc:Ignorable="d"
         Title="OzzContextGen - LLM Context Packer" Width="1080" Height="800" MinWidth="680" MinHeight="520"
-        WindowStartupLocation="CenterScreen" Icon="/Assets/CtxGen-Icon-02-64.png">
+        WindowStartupLocation="CenterScreen" Icon="/Assets/CtxGen-Icon.ico">
     <Window.Resources>
         <helpers:BindingProxy x:Key="proxy" Data="{Binding}"/>
     </Window.Resources>

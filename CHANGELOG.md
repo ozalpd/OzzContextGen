@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `.iss` (Inno Setup) and `.bat` (Batch) to SourceLanguages, expanding built-in types to 32.
 - Moved AppVersion to OzzWpf.Core/Models, improved version reporting using Assembly.GetEntryAssembly() with fallback.
 - Updated namespace imports to use `OzzMarkdown.Core.Models` for shared types. Added `MainWindowPosition` property to `AppSettings` for saving window geometry, utilizing the `WindowPosition` type. Restored `OzzWpf.Core.Models` import for compatibility. 
+- Replaced old icons with new `CtxGen-Icon.ico` and `CtxGen-Icon-832.png`. Updated project and window to use the new `.ico` file as the application icon.
 
 ### Fixed
 - Fixed `AppVersion` (in `OzzWpf.Core`) reporting its own assembly's version instead of the hosting application's; now uses `Assembly.GetEntryAssembly()` with a fallback to `Assembly.GetExecutingAssembly()`.
