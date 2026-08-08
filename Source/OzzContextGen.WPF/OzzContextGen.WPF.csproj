@@ -17,7 +17,6 @@
 
 	<ItemGroup>
 		<Resource Include="Assets\CtxGen-Icon.ico" />
-		<Resource Include="Assets\CtxGen-Icon-832.png" />
 	</ItemGroup>
 
 	<ItemGroup>

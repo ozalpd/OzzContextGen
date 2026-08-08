@@ -1,0 +1,63 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="diag45" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3A0CA3"/>
+      <stop offset="100%" stop-color="#7209B7"/>
+    </linearGradient>
+
+    <!-- Funnel Beam Gradient (Left to Right Glow) -->
+    <linearGradient id="funnelBeam" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#DDE1F8" stop-opacity="0.02"/>
+      <stop offset="50%" stop-color="#DDE1F8" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#DDE1F8" stop-opacity="1.0"/>
+    </linearGradient>
+
+    <style>
+      .line-stroke { stroke: #DDE1F8; }
+      .chev-stroke { stroke: #F72585; fill: none; }
+      .beam-fill { fill: url(#funnelBeam); }
+    </style>
+  </defs>
+
+  <!-- Background Base -->
+  <rect x="0" y="0" width="1024" height="1024" rx="180" fill="url(#diag45)"/>
+
+  <!-- Code Symbol 1 </ > Upper Left -->
+  <g id="code-symbol" class="line-stroke" stroke-width="48" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Left Angle < -->
+    <polyline points="216,96 24,224 216,360" />
+    <!-- Slash / -->
+    <line x1="312" y1="72" x2="264" y2="384" />
+    <!-- Right Angle > -->
+    <polyline points="360,96 552,224 360,360" />
+  </g>
+  <!-- Code Symbol 2 </ > Lower Left -->
+  <g id="code-symbol" class="line-stroke" stroke-width="48" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Left Angle < -->
+    <polyline points="144,572 24,656 144,744" />
+    <!-- Slash / -->
+    <line x1="240" y1="552" x2="192" y2="760" />
+    <!-- Right Angle > -->
+    <polyline points="288,572 408,656 288,744" />
+  </g>
+
+  <!-- Funnel Beams (Connecting Code Symbol to Markdown Output) -->
+  <polygon points="320,-20 -64,240 776,696 720,432" class="beam-fill" />
+  <polygon points="0,480 0,888 776,600 776,600" class="beam-fill" />
+  
+  <!-- Downward arrow -->
+  <g id="ozzmd-arrow" class="line-stroke" stroke-width="128" fill="none" stroke-linecap="butt" stroke-linejoin="miter">
+    <!-- Vertical line -->
+    <line x1="720" y1="96" x2="720" y2="656" />
+    <!-- Arrow head -->
+    <polygon points="656,720 784,720 720,816" />
+  </g>
+  
+  <g id="chevron-m" stroke="#F72585" stroke-width="96" stroke-linecap="round">
+    <path d="M 464 724 L 608 300"/>
+    <path d="M 720 724 L 608 300"/>
+    <path d="M 720 724 L 864 300"/>
+    <path d="M 976 724 L 864 300"/>
+  </g>
+</svg>
