@@ -126,6 +126,7 @@ OzzContextGen recognises the following file types out of the box. Each is scanne
 | `.ini` | `ini` | `;` | — | — |
 | `.iss` | `inno` | `;` | — | — |
 | `.bat` | `bat` | `REM` | — | — |
+| `.txt` | `text` | — | — | — |
 
 ## Planned Features
 

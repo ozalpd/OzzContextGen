@@ -263,6 +263,12 @@ public static class SourceLanguages
         LineComment = "REM"
     };
 
+    public static readonly SourceLanguage Text = new()
+    {
+        Suffix = ".txt",
+        MarkdownFence = "text"
+    };
+
     private static readonly Dictionary<string, SourceLanguage> _map =
         new(StringComparer.OrdinalIgnoreCase)
         {
@@ -298,6 +304,7 @@ public static class SourceLanguages
             [".ini"]      = IniConfig,
             [".iss"]      = InnoSetup,
             [".bat"]      = Batch,
+            [".txt"]      = Text,
         };
 
     /// <summary>All registered language definitions, keyed by suffix (case-insensitive).</summary>
