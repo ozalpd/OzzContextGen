@@ -269,6 +269,58 @@ public static class SourceLanguages
         MarkdownFence = "text"
     };
 
+    public static readonly SourceLanguage PowerShell = new()
+    {
+        Suffix = ".ps1",
+        MarkdownFence = "powershell",
+        LineComment = "#",
+        BlockCommentStart = "<#",
+        BlockCommentEnd = "#>"
+    };
+
+    public static readonly SourceLanguage PowerShellModule = new()
+    {
+        Suffix = ".psm1",
+        MarkdownFence = "powershell",
+        LineComment = "#",
+        BlockCommentStart = "<#",
+        BlockCommentEnd = "#>"
+    };
+
+    public static readonly SourceLanguage PowerShellData = new()
+    {
+        Suffix = ".psd1",
+        MarkdownFence = "powershell",
+        LineComment = "#",
+        BlockCommentStart = "<#",
+        BlockCommentEnd = "#>"
+    };
+
+    public static readonly SourceLanguage PowerShellXml = new()
+    {
+        Suffix = ".ps1xml",
+        MarkdownFence = "xml",
+        BlockCommentStart = "<!--",
+        BlockCommentEnd = "-->"
+    };
+
+    public static readonly SourceLanguage PowerShellSessionConfig = new()
+    {
+        Suffix = ".pssc",
+        MarkdownFence = "powershell",
+        LineComment = "#",
+        BlockCommentStart = "<#",
+        BlockCommentEnd = "#>"
+    };
+
+    public static readonly SourceLanguage PowerShellConsole = new()
+    {
+        Suffix = ".psc1",
+        MarkdownFence = "xml",
+        BlockCommentStart = "<!--",
+        BlockCommentEnd = "-->"
+    };
+
     private static readonly Dictionary<string, SourceLanguage> _map =
         new(StringComparer.OrdinalIgnoreCase)
         {
@@ -305,6 +357,12 @@ public static class SourceLanguages
             [".iss"]      = InnoSetup,
             [".bat"]      = Batch,
             [".txt"]      = Text,
+            [".ps1"]      = PowerShell,
+            [".psm1"]     = PowerShellModule,
+            [".psd1"]     = PowerShellData,
+            [".ps1xml"]   = PowerShellXml,
+            [".pssc"]     = PowerShellSessionConfig,
+            [".psc1"]     = PowerShellConsole,
         };
 
     /// <summary>All registered language definitions, keyed by suffix (case-insensitive).</summary>

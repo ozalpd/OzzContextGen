@@ -127,6 +127,12 @@ OzzContextGen recognises the following file types out of the box. Each is scanne
 | `.iss` | `inno` | `;` | — | — |
 | `.bat` | `bat` | `REM` | — | — |
 | `.txt` | `text` | — | — | — |
+| `.ps1` | `powershell` | `#` | `<# #>` | — |
+| `.psm1` | `powershell` | `#` | `<# #>` | — |
+| `.psd1` | `powershell` | `#` | `<# #>` | — |
+| `.ps1xml` | `xml` | — | `<!-- -->` | — |
+| `.pssc` | `powershell` | `#` | `<# #>` | — |
+| `.psc1` | `xml` | — | `<!-- -->` | — |
 
 ## Planned Features
 

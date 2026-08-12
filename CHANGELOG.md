@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Added `.txt` and PowerShell script file types (`.ps1`, `.psm1`, `.psd1`, `.ps1xml`, `.pssc`, `.psc1`) to `SourceLanguages`.
 - Added an About button to the main toolbar with a localized tooltip.
 - Added Batch and Pascal language definitions to PrismJS for improved code block highlighting. Updated minified assets accordingly.
 - Added support for opening a profile file passed by the OS (e.g. via double-click on an associated `.md` file): `App.OnStartup` now reads the launch arguments and passes the file path to a new `MainWindow(string? filePathToOpen)` constructor overload, which loads it through a new `MainViewModel.OpenProfile` method once the view model is initialized.
