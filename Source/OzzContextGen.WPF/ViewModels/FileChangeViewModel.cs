@@ -18,6 +18,8 @@ namespace OzzContextGen.WPF.ViewModels
         public string AbsolutePath => _summary.AbsolutePath;
         public string ChangeType => _summary.Change.ToString();
 
+        public string FileName => Path.GetFileName(_summary.RelativePath);
+
         public string FileSize => _summary.FileSize.ToFileSize();
 
         public long FileSizeInBytes => _summary.FileSize;

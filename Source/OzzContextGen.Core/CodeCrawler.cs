@@ -16,7 +16,7 @@
 
             ExcludedFolders = new(StringComparer.OrdinalIgnoreCase)
             {
-                "bin", "obj", ".git", ".vs", "packages", "node_modules"
+                "bin", "obj", ".git", ".vs", ".vscode", "packages", "node_modules", "GeneratedCodes"
             };
         }
 

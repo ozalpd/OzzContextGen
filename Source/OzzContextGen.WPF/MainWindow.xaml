@@ -288,35 +288,41 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="{x:Static i18n:LocalizedStrings.FilePath}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
-                    <TextBlock Text=":" Grid.Row="0" Grid.Column="1" Margin="2"/>
-                    <TextBlock Text="{Binding RelativePath}" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Background="White" Padding="4,2,0,2" Margin="1"/>
 
-                    <TextBlock Text="{x:Static i18n:LocalizedStrings.Status}" Grid.Row="1" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                    <TextBlock Text="{Binding FileName}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"
+                               Padding="6" Margin="0" FontSize="14"
+                               Background="#1080FF" Foreground="#F8F8F8"/>
+
+                    <TextBlock Text="{x:Static i18n:LocalizedStrings.FilePath}" Grid.Row="1" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
                     <TextBlock Text=":" Grid.Row="1" Grid.Column="1" Margin="2"/>
-                    <TextBlock Text="{Binding ChangeType}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Background="White" Padding="4,2,0,2" Margin="1"/>
+                    <TextBlock Text="{Binding RelativePath}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Background="White" Padding="4,2,0,2" Margin="1"/>
 
-                    <TextBlock Text="{x:Static i18n:LocalizedStrings.FileSize}" Grid.Row="2" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                    <TextBlock Text="{x:Static i18n:LocalizedStrings.Status}" Grid.Row="2" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
                     <TextBlock Text=":" Grid.Row="2" Grid.Column="1" Margin="2"/>
-                    <TextBlock Text="{Binding FileSize}" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Background="White" Padding="4,2,0,2" Margin="1"/>
+                    <TextBlock Text="{Binding ChangeType}" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Background="White" Padding="4,2,0,2" Margin="1"/>
 
-                    <TextBlock Text="{x:Static i18n:LocalizedStrings.Pack}" Grid.Row="3" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                    <TextBlock Text="{x:Static i18n:LocalizedStrings.FileSize}" Grid.Row="3" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
                     <TextBlock Text=":" Grid.Row="3" Grid.Column="1" Margin="2"/>
-                    <CheckBox IsChecked="{Binding IsSelected}" Grid.Row="3" Grid.Column="2" Background="White" Margin="0,4"/>
+                    <TextBlock Text="{Binding FileSize}" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Background="White" Padding="4,2,0,2" Margin="1"/>
 
-                    <TextBlock Text="{x:Static i18n:LocalizedStrings.PackingMode}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                    <TextBlock Text="{x:Static i18n:LocalizedStrings.Pack}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
                     <TextBlock Text=":" Grid.Row="4" Grid.Column="1" Margin="2"/>
+                    <CheckBox IsChecked="{Binding IsSelected}" Grid.Row="4" Grid.Column="2" Background="White" Margin="0,4"/>
+
+                    <TextBlock Text="{x:Static i18n:LocalizedStrings.PackingMode}" Grid.Row="5" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                    <TextBlock Text=":" Grid.Row="5" Grid.Column="1" Margin="2"/>
                     <ComboBox ItemsSource="{Binding Data.PackingModeModeValues, Source={StaticResource proxy}}"
                               SelectedValue="{Binding PackingMode, Mode=TwoWay}"
                               DisplayMemberPath="DisplayValue"
                               SelectedValuePath="Value"
-                              Grid.Row="4" Grid.Column="2" Margin="1"/>
+                              Grid.Row="5" Grid.Column="2" Margin="1"/>
 
-                    <TextBlock Text="{x:Static i18n:LocalizedStrings.ContextNote}" Grid.Row="5" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
-                    <TextBlock Text=":" Grid.Row="5" Grid.Column="1" Margin="2"/>
-                    <TextBox Text="{Binding ContextNote, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Margin="1" TextWrapping="Wrap"/>
+                    <TextBlock Text="{x:Static i18n:LocalizedStrings.ContextNote}" Grid.Row="6" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                    <TextBlock Text=":" Grid.Row="6" Grid.Column="1" Margin="2"/>
+                    <TextBox Text="{Binding ContextNote, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Margin="1" TextWrapping="Wrap"/>
                 </Grid>
             </Border>
         </Grid>

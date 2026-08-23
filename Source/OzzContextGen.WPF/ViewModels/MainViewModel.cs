@@ -204,6 +204,15 @@ public class MainViewModel : AbstractViewModel
         var profile = await _stateService.LoadProfileAsync(ProfilePath);
         _currentProfile = profile;
         SourcePath = profile.TargetSourcePath;
+
+        if(CanAnalyzeChanges())
+        {
+            await AnalyzeChangesAsync();
+        }
+        else
+        {
+            StatusMessage = $"{LocalizedStrings.InvalidSourceFolder}";
+        }
     }
 
     private bool CanAnalyzeChanges() => !string.IsNullOrEmpty(SourcePath) && Directory.Exists(SourcePath);
