@@ -306,4 +306,13 @@
   <data name="ProfileFileNotFound" xml:space="preserve">
     <value>Profil Dosyası Bulunamadı!</value>
   </data>
+  <data name="EstimatedTokens" xml:space="preserve">
+    <value>~{0:N0} token (tahmini)</value>
+  </data>
+  <data name="TokenSize" xml:space="preserve">
+    <value>Token Boyu</value>
+  </data>
+  <data name="TokenEstimateTooltip" xml:space="preserve">
+    <value>Oluşturulan markdown paketinin sezgisel token tahmini. ASCII: {0:N0}, Genişletilmiş Latin: {1:N0}, CJK: {2:N0}, Diğer: {3:N0} karakter. Gerçek token sayısı hedef modelin tokenizer'ına bağlıdır.</value>
+  </data>
 </root>

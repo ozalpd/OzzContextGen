@@ -90,6 +90,9 @@ namespace OzzContextGen.CLI
                     // StateService entegrasyonu buraya gelecek
                 }
 
+                var estimate = TokenEstimator.Estimate(markdownResult);
+                Console.WriteLine($" ~ {string.Format(LocalizedStrings.EstimatedTokens, estimate.EstimatedTokens)}");
+
                 Console.WriteLine($"\n[✓] {LocalizedStrings.OperationCompleted}!");
                 return 0;
             }

@@ -306,4 +306,13 @@
   <data name="ProfileFileNotFound" xml:space="preserve">
     <value>Profile File Not Found!</value>
   </data>
+  <data name="EstimatedTokens" xml:space="preserve">
+    <value>~{0:N0} tokens (estimated)</value>
+  </data>
+  <data name="TokenSize" xml:space="preserve">
+    <value>Token Size</value>
+  </data>
+  <data name="TokenEstimateTooltip" xml:space="preserve">
+    <value>Heuristic token estimate of the generated markdown pack. ASCII: {0:N0}, Extended Latin: {1:N0}, CJK: {2:N0}, Other: {3:N0} characters. Actual token count depends on the target model's tokenizer.</value>
+  </data>
 </root>

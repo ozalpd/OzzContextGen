@@ -1,4 +1,5 @@
-﻿using OzzContextGen.Core.Helpers;
+﻿using OzzContextGen.Core;
+using OzzContextGen.Core.Helpers;
 using OzzContextGen.Core.Models;
 using OzzWpf.Core.ViewModels;
 using System.IO;
@@ -22,6 +23,33 @@ namespace OzzContextGen.WPF.ViewModels
 
         public string FileSize => _summary.FileSize.ToFileSize();
 
+        public string EstimatedTokens
+        {
+            get
+            {
+                if (_estimatedTokens == null)
+                    _estimatedTokens = ComputeEstimatedTokens();
+                return _estimatedTokens;
+            }
+        }
+        private string? _estimatedTokens;
+
+        private string ComputeEstimatedTokens()
+        {
+            if (PackingMode != PackingMode.FullPack || IsDeleted || !File.Exists(AbsolutePath))
+                return "-";
+
+            try
+            {
+                string content = File.ReadAllText(AbsolutePath);
+                return TokenEstimator.EstimateTokens(content).ToString("N0");
+            }
+            catch
+            {
+                return "-";
+            }
+        }
+
         public long FileSizeInBytes => _summary.FileSize;
 
         public bool IsDeleted => _summary.Change == Core.Models.ChangeType.Deleted;
@@ -42,6 +70,8 @@ namespace OzzContextGen.WPF.ViewModels
             set
             {
                 _summary.PackingMode = value;
+                _estimatedTokens = null;
+                RaisePropertyChanged(nameof(EstimatedTokens));
                 RaisePropertyChanged(nameof(IsSelected));
                 RaisePropertyChanged(nameof(PackingMode));
             }
@@ -61,6 +91,8 @@ namespace OzzContextGen.WPF.ViewModels
                     _summary.PackingMode = PackingMode.Excluded;
                 }
 
+                _estimatedTokens = null;
+                RaisePropertyChanged(nameof(EstimatedTokens));
                 RaisePropertyChanged(nameof(IsSelected));
                 RaisePropertyChanged(nameof(PackingMode));
             }

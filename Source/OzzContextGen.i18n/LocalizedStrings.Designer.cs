@@ -124,6 +124,15 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ~{0:N0} tokens (estimated).
+        /// </summary>
+        public static string EstimatedTokens {
+            get {
+                return ResourceManager.GetString("EstimatedTokens", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Example Usage (Task Scheduler or Terminal).
         /// </summary>
         public static string ExampleUsage {
@@ -588,6 +597,24 @@ namespace OzzContextGen.i18n {
         public static string SystemError {
             get {
                 return ResourceManager.GetString("SystemError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heuristic token estimate of the generated markdown pack. ASCII: {0:N0}, Extended Latin: {1:N0}, CJK: {2:N0}, Other: {3:N0} characters. Actual token count depends on the target model&apos;s tokenizer..
+        /// </summary>
+        public static string TokenEstimateTooltip {
+            get {
+                return ResourceManager.GetString("TokenEstimateTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Token Size.
+        /// </summary>
+        public static string TokenSize {
+            get {
+                return ResourceManager.GetString("TokenSize", resourceCulture);
             }
         }
         

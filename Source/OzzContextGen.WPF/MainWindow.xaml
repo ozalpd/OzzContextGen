@@ -289,6 +289,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
@@ -319,10 +320,14 @@
                               DisplayMemberPath="DisplayValue"
                               SelectedValuePath="Value"
                               Grid.Row="5" Grid.Column="2" Margin="1"/>
-
-                    <TextBlock Text="{x:Static i18n:LocalizedStrings.ContextNote}" Grid.Row="6" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                    
+                    <TextBlock Text="{x:Static i18n:LocalizedStrings.TokenSize}" Grid.Row="6" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
                     <TextBlock Text=":" Grid.Row="6" Grid.Column="1" Margin="2"/>
-                    <TextBox Text="{Binding ContextNote, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Margin="1" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding EstimatedTokens}" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Background="White" Padding="4,2,0,2" Margin="1"/>
+                    
+                    <TextBlock Text="{x:Static i18n:LocalizedStrings.ContextNote}" Grid.Row="7" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                    <TextBlock Text=":" Grid.Row="7" Grid.Column="1" Margin="2"/>
+                    <TextBox Text="{Binding ContextNote, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" Margin="1" TextWrapping="Wrap"/>
                 </Grid>
             </Border>
         </Grid>
@@ -331,6 +336,10 @@
         <StatusBar Grid.Row="3" Background="#EEEEEE">
             <StatusBarItem>
                 <TextBlock Text="{Binding StatusMessage}" />
+            </StatusBarItem>
+            <Separator />
+            <StatusBarItem>
+                <TextBlock Text="{Binding TokenEstimateText}" ToolTip="{Binding TokenEstimateTooltip}"/>
             </StatusBarItem>
         </StatusBar>
     </Grid>

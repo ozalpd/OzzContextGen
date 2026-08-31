@@ -134,6 +134,28 @@ public class MainViewModel : AbstractViewModel
     }
     private string _statusMessage = LocalizedStrings.Ready;
 
+    public string TokenEstimateText
+    {
+        get => _tokenEstimateText;
+        set
+        {
+            _tokenEstimateText = value;
+            RaisePropertyChanged(nameof(TokenEstimateText));
+        }
+    }
+    private string _tokenEstimateText = string.Empty;
+
+    public string TokenEstimateTooltip
+    {
+        get => _tokenEstimateTooltip;
+        set
+        {
+            _tokenEstimateTooltip = value;
+            RaisePropertyChanged(nameof(TokenEstimateTooltip));
+        }
+    }
+    private string _tokenEstimateTooltip = string.Empty;
+
     public FileChangeViewModel? SelectedFile
     {
         get => _selectedFile;
@@ -313,6 +335,12 @@ public class MainViewModel : AbstractViewModel
         }
 
         ShowMarkdown(markdownResult);
+
+        var estimate = TokenEstimator.Estimate(markdownResult);
+        TokenEstimateText = string.Format(LocalizedStrings.EstimatedTokens, estimate.EstimatedTokens);
+        TokenEstimateTooltip = string.Format(LocalizedStrings.TokenEstimateTooltip,
+            estimate.AsciiChars, estimate.ExtendedLatinChars, estimate.CjkChars, estimate.OtherChars);
+
         StatusMessage = $"✓ {LocalizedStrings.CompletedProfilePacking}!";
     }
 
