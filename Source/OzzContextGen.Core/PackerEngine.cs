@@ -25,7 +25,9 @@ public class PackerEngine
         progressAction?.Invoke(LocalizedStrings.ScanningFiles);
 
         var codeCrawler = new CodeCrawler(SourceLanguages.All.Keys.ToArray());
-        var codeFiles = codeCrawler.GetCodeFiles(sourcePath).Select(f => new FileContextEntry() { RelativePath = Path.GetRelativePath(sourcePath, f) }).ToList();
+        var codeFiles = codeCrawler.GetCodeFiles(sourcePath)
+                                   .Select(f => new FileContextEntry() { RelativePath = Path.GetRelativePath(sourcePath, f) })
+                                   .ToList();
 
         return await PackSourceCodeAsync(codeFiles, sourcePath, progressAction);
     }

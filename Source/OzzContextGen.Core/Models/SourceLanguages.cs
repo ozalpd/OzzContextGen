@@ -150,6 +150,22 @@ public static class SourceLanguages
         BlockCommentEnd = "-->"
     };
 
+    public static readonly SourceLanguage OzzGen = new()
+    {
+        Suffix = ".OzzGen",
+        MarkdownFence = "xml",
+        BlockCommentStart = "<!--",
+        BlockCommentEnd = "-->"
+    };
+
+    public static readonly SourceLanguage OzzGenSettings = new()
+    {
+        Suffix = ".settings",
+        MarkdownFence = "xml",
+        BlockCommentStart = "<!--",
+        BlockCommentEnd = "-->"
+    };
+
     // C++
     public static readonly SourceLanguage Cpp = new()
     {
@@ -326,8 +342,11 @@ public static class SourceLanguages
         {
             [".sln"]    = Sln,
             [".slnx"]   = SlnX,
+            [".ozzgen"]   = OzzGen,
+            [".settings"]   = OzzGenSettings,
             [".csproj"] = CsProj,
             [".xaml"]   = Xaml,
+            [".resx"]   = Resx,
             [".cs"]     = CSharp,
             [".html"]   = Html,
             [".cshtml"] = CssHtml,
@@ -340,7 +359,6 @@ public static class SourceLanguages
             [".md"]     = Markdown,
             [".py"]     = Python,
             [".pine"]   = PineScript,
-            [".resx"]   = Resx,
             [".ctxgen"] = CtxGen,
             [".cpp"]      = Cpp,
             [".h"]        = CppHeader,
