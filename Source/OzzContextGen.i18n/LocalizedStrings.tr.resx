@@ -297,6 +297,9 @@
   <data name="ProfileSaveCancelled" xml:space="preserve">
     <value>Profil kaydı gerçekleşmedi...</value>
   </data>
+  <data name="RecentProjects" xml:space="preserve">
+    <value>Son profiller</value>
+  </data>
   <data name="SaveProfile" xml:space="preserve">
     <value>Profili Kaydet</value>
   </data>

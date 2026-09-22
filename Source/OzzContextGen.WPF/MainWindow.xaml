@@ -6,12 +6,16 @@
         xmlns:viewmodels="clr-namespace:OzzContextGen.WPF.ViewModels"
         xmlns:i18n="clr-namespace:OzzContextGen.i18n;assembly=OzzContextGen.i18n"
         xmlns:local="clr-namespace:OzzContextGen.WPF"
+        xmlns:converters="clr-namespace:OzzWpf.Core.Converters;assembly=OzzWpf.Core"
+        xmlns:wpfhelpers="clr-namespace:OzzContextGen.WPF.Helpers"
         xmlns:helpers="clr-namespace:OzzWpf.Core.Helpers;assembly=OzzWpf.Core"
         mc:Ignorable="d"
         Title="OzzContextGen - LLM Context Packer" Width="1080" Height="800" MinWidth="680" MinHeight="520"
         WindowStartupLocation="CenterScreen" Icon="/Assets/CtxGen-Icon.ico">
     <Window.Resources>
         <helpers:BindingProxy x:Key="proxy" Data="{Binding}"/>
+        <converters:FileNameConverter x:Key="fileNameConverter"/>
+        <converters:FileNameConverter x:Key="fileNameConverterW" FallbackValue="{x:Static i18n:LocalizedStrings.RecentProjects}"/>
     </Window.Resources>
 
     <Grid Margin="0">
@@ -47,6 +51,24 @@
                     </Path>
                 </Viewbox>
             </Button>
+            <Grid>
+                <ComboBox x:Name="cboRecentProjects"
+                          ItemsSource="{Binding RecentProjects}"
+                          SelectedItem="{Binding SelectedRecentProject, Mode=TwoWay}"
+                          ToolTip="{x:Static i18n:LocalizedStrings.RecentProjects}"
+                          Width="160" Margin="3,0" VerticalAlignment="Center">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource fileNameConverter}}" ToolTip="{Binding}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock Width="140" Margin="2,4" Background="Transparent" Cursor="Hand"
+                           Text="{Binding ProfilePath, Converter={StaticResource fileNameConverterW}}"
+                           ToolTip="{Binding ProfilePath}"
+                           MouseLeftButtonDown="RecentProjectsLabel_MouseLeftButtonDown">
+                </TextBlock>
+            </Grid>
             <Button Style="{StaticResource IconButtonStyle-28x24}"
                     Command="{Binding AnalyzeChangesCommand}"
                     ToolTip="{x:Static i18n:LocalizedStrings.AnalyzeChanges}">

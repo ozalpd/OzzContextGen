@@ -33,6 +33,7 @@ OzzContextGen/
 │   │   ├── CodeCrawler.cs
 │   │   ├── PackerEngine.cs
 │   │   ├── StateService.cs
+│   │   ├── TokenEstimator.cs
 │   │   ├── Helpers/
 │   │   │   ├── EnumExtensions.cs
 │   │   │   └── FileExtensions.cs
@@ -42,37 +43,51 @@ OzzContextGen/
 │   │       ├── FileChangeSummary.cs
 │   │       ├── FileContextEntry.cs
 │   │       ├── SourceLanguage.cs
-│   │       └── SourceLanguages.cs
+│   │       ├── SourceLanguages.cs
+│   │       └── TokenEstimate.cs
 │   ├── OzzContextGen.CLI/        # Command-line frontend
 │   ├── OzzContextGen.WPF/        # WPF desktop frontend (MVVM)
+│   │   ├── MainWindow.xaml
 │   │   ├── Commands/
 │   │   │   └── RelayCommand.cs
-│   │   ├── Controls/
-│   │   │   └── MarkdownViewer.xaml
+│   │   ├── Converters/
+│   │   │   ├── FileSizeToColor.cs
+│   │   │   └── PackingModeToColor.cs
 │   │   ├── Helpers/
 │   │   │   └── BindingProxy.cs
 │   │   ├── Models/
 │   │   │   ├── AppSettings.cs
-│   │   │   └── WindowPosition.cs
+│   │   │   └── ReleaseSource.cs
+│   │   ├── Resources/
+│   │   │   ├── Converters.xaml
+│   │   │   └── Styles.xaml
 │   │   ├── ViewModels/
-│   │   │   ├── AbstractViewModel.cs
 │   │   │   ├── FileChangeViewModel.cs
 │   │   │   └── MainViewModel.cs
-│   │   ├── Views/
-│   │   │   ├── MainWindow.xaml
-│   │   │   └── MarkdownView.xaml
-│   │   └── Resources/
-│   │       └── Styles.xaml
+│   │   └── Views/
+│   │       └── MarkdownView.xaml
 │   ├── OzzMarkdown/              # Git submodule — github.com/ozalpd/OzzMarkdown
 │   │   ├── OzzMarkdown.Core/     # Markdown-to-HTML rendering library
 │   │   │   ├── MarkdownHtmlRenderer.cs
 │   │   │   ├── MarkdownTheme.cs
-│   │   │   └── MarkdownThemeProvider.cs
+│   │   │   ├── MarkdownThemeProvider.cs
+│   │   │   └── Models/
+│   │   │       ├── AbstractAppSettings.cs
+│   │   │       └── AppVersion.cs
 │   │   └── OzzWpf.Core/           # Shared WPF assets reused across frontends
+│   │       ├── Controls/
+│   │       │   └── MarkdownViewer.xaml
+│   │       ├── Converters/
+│   │       │   └── FileNameConverter.cs
+│   │       ├── Dialogs/
+│   │       │   └── AboutDialog.xaml
 │   │       ├── Models/
-│   │       │   └── AppVersion.cs
-│   │       └── Resources/
-│   │           └── BootstrapIcons.xaml
+│   │       │   └── WindowPosition.cs
+│   │       ├── Resources/
+│   │       │   ├── BootstrapIcons.xaml
+│   │       │   └── Styles.xaml
+│   │       └── ViewModels/
+│   │           └── AbstractViewModel.cs
 │   ├── OzzContextGen.MAUI/       # .NET MAUI frontend (planned)
 │   └── OzzContextGen.i18n/       # Shared localization (en, tr)
 ├── CHANGELOG.md
@@ -87,6 +102,7 @@ OzzContextGen/
 - Generate a single Markdown file with fenced code blocks per file
 - Include relative file paths as section headers
 - Per-profile file type selection — choose which suffixes each `.ctxgen` profile scans; persisted between sessions
+- WPF toolbar picker for up to 10 recently opened or saved `.ctxgen` profiles, persisted in application settings; displays the active profile's filename
 
 ## Supported File Types
 
@@ -112,6 +128,8 @@ OzzContextGen recognises the following file types out of the box. Each is scanne
 | `.resx` | `xml` | — | `<!-- -->` | — |
 | `.sln` | `text` | — | — | — |
 | `.slnx` | `xml` | — | `<!-- -->` | — |
+| `.OzzGen` | `xml` | — | `<!-- -->` | — |
+| `.settings` | `xml` | — | `<!-- -->` | — |
 | `.cpp` | `cpp` | `//` | `/* */` | — |
 | `.h` | `cpp` | `//` | `/* */` | — |
 | `.hlsl` | `hlsl` | `//` | `/* */` | — |

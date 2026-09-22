@@ -46,6 +46,12 @@ public class MainViewModel : AbstractViewModel
         PropertyChanged += OnPropertyChanged;
         TrackedFiles.CollectionChanged += OnTrackedFilesCollectionChanged;
 
+        var settings = AppSettings.GetAppSettings();
+        foreach (var path in settings.RecentFiles.Where(File.Exists))
+        {
+            RecentProjects.Add(path);
+        }
+
         //_ = Task.Run(CheckForUpdatesAsync);
     }
 
@@ -122,6 +128,22 @@ public class MainViewModel : AbstractViewModel
         }
     }
     private string _profilePath = string.Empty;
+
+    public ObservableCollection<string> RecentProjects { get; } = new();
+
+    public string? SelectedRecentProject
+    {
+        get => null;
+        set
+        {
+            RaisePropertyChanged(nameof(SelectedRecentProject));
+            if (!string.IsNullOrEmpty(value) && File.Exists(value))
+            {
+                ProfilePath = value;
+                _ = OpenProfile(false);
+            }
+        }
+    }
 
     public string StatusMessage
     {
@@ -226,6 +248,7 @@ public class MainViewModel : AbstractViewModel
         var profile = await _stateService.LoadProfileAsync(ProfilePath);
         _currentProfile = profile;
         SourcePath = profile.TargetSourcePath;
+        AddRecentProject(ProfilePath);
 
         if(CanAnalyzeChanges())
         {
@@ -374,9 +397,30 @@ public class MainViewModel : AbstractViewModel
             SelectedSuffixes = _currentProfile.SelectedSuffixes
         };
         await _stateService.SaveProfileAsync(ProfilePath, newProfile);
+        AddRecentProject(ProfilePath);
         StatusMessage = $"{LocalizedStrings.ProfileSavedSuccessfully}.";
     }
 
+
+    private void AddRecentProject(string path)
+    {
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            return;
+        }
+
+        var existing = RecentProjects.FirstOrDefault(
+            p => string.Equals(p, path, StringComparison.OrdinalIgnoreCase));
+        if (existing != null)
+        {
+            RecentProjects.Remove(existing);
+        }
+        RecentProjects.Insert(0, path);
+
+        var settings = AppSettings.GetAppSettings();
+        settings.AddRecentFile(path);
+        settings.Save();
+    }
 
     private void RemoveDeletedFilesFromTrackedList()
     {

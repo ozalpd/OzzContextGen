@@ -16,6 +16,7 @@ Source/
 │   ├── CodeCrawler.cs             # Recursive file scanner (suffixes driven by SourceLanguages)
 │   ├── PackerEngine.cs            # Markdown generator; resolves fence via SourceLanguages.TryGet
 │   ├── StateService.cs            # .ctxgen profile load/save + file-change diff
+│   ├── TokenEstimator.cs          # Heuristic LLM token estimator
 │   ├── Helpers/
 │   │   ├── EnumExtensions.cs          # Extension methods on Enum: GetDisplayValue, GetAttribute<T>, GetValues<T>, GetOrderedValues<T>, GetDisplayOrder; includes EnumValueItem<T>
 │   │   └── FileExtensions.cs          # ToFileSize extension on int/long (Bytes / KB / MB / GB)
@@ -25,27 +26,36 @@ Source/
 │       ├── FileChangeSummary.cs       # Diff result record; inherits FileContextEntry
 │       ├── FileContextEntry.cs        # Per-file metadata: RelativePath, LastWriteTime, FileSize, ContextNote, InclusionMode (lazy-defaults by size)
 │       ├── SourceLanguage.cs          # Record: Suffix, MarkdownFence, comment delimiters, XmlDocPrefix
-│       └── SourceLanguages.cs         # Static registry of 30 built-in SourceLanguage definitions
+│       ├── SourceLanguages.cs         # Static registry of 41 built-in SourceLanguage definitions
+│       └── TokenEstimate.cs           # Heuristic token breakdown record (Ascii, Extended Latin, CJK, Other)
 ├── OzzContextGen.CLI/         # Console frontend (-s, -o, -c, -n flags)
 ├── OzzContextGen.WPF/         # WPF MVVM frontend
-│   ├── Commands/RelayCommand.cs       # Sync/async ICommand with optional CanExecute
-│   ├── Controls/
-│   │   └── MarkdownViewer.xaml        # Uses MarkdownHtmlRenderer from OzzMarkdown.Core
+│   ├── MainWindow.xaml                # Primary application window
+│   ├── Commands/
+│   │   └── RelayCommand.cs            # Sync/async ICommand with optional CanExecute
+│   ├── Converters/                    # FileSizeToColor, PackingModeToColor
 │   ├── Helpers/
 │   │   └── BindingProxy.cs            # Freezable bridge for bindings outside the visual tree (e.g. DataGridColumn.Header)
 │   ├── Models/
-│   │   ├── AppSettings.cs             # Singleton; persists UiCulture + MainWindowPosition to %AppData%/OzzContextGen/wpfsettings.json
-│   │   ├── AppVersion.cs              # Static helper; exposes Version, FullVersion, Product, Copyright, Description from assembly metadata
-│   │   └── WindowPosition.cs          # Window geometry (Top/Left/Width/Height); GetWindowPositions/SetWindowPositions helpers; namespace TD.WPF.Models
-│   ├── ViewModels/                    # AbstractViewModel, MainViewModel, FileChangeViewModel
-│   ├── Views/
-│   │   └── MarkdownView.xaml
-│   └── Resources/                     # Styles.xaml, BootstrapIcons.xaml
+│   │   ├── AppSettings.cs             # Singleton; persists UiCulture, MainWindowPosition, RecentFiles to %AppData%/OzzContextGen/wpfsettings.json
+│   │   └── ReleaseSource.cs           # GitHub release info provider for update checks
+│   ├── Resources/                     # Styles.xaml, Converters.xaml
+│   ├── ViewModels/                    # FileChangeViewModel, MainViewModel (inherits AbstractViewModel from OzzWpf.Core)
+│   └── Views/
+│       └── MarkdownView.xaml          # Markdown pack preview window (hosts MarkdownViewer from OzzWpf.Core)
 ├── OzzMarkdown/               # Git submodule — github.com/ozalpd/OzzMarkdown
-│   └── OzzMarkdown.Core/          # Markdown-to-HTML rendering library (Markdig-based)
-│       ├── MarkdownHtmlRenderer.cs    # Renders markdown to a temp HTML file, returns virtual URL; handles WebView2 2MB NavigateToString limit
-│       ├── MarkdownTheme.cs           # Theme model (CSS string)
-│       └── MarkdownThemeProvider.cs   # Provides built-in themes by name
+│   ├── OzzMarkdown.Core/          # Markdown-to-HTML rendering library (Markdig-based)
+│   │   ├── MarkdownHtmlRenderer.cs    # Renders markdown to a temp HTML file, returns virtual URL; handles WebView2 2MB NavigateToString limit
+│   │   ├── MarkdownTheme.cs           # Theme model (CSS string)
+│   │   ├── MarkdownThemeProvider.cs   # Provides built-in themes by name
+│   │   └── Models/                    # AbstractAppSettings, AppVersion, GitHubRelease, etc.
+│   └── OzzWpf.Core/               # Shared WPF assets reused across frontends
+│       ├── Controls/                  # MarkdownViewer.xaml (WebView2 wrapper)
+│       ├── Converters/                # FileNameConverter
+│       ├── Dialogs/                   # AboutDialog.xaml
+│       ├── Models/                    # WindowPosition (virtual-screen boundary clamping)
+│       ├── Resources/                 # BootstrapIcons.xaml, Styles.xaml
+│       └── ViewModels/                # AbstractViewModel (INotifyPropertyChanged base)
 ├── OzzContextGen.MAUI/        # .NET MAUI frontend (planned — does not exist yet)
 └── OzzContextGen.i18n/        # Shared .resx localization (en + tr)
 ```
@@ -72,7 +82,7 @@ Source/
 ## Implemented Features
 
 - Recursive source file scanning with configurable suffixes and excluded folder list (`CodeCrawler`)
-- `SourceLanguage` record + `SourceLanguages` static registry — 14 built-in file type definitions mapping suffix → Markdown fence + comment delimiters + `XmlDocPrefix`
+- `SourceLanguage` record + `SourceLanguages` static registry — 41 built-in file type definitions mapping suffix → Markdown fence + comment delimiters + `XmlDocPrefix`
 - Single Markdown output with per-file fenced code blocks; fence language resolved dynamically via `SourceLanguages.TryGet` (`PackerEngine`)
 - Profile-aware `PackerEngine` overload — uses `ContextStateProfile.SelectedSuffixes` (falls back to all registered suffixes when empty)
 - `.ctxgen` JSON profile files with `SelectedSuffixes` persisting the user’s file-type selection between sessions (`StateService`, `ContextStateProfile`)

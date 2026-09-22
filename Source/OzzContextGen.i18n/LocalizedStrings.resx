@@ -297,6 +297,9 @@
   <data name="ProfileSaveCancelled" xml:space="preserve">
     <value>Profile save cancelled...</value>
   </data>
+  <data name="RecentProjects" xml:space="preserve">
+    <value>Recent profiles</value>
+  </data>
   <data name="SaveProfile" xml:space="preserve">
     <value>Save Profile</value>
   </data>

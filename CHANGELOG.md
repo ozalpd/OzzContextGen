@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Added a WPF toolbar picker for up to 10 recently opened or saved `.ctxgen` profiles; the list is persisted in application settings, and the picker displays the active profile's filename. (2026-09-22)
 - Added `.txt` and PowerShell script file types (`.ps1`, `.psm1`, `.psd1`, `.ps1xml`, `.pssc`, `.psc1`) to `SourceLanguages`.
 - Added an About button to the main toolbar with a localized tooltip.
 - Added Batch and Pascal language definitions to PrismJS for improved code block highlighting. Updated minified assets accordingly.

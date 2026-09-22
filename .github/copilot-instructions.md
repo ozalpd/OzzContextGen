@@ -25,7 +25,7 @@ OzzContextGen is a .NET 10 developer utility that scans source code files and ge
 | `CodeCrawler` | Recursively scans a directory for files matching configured suffixes. Excludes `bin`, `obj`, `.git`, `.vs`, `packages`, `node_modules`. Suffixes are driven by `SourceLanguages.All.Keys` by default. |
 | `PackerEngine` | Produces a single Markdown document with fenced code blocks and relative-path headers. Resolves the fence language via `SourceLanguages.TryGet`. Profile-aware overload uses `ContextStateProfile.SelectedSuffixes`. Planned: `TrimComments` and `TrimXmlDocs` flags for source trimming. |
 | `SourceLanguage` | Immutable record describing one file type: `Suffix`, `MarkdownFence`, `LineComment`, `BlockCommentStart`, `BlockCommentEnd`, `XmlDocPrefix`. |
-| `SourceLanguages` | Static registry of 39 built-in `SourceLanguage` definitions, keyed by suffix (case-insensitive). Exposes `All` dictionary and `TryGet(suffix)`. |
+| `SourceLanguages` | Static registry of 41 built-in `SourceLanguage` definitions, keyed by suffix (case-insensitive). Exposes `All` dictionary and `TryGet(suffix)`. |
 | `StateService` | Loads/saves `.ctxgen` JSON profile files and computes `FileChangeSummary` diffs. |
 | `ContextStateProfile` | Root profile model (record, own file). Contains `TrackedFiles`, `SelectedSuffixes` (persisted suffix selection), `ProfileName`, `TargetSourcePath`, `LastPackedAt`. |
 | `FileContextEntry` | Per-file metadata record: `RelativePath`, `LastWriteTime`, `FileSize`, `ContextNote`, `InclusionMode` (lazy-defaults to `FullPack` / `MetadataOnly` based on file size). |
@@ -60,9 +60,9 @@ Scan state is persisted as `.ctxgen` files (JSON). `StateService.LoadProfileAsyn
 - Shared styles: `Resources/Styles.xaml` — validation-aware TextBox/ComboBox styles, read-only styles, icon Button sizes.
 - Icons: `BootstrapIcons.xaml` — Bootstrap Icons v1.13.1 (MIT) as `Geometry` resources for use in `Path` elements. Lives in `OzzWpf.Core` (from the `OzzMarkdown` submodule), not in `OzzContextGen.WPF`, so it can be reused by other WPF-based frontends.
 - `BindingProxy` (`Helpers/BindingProxy.cs`): `Freezable` subclass that bridges bindings for elements outside the visual tree (e.g. `DataGridColumn.Header`). Declare as a `Window.Resources` entry with `Data="{Binding}"`.
-- `AppVersion` (`OzzWpf.Core/Models/AppVersion.cs`): Static class in `OzzWpf.Core`, not `OzzContextGen.WPF`; exposes `Version`, `FullVersion`, `Product`, `Copyright`, `Description` read from assembly metadata. Uses `Assembly.GetEntryAssembly()` (falling back to `Assembly.GetExecutingAssembly()`) so the reported version is the running application's (e.g. `OzzContextGen.WPF`), not `OzzWpf.Core`'s own assembly.
-- `AppSettings` (`Models/AppSettings.cs`): Singleton (thread-safe lazy init); persists `UiCulture` and `MainWindowPosition` as JSON to `%AppData%/OzzContextGen/wpfsettings.json`. Call `GetAppSettings()` to read, `Save()` to write.
-- `WindowPosition` (`Models/WindowPosition.cs`): Holds window geometry (`Top`, `Left`, `Width`, `Height`). `GetWindowPositions(window)` captures current state; `SetWindowPositions(window)` restores it with virtual-screen boundary clamping. Namespace: `TD.WPF.Models`.
+- `AppVersion` (`OzzMarkdown.Core/Models/AppVersion.cs`): Static class in `OzzMarkdown.Core` (namespace `OzzMarkdown.Core.Models`); exposes `Version`, `FullVersion`, `Product`, `Copyright`, `Description` read from assembly metadata. Uses `Assembly.GetEntryAssembly()` (falling back to `Assembly.GetExecutingAssembly()`) so the reported version is the running application's (e.g. `OzzContextGen.WPF`), not `OzzMarkdown.Core`'s own assembly.
+- `AppSettings` (`Models/AppSettings.cs`): Singleton (thread-safe lazy init); persists `UiCulture`, `MainWindowPosition`, and `RecentFiles` as JSON to `%AppData%/OzzContextGen/wpfsettings.json`. Call `GetAppSettings()` to read, `Save()` to write.
+- `WindowPosition` (`OzzWpf.Core/Models/WindowPosition.cs`): Holds window geometry (`Top`, `Left`, `Width`, `Height`). `GetWindowPositions(window)` captures current state; `SetWindowPositions(window)` restores it with virtual-screen boundary clamping. Namespace: `OzzWpf.Core.Models`.
 
 ## MAUI Frontend Notes (Planned)
 

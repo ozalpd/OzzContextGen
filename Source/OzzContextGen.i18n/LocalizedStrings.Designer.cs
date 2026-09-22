@@ -446,7 +446,16 @@ namespace OzzContextGen.i18n {
                 return ResourceManager.GetString("Ready", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Recent profiles.
+        /// </summary>
+        public static string RecentProjects {
+            get {
+                return ResourceManager.GetString("RecentProjects", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Remove deleted files from list.
         /// </summary>

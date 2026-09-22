@@ -39,6 +39,12 @@ namespace OzzContextGen.WPF
             }
         }
 
+        private void RecentProjectsLabel_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            cboRecentProjects.IsDropDownOpen = true;
+            e.Handled = true;
+        }
+
         private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
         {
             if (DataContext is MainViewModel viewModel)
