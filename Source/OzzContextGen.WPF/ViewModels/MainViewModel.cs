@@ -199,6 +199,15 @@ public class MainViewModel : AbstractViewModel
 
     public ObservableCollection<FileChangeViewModel> TrackedFiles { get; } = new();
 
+    private string ResolveSourcePath()
+    {
+        if (Path.IsPathRooted(SourcePath))
+            return SourcePath;
+
+        var baseDir = Path.GetDirectoryName(ProfilePath) ?? string.Empty;
+        return Path.GetFullPath(SourcePath, baseDir);
+    }
+
     public string SourcePath
     {
         get => _sourcePath;
@@ -260,7 +269,7 @@ public class MainViewModel : AbstractViewModel
         }
     }
 
-    private bool CanAnalyzeChanges() => !string.IsNullOrEmpty(SourcePath) && Directory.Exists(SourcePath);
+    private bool CanAnalyzeChanges() => !string.IsNullOrEmpty(SourcePath) && Directory.Exists(ResolveSourcePath());
 
     private async Task AnalyzeChangesAsync()
     {
@@ -290,9 +299,9 @@ public class MainViewModel : AbstractViewModel
             ? profile.SelectedSuffixes.ToArray()
             : SourceLanguages.All.Keys.ToArray();
         var codeCrawler = new CodeCrawler(suffixes);
-        var csFiles = codeCrawler.GetCodeFiles(SourcePath).ToList();
+        var csFiles = codeCrawler.GetCodeFiles(ResolveSourcePath()).ToList();
 
-        var changes = _stateService.AnalyzeChanges(SourcePath, profile, csFiles);
+        var changes = _stateService.AnalyzeChanges(ResolveSourcePath(), profile, csFiles);
 
         foreach (var change in changes)
         {
@@ -329,7 +338,7 @@ public class MainViewModel : AbstractViewModel
         }
 
         // Triggering PackerEngine (async to avoid UI freezing)
-        string markdownResult = await PackerEngine.PackSourceCodeAsync(selectedFiles, SourcePath, message =>
+        string markdownResult = await PackerEngine.PackSourceCodeAsync(selectedFiles, ResolveSourcePath(), message =>
         {
             StatusMessage = message; // Displaying the progress status in real-time
         });

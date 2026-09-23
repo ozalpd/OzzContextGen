@@ -103,6 +103,7 @@ OzzContextGen/
 - Include relative file paths as section headers
 - Per-profile file type selection — choose which suffixes each `.ctxgen` profile scans; persisted between sessions
 - WPF toolbar picker for up to 10 recently opened or saved `.ctxgen` profiles, persisted in application settings; displays the active profile's filename
+- Profile-relative source paths — a profile's source path may be stored relative to the `.ctxgen` file and is resolved to an absolute path at runtime, keeping profiles portable
 
 ## Supported File Types
 
