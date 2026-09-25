@@ -8,16 +8,19 @@
     /// </summary>
     public class CodeCrawler
     {
+        public static readonly string[] DefaultExcludedFolders = CtxDefaults.ExcludedFolders;
+
         public CodeCrawler() : this(".cs") { }
 
-        public CodeCrawler(params string[] suffixes)
+        public CodeCrawler(params string[] suffixes) : this((IEnumerable<string>)suffixes, null) { }
+
+        public CodeCrawler(IEnumerable<string> suffixes, IEnumerable<string>? excludedFolders)
         {
             Suffixes = new(suffixes, StringComparer.OrdinalIgnoreCase);
 
-            ExcludedFolders = new(StringComparer.OrdinalIgnoreCase)
-            {
-                "bin", "obj", ".git", ".vs", ".vscode", "packages", "node_modules", "GeneratedCodes"
-            };
+            ExcludedFolders = excludedFolders != null
+                ? new(excludedFolders, StringComparer.OrdinalIgnoreCase)
+                : new(DefaultExcludedFolders, StringComparer.OrdinalIgnoreCase);
         }
 
         /// <summary>

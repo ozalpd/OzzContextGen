@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Added support for a relative `SourcePath` in `.ctxgen` profiles; a new `MainViewModel.ResolveSourcePath()` resolves it against the profile file's directory (`ProfilePath`) so profiles are portable across machines and folder layouts.
+- Added `CtxDefaults` class to centralize default profile and scanner settings.
+- Added `ExcludedFolders` property to `ContextStateProfile` and `CodeCrawler`, allowing folder exclusions to be customized per `.ctxgen` profile while pre-populating with default exclusions from `CtxDefaults.ExcludedFolders`.
+- Added support for a relative `SourcePath` in `.ctxgen` profiles; `MainViewModel.ResolvedSourcePath` resolves it against the profile file's directory (`ProfilePath`) so profiles are portable across machines and folder layouts.
 - Added `.txt` and PowerShell script file types (`.ps1`, `.psm1`, `.psd1`, `.ps1xml`, `.pssc`, `.psc1`) to `SourceLanguages`.
 - Added an About button to the main toolbar with a localized tooltip.
 - Added Batch and Pascal language definitions to PrismJS for improved code block highlighting. Updated minified assets accordingly.

@@ -125,6 +125,7 @@ public class MainViewModel : AbstractViewModel
         {
             _profilePath = value;
             RaisePropertyChanged(nameof(ProfilePath));
+            RaisePropertyChanged(nameof(ResolvedSourcePath));
         }
     }
     private string _profilePath = string.Empty;
@@ -199,13 +200,26 @@ public class MainViewModel : AbstractViewModel
 
     public ObservableCollection<FileChangeViewModel> TrackedFiles { get; } = new();
 
-    private string ResolveSourcePath()
+    public string ResolvedSourcePath
     {
-        if (Path.IsPathRooted(SourcePath))
-            return SourcePath;
+        get
+        {
+            if (string.IsNullOrEmpty(SourcePath) || Path.IsPathRooted(SourcePath))
+                return SourcePath;
 
-        var baseDir = Path.GetDirectoryName(ProfilePath) ?? string.Empty;
-        return Path.GetFullPath(SourcePath, baseDir);
+            var baseDir = Path.GetDirectoryName(ProfilePath);
+            if (string.IsNullOrEmpty(baseDir) || !Path.IsPathRooted(baseDir))
+                return SourcePath;
+
+            try
+            {
+                return Path.GetFullPath(SourcePath, baseDir);
+            }
+            catch
+            {
+                return SourcePath;
+            }
+        }
     }
 
     public string SourcePath
@@ -215,6 +229,7 @@ public class MainViewModel : AbstractViewModel
         {
             _sourcePath = value;
             RaisePropertyChanged(nameof(SourcePath));
+            RaisePropertyChanged(nameof(ResolvedSourcePath));
             AnalyzeChangesCommand.RaiseCanExecuteChanged();
         }
     }
@@ -259,7 +274,7 @@ public class MainViewModel : AbstractViewModel
         SourcePath = profile.TargetSourcePath;
         AddRecentProject(ProfilePath);
 
-        if(CanAnalyzeChanges())
+        if (CanAnalyzeChanges())
         {
             await AnalyzeChangesAsync();
         }
@@ -269,7 +284,7 @@ public class MainViewModel : AbstractViewModel
         }
     }
 
-    private bool CanAnalyzeChanges() => !string.IsNullOrEmpty(SourcePath) && Directory.Exists(ResolveSourcePath());
+    private bool CanAnalyzeChanges() => !string.IsNullOrEmpty(SourcePath) && Directory.Exists(ResolvedSourcePath);
 
     private async Task AnalyzeChangesAsync()
     {
@@ -298,10 +313,10 @@ public class MainViewModel : AbstractViewModel
         var suffixes = profile.SelectedSuffixes.Count > 0
             ? profile.SelectedSuffixes.ToArray()
             : SourceLanguages.All.Keys.ToArray();
-        var codeCrawler = new CodeCrawler(suffixes);
-        var csFiles = codeCrawler.GetCodeFiles(ResolveSourcePath()).ToList();
+        var codeCrawler = new CodeCrawler(suffixes, profile.ExcludedFolders);
+        var csFiles = codeCrawler.GetCodeFiles(ResolvedSourcePath).ToList();
 
-        var changes = _stateService.AnalyzeChanges(ResolveSourcePath(), profile, csFiles);
+        var changes = _stateService.AnalyzeChanges(ResolvedSourcePath, profile, csFiles);
 
         foreach (var change in changes)
         {
@@ -338,7 +353,7 @@ public class MainViewModel : AbstractViewModel
         }
 
         // Triggering PackerEngine (async to avoid UI freezing)
-        string markdownResult = await PackerEngine.PackSourceCodeAsync(selectedFiles, ResolveSourcePath(), message =>
+        string markdownResult = await PackerEngine.PackSourceCodeAsync(selectedFiles, ResolvedSourcePath, message =>
         {
             StatusMessage = message; // Displaying the progress status in real-time
         });
@@ -360,7 +375,8 @@ public class MainViewModel : AbstractViewModel
                 TargetSourcePath = SourcePath,
                 LastPackedAt = DateTime.Now,
                 TrackedFiles = updatedTrackedFiles,
-                SelectedSuffixes = _currentProfile.SelectedSuffixes
+                SelectedSuffixes = _currentProfile.SelectedSuffixes,
+                ExcludedFolders = _currentProfile.ExcludedFolders
             };
 
             await _stateService.SaveProfileAsync(ProfilePath, newProfile);
@@ -403,7 +419,8 @@ public class MainViewModel : AbstractViewModel
             TargetSourcePath = SourcePath,
             LastPackedAt = _currentProfile.LastPackedAt,
             TrackedFiles = updatedTrackedFiles,
-            SelectedSuffixes = _currentProfile.SelectedSuffixes
+            SelectedSuffixes = _currentProfile.SelectedSuffixes,
+            ExcludedFolders = _currentProfile.ExcludedFolders
         };
         await _stateService.SaveProfileAsync(ProfilePath, newProfile);
         AddRecentProject(ProfilePath);

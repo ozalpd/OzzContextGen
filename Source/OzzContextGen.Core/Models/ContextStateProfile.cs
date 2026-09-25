@@ -20,15 +20,29 @@ public record ContextStateProfile
     public DateTime LastPackedAt { get; init; }
 
     /// <summary>
+    /// File suffixes to scan for this profile (e.g. <c>".cs"</c>, <c>".xaml"</c>).
+    /// An empty list means all suffixes registered in <see cref="SourceLanguages"/> are used.
+    /// </summary>
+    public List<string> SelectedSuffixes { get; init; } = new();
+
+    private List<string> _excludedFolders = [.. CtxDefaults.ExcludedFolders];
+
+    /// <summary>
+    /// Folder names to exclude during scanning (e.g. <c>"bin"</c>, <c>"obj"</c>).
+    /// If empty or omitted, defaults from <see cref="CtxDefaults.ExcludedFolders"/> are used.
+    /// </summary>
+    public List<string> ExcludedFolders
+    {
+        get => _excludedFolders;
+        set => _excludedFolders = (value == null || value.Count == 0)
+            ? [.. CtxDefaults.ExcludedFolders]
+            : value;
+    }
+
+    /// <summary>
     /// Per-file state snapshots from the last scan, keyed by relative path.
     /// Used by <see cref="StateService.AnalyzeChanges"/> to compute
     /// New / Modified / Unchanged / Deleted diffs on the next run.
     /// </summary>
     public Dictionary<string, FileContextEntry> TrackedFiles { get; init; } = new();
-
-    /// <summary>
-    /// File suffixes to scan for this profile (e.g. <c>".cs"</c>, <c>".xaml"</c>).
-    /// An empty list means all suffixes registered in <see cref="SourceLanguages"/> are used.
-    /// </summary>
-    public List<string> SelectedSuffixes { get; init; } = new();
 }

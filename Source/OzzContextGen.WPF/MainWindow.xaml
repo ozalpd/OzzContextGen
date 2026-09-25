@@ -238,7 +238,9 @@
 
                 <!-- Kaynak Klasör -->
                 <TextBlock Text="{x:Static i18n:LocalizedStrings.SourceFolder}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
-                <TextBox Text="{Binding SourcePath, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="5" VerticalAlignment="Center"
+                         Text="{Binding SourcePath, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="{Binding ResolvedSourcePath}"/>
                 <Button Content="{x:Static i18n:LocalizedStrings.Browse}" Command="{Binding BrowseSourceCommand}" Grid.Row="0" Grid.Column="2" Padding="10,2" Margin="5"/>
 
                 <!-- Profil Dosyası (.ctxgen) -->
