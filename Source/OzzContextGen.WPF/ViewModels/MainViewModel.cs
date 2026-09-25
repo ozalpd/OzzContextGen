@@ -31,7 +31,6 @@ public class MainViewModel : AbstractViewModel
         _stateService = new StateService();
 
         BrowseSourceCommand = new RelayCommand(BrowseSource);
-        BrowseOutputCommand = new RelayCommand(BrowseOutput);
         OpenProfileCommand = new RelayCommand(async () => await OpenProfile());
         AnalyzeChangesCommand = new RelayCommand(async () => await AnalyzeChangesAsync(), CanAnalyzeChanges);
         PackCommand = new RelayCommand(async () => await PackContextAsync(), CanPack);
@@ -43,6 +42,7 @@ public class MainViewModel : AbstractViewModel
         CheckForUpdatesCommand = new RelayCommand(async () => await CheckForUpdatesAsync());
         ShowAboutCommand = new RelayCommand(ShowAboutDialog);
         PackingModeModeValues = GetValues<PackingMode>();
+        PromptPresets = CtxDefaults.SampleSystemPrompts;
 
         PropertyChanged += OnPropertyChanged;
         TrackedFiles.CollectionChanged += OnTrackedFilesCollectionChanged;
@@ -57,7 +57,7 @@ public class MainViewModel : AbstractViewModel
     }
 
     public RelayCommand BrowseSourceCommand { get; }
-    public RelayCommand BrowseOutputCommand { get; }
+    
     public RelayCommand OpenProfileCommand { get; }
     public RelayCommand AnalyzeChangesCommand { get; }
     public RelayCommand PackCommand { get; }
@@ -108,17 +108,90 @@ public class MainViewModel : AbstractViewModel
     public GitHubRelease? LatestRelease { get; private set; }
 
 
-    public string OutputPath
+    public string RepoUrl
     {
-        get => _outputPath;
+        get => _repoUrl;
         set
         {
-            _outputPath = value;
-            RaisePropertyChanged(nameof(OutputPath));
-            PackCommand.RaiseCanExecuteChanged();
+            if (_repoUrl != value)
+            {
+                _repoUrl = value;
+                RaisePropertyChanged(nameof(RepoUrl));
+            }
         }
     }
-    private string _outputPath = string.Empty;
+    private string _repoUrl = string.Empty;
+
+    public string License
+    {
+        get => _license;
+        set
+        {
+            if (_license != value)
+            {
+                _license = value;
+                RaisePropertyChanged(nameof(License));
+            }
+        }
+    }
+    private string _license = string.Empty;
+
+    public bool? IsOpenSource
+    {
+        get => _isOpenSource;
+        set
+        {
+            if (_isOpenSource != value)
+            {
+                _isOpenSource = value;
+                RaisePropertyChanged(nameof(IsOpenSource));
+            }
+        }
+    }
+    private bool? _isOpenSource;
+
+    public string Description
+    {
+        get => _description;
+        set
+        {
+            if (_description != value)
+            {
+                _description = value;
+                RaisePropertyChanged(nameof(Description));
+            }
+        }
+    }
+    private string _description = string.Empty;
+
+    public string SystemPrompt
+    {
+        get => _systemPrompt;
+        set
+        {
+            if (_systemPrompt != value)
+            {
+                _systemPrompt = value;
+                RaisePropertyChanged(nameof(SystemPrompt));
+            }
+        }
+    }
+    private string _systemPrompt = string.Empty;
+
+    public IReadOnlyDictionary<string, string> PromptPresets { get; } = new Dictionary<string, string>();
+
+    public KeyValuePair<string, string>? SelectedPromptPreset
+    {
+        get => null;
+        set
+        {
+            if (value.HasValue && !string.IsNullOrEmpty(value.Value.Value))
+            {
+                SystemPrompt = value.Value.Value;
+                RaisePropertyChanged(nameof(SelectedPromptPreset));
+            }
+        }
+    }
 
     public string ProfilePath
     {
@@ -247,15 +320,6 @@ public class MainViewModel : AbstractViewModel
         }
     }
 
-    private void BrowseOutput()
-    {
-        var dialog = new Microsoft.Win32.SaveFileDialog { Filter = LocalizedStrings.MarkdownFileFilter };
-        if (dialog.ShowDialog() == true)
-        {
-            OutputPath = dialog.FileName;
-        }
-    }
-
     public async Task OpenProfile(bool showDialog = true)
     {
         if (showDialog)
@@ -275,6 +339,11 @@ public class MainViewModel : AbstractViewModel
         var profile = await _stateService.LoadProfileAsync(ProfilePath);
         _currentProfile = profile;
         SourcePath = profile.TargetSourcePath;
+        RepoUrl = profile.RepoUrl;
+        License = profile.License;
+        IsOpenSource = profile.IsOpenSource;
+        Description = profile.Description;
+        SystemPrompt = profile.SystemPrompt;
         AddRecentProject(ProfilePath);
 
         if (CanAnalyzeChanges())
@@ -334,10 +403,14 @@ public class MainViewModel : AbstractViewModel
 
     private async Task PackContextAsync()
     {
-        if (string.IsNullOrEmpty(OutputPath))
-            BrowseOutput();
+        var dialog = new Microsoft.Win32.SaveFileDialog { Filter = LocalizedStrings.MarkdownFileFilter };
+        string outputPath = string.Empty;
+        if (dialog.ShowDialog() == true)
+        {
+            outputPath = dialog.FileName;
+        }
 
-        if (string.IsNullOrEmpty(OutputPath))
+        if (string.IsNullOrEmpty(outputPath))
         {
             StatusMessage = $"{LocalizedStrings.SpecifyOutputPath}.";
             return;
@@ -362,27 +435,11 @@ public class MainViewModel : AbstractViewModel
         });
 
         // Write the file
-        await File.WriteAllTextAsync(OutputPath, markdownResult, System.Text.Encoding.UTF8);
+        await File.WriteAllTextAsync(outputPath, markdownResult, System.Text.Encoding.UTF8);
 
-        // Eğer profil yolu varsa .ctxgen dosyasını da güncelle
-        // If a profile path exists, also update the .ctxgen file
         if (!string.IsNullOrEmpty(ProfilePath))
         {
-            var updatedTrackedFiles = TrackedFiles.ToDictionary(
-                f => f.RelativePath,
-                f => f.ToFileContextEntry());
-
-            var newProfile = new ContextStateProfile
-            {
-                ProfileName = _currentProfile.ProfileName,
-                TargetSourcePath = SourcePath,
-                LastPackedAt = DateTime.Now,
-                TrackedFiles = updatedTrackedFiles,
-                SelectedSuffixes = _currentProfile.SelectedSuffixes,
-                ExcludedFolders = _currentProfile.ExcludedFolders
-            };
-
-            await _stateService.SaveProfileAsync(ProfilePath, newProfile);
+            await SaveProfileAsync(isPacking: true);
         }
 
         ShowMarkdown(markdownResult);
@@ -398,7 +455,7 @@ public class MainViewModel : AbstractViewModel
 
     private bool CanSaveProfile() => TrackedFiles.Count > 0;
 
-    private async Task SaveProfileAsync()
+    private async Task SaveProfileAsync(bool isPacking = false)
     {
         if (string.IsNullOrEmpty(ProfilePath))
         {
@@ -413,19 +470,28 @@ public class MainViewModel : AbstractViewModel
                 return;
             }
         }
+
         var updatedTrackedFiles = TrackedFiles.ToDictionary(
             f => f.RelativePath,
             f => f.ToFileContextEntry());
+
         var newProfile = new ContextStateProfile
         {
             ProfileName = _currentProfile.ProfileName,
             TargetSourcePath = SourcePath,
-            LastPackedAt = _currentProfile.LastPackedAt,
+            LastPackedAt = isPacking ? DateTime.Now : _currentProfile.LastPackedAt,
             TrackedFiles = updatedTrackedFiles,
             SelectedSuffixes = _currentProfile.SelectedSuffixes,
-            ExcludedFolders = _currentProfile.ExcludedFolders
+            ExcludedFolders = _currentProfile.ExcludedFolders,
+            RepoUrl = RepoUrl,
+            License = License,
+            IsOpenSource = IsOpenSource,
+            Description = Description,
+            SystemPrompt = SystemPrompt
         };
+
         await _stateService.SaveProfileAsync(ProfilePath, newProfile);
+        _currentProfile = newProfile;
         AddRecentProject(ProfilePath);
         StatusMessage = $"{LocalizedStrings.ProfileSavedSuccessfully}.";
     }

@@ -31,6 +31,7 @@ OzzContextGen/
 ├── Source/
 │   ├── OzzContextGen.Core/       # Platform-agnostic: scanning, packing, state
 │   │   ├── CodeCrawler.cs
+│   │   ├── CtxDefaults.cs
 │   │   ├── PackerEngine.cs
 │   │   ├── StateService.cs
 │   │   ├── TokenEstimator.cs
@@ -62,9 +63,11 @@ OzzContextGen/
 │   │   │   ├── Converters.xaml
 │   │   │   └── Styles.xaml
 │   │   ├── ViewModels/
+│   │   │   ├── ExcludedFoldersEditVM.cs
 │   │   │   ├── FileChangeViewModel.cs
 │   │   │   └── MainViewModel.cs
 │   │   └── Views/
+│   │       ├── ExcludedFoldersEdit.xaml
 │   │       └── MarkdownView.xaml
 │   ├── OzzMarkdown/              # Git submodule — github.com/ozalpd/OzzMarkdown
 │   │   ├── OzzMarkdown.Core/     # Markdown-to-HTML rendering library
@@ -104,6 +107,8 @@ OzzContextGen/
 - Per-profile file type selection — choose which suffixes each `.ctxgen` profile scans; persisted between sessions
 - WPF toolbar picker for up to 10 recently opened or saved `.ctxgen` profiles, persisted in application settings; displays the active profile's filename
 - Profile-relative source paths — a profile's source path may be stored relative to the `.ctxgen` file and is resolved to an absolute path at runtime, keeping profiles portable
+- Per-profile folder exclusion management with dedicated editor dialog and centralized sensible defaults
+- Project metadata and LLM directives — configure Repo URL, License, Open Source flag, Description, and System Prompts per profile with curated preset templates
 
 ## Supported File Types
 

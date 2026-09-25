@@ -342,4 +342,34 @@
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="ProfileSettings" xml:space="preserve">
+    <value>Profile and Directory Settings</value>
+  </data>
+  <data name="ProjectInfo" xml:space="preserve">
+    <value>Project Info</value>
+  </data>
+  <data name="RepoUrl" xml:space="preserve">
+    <value>Repo URL:</value>
+  </data>
+  <data name="License" xml:space="preserve">
+    <value>License:</value>
+  </data>
+  <data name="OpenSource" xml:space="preserve">
+    <value>Open Source</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="SystemPrompt" xml:space="preserve">
+    <value>System Prompt</value>
+  </data>
+  <data name="LlmAndPrompts" xml:space="preserve">
+    <value>LLM &amp; Prompts</value>
+  </data>
+  <data name="SelectedFile" xml:space="preserve">
+    <value>Selected File</value>
+  </data>
+  <data name="PromptPresets" xml:space="preserve">
+    <value>Prompt Presets</value>
+  </data>
 </root>

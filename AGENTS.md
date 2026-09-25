@@ -14,6 +14,7 @@ OzzContextGen scans source code files in a local directory or repository and gen
 Source/
 ├── OzzContextGen.Core/        # Platform-agnostic: scanning, packing, state
 │   ├── CodeCrawler.cs             # Recursive file scanner (suffixes driven by SourceLanguages)
+│   ├── CtxDefaults.cs             # Centralized default configurations, exclusions, and sample system prompts
 │   ├── PackerEngine.cs            # Markdown generator; resolves fence via SourceLanguages.TryGet
 │   ├── StateService.cs            # .ctxgen profile load/save + file-change diff
 │   ├── TokenEstimator.cs          # Heuristic LLM token estimator
@@ -21,7 +22,7 @@ Source/
 │   │   ├── EnumExtensions.cs          # Extension methods on Enum: GetDisplayValue, GetAttribute<T>, GetValues<T>, GetOrderedValues<T>, GetDisplayOrder; includes EnumValueItem<T>
 │   │   └── FileExtensions.cs          # ToFileSize extension on int/long (Bytes / KB / MB / GB)
 │   └── Models/
-│       ├── ContextStateProfile.cs     # Root profile record; includes SelectedSuffixes
+│       ├── ContextStateProfile.cs     # Root profile record; includes TrackedFiles, ExcludedFolders, metadata & prompts
 │       ├── Enums.cs                   # ChangeType (New/Modified/Unchanged/Deleted) + FileInclusionMode (FullPack/MetadataOnly/Excluded)
 │       ├── FileChangeSummary.cs       # Diff result record; inherits FileContextEntry
 │       ├── FileContextEntry.cs        # Per-file metadata: RelativePath, LastWriteTime, FileSize, ContextNote, InclusionMode (lazy-defaults by size)
@@ -40,8 +41,9 @@ Source/
 │   │   ├── AppSettings.cs             # Singleton; persists UiCulture, MainWindowPosition, RecentFiles to %AppData%/OzzContextGen/wpfsettings.json
 │   │   └── ReleaseSource.cs           # GitHub release info provider for update checks
 │   ├── Resources/                     # Styles.xaml, Converters.xaml
-│   ├── ViewModels/                    # FileChangeViewModel, MainViewModel (inherits AbstractViewModel from OzzWpf.Core)
+│   ├── ViewModels/                    # ExcludedFoldersEditVM, FileChangeViewModel, MainViewModel (inherits AbstractViewModel from OzzWpf.Core)
 │   └── Views/
+│       ├── ExcludedFoldersEdit.xaml   # Profile folder exclusions editor dialog
 │       └── MarkdownView.xaml          # Markdown pack preview window (hosts MarkdownViewer from OzzWpf.Core)
 ├── OzzMarkdown/               # Git submodule — github.com/ozalpd/OzzMarkdown
 │   ├── OzzMarkdown.Core/          # Markdown-to-HTML rendering library (Markdig-based)
@@ -88,6 +90,9 @@ Source/
 - `.ctxgen` JSON profile files with `SelectedSuffixes` persisting the user’s file-type selection between sessions (`StateService`, `ContextStateProfile`)
 - File-change diff analysis: New / Modified / Unchanged / Deleted (`StateService.AnalyzeChanges`); per-file state stored as `FileContextEntry` (includes `ContextNote` for optional per-file annotations)
 - WPF MVVM GUI: browse source, open/save profile, analyze changes, pack context; round-trips `ProfileName` and `SelectedSuffixes` on save
+- Per-profile folder exclusions with dialog editor (`ExcludedFoldersEdit`) and fallback defaults (`CtxDefaults`)
+- Profile metadata & system prompts: `RepoUrl`, `License`, `IsOpenSource`, `Description`, and `SystemPrompt` support with sample prompt presets
+- Dedicated tabbed detail view in WPF separating LLM prompt/description editing from per-file details
 - CLI: `--source`, `--output`, `--config`, `--nohistory` parameters
 
 ## Planned Features (Not Yet Implemented)

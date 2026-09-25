@@ -23,12 +23,12 @@ OzzContextGen is a .NET 10 developer utility that scans source code files and ge
 | Type | Responsibility |
 |---|---|
 | `CodeCrawler` | Recursively scans a directory for files matching configured suffixes. Excludes `bin`, `obj`, `.git`, `.vs`, `packages`, `node_modules`, etc. by default; accepts custom excluded folders. Suffixes are driven by `SourceLanguages.All.Keys` by default. |
-| `CtxDefaults` | Static class holding default fallback configurations (e.g. `ExcludedFolders`). |
+| `CtxDefaults` | Static class holding default fallback configurations (e.g. `ExcludedFolders`), default system prompt, and curated sample system prompts. |
 | `PackerEngine` | Produces a single Markdown document with fenced code blocks and relative-path headers. Resolves the fence language via `SourceLanguages.TryGet`. Profile-aware overload uses `ContextStateProfile.SelectedSuffixes`. Planned: `TrimComments` and `TrimXmlDocs` flags for source trimming. |
 | `SourceLanguage` | Immutable record describing one file type: `Suffix`, `MarkdownFence`, `LineComment`, `BlockCommentStart`, `BlockCommentEnd`, `XmlDocPrefix`. |
 | `SourceLanguages` | Static registry of 41 built-in `SourceLanguage` definitions, keyed by suffix (case-insensitive). Exposes `All` dictionary and `TryGet(suffix)`. |
 | `StateService` | Loads/saves `.ctxgen` JSON profile files and computes `FileChangeSummary` diffs. |
-| `ContextStateProfile` | Root profile model (record, own file). Contains `TrackedFiles`, `SelectedSuffixes` (persisted suffix selection), `ExcludedFolders` (custom folder exclusions), `ProfileName`, `TargetSourcePath`, `LastPackedAt`. |
+| `ContextStateProfile` | Root profile model (record, own file). Contains `TrackedFiles`, `SelectedSuffixes` (persisted suffix selection), `ExcludedFolders` (custom folder exclusions), `ProfileName`, `TargetSourcePath`, `LastPackedAt`, `RepoUrl`, `License`, `IsOpenSource`, `Description`, `SystemPrompt`. |
 | `FileContextEntry` | Per-file metadata record: `RelativePath`, `LastWriteTime`, `FileSize`, `ContextNote`, `InclusionMode` (lazy-defaults to `FullPack` / `MetadataOnly` based on file size). |
 | `FileChangeSummary` | Diff result per file: `ChangeType` (New / Modified / Unchanged / Deleted) + `InclusionMode`. Inherits `FileContextEntry`. |
 | `EnumValueItem<T>` | Pairs an enum value with its localized display string; used for binding enum collections to UI controls. |

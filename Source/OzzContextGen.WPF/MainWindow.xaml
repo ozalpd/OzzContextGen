@@ -19,6 +19,10 @@
     </Window.Resources>
 
     <Grid Margin="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -28,7 +32,7 @@
             <RowDefinition Height="Auto"/>
             <!-- Durum Çubuğu (Status Bar) -->
         </Grid.RowDefinitions>
-        <ToolBar Grid.Row="0">
+        <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
             <Button Style="{StaticResource IconButtonStyle-28x24}"
                     ToolTip="{x:Static i18n:LocalizedStrings.OpenProfile}"
                     Command="{Binding OpenProfileCommand}">
@@ -113,28 +117,41 @@
                     </Path>
                 </Viewbox>
             </Button>
-            <Button Style="{StaticResource IconButtonStyle-28x24}"
-                    Command="{Binding EditExcludedFoldersCommand}"
-                    ToolTip="{x:Static i18n:LocalizedStrings.EditExcludedFolders}">
-                <Viewbox Width="18" Height="18">
-                    <Path Margin="0">
-                        <Path.Style>
-                            <Style TargetType="Path">
-                                <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-                                <Setter Property="Data" Value="{StaticResource folder-x}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=Button}}" Value="False">
-                                        <Setter Property="Fill" Value="#808890"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}" Value="True">
-                                        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Path.Style>
-                    </Path>
-                </Viewbox>
+            <Button x:Name="PackButton" Padding="8,3" Margin="3,0" FontWeight="Bold"
+                    Command="{Binding PackCommand}"
+                    ToolTip="{x:Static i18n:LocalizedStrings.PackContext}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#007ACC"/>
+                        <Setter Property="Foreground" Value="#F0F0F0"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#005A9E"/>
+                                <Setter Property="Foreground" Value="#007ACC"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#A0A0A0"/>
+                                <Setter Property="Foreground" Value="#D8D8D8"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="{x:Static i18n:LocalizedStrings.Pack}" Margin="0,0,4,0"/>
+                    <Viewbox Width="18" Height="18">
+                        <Path Margin="2,0,0,0">
+                            <Path.Style>
+                                <Style TargetType="Path">
+                                    <Setter Property="Fill" Value="{Binding Foreground, ElementName=PackButton}"/>
+                                    <Setter Property="Data" Value="{StaticResource box-seam-fill}"/>
+                                </Style>
+                            </Path.Style>
+                        </Path>
+                    </Viewbox>
+                </StackPanel>
             </Button>
+            <Separator/>
+            <Border Width="16" Background="Transparent" />
             <Button Style="{StaticResource IconButtonStyle-38x24}"
                     Command="{Binding RemoveDeletedFilesCommand}"
                     ToolTip="{x:Static i18n:LocalizedStrings.RemoveDeletedFiles}">
@@ -185,40 +202,29 @@
                     </Viewbox>
                 </StackPanel>
             </Button>
-            <Button x:Name="PackButton" Padding="8,3" Margin="3,0" FontWeight="Bold"
-                    Command="{Binding PackCommand}"
-                    ToolTip="{x:Static i18n:LocalizedStrings.PackContext}">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="#007ACC"/>
-                        <Setter Property="Foreground" Value="#F0F0F0"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#005A9E"/>
-                                <Setter Property="Foreground" Value="#007ACC"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Background" Value="#A0A0A0"/>
-                                <Setter Property="Foreground" Value="#D8D8D8"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBlock Text="{x:Static i18n:LocalizedStrings.Pack}" Margin="0,0,4,0"/>
-                    <Viewbox Width="18" Height="18">
-                        <Path Margin="2,0,0,0">
-                            <Path.Style>
-                                <Style TargetType="Path">
-                                    <Setter Property="Fill" Value="{Binding Foreground, ElementName=PackButton}"/>
-                                    <Setter Property="Data" Value="{StaticResource box-seam-fill}"/>
-                                </Style>
-                            </Path.Style>
-                        </Path>
-                    </Viewbox>
-                </StackPanel>
+            <Button Style="{StaticResource IconButtonStyle-28x24}"
+                    Command="{Binding EditExcludedFoldersCommand}"
+                    ToolTip="{x:Static i18n:LocalizedStrings.EditExcludedFolders}">
+                <Viewbox Width="18" Height="18">
+                    <Path Margin="0">
+                        <Path.Style>
+                            <Style TargetType="Path">
+                                <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                <Setter Property="Data" Value="{StaticResource folder-x}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=Button}}" Value="False">
+                                        <Setter Property="Fill" Value="#808890"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}" Value="True">
+                                        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </Viewbox>
             </Button>
-            <Separator/>
+            <Border Width="16" Background="Transparent" />
             <Border Width="32" Background="Transparent" />
             <Border Width="32" Background="Transparent" />
             <Button Style="{StaticResource IconButtonStyle-28x24}"
@@ -245,7 +251,7 @@
             </Button>
         </ToolBar>
         <!-- 1. ÜST SEÇİM ALANI (Klasör ve Profil Seçimleri) -->
-        <GroupBox Header="Profil ve Dizin Ayarları" Grid.Row="1" Padding="5" Margin="6">
+        <GroupBox Header="{x:Static i18n:LocalizedStrings.ProfileSettings}" Grid.Row="1" Padding="5" Margin="6">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -253,7 +259,6 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
@@ -278,16 +283,41 @@
                 <TextBlock Text="{x:Static i18n:LocalizedStrings.ProfileFile}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
                 <TextBox Text="{Binding ProfilePath, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"
                          Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalAlignment="Center"/>
-                
-                <!-- Çıktı Dosyası (.md) -->
-                <TextBlock Text="{x:Static i18n:LocalizedStrings.OutputFile}" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
-                <TextBox Text="{Binding OutputPath, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalAlignment="Center"/>
 
             </Grid>
         </GroupBox>
 
+        <GroupBox Header="{x:Static i18n:LocalizedStrings.ProjectInfo}" Grid.Column="1" Grid.Row="1" Padding="5" Margin="6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Depo Adresi (RepoUrl) -->
+                <TextBlock Text="{x:Static i18n:LocalizedStrings.RepoUrl}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalAlignment="Center"
+                         Text="{Binding RepoUrl, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <!-- Lisans (License) -->
+                <TextBlock Text="{x:Static i18n:LocalizedStrings.License}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center"
+                         Text="{Binding License, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <!-- Açık Kaynak (IsOpenSource) -->
+                <CheckBox Grid.Row="1" Grid.Column="2" Margin="5" VerticalAlignment="Center"
+                          Content="{x:Static i18n:LocalizedStrings.OpenSource}"
+                          IsChecked="{Binding IsOpenSource, Mode=TwoWay}"/>
+            </Grid>
+        </GroupBox>
+
         <!-- DataGrid & Detail Panel -->
-        <Grid Grid.Row="2" Margin="6">
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*" MinWidth="400"/>
                 <ColumnDefinition Width="2*" MinWidth="240"/>
@@ -328,67 +358,124 @@
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Left"
                           VerticalAlignment="Stretch"
                           Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"/>
-            <Border Grid.Column="1" Margin="8,0,2,0" Padding="6" DataContext="{Binding SelectedFile}"
-                    Background="#F0F0F0" BorderBrush="#484848" BorderThickness="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="112"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+            <TabControl Grid.Column="1" Margin="8,0,2,0" SelectedIndex="0">
+                <!-- Tab: LLM & Prompts (Default Active) -->
+                <TabItem Header="{x:Static i18n:LocalizedStrings.LlmAndPrompts}">
+                    <Grid Background="#F0F0F0" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="122*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="120" MinHeight="60"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*" MinHeight="100"/>
+                        </Grid.RowDefinitions>
 
-                    <TextBlock Text="{Binding FileName}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"
-                               Padding="6" Margin="0" FontSize="14"
-                               Background="#1080FF" Foreground="#F8F8F8"/>
+                        <!-- Project Description -->
+                        <TextBlock Text="{x:Static i18n:LocalizedStrings.Description}" Grid.Row="0"
+                                   FontWeight="Bold" Margin="8,8,8,4" Grid.ColumnSpan="2"/>
+                        <TextBox x:Name="DescriptionTextBox"
+                                 Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                                 Grid.Row="1" Margin="8,0,8,6"
+                                 AcceptsReturn="True" TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"
+                                 GotFocus="LlmAndPrompts_GotFocus"
+                                 LostFocus="LlmAndPrompts_LostFocus"/>
 
-                    <TextBlock Text="{x:Static i18n:LocalizedStrings.FilePath}" Grid.Row="1" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
-                    <TextBlock Text=":" Grid.Row="1" Grid.Column="1" Margin="2"/>
-                    <TextBlock Text="{Binding RelativePath}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Background="White" Padding="4,2,0,2" Margin="1"/>
+                        <!-- System Prompt Header & Presets -->
+                        <Grid Grid.Row="2" Margin="8,4,8,4" Grid.ColumnSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{x:Static i18n:LocalizedStrings.SystemPrompt}"
+                                       FontWeight="Bold" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Column="1" MinWidth="150"
+                                      ItemsSource="{Binding PromptPresets}"
+                                      DisplayMemberPath="Key"
+                                      SelectedItem="{Binding SelectedPromptPreset, Mode=TwoWay}"
+                                      ToolTip="{x:Static i18n:LocalizedStrings.PromptPresets}"/>
+                        </Grid>
 
-                    <TextBlock Text="{x:Static i18n:LocalizedStrings.Status}" Grid.Row="2" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
-                    <TextBlock Text=":" Grid.Row="2" Grid.Column="1" Margin="2"/>
-                    <TextBlock Text="{Binding ChangeType}" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Background="White" Padding="4,2,0,2" Margin="1"/>
+                        <!-- System Prompt Editor -->
+                        <TextBox x:Name="SystemPromptTextBox"
+                                 Text="{Binding SystemPrompt, UpdateSourceTrigger=PropertyChanged}"
+                                 Grid.Row="4" Margin="8,0,8,8"
+                                 AcceptsReturn="True" TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"
+                                 GotFocus="LlmAndPrompts_GotFocus"
+                                 LostFocus="LlmAndPrompts_LostFocus"/>
+                    </Grid>
+                </TabItem>
 
-                    <TextBlock Text="{x:Static i18n:LocalizedStrings.FileSize}" Grid.Row="3" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
-                    <TextBlock Text=":" Grid.Row="3" Grid.Column="1" Margin="2"/>
-                    <TextBlock Text="{Binding FileSize}" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Background="White" Padding="4,2,0,2" Margin="1"/>
+                <!-- Tab: Selected File Details -->
+                <TabItem x:Name="SelectedFileTab" Header="{x:Static i18n:LocalizedStrings.SelectedFile}">
+                    <Border Padding="6" DataContext="{Binding SelectedFile}"
+                            Background="#F0F0F0" BorderBrush="#484848" BorderThickness="0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="112"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                    <TextBlock Text="{x:Static i18n:LocalizedStrings.Pack}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
-                    <TextBlock Text=":" Grid.Row="4" Grid.Column="1" Margin="2"/>
-                    <CheckBox IsChecked="{Binding IsSelected}" Grid.Row="4" Grid.Column="2" Background="White" Margin="0,4"/>
+                            <TextBlock Text="{Binding FileName}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"
+                                       Padding="6" Margin="0" FontSize="14"
+                                       Background="#1080FF" Foreground="#F8F8F8"/>
 
-                    <TextBlock Text="{x:Static i18n:LocalizedStrings.PackingMode}" Grid.Row="5" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
-                    <TextBlock Text=":" Grid.Row="5" Grid.Column="1" Margin="2"/>
-                    <ComboBox ItemsSource="{Binding Data.PackingModeModeValues, Source={StaticResource proxy}}"
-                              SelectedValue="{Binding PackingMode, Mode=TwoWay}"
-                              DisplayMemberPath="DisplayValue"
-                              SelectedValuePath="Value"
-                              Grid.Row="5" Grid.Column="2" Margin="1"/>
-                    
-                    <TextBlock Text="{x:Static i18n:LocalizedStrings.TokenSize}" Grid.Row="6" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
-                    <TextBlock Text=":" Grid.Row="6" Grid.Column="1" Margin="2"/>
-                    <TextBlock Text="{Binding EstimatedTokens}" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Background="White" Padding="4,2,0,2" Margin="1"/>
-                    
-                    <TextBlock Text="{x:Static i18n:LocalizedStrings.ContextNote}" Grid.Row="7" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
-                    <TextBlock Text=":" Grid.Row="7" Grid.Column="1" Margin="2"/>
-                    <TextBox Text="{Binding ContextNote, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" Margin="1" TextWrapping="Wrap"/>
-                </Grid>
-            </Border>
+                            <TextBlock Text="{x:Static i18n:LocalizedStrings.FilePath}" Grid.Row="1" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                            <TextBlock Text=":" Grid.Row="1" Grid.Column="1" Margin="2"/>
+                            <TextBlock Text="{Binding RelativePath}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Background="White" Padding="4,2,0,2" Margin="1"/>
+
+                            <TextBlock Text="{x:Static i18n:LocalizedStrings.Status}" Grid.Row="2" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                            <TextBlock Text=":" Grid.Row="2" Grid.Column="1" Margin="2"/>
+                            <TextBlock Text="{Binding ChangeType}" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Background="White" Padding="4,2,0,2" Margin="1"/>
+
+                            <TextBlock Text="{x:Static i18n:LocalizedStrings.FileSize}" Grid.Row="3" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                            <TextBlock Text=":" Grid.Row="3" Grid.Column="1" Margin="2"/>
+                            <TextBlock Text="{Binding FileSize}" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Background="White" Padding="4,2,0,2" Margin="1"/>
+
+                            <TextBlock Text="{x:Static i18n:LocalizedStrings.Pack}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                            <TextBlock Text=":" Grid.Row="4" Grid.Column="1" Margin="2"/>
+                            <CheckBox IsChecked="{Binding IsSelected}" Grid.Row="4" Grid.Column="2" Background="White" Margin="0,4"/>
+
+                            <TextBlock Text="{x:Static i18n:LocalizedStrings.PackingMode}" Grid.Row="5" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                            <TextBlock Text=":" Grid.Row="5" Grid.Column="1" Margin="2"/>
+                            <ComboBox ItemsSource="{Binding Data.PackingModeModeValues, Source={StaticResource proxy}}"
+                                      SelectedValue="{Binding PackingMode, Mode=TwoWay}"
+                                      DisplayMemberPath="DisplayValue"
+                                      SelectedValuePath="Value"
+                                      Grid.Row="5" Grid.Column="2" Margin="1"/>
+
+                            <TextBlock Text="{x:Static i18n:LocalizedStrings.TokenSize}" Grid.Row="6" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                            <TextBlock Text=":" Grid.Row="6" Grid.Column="1" Margin="2"/>
+                            <TextBlock Text="{Binding EstimatedTokens}" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Background="White" Padding="4,2,0,2" Margin="1"/>
+
+                            <TextBlock Text="{x:Static i18n:LocalizedStrings.ContextNote}" Grid.Row="7" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
+                            <TextBlock Text=":" Grid.Row="7" Grid.Column="1" Margin="2"/>
+                            <TextBox Text="{Binding ContextNote, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" Margin="1" TextWrapping="Wrap"/>
+                        </Grid>
+                    </Border>
+                </TabItem>
+            </TabControl>
         </Grid>
 
         <!-- Status Bar -->
-        <StatusBar Grid.Row="3" Background="#EEEEEE">
+        <StatusBar Grid.Row="3" Grid.ColumnSpan="2" Background="#EEEEEE">
             <StatusBarItem>
                 <TextBlock Text="{Binding StatusMessage}" />
             </StatusBarItem>

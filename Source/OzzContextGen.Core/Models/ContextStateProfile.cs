@@ -19,6 +19,21 @@ public record ContextStateProfile
     /// </summary>
     public DateTime LastPackedAt { get; init; }
 
+    /// <summary>Repository URL (e.g. GitHub, GitLab, Azure DevOps).</summary>
+    public string RepoUrl { get; set; } = string.Empty;
+
+    /// <summary>License or source model (e.g. "MIT", "Apache-2.0", "Proprietary").</summary>
+    public string License { get; set; } = string.Empty;
+
+    /// <summary>Indicates whether the project is open source or proprietary/closed source.</summary>
+    public bool? IsOpenSource { get; set; }
+
+    /// <summary>Overview, architecture notes, or system instructions for the LLM.</summary>
+    public string Description { get; set; } = string.Empty;
+
+    /// <summary>Custom directives or instructions for the LLM when consuming this context pack.</summary>
+    public string SystemPrompt { get; set; } = string.Empty;
+
     /// <summary>
     /// File suffixes to scan for this profile (e.g. <c>".cs"</c>, <c>".xaml"</c>).
     /// An empty list means all suffixes registered in <see cref="SourceLanguages"/> are used.

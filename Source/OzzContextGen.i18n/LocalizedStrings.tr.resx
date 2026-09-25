@@ -342,4 +342,34 @@
   <data name="OK" xml:space="preserve">
     <value>Tamam</value>
   </data>
+  <data name="ProfileSettings" xml:space="preserve">
+    <value>Profil ve Dizin Ayarları</value>
+  </data>
+  <data name="ProjectInfo" xml:space="preserve">
+    <value>Proje Bilgileri</value>
+  </data>
+  <data name="RepoUrl" xml:space="preserve">
+    <value>Depo URL:</value>
+  </data>
+  <data name="License" xml:space="preserve">
+    <value>Lisans:</value>
+  </data>
+  <data name="OpenSource" xml:space="preserve">
+    <value>Açık Kaynak</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Açıklama</value>
+  </data>
+  <data name="SystemPrompt" xml:space="preserve">
+    <value>Sistem İstemi</value>
+  </data>
+  <data name="LlmAndPrompts" xml:space="preserve">
+    <value>LLM &amp; Yönergeler</value>
+  </data>
+  <data name="SelectedFile" xml:space="preserve">
+    <value>Seçili Dosya</value>
+  </data>
+  <data name="PromptPresets" xml:space="preserve">
+    <value>Hazır Şablonlar</value>
+  </data>
 </root>

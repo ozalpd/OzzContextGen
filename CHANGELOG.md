@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Added project metadata fields (`RepoUrl`, `License`, `IsOpenSource`, `Description`, `SystemPrompt`) to `ContextStateProfile` and persisted in `.ctxgen` profile files.
+- Added Project Info controls (Repo URL, License, Open Source checkbox) to the WPF frontend.
+- Added a dedicated tabbed detail area in `MainWindow` with a default active "LLM & Prompts" tab for multi-line editing of `Description` and `SystemPrompt`, and a "Selected File" tab for per-file details.
+- Added curated sample system prompts (`SampleSystemPrompts` in `CtxDefaults`) and a preset selector in the WPF UI to quickly populate common prompt scenarios (General, Security Review, Refactoring & Architecture, Code Review & QA, Documentation & Explanation).
+- Added Turkish and English localization keys for project info and prompt properties (`ProjectInfo`, `RepoUrl`, `License`, `OpenSource`, `Description`, `SystemPrompt`, `LlmAndPrompts`, `SelectedFile`, `PromptPresets`).
 - Added an Excluded Folders dialog (`ExcludedFoldersEdit` / `ExcludedFoldersEditVM`) in the WPF frontend, accessible from both the toolbar and next to the Source Folder input, allowing users to add, remove, and reset folder exclusion rules per profile.
 - Added `CtxDefaults` class to centralize default profile and scanner settings.
 - Added `ExcludedFolders` property to `ContextStateProfile` and `CodeCrawler`, allowing folder exclusions to be customized per `.ctxgen` profile while pre-populating with default exclusions from `CtxDefaults.ExcludedFolders`.
