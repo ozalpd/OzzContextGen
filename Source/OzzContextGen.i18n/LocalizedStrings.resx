@@ -318,4 +318,28 @@
   <data name="TokenEstimateTooltip" xml:space="preserve">
     <value>Heuristic token estimate of the generated markdown pack. ASCII: {0:N0}, Extended Latin: {1:N0}, CJK: {2:N0}, Other: {3:N0} characters. Actual token count depends on the target model's tokenizer.</value>
   </data>
+  <data name="ExcludedFolders" xml:space="preserve">
+    <value>Excluded Folders</value>
+  </data>
+  <data name="EditExcludedFolders" xml:space="preserve">
+    <value>Edit Excluded Folders</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="ResetToDefaults" xml:space="preserve">
+    <value>Reset to Defaults</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
 </root>

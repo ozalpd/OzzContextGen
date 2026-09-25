@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Added an Excluded Folders dialog (`ExcludedFoldersEdit` / `ExcludedFoldersEditVM`) in the WPF frontend, accessible from both the toolbar and next to the Source Folder input, allowing users to add, remove, and reset folder exclusion rules per profile.
 - Added `CtxDefaults` class to centralize default profile and scanner settings.
 - Added `ExcludedFolders` property to `ContextStateProfile` and `CodeCrawler`, allowing folder exclusions to be customized per `.ctxgen` profile while pre-populating with default exclusions from `CtxDefaults.ExcludedFolders`.
 - Added support for a relative `SourcePath` in `.ctxgen` profiles; `MainViewModel.ResolvedSourcePath` resolves it against the profile file's directory (`ProfilePath`) so profiles are portable across machines and folder layouts.

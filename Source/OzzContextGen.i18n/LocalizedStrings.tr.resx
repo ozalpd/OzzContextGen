@@ -318,4 +318,28 @@
   <data name="TokenEstimateTooltip" xml:space="preserve">
     <value>Oluşturulan markdown paketinin sezgisel token tahmini. ASCII: {0:N0}, Genişletilmiş Latin: {1:N0}, CJK: {2:N0}, Diğer: {3:N0} karakter. Gerçek token sayısı hedef modelin tokenizer'ına bağlıdır.</value>
   </data>
+  <data name="ExcludedFolders" xml:space="preserve">
+    <value>Hariç Tutulan Klasörler</value>
+  </data>
+  <data name="EditExcludedFolders" xml:space="preserve">
+    <value>Hariç Tutulan Klasörleri Düzenle</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Ekle</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Kaldır</value>
+  </data>
+  <data name="ResetToDefaults" xml:space="preserve">
+    <value>Varsayılanlara Sıfırla</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>İptal</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>Tamam</value>
+  </data>
 </root>

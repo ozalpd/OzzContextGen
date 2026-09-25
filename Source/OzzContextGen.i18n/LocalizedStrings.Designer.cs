@@ -70,6 +70,15 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Analyze Changes.
         /// </summary>
         public static string AnalyzeChanges {
@@ -84,6 +93,15 @@ namespace OzzContextGen.i18n {
         public static string Browse {
             get {
                 return ResourceManager.GetString("Browse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
         
@@ -124,6 +142,15 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Excluded Folders.
+        /// </summary>
+        public static string EditExcludedFolders {
+            get {
+                return ResourceManager.GetString("EditExcludedFolders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ~{0:N0} tokens (estimated).
         /// </summary>
         public static string EstimatedTokens {
@@ -147,6 +174,15 @@ namespace OzzContextGen.i18n {
         public static string Excluded {
             get {
                 return ResourceManager.GetString("Excluded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excluded Folders.
+        /// </summary>
+        public static string ExcludedFolders {
+            get {
+                return ResourceManager.GetString("ExcludedFolders", resourceCulture);
             }
         }
         
@@ -282,6 +318,15 @@ namespace OzzContextGen.i18n {
         public static string NoHistoryDescription {
             get {
                 return ResourceManager.GetString("NoHistoryDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
             }
         }
         
@@ -446,7 +491,7 @@ namespace OzzContextGen.i18n {
                 return ResourceManager.GetString("Ready", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Recent profiles.
         /// </summary>
@@ -455,7 +500,16 @@ namespace OzzContextGen.i18n {
                 return ResourceManager.GetString("RecentProjects", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Remove deleted files from list.
         /// </summary>
@@ -471,6 +525,24 @@ namespace OzzContextGen.i18n {
         public static string RequiredParameters {
             get {
                 return ResourceManager.GetString("RequiredParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset to Defaults.
+        /// </summary>
+        public static string ResetToDefaults {
+            get {
+                return ResourceManager.GetString("ResetToDefaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
         

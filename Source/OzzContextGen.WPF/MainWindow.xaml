@@ -113,6 +113,28 @@
                     </Path>
                 </Viewbox>
             </Button>
+            <Button Style="{StaticResource IconButtonStyle-28x24}"
+                    Command="{Binding EditExcludedFoldersCommand}"
+                    ToolTip="{x:Static i18n:LocalizedStrings.EditExcludedFolders}">
+                <Viewbox Width="18" Height="18">
+                    <Path Margin="0">
+                        <Path.Style>
+                            <Style TargetType="Path">
+                                <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                <Setter Property="Data" Value="{StaticResource folder-x}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=Button}}" Value="False">
+                                        <Setter Property="Fill" Value="#808890"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}" Value="True">
+                                        <Setter Property="Fill" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </Viewbox>
+            </Button>
             <Button Style="{StaticResource IconButtonStyle-38x24}"
                     Command="{Binding RemoveDeletedFilesCommand}"
                     ToolTip="{x:Static i18n:LocalizedStrings.RemoveDeletedFiles}">
@@ -241,7 +263,16 @@
                 <TextBox Grid.Row="0" Grid.Column="1" Margin="5" VerticalAlignment="Center"
                          Text="{Binding SourcePath, UpdateSourceTrigger=PropertyChanged}"
                          ToolTip="{Binding ResolvedSourcePath}"/>
-                <Button Content="{x:Static i18n:LocalizedStrings.Browse}" Command="{Binding BrowseSourceCommand}" Grid.Row="0" Grid.Column="2" Padding="10,2" Margin="5"/>
+                <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Margin="5,0" VerticalAlignment="Center">
+                    <Button Content="{x:Static i18n:LocalizedStrings.Browse}" Command="{Binding BrowseSourceCommand}" Padding="10,2" Margin="0,5"/>
+                    <Button Command="{Binding EditExcludedFoldersCommand}"
+                            ToolTip="{x:Static i18n:LocalizedStrings.EditExcludedFolders}"
+                            Padding="5,2" Margin="4,5,0,5">
+                        <Viewbox Width="16" Height="16">
+                            <Path Data="{StaticResource folder-x}" Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                        </Viewbox>
+                    </Button>
+                </StackPanel>
 
                 <!-- Profil Dosyası (.ctxgen) -->
                 <TextBlock Text="{x:Static i18n:LocalizedStrings.ProfileFile}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>

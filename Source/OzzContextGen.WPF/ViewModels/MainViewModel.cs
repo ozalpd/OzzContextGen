@@ -37,6 +37,7 @@ public class MainViewModel : AbstractViewModel
         PackCommand = new RelayCommand(async () => await PackContextAsync(), CanPack);
         RemoveDeletedFilesCommand = new RelayCommand(RemoveDeletedFilesFromTrackedList, () => TrackedFiles.Any(f => f.IsDeleted));
         SaveProfileCommand = new RelayCommand(async () => await SaveProfileAsync(), CanSaveProfile);
+        EditExcludedFoldersCommand = new RelayCommand(EditExcludedFolders, CanEditExcludedFolders);
         ToggleAllSelectedCommand = new RelayCommand(ToggleAllSelected, CanToggleAllSelected);
 
         CheckForUpdatesCommand = new RelayCommand(async () => await CheckForUpdatesAsync());
@@ -62,6 +63,7 @@ public class MainViewModel : AbstractViewModel
     public RelayCommand PackCommand { get; }
     public RelayCommand RemoveDeletedFilesCommand { get; }
     public RelayCommand SaveProfileCommand { get; }
+    public RelayCommand EditExcludedFoldersCommand { get; }
     public RelayCommand CheckForUpdatesCommand { get; }
     public RelayCommand ShowAboutCommand { get; }
     public RelayCommand ToggleAllSelectedCommand { get; }
@@ -231,6 +233,7 @@ public class MainViewModel : AbstractViewModel
             RaisePropertyChanged(nameof(SourcePath));
             RaisePropertyChanged(nameof(ResolvedSourcePath));
             AnalyzeChangesCommand.RaiseCanExecuteChanged();
+            EditExcludedFoldersCommand.RaiseCanExecuteChanged();
         }
     }
     private string _sourcePath = string.Empty;
@@ -580,5 +583,23 @@ public class MainViewModel : AbstractViewModel
         }
         aboutDialog.LoadHighResolutionIcon("pack://application:,,,/OzzContextGen.WPF;component/Assets/CtxGen-Icon-02-256.ico");
         aboutDialog.ShowDialog();
+    }
+
+    private bool CanEditExcludedFolders() => CanAnalyzeChanges();
+
+    private void EditExcludedFolders()
+    {
+        var vm = new ExcludedFoldersEditVM(_currentProfile.ExcludedFolders);
+        var dialog = new ExcludedFoldersEdit
+        {
+            Owner = System.Windows.Application.Current.MainWindow,
+            DataContext = vm
+        };
+
+        if (dialog.ShowDialog() == true)
+        {
+            _currentProfile.ExcludedFolders = vm.Folders.ToList();
+            SaveProfileCommand.RaiseCanExecuteChanged();
+        }
     }
 }
