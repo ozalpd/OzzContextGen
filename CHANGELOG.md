@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Updated `PackerEngine` to include profile metadata (`RepoUrl`, `IsOpenSource`, `License`, `Description`, and `SystemPrompt`) in the generated Markdown context pack preamble.
 - Added project metadata fields (`RepoUrl`, `License`, `IsOpenSource`, `Description`, `SystemPrompt`) to `ContextStateProfile` and persisted in `.ctxgen` profile files.
 - Added Project Info controls (Repo URL, License, Open Source checkbox) to the WPF frontend.
 - Added a dedicated tabbed detail area in `MainWindow` with a default active "LLM & Prompts" tab for multi-line editing of `Description` and `SystemPrompt`, and a "Selected File" tab for per-file details.

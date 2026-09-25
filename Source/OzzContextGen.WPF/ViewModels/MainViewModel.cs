@@ -432,7 +432,7 @@ public class MainViewModel : AbstractViewModel
         string markdownResult = await PackerEngine.PackSourceCodeAsync(selectedFiles, ResolvedSourcePath, message =>
         {
             StatusMessage = message; // Displaying the progress status in real-time
-        });
+        }, _currentProfile);
 
         // Write the file
         await File.WriteAllTextAsync(outputPath, markdownResult, System.Text.Encoding.UTF8);

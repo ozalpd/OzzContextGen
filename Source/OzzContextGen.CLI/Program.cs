@@ -1,4 +1,5 @@
 ﻿using OzzContextGen.Core;
+using OzzContextGen.Core.Models;
 using OzzContextGen.i18n;
 
 namespace OzzContextGen.CLI
@@ -69,11 +70,18 @@ namespace OzzContextGen.CLI
 
                 Console.WriteLine($"[1/2] {LocalizedStrings.ScanningSource}: {source}");
 
+                ContextStateProfile? profile = null;
+                if (!string.IsNullOrEmpty(config) && File.Exists(config))
+                {
+                    var stateService = new StateService();
+                    profile = await stateService.LoadProfileAsync(config);
+                }
+
                 // Core motorumuzu tetikliyoruz
                 string markdownResult = await packer.PackSourceCodeAsync(source, message =>
                 {
                     Console.WriteLine($" > {message}");
-                });
+                }, profile);
 
                 // Markdown dosyasını diske yaz
                 Console.WriteLine($"\n[2/2] {LocalizedStrings.GeneratingMarkdown}: {output}");
