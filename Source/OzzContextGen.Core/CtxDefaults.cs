@@ -10,7 +10,25 @@ public static class CtxDefaults
     /// </summary>
     public static readonly string[] ExcludedFolders =
     [
-        "bin", "obj", ".git", ".vs", ".vscode", "packages", "node_modules", "GeneratedCodes"
+        "bin", "obj", ".git", ".vs", ".vscode", "packages", "node_modules", "GeneratedCodes",
+        "Library", "Temp", "UserSettings", "Logs", "Build", "Builds"
+    ];
+
+    /// <summary>
+    /// File suffixes prioritized to appear at the top of directory listings (e.g. solution, project, and engine definitions).
+    /// </summary>
+    public static readonly string[] PrioritySuffixes =
+    [
+        ".slnx", ".sln", ".csproj", ".fsproj", ".vbproj",
+        ".asmdef", ".asmref", ".uproject", ".uplugin"
+    ];
+
+    /// <summary>
+    /// Specific file names prioritized to appear at the top of directory listings (e.g. package manifests).
+    /// </summary>
+    public static readonly string[] PriorityFileNames =
+    [
+        "package.json", "tsconfig.json", "manifest.json"
     ];
 
     /// <summary>

@@ -31,6 +31,9 @@
         // Build result organization: Exclude common build and version control folders to avoid unnecessary files
         public HashSet<string> ExcludedFolders { get; }
 
+        private static readonly HashSet<string> PrioritySuffixSet = new(CtxDefaults.PrioritySuffixes, StringComparer.OrdinalIgnoreCase);
+        private static readonly HashSet<string> PriorityFileNameSet = new(CtxDefaults.PriorityFileNames, StringComparer.OrdinalIgnoreCase);
+
         /// <summary>
         /// Recursively scans the specified directory and returns all files whose extension
         /// matches one of the configured <see cref="Suffixes"/>, excluding <see cref="ExcludedFolders"/>.
@@ -42,10 +45,27 @@
             var files = new List<string>();
             try
             {
+                var tmpList = new List<string>();
                 foreach (var suffix in Suffixes)
                 {
-                    files.AddRange(Directory.GetFiles(path, $"*{suffix}"));
+                    tmpList.AddRange(Directory.GetFiles(path, $"*{suffix}"));
                 }
+
+                // 1. Specific priority file names (e.g., package.json, tsconfig.json)
+                files.AddRange(tmpList.Where(f => PriorityFileNameSet.Contains(Path.GetFileName(f)))
+                                      .OrderBy(f => Array.IndexOf(CtxDefaults.PriorityFileNames, Path.GetFileName(f).ToLowerInvariant()))
+                                      .ThenBy(f => f));
+
+                // 2. Priority suffixes (e.g., solution, project, asmdef) excluding any already added above
+                files.AddRange(tmpList.Where(f => !PriorityFileNameSet.Contains(Path.GetFileName(f))
+                                               && PrioritySuffixSet.Contains(Path.GetExtension(f)))
+                                      .OrderBy(f => Array.IndexOf(CtxDefaults.PrioritySuffixes, Path.GetExtension(f).ToLowerInvariant()))
+                                      .ThenBy(f => f));
+
+                // 3. All remaining source files sorted alphabetically
+                files.AddRange(tmpList.Where(f => !PriorityFileNameSet.Contains(Path.GetFileName(f))
+                                               && !PrioritySuffixSet.Contains(Path.GetExtension(f)))
+                                      .OrderBy(f => f));
 
                 foreach (var directory in Directory.GetDirectories(path))
                 {

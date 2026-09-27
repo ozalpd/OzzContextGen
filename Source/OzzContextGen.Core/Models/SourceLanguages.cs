@@ -204,6 +204,24 @@ public static class SourceLanguages
         BlockCommentEnd = "*/"
     };
 
+    public static readonly SourceLanguage UnityCgInclude = new()
+    {
+        Suffix = ".cginc",
+        MarkdownFence = "hlsl",
+        LineComment = "//",
+        BlockCommentStart = "/*",
+        BlockCommentEnd = "*/"
+    };
+
+    public static readonly SourceLanguage UnityComputeShader = new()
+    {
+        Suffix = ".compute",
+        MarkdownFence = "hlsl",
+        LineComment = "//",
+        BlockCommentStart = "/*",
+        BlockCommentEnd = "*/"
+    };
+
     public static readonly SourceLanguage UnrealShaderFile = new()
     {
         Suffix = ".usf",
@@ -255,6 +273,12 @@ public static class SourceLanguages
     public static readonly SourceLanguage UnityAsmDef = new()
     {
         Suffix = ".asmdef",
+        MarkdownFence = "json"
+    };
+
+    public static readonly SourceLanguage UnityAsmRef = new()
+    {
+        Suffix = ".asmref",
         MarkdownFence = "json"
     };
 
@@ -364,6 +388,8 @@ public static class SourceLanguages
             [".h"]        = CppHeader,
             [".hlsl"]     = Hlsl,
             [".shader"]   = UnityShader,
+            [".cginc"]    = UnityCgInclude,
+            [".compute"]  = UnityComputeShader,
             [".usf"]      = UnrealShaderFile,
             [".ush"]      = UnrealShaderHeader,
             [".uxml"]     = UnityUxml,
@@ -371,6 +397,7 @@ public static class SourceLanguages
             [".uproject"] = UnrealProject,
             [".uplugin"]  = UnrealPlugin,
             [".asmdef"]   = UnityAsmDef,
+            [".asmref"]   = UnityAsmRef,
             [".ini"]      = IniConfig,
             [".iss"]      = InnoSetup,
             [".bat"]      = Batch,

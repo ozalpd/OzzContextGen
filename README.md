@@ -107,8 +107,9 @@ OzzContextGen/
 - Per-profile file type selection — choose which suffixes each `.ctxgen` profile scans; persisted between sessions
 - WPF toolbar picker for up to 10 recently opened or saved `.ctxgen` profiles, persisted in application settings; displays the active profile's filename
 - Profile-relative source paths — a profile's source path may be stored relative to the `.ctxgen` file and is resolved to an absolute path at runtime, keeping profiles portable
-- Per-profile folder exclusion management with dedicated editor dialog and centralized sensible defaults
+- Per-profile folder exclusion management with dedicated editor dialog and centralized sensible defaults (including .NET, Node, Unity, and build cache exclusions)
 - Project metadata and LLM directives — configure Repo URL, License, Open Source flag, Description, and System Prompts per profile with curated preset templates
+- Prioritized file ordering — project definitions (`.slnx`, `.sln`, `.csproj`, `.asmdef`, etc.) and package manifests (`package.json`, `tsconfig.json`, `manifest.json`) are automatically positioned first within directory listings for optimal LLM context loading
 
 ## Supported File Types
 
@@ -140,6 +141,8 @@ OzzContextGen recognises the following file types out of the box. Each is scanne
 | `.h` | `cpp` | `//` | `/* */` | — |
 | `.hlsl` | `hlsl` | `//` | `/* */` | — |
 | `.shader` | `hlsl` | `//` | `/* */` | — |
+| `.cginc` | `hlsl` | `//` | `/* */` | — |
+| `.compute` | `hlsl` | `//` | `/* */` | — |
 | `.usf` | `hlsl` | `//` | `/* */` | — |
 | `.ush` | `hlsl` | `//` | `/* */` | — |
 | `.uxml` | `xml` | — | `<!-- -->` | — |
@@ -147,6 +150,7 @@ OzzContextGen recognises the following file types out of the box. Each is scanne
 | `.uproject` | `json` | — | — | — |
 | `.uplugin` | `json` | — | — | — |
 | `.asmdef` | `json` | — | — | — |
+| `.asmref` | `json` | — | — | — |
 | `.ini` | `ini` | `;` | — | — |
 | `.iss` | `inno` | `;` | — | — |
 | `.bat` | `bat` | `REM` | — | — |

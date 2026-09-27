@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Added priority file ordering in `CodeCrawler` driven by `CtxDefaults.PrioritySuffixes` (.NET solutions/projects, Unity `.asmdef`/`.asmref`, Unreal `.uproject`/`.uplugin`) and `CtxDefaults.PriorityFileNames` (`package.json`, `tsconfig.json`, `manifest.json`), ensuring solution/project descriptors and manifests appear first in directory listings.
+- Added Unity and game engine support:
+  - Registered `.asmref` (Assembly Definition Reference), `.cginc` (Cg/HLSL include), and `.compute` (Compute Shader) in `SourceLanguages`.
+  - Added default exclusions for Unity cache, log, and build folders (`Library`, `Temp`, `UserSettings`, `Logs`, `Build`, `Builds`) in `CtxDefaults.ExcludedFolders`.
 - Updated `PackerEngine` to include profile metadata (`RepoUrl`, `IsOpenSource`, `License`, `Description`, and `SystemPrompt`) in the generated Markdown context pack preamble.
 - Added project metadata fields (`RepoUrl`, `License`, `IsOpenSource`, `Description`, `SystemPrompt`) to `ContextStateProfile` and persisted in `.ctxgen` profile files.
 - Added Project Info controls (Repo URL, License, Open Source checkbox) to the WPF frontend.
