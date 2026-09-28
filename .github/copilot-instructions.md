@@ -28,7 +28,7 @@ OzzContextGen is a .NET 10 developer utility that scans source code files and ge
 | `SourceLanguage` | Immutable record describing one file type: `Suffix`, `MarkdownFence`, `LineComment`, `BlockCommentStart`, `BlockCommentEnd`, `XmlDocPrefix`. |
 | `SourceLanguages` | Static registry of 44 built-in `SourceLanguage` definitions, keyed by suffix (case-insensitive). Exposes `All` dictionary and `TryGet(suffix)`. |
 | `StateService` | Loads/saves `.ctxgen` JSON profile files and computes `FileChangeSummary` diffs. |
-| `ContextStateProfile` | Root profile model (record, own file). Contains `TrackedFiles`, `SelectedSuffixes` (persisted suffix selection), `ExcludedFolders` (custom folder exclusions), `Layout` (`PackLayout`), `ProfileName`, `TargetSourcePath`, `LastPackedAt`, `RepoUrl`, `License`, `IsOpenSource`, `Description`, `SystemPrompt`. |
+| `ContextStateProfile` | Root profile model (record, own file). Contains `TrackedFiles`, `SelectedSuffixes` (persisted suffix selection), `ExcludedFolders` (custom folder exclusions), `Layout` (`PackLayout`), `LayoutHeader` (custom tree section header), `ProfileName`, `TargetSourcePath`, `LastPackedAt`, `RepoUrl`, `License`, `IsOpenSource`, `Description`, `SystemPrompt`. |
 | `FileContextEntry` | Per-file metadata record: `RelativePath`, `LastWriteTime`, `FileSize`, `ContextNote`, `InclusionMode` (lazy-defaults to `FullPack` / `MetadataOnly` based on file size). |
 | `FileChangeSummary` | Diff result per file: `ChangeType` (New / Modified / Unchanged / Deleted) + `InclusionMode`. Inherits `FileContextEntry`. |
 | `EnumValueItem<T>` | Pairs an enum value with its localized display string; used for binding enum collections to UI controls. |

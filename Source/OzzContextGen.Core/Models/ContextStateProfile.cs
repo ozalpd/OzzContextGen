@@ -38,6 +38,11 @@ public record ContextStateProfile
     public PackLayout Layout { get; set; } = PackLayout.FilesOnly;
 
     /// <summary>
+    /// Optional header text to display above the project structure tree in the generated markdown.
+    /// </summary>
+    public string LayoutHeader { get; set; } = string.Empty;
+
+    /// <summary>
     /// File suffixes to scan for this profile (e.g. <c>".cs"</c>, <c>".xaml"</c>).
     /// An empty list means all suffixes registered in <see cref="SourceLanguages"/> are used.
     /// </summary>

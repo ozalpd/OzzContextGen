@@ -9,8 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Added `LayoutHeader` property to `ContextStateProfile` and `MainViewModel`, allowing customization of the Markdown header for the project structure tree section (defaulting to `"Project Structure"`).
 - Added `PackLayout` option (`FilesOnly`, `TreeOnly`, `TreeAndFiles`) to configure Markdown pack output format, including an LLM-friendly plain indented hierarchy (2 spaces per depth level, trailing slashes on folders, no box characters) for project structure.
-- Added Pack Layout selection dropdown to the WPF toolbar and persisted `Layout` in `.ctxgen` profile files.
+- Added Pack Layout selection dropdown and customizable Layout Header input to the WPF UI, persisted in `.ctxgen` profile files.
 - Added Turkish and English localization keys for pack layout options (`PackLayout`, `FilesOnly`, `TreeOnly`, `TreeAndFiles`).
 - Added priority file ordering in `CodeCrawler` driven by `CtxDefaults.PrioritySuffixes` (.NET solutions/projects, Unity `.asmdef`/`.asmref`, Unreal `.uproject`/`.uplugin`) and `CtxDefaults.PriorityFileNames` (`package.json`, `tsconfig.json`, `manifest.json`), ensuring solution/project descriptors and manifests appear first in directory listings.
 - Added Unity and game engine support:

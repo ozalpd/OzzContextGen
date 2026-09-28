@@ -193,16 +193,6 @@
             </Button>
             <Separator/>
             <Border Width="8" Background="Transparent" />
-            <TextBlock Text="{x:Static i18n:LocalizedStrings.PackLayout}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
-            <ComboBox ItemsSource="{Binding PackLayoutValues}"
-                      SelectedValue="{Binding Layout, Mode=TwoWay}"
-                      DisplayMemberPath="DisplayValue"
-                      SelectedValuePath="Value"
-                      ToolTip="{x:Static i18n:LocalizedStrings.PackLayout}"
-                      VerticalAlignment="Center"
-                      Margin="4,0"
-                      MinWidth="115"/>
-            <Border Width="8" Background="Transparent" />
             <Button x:Name="PackButton" Padding="8,3" Margin="3,0" FontWeight="Bold"
                     Command="{Binding PackCommand}"
                     ToolTip="{x:Static i18n:LocalizedStrings.PackContext}">
@@ -236,11 +226,13 @@
                     </Viewbox>
                 </StackPanel>
             </Button>
+            <Border Width="8" Background="Transparent" />
             <Separator/>
-            <Border Width="16" Background="Transparent" />
+            <Border Width="8" Background="Transparent" />
             <Border Width="16" Background="Transparent" />
             <Border Width="32" Background="Transparent" />
-            <Border Width="32" Background="Transparent" />
+            <Border Width="48" Background="Transparent" />
+            <Border Width="64" Background="Transparent" />
             <Button Style="{StaticResource IconButtonStyle-28x24}"
                     ToolTip="{x:Static i18n:LocalizedStrings.About}"
                     Command="{Binding ShowAboutCommand}">
@@ -377,10 +369,12 @@
                 <TabItem Header="{x:Static i18n:LocalizedStrings.LlmAndPrompts}">
                     <Grid Background="#F0F0F0" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="15*"/>
-                            <ColumnDefinition Width="122*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="120" MinHeight="60"/>
                             <RowDefinition Height="Auto"/>
@@ -388,36 +382,48 @@
                             <RowDefinition Height="*" MinHeight="100"/>
                         </Grid.RowDefinitions>
 
+                        <!-- Pack Layout -->
+                        <TextBlock Grid.Row="0" VerticalAlignment="Center" Margin="8,4"
+                                   Text="{x:Static i18n:LocalizedStrings.PackLayout}"
+                                   FontWeight="Bold"/>
+                        <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding PackLayoutValues}"
+                                  SelectedValue="{Binding Layout, Mode=TwoWay}"
+                                  DisplayMemberPath="DisplayValue"
+                                  SelectedValuePath="Value"
+                                  ToolTip="{x:Static i18n:LocalizedStrings.PackLayout}"
+                                  VerticalAlignment="Center" MinWidth="110"/>
+
+                        <!-- Layout Header (Tree Header) -->
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Header:" VerticalAlignment="Center" Margin="8,4"
+                                   FontWeight="Bold"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="0"
+                                 Text="{Binding LayoutHeader, UpdateSourceTrigger=PropertyChanged}"/>
+
                         <!-- Project Description -->
-                        <TextBlock Text="{x:Static i18n:LocalizedStrings.Description}" Grid.Row="0"
+                        <TextBlock Text="{x:Static i18n:LocalizedStrings.Description}" Grid.Row="2"
                                    FontWeight="Bold" Margin="8,8,8,4" Grid.ColumnSpan="2"/>
                         <TextBox x:Name="DescriptionTextBox"
                                  Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
-                                 Grid.Row="1" Margin="8,0,8,6"
+                                 Grid.Row="3" Margin="8,0,8,6"
                                  AcceptsReturn="True" TextWrapping="Wrap"
                                  VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"
                                  GotFocus="LlmAndPrompts_GotFocus"
                                  LostFocus="LlmAndPrompts_LostFocus"/>
 
                         <!-- System Prompt Header & Presets -->
-                        <Grid Grid.Row="2" Margin="8,4,8,4" Grid.ColumnSpan="2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="{x:Static i18n:LocalizedStrings.SystemPrompt}"
-                                       FontWeight="Bold" VerticalAlignment="Center"/>
-                            <ComboBox Grid.Column="1" MinWidth="150"
-                                      ItemsSource="{Binding PromptPresets}"
-                                      DisplayMemberPath="Key"
-                                      SelectedItem="{Binding SelectedPromptPreset, Mode=TwoWay}"
-                                      ToolTip="{x:Static i18n:LocalizedStrings.PromptPresets}"/>
-                        </Grid>
+                        <TextBlock Grid.Row="5" Margin="8,4"
+                                   Text="{x:Static i18n:LocalizedStrings.SystemPrompt}"
+                                   FontWeight="Bold" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Column="1" Grid.Row="5" MinWidth="150" Margin="8,4"
+                                  ItemsSource="{Binding PromptPresets}"
+                                  DisplayMemberPath="Key"
+                                  SelectedItem="{Binding SelectedPromptPreset, Mode=TwoWay}"
+                                  ToolTip="{x:Static i18n:LocalizedStrings.PromptPresets}"/>
 
                         <!-- System Prompt Editor -->
                         <TextBox x:Name="SystemPromptTextBox"
                                  Text="{Binding SystemPrompt, UpdateSourceTrigger=PropertyChanged}"
-                                 Grid.Row="4" Margin="8,0,8,8"
+                                 Grid.Row="6" Margin="8,0,8,8"
                                  AcceptsReturn="True" TextWrapping="Wrap"
                                  VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"
                                  GotFocus="LlmAndPrompts_GotFocus"

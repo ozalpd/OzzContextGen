@@ -93,9 +93,16 @@ public class PackerEngine
                 .Select(f => f.RelativePath);
 
             sb.AppendLine();
-            sb.AppendLine("## Project Structure");
+            if (!string.IsNullOrWhiteSpace(profile?.LayoutHeader))
+            {
+                sb.AppendLine($"## {profile.LayoutHeader.Trim()}");
+            }
+            else
+            {
+                sb.AppendLine("## Project Structure");
+            }
             sb.AppendLine("```");
-            sb.Append(GenerateProjectTree(nonExcludedFiles));
+            sb.Append(GenerateProjectTree(nonExcludedFiles, codeFiles, layout == PackLayout.TreeOnly));
             sb.AppendLine("```");
         }
 
@@ -176,13 +183,14 @@ public class PackerEngine
     {
         public string Name { get; set; } = string.Empty;
         public bool IsDirectory { get; set; }
+        public string ContextNote { get; set; } = string.Empty;
         public Dictionary<string, TreeNode> Children { get; } = new(StringComparer.OrdinalIgnoreCase);
     }
 
     /// <summary>
     /// Generates an indented plain text project hierarchy (2 spaces indentation, trailing slash on folders, no box-drawing chars).
     /// </summary>
-    public static string GenerateProjectTree(IEnumerable<string> relativePaths)
+    public static string GenerateProjectTree(IEnumerable<string> relativePaths, List<FileContextEntry> codeFiles, bool appendContextNote)
     {
         var root = new TreeNode();
 
@@ -191,6 +199,11 @@ public class PackerEngine
             var parts = relativePath.Split(new[] { '/', '\\' }, StringSplitOptions.RemoveEmptyEntries);
             var current = root;
 
+            FileContextEntry? entry = null;
+            if (appendContextNote)
+            {
+                entry = codeFiles.FirstOrDefault(f => f.RelativePath == relativePath);
+            }
             for (int i = 0; i < parts.Length; i++)
             {
                 string part = parts[i];
@@ -201,7 +214,8 @@ public class PackerEngine
                     child = new TreeNode
                     {
                         Name = part,
-                        IsDirectory = !isFile
+                        IsDirectory = !isFile,
+                        ContextNote = entry?.ContextNote ?? string.Empty
                     };
                     current.Children[part] = child;
                 }
@@ -232,7 +246,14 @@ public class PackerEngine
             }
             else
             {
-                sb.AppendLine($"{indent}{node.Name}");
+                if (string.IsNullOrWhiteSpace(node.ContextNote))
+                {
+                    sb.AppendLine($"{indent}{node.Name}");
+                }
+                else
+                {
+                    sb.AppendLine($"{indent}{node.Name} | ContextNote: {node.ContextNote}");
+                }
             }
         }
     }

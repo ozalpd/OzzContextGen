@@ -181,6 +181,20 @@ public class MainViewModel : AbstractViewModel
     }
     private PackLayout _layout = PackLayout.FilesOnly;
 
+    public string LayoutHeader
+    {
+        get => _layoutHeader;
+        set
+        {
+            if (_layoutHeader != value)
+            {
+                _layoutHeader = value;
+                RaisePropertyChanged(nameof(LayoutHeader));
+            }
+        }
+    }
+    private string _layoutHeader = string.Empty;
+
     public string SystemPrompt
     {
         get => _systemPrompt;
