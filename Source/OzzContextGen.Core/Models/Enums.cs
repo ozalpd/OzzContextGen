@@ -31,3 +31,16 @@ public enum PackingMode
     [Display(ResourceType = typeof(LocalizedStrings), Name = "FullPack", Order = 20)]
     FullPack = 20
 }
+
+public enum PackLayout
+{
+    /// <summary>Only source files are included in the markdown output; project structure tree is omitted.</summary>
+    [Display(ResourceType = typeof(LocalizedStrings), Name = "FilesOnly", Order = 0)]
+    FilesOnly = 0,
+    /// <summary>Only the project structure tree is generated; file contents are omitted.</summary>
+    [Display(ResourceType = typeof(LocalizedStrings), Name = "TreeOnly", Order = 10)]
+    TreeOnly = 10,
+    /// <summary>Both project structure tree and file contents are generated in the markdown output.</summary>
+    [Display(ResourceType = typeof(LocalizedStrings), Name = "TreeAndFiles", Order = 20)]
+    TreeAndFiles = 20
+}

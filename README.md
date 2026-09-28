@@ -109,6 +109,7 @@ OzzContextGen/
 - Profile-relative source paths — a profile's source path may be stored relative to the `.ctxgen` file and is resolved to an absolute path at runtime, keeping profiles portable
 - Per-profile folder exclusion management with dedicated editor dialog and centralized sensible defaults (including .NET, Node, Unity, and build cache exclusions)
 - Project metadata and LLM directives — configure Repo URL, License, Open Source flag, Description, and System Prompts per profile with curated preset templates
+- Pack layout options — output source files only, an LLM-optimized plain indented folder structure tree (2 spaces per depth level, trailing slashes, no box characters), or both
 - Prioritized file ordering — project definitions (`.slnx`, `.sln`, `.csproj`, `.asmdef`, etc.) and package manifests (`package.json`, `tsconfig.json`, `manifest.json`) are automatically positioned first within directory listings for optimal LLM context loading
 
 ## Supported File Types

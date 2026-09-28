@@ -824,5 +824,41 @@ namespace OzzContextGen.i18n {
                 return ResourceManager.GetString("PromptPresets", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Pack Layout:.
+        /// </summary>
+        public static string PackLayout {
+            get {
+                return ResourceManager.GetString("PackLayout", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Files Only.
+        /// </summary>
+        public static string FilesOnly {
+            get {
+                return ResourceManager.GetString("FilesOnly", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Structure Only.
+        /// </summary>
+        public static string TreeOnly {
+            get {
+                return ResourceManager.GetString("TreeOnly", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Structure &amp; Files.
+        /// </summary>
+        public static string TreeAndFiles {
+            get {
+                return ResourceManager.GetString("TreeAndFiles", resourceCulture);
+            }
+        }
     }
 }

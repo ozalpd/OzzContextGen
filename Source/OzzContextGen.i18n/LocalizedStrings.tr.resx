@@ -372,4 +372,16 @@
   <data name="PromptPresets" xml:space="preserve">
     <value>Hazır Şablonlar</value>
   </data>
+  <data name="PackLayout" xml:space="preserve">
+    <value>Paket Düzeni:</value>
+  </data>
+  <data name="FilesOnly" xml:space="preserve">
+    <value>Yalnızca Dosyalar</value>
+  </data>
+  <data name="TreeOnly" xml:space="preserve">
+    <value>Yalnızca Dizin Yapısı</value>
+  </data>
+  <data name="TreeAndFiles" xml:space="preserve">
+    <value>Dizin Yapısı ve Dosyalar</value>
+  </data>
 </root>

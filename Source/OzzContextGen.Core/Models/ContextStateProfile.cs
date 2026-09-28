@@ -34,6 +34,9 @@ public record ContextStateProfile
     /// <summary>Custom directives or instructions for the LLM when consuming this context pack.</summary>
     public string SystemPrompt { get; set; } = string.Empty;
 
+    /// <summary>Markdown output layout (files only, tree only, or tree and files).</summary>
+    public PackLayout Layout { get; set; } = PackLayout.FilesOnly;
+
     /// <summary>
     /// File suffixes to scan for this profile (e.g. <c>".cs"</c>, <c>".xaml"</c>).
     /// An empty list means all suffixes registered in <see cref="SourceLanguages"/> are used.

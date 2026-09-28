@@ -84,73 +84,156 @@ public class PackerEngine
             }
         }
 
-        sb.AppendLine();
-        sb.AppendLine("Below is the structural source code of the project. Each file is separated by a markdown header and enclosed in code blocks.");
-        sb.AppendLine();
-        sb.AppendLine("---");
+        var layout = profile?.Layout ?? PackLayout.FilesOnly;
 
-        foreach (var file in codeFiles)
+        if (layout is PackLayout.TreeOnly or PackLayout.TreeAndFiles)
         {
-            // Notify the user which file is being processed via GUI or CLI
-            string relativePath = file.RelativePath;
-            progressAction?.Invoke(string.Format(LocalizedStrings.ProcessingFile, relativePath));
-            if (file.PackingMode == PackingMode.Excluded)
-                continue; // Skip excluded files
+            var nonExcludedFiles = codeFiles
+                .Where(f => f.PackingMode != PackingMode.Excluded)
+                .Select(f => f.RelativePath);
 
+            sb.AppendLine();
+            sb.AppendLine("## Project Structure");
+            sb.AppendLine("```");
+            sb.Append(GenerateProjectTree(nonExcludedFiles));
+            sb.AppendLine("```");
+        }
 
-            sb.AppendLine($"## FILE: {relativePath}");
+        if (layout != PackLayout.TreeOnly)
+        {
+            sb.AppendLine();
+            sb.AppendLine("Below is the structural source code of the project. Each file is separated by a markdown header and enclosed in code blocks.");
+            sb.AppendLine();
+            sb.AppendLine("---");
 
-            if (!string.IsNullOrWhiteSpace(file.ContextNote))
+            foreach (var file in codeFiles)
             {
-                sb.AppendLine($"**Note:** {file.ContextNote}");
-            }
+                // Notify the user which file is being processed via GUI or CLI
+                string relativePath = file.RelativePath;
+                progressAction?.Invoke(string.Format(LocalizedStrings.ProcessingFile, relativePath));
+                if (file.PackingMode == PackingMode.Excluded)
+                    continue; // Skip excluded files
 
-            if (file.PackingMode == PackingMode.MetadataOnly)
-            {
-                if (string.IsNullOrWhiteSpace(file.ContextNote))
+
+                sb.AppendLine($"## FILE: {relativePath}");
+
+                if (!string.IsNullOrWhiteSpace(file.ContextNote))
                 {
-                    sb.AppendLine($"**Packing Mode:** Metadata Only");
+                    sb.AppendLine($"**Note:** {file.ContextNote}");
+                }
+
+                if (file.PackingMode == PackingMode.MetadataOnly)
+                {
+                    if (string.IsNullOrWhiteSpace(file.ContextNote))
+                    {
+                        sb.AppendLine($"**Packing Mode:** Metadata Only");
+                        sb.AppendLine();
+                    }
+                    continue; // Skip reading the file content
+                }
+
+
+                string fullPath = Path.Combine(sourcePath, relativePath);
+                if (!File.Exists(fullPath))
+                {
+                    sb.AppendLine($"**ERROR:** File not found at path: {relativePath}");
+                    sb.AppendLine();
+                    continue;
+                }
+
+                string suffix = Path.GetExtension(relativePath);
+                string fence = SourceLanguages.TryGet(suffix)?.MarkdownFence ?? "text";
+
+                try
+                {
+                    // Read the file asynchronously to prevent UI blocking in large projects
+                    string content = await File.ReadAllTextAsync(fullPath, Encoding.UTF8);
+
+                    // Exceptions likely to be thrown during files are being read, so we put fence after reading the file
+                    sb.AppendLine($"```{fence}");
+                    sb.AppendLine(content.TrimEnd('\r', '\n'));
+                    sb.AppendLine("```");
+                }
+                catch (Exception ex)
+                {
+                    sb.AppendLine();
+                    sb.AppendLine($"**ERROR While Reading File:** {ex.Message}");
+                    if (ex.InnerException != null)
+                        sb.AppendLine(ex.InnerException.Message);
+
                     sb.AppendLine();
                 }
-                continue; // Skip reading the file content
+
+                sb.AppendLine(); // Add a blank line between files
             }
-
-
-            string fullPath = Path.Combine(sourcePath, relativePath);
-            if (!File.Exists(fullPath))
-            {
-                sb.AppendLine($"**ERROR:** File not found at path: {relativePath}");
-                sb.AppendLine();
-                continue;
-            }
-
-            string suffix = Path.GetExtension(relativePath);
-            string fence = SourceLanguages.TryGet(suffix)?.MarkdownFence ?? "text";
-
-            try
-            {
-                // Read the file asynchronously to prevent UI blocking in large projects
-                string content = await File.ReadAllTextAsync(fullPath, Encoding.UTF8);
-
-                // Exceptions likely to be thrown during files are being read, so we put fence after reading the file
-                sb.AppendLine($"```{fence}");
-                sb.AppendLine(content.TrimEnd('\r', '\n'));
-                sb.AppendLine("```");
-            }
-            catch (Exception ex)
-            {
-                sb.AppendLine();
-                sb.AppendLine($"**ERROR While Reading File:** {ex.Message}");
-                if (ex.InnerException != null)
-                    sb.AppendLine(ex.InnerException.Message);
-
-                sb.AppendLine();
-            }
-
-            sb.AppendLine(); // Add a blank line between files
         }
 
         progressAction?.Invoke(LocalizedStrings.PackagingCompleted);
         return sb.ToString();
+    }
+
+    private class TreeNode
+    {
+        public string Name { get; set; } = string.Empty;
+        public bool IsDirectory { get; set; }
+        public Dictionary<string, TreeNode> Children { get; } = new(StringComparer.OrdinalIgnoreCase);
+    }
+
+    /// <summary>
+    /// Generates an indented plain text project hierarchy (2 spaces indentation, trailing slash on folders, no box-drawing chars).
+    /// </summary>
+    public static string GenerateProjectTree(IEnumerable<string> relativePaths)
+    {
+        var root = new TreeNode();
+
+        foreach (var relativePath in relativePaths)
+        {
+            var parts = relativePath.Split(new[] { '/', '\\' }, StringSplitOptions.RemoveEmptyEntries);
+            var current = root;
+
+            for (int i = 0; i < parts.Length; i++)
+            {
+                string part = parts[i];
+                bool isFile = (i == parts.Length - 1);
+
+                if (!current.Children.TryGetValue(part, out var child))
+                {
+                    child = new TreeNode
+                    {
+                        Name = part,
+                        IsDirectory = !isFile
+                    };
+                    current.Children[part] = child;
+                }
+                current = child;
+            }
+        }
+
+        var sb = new StringBuilder();
+        AppendTreeNodes(sb, root.Children.Values, indentLevel: 0);
+        return sb.ToString();
+    }
+
+    private static void AppendTreeNodes(StringBuilder sb, IEnumerable<TreeNode> nodes, int indentLevel)
+    {
+        // Sort folders first, then files; alphabetically within each
+        var sorted = nodes
+            .OrderByDescending(n => n.IsDirectory)
+            .ThenBy(n => n.Name, StringComparer.OrdinalIgnoreCase);
+
+        string indent = new string(' ', indentLevel * 2);
+
+        foreach (var node in sorted)
+        {
+            if (node.IsDirectory)
+            {
+                sb.AppendLine($"{indent}{node.Name}/");
+                AppendTreeNodes(sb, node.Children.Values, indentLevel + 1);
+            }
+            else
+            {
+                sb.AppendLine($"{indent}{node.Name}");
+            }
+        }
     }
 }

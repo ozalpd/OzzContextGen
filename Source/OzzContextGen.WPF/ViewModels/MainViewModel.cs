@@ -42,6 +42,7 @@ public class MainViewModel : AbstractViewModel
         CheckForUpdatesCommand = new RelayCommand(async () => await CheckForUpdatesAsync());
         ShowAboutCommand = new RelayCommand(ShowAboutDialog);
         PackingModeModeValues = GetValues<PackingMode>();
+        PackLayoutValues = GetValues<PackLayout>();
         PromptPresets = CtxDefaults.SampleSystemPrompts;
 
         PropertyChanged += OnPropertyChanged;
@@ -70,6 +71,8 @@ public class MainViewModel : AbstractViewModel
 
 
     public IEnumerable<EnumValueItem<PackingMode>> PackingModeModeValues { get; private set; } = Array.Empty<EnumValueItem<PackingMode>>();
+
+    public IEnumerable<EnumValueItem<PackLayout>> PackLayoutValues { get; private set; } = Array.Empty<EnumValueItem<PackLayout>>();
 
 
 
@@ -163,6 +166,20 @@ public class MainViewModel : AbstractViewModel
         }
     }
     private string _description = string.Empty;
+
+    public PackLayout Layout
+    {
+        get => _layout;
+        set
+        {
+            if (_layout != value)
+            {
+                _layout = value;
+                RaisePropertyChanged(nameof(Layout));
+            }
+        }
+    }
+    private PackLayout _layout = PackLayout.FilesOnly;
 
     public string SystemPrompt
     {
@@ -344,6 +361,7 @@ public class MainViewModel : AbstractViewModel
         IsOpenSource = profile.IsOpenSource;
         Description = profile.Description;
         SystemPrompt = profile.SystemPrompt;
+        Layout = profile.Layout;
         AddRecentProject(ProfilePath);
 
         if (CanAnalyzeChanges())
@@ -428,6 +446,14 @@ public class MainViewModel : AbstractViewModel
             return;
         }
 
+        // Synchronize current UI profile state before packing
+        _currentProfile.RepoUrl = RepoUrl;
+        _currentProfile.License = License;
+        _currentProfile.IsOpenSource = IsOpenSource;
+        _currentProfile.Description = Description;
+        _currentProfile.SystemPrompt = SystemPrompt;
+        _currentProfile.Layout = Layout;
+
         // Triggering PackerEngine (async to avoid UI freezing)
         string markdownResult = await PackerEngine.PackSourceCodeAsync(selectedFiles, ResolvedSourcePath, message =>
         {
@@ -487,7 +513,8 @@ public class MainViewModel : AbstractViewModel
             License = License,
             IsOpenSource = IsOpenSource,
             Description = Description,
-            SystemPrompt = SystemPrompt
+            SystemPrompt = SystemPrompt,
+            Layout = Layout
         };
 
         await _stateService.SaveProfileAsync(ProfilePath, newProfile);

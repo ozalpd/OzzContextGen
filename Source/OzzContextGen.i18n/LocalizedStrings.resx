@@ -372,4 +372,16 @@
   <data name="PromptPresets" xml:space="preserve">
     <value>Prompt Presets</value>
   </data>
+  <data name="PackLayout" xml:space="preserve">
+    <value>Pack Layout:</value>
+  </data>
+  <data name="FilesOnly" xml:space="preserve">
+    <value>Files Only</value>
+  </data>
+  <data name="TreeOnly" xml:space="preserve">
+    <value>Structure Only</value>
+  </data>
+  <data name="TreeAndFiles" xml:space="preserve">
+    <value>Structure &amp; Files</value>
+  </data>
 </root>
