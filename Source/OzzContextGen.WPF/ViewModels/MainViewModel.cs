@@ -375,6 +375,7 @@ public class MainViewModel : AbstractViewModel
         IsOpenSource = profile.IsOpenSource;
         Description = profile.Description;
         SystemPrompt = profile.SystemPrompt;
+        LayoutHeader = profile.LayoutHeader;
         Layout = profile.Layout;
         AddRecentProject(ProfilePath);
 
