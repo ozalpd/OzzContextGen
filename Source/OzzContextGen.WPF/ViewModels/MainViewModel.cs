@@ -58,7 +58,7 @@ public class MainViewModel : AbstractViewModel
     }
 
     public RelayCommand BrowseSourceCommand { get; }
-    
+
     public RelayCommand OpenProfileCommand { get; }
     public RelayCommand AnalyzeChangesCommand { get; }
     public RelayCommand PackCommand { get; }
@@ -466,6 +466,7 @@ public class MainViewModel : AbstractViewModel
         _currentProfile.IsOpenSource = IsOpenSource;
         _currentProfile.Description = Description;
         _currentProfile.SystemPrompt = SystemPrompt;
+        _currentProfile.LayoutHeader = LayoutHeader;
         _currentProfile.Layout = Layout;
 
         // Triggering PackerEngine (async to avoid UI freezing)
@@ -528,6 +529,7 @@ public class MainViewModel : AbstractViewModel
             IsOpenSource = IsOpenSource,
             Description = Description,
             SystemPrompt = SystemPrompt,
+            LayoutHeader = LayoutHeader,
             Layout = Layout
         };
 
