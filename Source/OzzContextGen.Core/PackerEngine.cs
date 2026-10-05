@@ -105,6 +105,11 @@ public class PackerEngine
             sb.Append(GenerateProjectTree(codeFiles, layout == PackLayout.TreeOnly));
             sb.AppendLine("```");
         }
+        else if (!string.IsNullOrWhiteSpace(profile?.LayoutHeader))
+        {
+            sb.AppendLine();
+            sb.AppendLine($"## {profile.LayoutHeader.Trim()}");
+        }
 
         if (layout != PackLayout.TreeOnly)
         {
@@ -122,7 +127,7 @@ public class PackerEngine
                     continue; // Skip excluded files
 
 
-                sb.AppendLine($"## FILE: {relativePath}");
+                sb.AppendLine($"### FILE: {relativePath}");
 
                 if (!string.IsNullOrWhiteSpace(file.ContextNote))
                 {
