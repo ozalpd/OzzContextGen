@@ -1,4 +1,5 @@
 ﻿using OzzContextGen.Core.Models;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 
@@ -30,12 +31,16 @@ public class StateService
 
     /// <summary>
     /// Diffs <paramref name="currentDiskFiles"/> against <paramref name="oldProfile"/> and returns
-    /// a <see cref="FileChangeSummary"/> for every file (New, Modified, Unchanged, or Deleted).
+    /// a <see cref="FileChangeSummary"/> for every file (New, Modified, Unchanged, or Deleted),
+    /// along with the newest file write time observed on disk.
+    /// Change detection is content-based (SHA-256); file size and timestamp serve only as a
+    /// fast path to skip hashing untouched files.
     /// </summary>
-    public List<FileChangeSummary> AnalyzeChanges(string sourcePath, ContextStateProfile oldProfile, IEnumerable<string> currentDiskFiles)
+    public async Task<ChangeAnalysis> AnalyzeChangesAsync(string sourcePath, ContextStateProfile oldProfile, IEnumerable<string> currentDiskFiles)
     {
         var summaries = new List<FileChangeSummary>();
         var diskFileSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        DateTime latestWrite = default;
 
         // 1. Walk current disk files — classify as New or Modified/Unchanged
         foreach (var filePath in currentDiskFiles)
@@ -44,10 +49,28 @@ public class StateService
             string relativePath = Path.GetRelativePath(sourcePath, filePath);
             var fileInfo = new FileInfo(filePath);
 
+            if (fileInfo.LastWriteTime > latestWrite)
+                latestWrite = fileInfo.LastWriteTime;
+
             // File exists in old profile — check for changes
             if (oldProfile.TrackedFiles.TryGetValue(relativePath, out var oldState))
             {
-                bool isModified = fileInfo.LastWriteTime != oldState.LastWriteTime || fileInfo.Length != oldState.FileSize;
+                string hash;
+                bool isModified;
+
+                // Fast path: identical size + timestamp means the file was not touched since the last scan
+                if (!string.IsNullOrEmpty(oldState.FileHash)
+                    && fileInfo.Length == oldState.FileSize
+                    && fileInfo.LastWriteTime == oldState.LastWriteTime)
+                {
+                    hash = oldState.FileHash;
+                    isModified = false;
+                }
+                else
+                {
+                    hash = await ComputeFileHashAsync(filePath);
+                    isModified = hash != oldState.FileHash;
+                }
 
                 summaries.Add(new FileChangeSummary
                 {
@@ -57,6 +80,7 @@ public class StateService
                     ContextNote = oldState.ContextNote,
                     FileSize = fileInfo.Length,
                     LastWriteTime = fileInfo.LastWriteTime,
+                    FileHash = hash,
                     PackingMode = oldState.PackingMode // preserve previous user selection
                 });
             }
@@ -67,7 +91,10 @@ public class StateService
                 {
                     RelativePath = relativePath,
                     AbsolutePath = filePath,
-                    Change = ChangeType.New
+                    Change = ChangeType.New,
+                    FileSize = fileInfo.Length,
+                    LastWriteTime = fileInfo.LastWriteTime,
+                    FileHash = await ComputeFileHashAsync(filePath)
                 });
             }
         }
@@ -88,6 +115,13 @@ public class StateService
             }
         }
 
-        return summaries;
+        return new ChangeAnalysis(summaries, latestWrite);
+    }
+
+    private static async Task<string> ComputeFileHashAsync(string filePath)
+    {
+        await using var stream = File.OpenRead(filePath);
+        byte[] hash = await SHA256.HashDataAsync(stream);
+        return Convert.ToHexString(hash);
     }
 }

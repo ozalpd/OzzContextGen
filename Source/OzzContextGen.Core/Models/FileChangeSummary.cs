@@ -12,6 +12,7 @@ public record FileChangeSummary : FileContextEntry
         {
             RelativePath = this.RelativePath,
             LastWriteTime = this.LastWriteTime,
+            FileHash = this.FileHash,
             FileSize = this.FileSize,
             PackingMode = this.PackingMode,
             ContextNote = this.ContextNote

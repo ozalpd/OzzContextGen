@@ -23,6 +23,7 @@ public class MainViewModel : AbstractViewModel
     private readonly PackerEngine _packerEngine;
     private readonly StateService _stateService;
     private ContextStateProfile _currentProfile = new();
+    private DateTime _latestSourceWriteAt;
     private ReleaseSource _releaseSource = new ReleaseSource();
 
     public MainViewModel()
@@ -421,9 +422,10 @@ public class MainViewModel : AbstractViewModel
         var codeCrawler = new CodeCrawler(suffixes, profile.ExcludedFolders);
         var csFiles = codeCrawler.GetCodeFiles(ResolvedSourcePath).ToList();
 
-        var changes = _stateService.AnalyzeChanges(ResolvedSourcePath, profile, csFiles);
+        var analysis = await _stateService.AnalyzeChangesAsync(ResolvedSourcePath, profile, csFiles);
+        _latestSourceWriteAt = analysis.LatestSourceWriteAt;
 
-        foreach (var change in changes)
+        foreach (var change in analysis.Changes)
         {
             TrackedFiles.Add(new FileChangeViewModel(change));
         }
@@ -521,6 +523,7 @@ public class MainViewModel : AbstractViewModel
         {
             ProfileName = _currentProfile.ProfileName,
             TargetSourcePath = SourcePath,
+            LatestSourceWriteAt = _latestSourceWriteAt != default ? _latestSourceWriteAt : _currentProfile.LatestSourceWriteAt,
             LastPackedAt = isPacking ? DateTime.Now : _currentProfile.LastPackedAt,
             TrackedFiles = updatedTrackedFiles,
             SelectedSuffixes = _currentProfile.SelectedSuffixes,

@@ -22,10 +22,11 @@ Source/
 │   │   ├── EnumExtensions.cs          # Extension methods on Enum: GetDisplayValue, GetAttribute<T>, GetValues<T>, GetOrderedValues<T>, GetDisplayOrder; includes EnumValueItem<T>
 │   │   └── FileExtensions.cs          # ToFileSize extension on int/long (Bytes / KB / MB / GB)
 │   └── Models/
-│       ├── ContextStateProfile.cs     # Root profile record; includes TrackedFiles, ExcludedFolders, metadata & prompts
+│       ├── ChangeAnalysis.cs          # AnalyzeChangesAsync result: List<FileChangeSummary> + LatestSourceWriteAt
+│       ├── ContextStateProfile.cs     # Root profile record; includes TrackedFiles, ExcludedFolders, LatestSourceWriteAt, metadata & prompts
 │       ├── Enums.cs                   # ChangeType (New/Modified/Unchanged/Deleted) + FileInclusionMode (FullPack/MetadataOnly/Excluded)
 │       ├── FileChangeSummary.cs       # Diff result record; inherits FileContextEntry
-│       ├── FileContextEntry.cs        # Per-file metadata: RelativePath, LastWriteTime, FileSize, ContextNote, InclusionMode (lazy-defaults by size)
+│       ├── FileContextEntry.cs        # Per-file metadata: RelativePath, LastWriteTime, FileHash (SHA-256 hex, authoritative change detector), FileSize, ContextNote, PackingMode (lazy-defaults by size)
 │       ├── SourceLanguage.cs          # Record: Suffix, MarkdownFence, comment delimiters, XmlDocPrefix
 │       ├── SourceLanguages.cs         # Static registry of 41 built-in SourceLanguage definitions
 │       └── TokenEstimate.cs           # Heuristic token breakdown record (Ascii, Extended Latin, CJK, Other)
@@ -88,7 +89,7 @@ Source/
 - Single Markdown output with per-file fenced code blocks; fence language resolved dynamically via `SourceLanguages.TryGet` (`PackerEngine`)
 - Profile-aware `PackerEngine` overload — uses `ContextStateProfile.SelectedSuffixes` (falls back to all registered suffixes when empty)
 - `.ctxgen` JSON profile files with `SelectedSuffixes` persisting the user’s file-type selection between sessions (`StateService`, `ContextStateProfile`)
-- File-change diff analysis: New / Modified / Unchanged / Deleted (`StateService.AnalyzeChanges`); per-file state stored as `FileContextEntry` (includes `ContextNote` for optional per-file annotations)
+- File-change diff analysis: New / Modified / Unchanged / Deleted (`StateService.AnalyzeChangesAsync`); content-based via SHA-256 `FileHash` (size + timestamp are only a fast path); `LatestSourceWriteAt` on the profile records the newest file write time observed, for comparison with `LastPackedAt`; per-file state stored as `FileContextEntry` (includes `ContextNote` for optional per-file annotations)
 - WPF MVVM GUI: browse source, open/save profile, analyze changes, pack context; round-trips `ProfileName` and `SelectedSuffixes` on save
 - Per-profile folder exclusions with dialog editor (`ExcludedFoldersEdit`) and fallback defaults (`CtxDefaults`)
 - Profile metadata & system prompts: `RepoUrl`, `License`, `IsOpenSource`, `Description`, and `SystemPrompt` support with sample prompt presets

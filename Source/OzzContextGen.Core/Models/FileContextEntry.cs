@@ -9,8 +9,11 @@ public record FileContextEntry
     /// <summary>Path relative to the scanned root directory.</summary>
     public string RelativePath { get; init; } = string.Empty;
 
-    /// <summary>Last modified timestamp; used for change detection.</summary>
+    /// <summary>Last modified timestamp; used only as a fast-path hint and to compute <see cref="ContextStateProfile.LatestSourceWriteAt"/>.</summary>
     public DateTime LastWriteTime { get; init; }
+
+    /// <summary>SHA-256 hex digest of the file content; the authoritative change-detection value.</summary>
+    public string FileHash { get; set; } = string.Empty;
 
     /// <summary>File size in bytes; drives the default <see cref="PackingMode"/>.</summary>
     public long FileSize { get; init; }

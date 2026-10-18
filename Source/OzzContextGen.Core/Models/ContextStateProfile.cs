@@ -14,6 +14,13 @@ public record ContextStateProfile
     public string TargetSourcePath { get; init; } = string.Empty;
 
     /// <summary>
+    /// Newest file write time observed during the last change analysis.
+    /// Compare with <see cref="LastPackedAt"/> to tell whether the source tree
+    /// contains changes newer than the last pack.
+    /// </summary>
+    public DateTime LatestSourceWriteAt { get; init; }
+
+    /// <summary>
     /// Timestamp of the most recent successful pack operation.
     /// A default (zero) value indicates the profile has never been packed.
     /// </summary>

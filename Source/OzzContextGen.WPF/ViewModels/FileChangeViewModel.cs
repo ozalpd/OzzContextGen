@@ -104,6 +104,7 @@ namespace OzzContextGen.WPF.ViewModels
             {
                 RelativePath = RelativePath,
                 LastWriteTime = File.GetLastWriteTime(AbsolutePath),
+                FileHash = _summary.FileHash,
                 FileSize = _summary.Change != Core.Models.ChangeType.Deleted
                          ? new FileInfo(AbsolutePath).Length : 0,
                 PackingMode = PackingMode,
