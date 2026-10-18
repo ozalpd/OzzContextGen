@@ -573,24 +573,20 @@ public class MainViewModel : AbstractViewModel
 
     private void ShowMarkdown(string markdownContent)
     {
-        if (markdownView == null)
+        var view = new MarkdownView
         {
-            markdownView = new MarkdownView();
-            markdownView.GenerateToc = true;
-        }
-        else if (markdownView.WindowState == WindowState.Minimized)
-        {
-            markdownView.WindowState = WindowState.Normal;
-        }
-
-        markdownView.LoadMarkdown(markdownContent);
-        markdownView.Show();
+            GenerateToc = true
+        };
+        view.LoadMarkdown(markdownContent);
+        view.Show();
     }
-    MarkdownView markdownView;
 
     public void Shutdown()
     {
-        markdownView?.Close();
+        foreach (var view in System.Windows.Application.Current.Windows.OfType<MarkdownView>().ToList())
+        {
+            view.Close();
+        }
     }
 
     public bool CanToggleAllSelected() => TrackedFiles.Count > 0;
