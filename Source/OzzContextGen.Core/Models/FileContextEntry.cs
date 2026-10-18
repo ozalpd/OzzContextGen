@@ -59,5 +59,16 @@ public record FileContextEntry
         return FileSize < 32678 ? PackingMode.FullPack : PackingMode.MetadataOnly;
     }
 
-    private static readonly (string, string)[] nonFullPacks = new (string, string)[] { (".resx", "This file contains localizable resources.") };
+    private static readonly (string, string)[] nonFullPacks = new (string, string)[]
+    {
+        (".resx", "This file contains localizable resources."),
+        (".Designer.cs", "This file is auto-generated and contains designer code."),
+        (".md", "This file is a markdown document and may not contain source code."),
+        //(".json", "This file is a JSON configuration or data file."),
+        //(".xml", "This file is an XML configuration or data file."),
+        //(".config", "This file is a configuration file."),
+        //(".yml", "This file is a YAML configuration or data file."),
+        //(".yaml", "This file is a YAML configuration or data file."),
+        //(".txt", "This file is a plain text document."),
+    };
 }
