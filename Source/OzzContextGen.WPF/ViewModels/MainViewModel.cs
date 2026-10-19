@@ -250,6 +250,14 @@ public class MainViewModel : AbstractViewModel
                 ProfilePath = value;
                 _ = OpenProfile(false);
             }
+            else if (!string.IsNullOrEmpty(value))
+            {
+                System.Windows.MessageBox.Show(string.Format(LocalizedStrings.ProjectFileNotExist, value),
+                                LocalizedStrings.ProjectFileNotFound, MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+                RecentProjects.Remove(value);
+                RaisePropertyChanged(nameof(RecentProjects));
+            }
         }
     }
 

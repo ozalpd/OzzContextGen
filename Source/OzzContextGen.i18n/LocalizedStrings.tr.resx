@@ -384,4 +384,10 @@
   <data name="TreeAndFiles" xml:space="preserve">
     <value>Dizin Yapısı ve Dosyalar</value>
   </data>
+  <data name="ProjectFileNotExist" xml:space="preserve">
+    <value>Proje dosyası '{0}' mevcut değil.</value>
+  </data>
+  <data name="ProjectFileNotFound" xml:space="preserve">
+    <value>Proje Dosyası Bulunamadı</value>
+  </data>
 </root>

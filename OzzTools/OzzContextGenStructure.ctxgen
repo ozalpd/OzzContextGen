@@ -1,7 +1,8 @@
 ﻿{
   "ProfileName": "Default Profile",
   "TargetSourcePath": "..\\..\\OzzContextGen",
-  "LastPackedAt": "2026-10-18T16:41:12.5336431+03:00",
+  "LatestSourceWriteAt": "2026-10-19T08:09:18.0891099+03:00",
+  "LastPackedAt": "2026-10-19T08:09:54.8399979+03:00",
   "RepoUrl": "https://github.com/ozalpd/OzzContextGen",
   "License": "MIT",
   "IsOpenSource": null,
@@ -29,14 +30,16 @@
   "TrackedFiles": {
     "AGENTS.md": {
       "RelativePath": "AGENTS.md",
-      "LastWriteTime": "2026-09-25T22:22:11.1031879+03:00",
-      "FileSize": 8840,
+      "LastWriteTime": "2026-10-18T20:28:47.9513439+03:00",
+      "FileHash": "60AFA7020B8245058AF2CE021E18BBAD4D4007C624B7C842FA10DBD2BC3F4C6C",
+      "FileSize": 9239,
       "ContextNote": "This file is a markdown document and may not contain source code.",
       "PackingMode": 10
     },
     "CHANGELOG.md": {
       "RelativePath": "CHANGELOG.md",
       "LastWriteTime": "2026-09-28T20:54:00.785829+03:00",
+      "FileHash": "B8B9FEC3841A071F2EC00EE7F76B4958F5E770CED869C87E8F20504C8BA20C4C",
       "FileSize": 12094,
       "ContextNote": "This file is a markdown document and may not contain source code.",
       "PackingMode": 10
@@ -44,34 +47,39 @@
     "README.md": {
       "RelativePath": "README.md",
       "LastWriteTime": "2026-09-28T20:54:11.4476582+03:00",
+      "FileHash": "E4CEC465E4FD75D39FD63AD18AFBB5D78140D69ED5594520D0EC219655893F28",
       "FileSize": 10187,
       "ContextNote": "This file is a markdown document and may not contain source code.",
       "PackingMode": 10
     },
     ".github\\copilot-instructions.md": {
       "RelativePath": ".github\\copilot-instructions.md",
-      "LastWriteTime": "2026-09-28T20:54:16.6349432+03:00",
-      "FileSize": 7148,
+      "LastWriteTime": "2026-10-18T20:28:47.9667208+03:00",
+      "FileHash": "A8C3274F82BC43E40F443B343821176F8DAB77B0986AF07226F578E075D7B1DE",
+      "FileSize": 7429,
       "ContextNote": "This file is a markdown document and may not contain source code.",
       "PackingMode": 10
     },
     "OzzTools\\OzzContextGen.ctxgen": {
       "RelativePath": "OzzTools\\OzzContextGen.ctxgen",
-      "LastWriteTime": "2026-10-18T16:37:54.0266068+03:00",
-      "FileSize": 35475,
+      "LastWriteTime": "2026-10-19T08:09:18.0891099+03:00",
+      "FileHash": "DDDD2706AC76B2958AE6B03130D55D1277FFAB1B9E319D2C7853A6A25F776349",
+      "FileSize": 45991,
       "ContextNote": "OzzContextGen file for source code pack",
       "PackingMode": 10
     },
     "OzzTools\\OzzContextGenStructure.ctxgen": {
       "RelativePath": "OzzTools\\OzzContextGenStructure.ctxgen",
-      "LastWriteTime": "2026-10-18T16:40:43.0004325+03:00",
-      "FileSize": 37479,
+      "LastWriteTime": "2026-10-19T06:57:33.5167473+03:00",
+      "FileHash": "9091FBCD6A5DFD7555215C1E9D2730F6115910BF8352639B28F0BCA63EB76596",
+      "FileSize": 48531,
       "ContextNote": "OzzContextGen file for structure of this repository",
       "PackingMode": 10
     },
     "Source\\OzzContextGen.slnx": {
       "RelativePath": "Source\\OzzContextGen.slnx",
       "LastWriteTime": "2026-07-14T18:23:08.6970894+03:00",
+      "FileHash": "5365CE6BC47A2DF1F657F4829FDFC4A3E9525FD1CE280271EBAFDD279879487A",
       "FileSize": 639,
       "ContextNote": "OzzContextGen file for source code pack",
       "PackingMode": 20
@@ -79,6 +87,7 @@
     "Source\\OzzContextGen.CLI\\OzzContextGen.CLI.csproj": {
       "RelativePath": "Source\\OzzContextGen.CLI\\OzzContextGen.CLI.csproj",
       "LastWriteTime": "2026-06-27T21:51:38.0784271+03:00",
+      "FileHash": "30E3629C4A43FC43B33CB16088EDAE2AAA794E58B98F427893C951FB636FA0D2",
       "FileSize": 560,
       "ContextNote": "",
       "PackingMode": 20
@@ -86,6 +95,7 @@
     "Source\\OzzContextGen.CLI\\Program.cs": {
       "RelativePath": "Source\\OzzContextGen.CLI\\Program.cs",
       "LastWriteTime": "2026-09-25T22:27:58.2330943+03:00",
+      "FileHash": "3A2A1B4FAB3B9C5177030DAEDFD9D31DD6566BF3456F5ACCC126798B2AAB4FE0",
       "FileSize": 6155,
       "ContextNote": "Entry for the CLI",
       "PackingMode": 20
@@ -93,6 +103,7 @@
     "Source\\OzzContextGen.CLI\\Properties\\launchSettings.json": {
       "RelativePath": "Source\\OzzContextGen.CLI\\Properties\\launchSettings.json",
       "LastWriteTime": "2026-06-15T21:02:21.7952296+03:00",
+      "FileHash": "44DBA83AD7B710D27683B909E7108910AB8F947A23FB4FAC1982B57B63528AA2",
       "FileSize": 180,
       "ContextNote": "",
       "PackingMode": 20
@@ -100,6 +111,7 @@
     "Source\\OzzContextGen.Core\\OzzContextGen.Core.csproj": {
       "RelativePath": "Source\\OzzContextGen.Core\\OzzContextGen.Core.csproj",
       "LastWriteTime": "2026-07-22T19:34:07.2590687+03:00",
+      "FileHash": "AB14B14361828DDFC62D8AFC9D31AE0F55804558C3F2E38E9612936233B76395",
       "FileSize": 352,
       "ContextNote": "",
       "PackingMode": 20
@@ -107,6 +119,7 @@
     "Source\\OzzContextGen.Core\\CodeCrawler.cs": {
       "RelativePath": "Source\\OzzContextGen.Core\\CodeCrawler.cs",
       "LastWriteTime": "2026-09-27T19:13:55.6089064+03:00",
+      "FileHash": "7ECD5003ED9D91EFFB0DF5083383CECBEA8327A8037EFED96786C578C410AC42",
       "FileSize": 4597,
       "ContextNote": "",
       "PackingMode": 20
@@ -114,6 +127,7 @@
     "Source\\OzzContextGen.Core\\CtxDefaults.cs": {
       "RelativePath": "Source\\OzzContextGen.Core\\CtxDefaults.cs",
       "LastWriteTime": "2026-09-27T19:21:28.5609113+03:00",
+      "FileHash": "AA506C2B09EE3813CB981FBD1441267C9B04D9E32B33F8F249F643FE0DA7F629",
       "FileSize": 2829,
       "ContextNote": "",
       "PackingMode": 20
@@ -121,20 +135,23 @@
     "Source\\OzzContextGen.Core\\PackerEngine.cs": {
       "RelativePath": "Source\\OzzContextGen.Core\\PackerEngine.cs",
       "LastWriteTime": "2026-10-05T22:51:31.3236353+03:00",
+      "FileHash": "4479F8863D64BE1E93BDE265C223FEB39B6DB5469BA0DDA481AA921CBB9F9D5E",
       "FileSize": 10454,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzContextGen.Core\\StateService.cs": {
       "RelativePath": "Source\\OzzContextGen.Core\\StateService.cs",
-      "LastWriteTime": "2026-06-29T14:12:02.4208877+03:00",
-      "FileSize": 3903,
+      "LastWriteTime": "2026-10-18T20:28:11.160645+03:00",
+      "FileHash": "6245AC399F9FBD577F036FE4A63671A70A8149191C8624AAC392655D93CD5144",
+      "FileSize": 5377,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzContextGen.Core\\TokenEstimator.cs": {
       "RelativePath": "Source\\OzzContextGen.Core\\TokenEstimator.cs",
       "LastWriteTime": "2026-08-31T22:31:25.3587278+03:00",
+      "FileHash": "D78EA6DEDFAC33E2EB2ED5177A54134E4FB3DBBE981B46986F01D945EEEB374F",
       "FileSize": 1793,
       "ContextNote": "",
       "PackingMode": 20
@@ -142,6 +159,7 @@
     "Source\\OzzContextGen.Core\\Helpers\\EnumExtensions.cs": {
       "RelativePath": "Source\\OzzContextGen.Core\\Helpers\\EnumExtensions.cs",
       "LastWriteTime": "2026-06-29T13:05:50.6161427+03:00",
+      "FileHash": "22080F0093ADBF415790BC73233CBA5847A1146A4ADF152D354E316AFC9874CC",
       "FileSize": 5527,
       "ContextNote": "",
       "PackingMode": 20
@@ -149,41 +167,55 @@
     "Source\\OzzContextGen.Core\\Helpers\\FileExtensions.cs": {
       "RelativePath": "Source\\OzzContextGen.Core\\Helpers\\FileExtensions.cs",
       "LastWriteTime": "2026-06-27T19:05:10.0668398+03:00",
+      "FileHash": "8FD3859D8C31845673422153B91DCF8994BC4C72F0482FC98B0A4BDBCCA1704A",
       "FileSize": 776,
+      "ContextNote": "",
+      "PackingMode": 20
+    },
+    "Source\\OzzContextGen.Core\\Models\\ChangeAnalysis.cs": {
+      "RelativePath": "Source\\OzzContextGen.Core\\Models\\ChangeAnalysis.cs",
+      "LastWriteTime": "2026-10-18T20:27:27.5373374+03:00",
+      "FileHash": "743F7858D10D94E3F165EDD200740A44349A8216AE0B7443083B0BBBDC6F9693",
+      "FileSize": 314,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzContextGen.Core\\Models\\ContextStateProfile.cs": {
       "RelativePath": "Source\\OzzContextGen.Core\\Models\\ContextStateProfile.cs",
-      "LastWriteTime": "2026-09-28T20:12:54.6977611+03:00",
-      "FileSize": 3160,
+      "LastWriteTime": "2026-10-18T20:27:27.4860127+03:00",
+      "FileHash": "4731A5976E10C9675FD5FF6692F0C09A0360153902B370E3691EA7CA5689AC27",
+      "FileSize": 3464,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzContextGen.Core\\Models\\Enums.cs": {
       "RelativePath": "Source\\OzzContextGen.Core\\Models\\Enums.cs",
       "LastWriteTime": "2026-09-28T17:05:36.2681717+03:00",
+      "FileHash": "E86F153630B4A94E946CB418FE0FBE6C279176C56ECFB5A83459D22C019DF60E",
       "FileSize": 2151,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzContextGen.Core\\Models\\FileChangeSummary.cs": {
       "RelativePath": "Source\\OzzContextGen.Core\\Models\\FileChangeSummary.cs",
-      "LastWriteTime": "2026-06-29T14:07:47.179255+03:00",
-      "FileSize": 676,
+      "LastWriteTime": "2026-10-18T20:27:27.7546896+03:00",
+      "FileHash": "899404A40DE4386A180A8D928A7033237226C4034AF1E21C55A1065CC7DCE121",
+      "FileSize": 715,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzContextGen.Core\\Models\\FileContextEntry.cs": {
       "RelativePath": "Source\\OzzContextGen.Core\\Models\\FileContextEntry.cs",
-      "LastWriteTime": "2026-10-06T21:11:53.1504482+03:00",
-      "FileSize": 2832,
+      "LastWriteTime": "2026-10-18T20:27:27.6603898+03:00",
+      "FileHash": "B07AEECD7ABC9CD574B9F797E0328F6D6AE6C7EA0F45CA726BE73F5568850C49",
+      "FileSize": 3075,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzContextGen.Core\\Models\\SourceLanguage.cs": {
       "RelativePath": "Source\\OzzContextGen.Core\\Models\\SourceLanguage.cs",
       "LastWriteTime": "2026-06-27T21:46:13.404276+03:00",
+      "FileHash": "A5251237F11FEDBE83A745E9B3A6AC6DAC61F24124D72516968F24A04849EA37",
       "FileSize": 1412,
       "ContextNote": "",
       "PackingMode": 20
@@ -191,6 +223,7 @@
     "Source\\OzzContextGen.Core\\Models\\SourceLanguages.cs": {
       "RelativePath": "Source\\OzzContextGen.Core\\Models\\SourceLanguages.cs",
       "LastWriteTime": "2026-09-27T19:21:43.1108121+03:00",
+      "FileHash": "344C0C8C5EDCE152B57A2D25E352D5B69E38406A50C76AE15D2E609B376E6864",
       "FileSize": 11704,
       "ContextNote": "",
       "PackingMode": 20
@@ -198,6 +231,7 @@
     "Source\\OzzContextGen.Core\\Models\\TokenEstimate.cs": {
       "RelativePath": "Source\\OzzContextGen.Core\\Models\\TokenEstimate.cs",
       "LastWriteTime": "2026-08-31T22:31:25.3295097+03:00",
+      "FileHash": "88147AB06F1FFB7885E5F27AAC9A9E832D1DCF46170A7D89428648FA48F51596",
       "FileSize": 335,
       "ContextNote": "",
       "PackingMode": 20
@@ -205,34 +239,39 @@
     "Source\\OzzContextGen.i18n\\OzzContextGen.i18n.csproj": {
       "RelativePath": "Source\\OzzContextGen.i18n\\OzzContextGen.i18n.csproj",
       "LastWriteTime": "2026-06-29T14:51:43.4030202+03:00",
+      "FileHash": "F10FB36A83D0BD63AE69064681C080929FA87938E5AC8BC1CC1BC7DFA9F58B9F",
       "FileSize": 680,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzContextGen.i18n\\LocalizedStrings.Designer.cs": {
       "RelativePath": "Source\\OzzContextGen.i18n\\LocalizedStrings.Designer.cs",
-      "LastWriteTime": "2026-09-28T17:05:29.6400202+03:00",
-      "FileSize": 30488,
+      "LastWriteTime": "2026-10-19T08:02:03.4756591+03:00",
+      "FileHash": "99A8CBA09F7CDD4C30179D57CFA8CDAB0AF65D22B9CD608B960B9899C2D97EEC",
+      "FileSize": 31256,
       "ContextNote": "This file is auto-generated and contains designer code.",
       "PackingMode": 10
     },
     "Source\\OzzContextGen.i18n\\LocalizedStrings.resx": {
       "RelativePath": "Source\\OzzContextGen.i18n\\LocalizedStrings.resx",
-      "LastWriteTime": "2026-09-28T16:57:59.3809386+03:00",
-      "FileSize": 15320,
+      "LastWriteTime": "2026-10-19T08:02:03.4546775+03:00",
+      "FileHash": "0BC3BF9CEBCEEE9061606A92649B9330DA578AB5F4F00649F5477B457DCB5973",
+      "FileSize": 15552,
       "ContextNote": "This file contains localizable resources.",
       "PackingMode": 10
     },
     "Source\\OzzContextGen.i18n\\LocalizedStrings.tr.resx": {
       "RelativePath": "Source\\OzzContextGen.i18n\\LocalizedStrings.tr.resx",
-      "LastWriteTime": "2026-09-28T16:58:05.2980728+03:00",
-      "FileSize": 15636,
+      "LastWriteTime": "2026-10-19T08:01:58.3591418+03:00",
+      "FileHash": "4E2F62504E78D23ECAC170B3CB0D5B1732559B0E13B12DCE57DB4F8DC7F8D7A6",
+      "FileSize": 15877,
       "ContextNote": "This file contains localizable resources.",
       "PackingMode": 10
     },
     "Source\\OzzContextGen.WPF\\OzzContextGen.WPF.csproj": {
       "RelativePath": "Source\\OzzContextGen.WPF\\OzzContextGen.WPF.csproj",
       "LastWriteTime": "2026-08-08T20:24:02.6641172+03:00",
+      "FileHash": "15544A9CA680CD741D75B85602BCA343A70ED2E3F92BA810199B25CDEB4717BE",
       "FileSize": 967,
       "ContextNote": "",
       "PackingMode": 20
@@ -240,6 +279,7 @@
     "Source\\OzzContextGen.WPF\\App.xaml": {
       "RelativePath": "Source\\OzzContextGen.WPF\\App.xaml",
       "LastWriteTime": "2026-08-05T09:29:43.1818676+03:00",
+      "FileHash": "06C8145EF4B83A02B529BAD5BA0D52EF6DB85B34D92C7694995C6539E32D66BC",
       "FileSize": 816,
       "ContextNote": "",
       "PackingMode": 20
@@ -247,6 +287,7 @@
     "Source\\OzzContextGen.WPF\\App.xaml.cs": {
       "RelativePath": "Source\\OzzContextGen.WPF\\App.xaml.cs",
       "LastWriteTime": "2026-08-05T09:34:15.3399397+03:00",
+      "FileHash": "E01D2D2E9CD4A266A30118B898D06DEB9D5596511A99C8A6D31D595F4374309E",
       "FileSize": 1071,
       "ContextNote": "",
       "PackingMode": 20
@@ -254,6 +295,7 @@
     "Source\\OzzContextGen.WPF\\AssemblyInfo.cs": {
       "RelativePath": "Source\\OzzContextGen.WPF\\AssemblyInfo.cs",
       "LastWriteTime": "2026-06-15T13:44:27.4651348+03:00",
+      "FileHash": "1D31ED3C7E4AAF76FABB82E330208385CB70685E9B7C577764493A4D169BCA61",
       "FileSize": 644,
       "ContextNote": "",
       "PackingMode": 20
@@ -261,6 +303,7 @@
     "Source\\OzzContextGen.WPF\\MainWindow.xaml": {
       "RelativePath": "Source\\OzzContextGen.WPF\\MainWindow.xaml",
       "LastWriteTime": "2026-10-04T17:04:11.700988+03:00",
+      "FileHash": "65177FD6B7957D4E14DA2FABE1D007D58E4CA89DB3982B16AB13CBA6B189D696",
       "FileSize": 33655,
       "ContextNote": "",
       "PackingMode": 20
@@ -268,6 +311,7 @@
     "Source\\OzzContextGen.WPF\\MainWindow.xaml.cs": {
       "RelativePath": "Source\\OzzContextGen.WPF\\MainWindow.xaml.cs",
       "LastWriteTime": "2026-09-25T22:22:11.1071879+03:00",
+      "FileHash": "E6D63811672B5A15EB246B1D0E0187E81302BFF41547BB69630C07D8262322A1",
       "FileSize": 2940,
       "ContextNote": "",
       "PackingMode": 20
@@ -275,6 +319,7 @@
     "Source\\OzzContextGen.WPF\\Commands\\RelayCommand.cs": {
       "RelativePath": "Source\\OzzContextGen.WPF\\Commands\\RelayCommand.cs",
       "LastWriteTime": "2026-07-22T19:00:15.1958183+03:00",
+      "FileHash": "B85843796025652DE34BB13F2C8AA701DB29999E19C8A9CE4C9ED25C52E2E367",
       "FileSize": 863,
       "ContextNote": "",
       "PackingMode": 20
@@ -282,6 +327,7 @@
     "Source\\OzzContextGen.WPF\\Converters\\FileSizeToColor.cs": {
       "RelativePath": "Source\\OzzContextGen.WPF\\Converters\\FileSizeToColor.cs",
       "LastWriteTime": "2026-06-30T21:53:44.191444+03:00",
+      "FileHash": "4ACF3F7E7F9EAD91EE38AEC73A8694609F1555A584D17FF3849218E0C6D8BE19",
       "FileSize": 2781,
       "ContextNote": "",
       "PackingMode": 20
@@ -289,6 +335,7 @@
     "Source\\OzzContextGen.WPF\\Converters\\PackingModeToColor.cs": {
       "RelativePath": "Source\\OzzContextGen.WPF\\Converters\\PackingModeToColor.cs",
       "LastWriteTime": "2026-06-30T22:30:36.476821+03:00",
+      "FileHash": "D1E95FC75C0A87AE6B6B13BBB1BD45E51E66F1CD31C8D583B71DBE1E5682ED95",
       "FileSize": 1074,
       "ContextNote": "",
       "PackingMode": 20
@@ -296,6 +343,7 @@
     "Source\\OzzContextGen.WPF\\Helpers\\BindingProxy.cs": {
       "RelativePath": "Source\\OzzContextGen.WPF\\Helpers\\BindingProxy.cs",
       "LastWriteTime": "2026-07-22T19:00:15.1969957+03:00",
+      "FileHash": "8D89AA9D7D3200BDE9353B81494DEEC1F3D267999C89CD3DB88719D5C4C010A0",
       "FileSize": 660,
       "ContextNote": "",
       "PackingMode": 20
@@ -303,6 +351,7 @@
     "Source\\OzzContextGen.WPF\\Models\\AppSettings.cs": {
       "RelativePath": "Source\\OzzContextGen.WPF\\Models\\AppSettings.cs",
       "LastWriteTime": "2026-07-27T15:18:55.0308532+03:00",
+      "FileHash": "F4B9C5612CD8E5395565B3BE36587BDC8641D773849B8665D12E284276824F6D",
       "FileSize": 2544,
       "ContextNote": "",
       "PackingMode": 20
@@ -310,6 +359,7 @@
     "Source\\OzzContextGen.WPF\\Models\\ReleaseSource.cs": {
       "RelativePath": "Source\\OzzContextGen.WPF\\Models\\ReleaseSource.cs",
       "LastWriteTime": "2026-08-04T14:48:39.6663917+03:00",
+      "FileHash": "25561440849898F95A3A8EC6D834F6BE04A7E8C924FEF71F0E7F39DE61ED0F04",
       "FileSize": 417,
       "ContextNote": "",
       "PackingMode": 20
@@ -317,6 +367,7 @@
     "Source\\OzzContextGen.WPF\\Resources\\Converters.xaml": {
       "RelativePath": "Source\\OzzContextGen.WPF\\Resources\\Converters.xaml",
       "LastWriteTime": "2026-06-30T22:33:02.2040201+03:00",
+      "FileHash": "E6B761FF052D30AEFDAA0BF6F81F07A230977B72E47EECC845FFE0C3E948F75B",
       "FileSize": 465,
       "ContextNote": "",
       "PackingMode": 20
@@ -324,6 +375,7 @@
     "Source\\OzzContextGen.WPF\\Resources\\Styles.xaml": {
       "RelativePath": "Source\\OzzContextGen.WPF\\Resources\\Styles.xaml",
       "LastWriteTime": "2026-06-30T22:29:20.196788+03:00",
+      "FileHash": "FF23DCE0A656CC72293A11A437CBC668E2CDF8E1FB5D397CC2EE5943573D780B",
       "FileSize": 9684,
       "ContextNote": "",
       "PackingMode": 20
@@ -331,27 +383,31 @@
     "Source\\OzzContextGen.WPF\\ViewModels\\ExcludedFoldersEditVM.cs": {
       "RelativePath": "Source\\OzzContextGen.WPF\\ViewModels\\ExcludedFoldersEditVM.cs",
       "LastWriteTime": "2026-09-25T19:19:14.8604531+03:00",
+      "FileHash": "FC69B68C84B71E5172944A49FBF00B90767395990D739A8590D9EB6D1D0CEFEA",
       "FileSize": 3514,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzContextGen.WPF\\ViewModels\\FileChangeViewModel.cs": {
       "RelativePath": "Source\\OzzContextGen.WPF\\ViewModels\\FileChangeViewModel.cs",
-      "LastWriteTime": "2026-08-31T22:59:37.7096233+03:00",
-      "FileSize": 3610,
+      "LastWriteTime": "2026-10-18T20:27:27.7746877+03:00",
+      "FileHash": "990B5ED22ED3CB22B19CB52DB6AED9DF20F74B2BABF0A0A06AFFAF947CFC1EBE",
+      "FileSize": 3657,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzContextGen.WPF\\ViewModels\\MainViewModel.cs": {
       "RelativePath": "Source\\OzzContextGen.WPF\\ViewModels\\MainViewModel.cs",
-      "LastWriteTime": "2026-10-18T15:57:08.5951513+03:00",
-      "FileSize": 22870,
+      "LastWriteTime": "2026-10-19T08:05:00.8232658+03:00",
+      "FileHash": "467FE846D84A2202A379FCD312A807758FB859FE84C90CA0CF88E5704A384057",
+      "FileSize": 23577,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzContextGen.WPF\\Views\\ExcludedFoldersEdit.xaml": {
       "RelativePath": "Source\\OzzContextGen.WPF\\Views\\ExcludedFoldersEdit.xaml",
       "LastWriteTime": "2026-09-25T19:45:43.5633025+03:00",
+      "FileHash": "D6AC5571D98920072994798C856A6BDE2B5B9B219478A4DCDFAB5D591704B042",
       "FileSize": 4598,
       "ContextNote": "",
       "PackingMode": 20
@@ -359,6 +415,7 @@
     "Source\\OzzContextGen.WPF\\Views\\ExcludedFoldersEdit.xaml.cs": {
       "RelativePath": "Source\\OzzContextGen.WPF\\Views\\ExcludedFoldersEdit.xaml.cs",
       "LastWriteTime": "2026-09-25T19:19:20.3017515+03:00",
+      "FileHash": "D1D223F64D0135019E8EEBC0945A1BC8E25078FD5189430C40BFF8FCEE8E0F3D",
       "FileSize": 1055,
       "ContextNote": "",
       "PackingMode": 20
@@ -366,6 +423,7 @@
     "Source\\OzzContextGen.WPF\\Views\\MarkdownView.xaml": {
       "RelativePath": "Source\\OzzContextGen.WPF\\Views\\MarkdownView.xaml",
       "LastWriteTime": "2026-07-14T20:20:42.445438+03:00",
+      "FileHash": "69B9E1F0FAC1B0556F08065888FB96271811DB6F094C58945989A015684D02B7",
       "FileSize": 585,
       "ContextNote": "",
       "PackingMode": 20
@@ -373,6 +431,7 @@
     "Source\\OzzContextGen.WPF\\Views\\MarkdownView.xaml.cs": {
       "RelativePath": "Source\\OzzContextGen.WPF\\Views\\MarkdownView.xaml.cs",
       "LastWriteTime": "2026-07-17T21:32:22.8176184+03:00",
+      "FileHash": "E4BE7DEE95080B41B45C7538CFAD2F71328A99EC84E64FEE111BFE85D501773E",
       "FileSize": 1874,
       "ContextNote": "",
       "PackingMode": 20
@@ -380,20 +439,23 @@
     "Source\\OzzMarkdown\\OzzMarkdown.slnx": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.slnx",
       "LastWriteTime": "2026-07-26T12:05:36.5250215+03:00",
+      "FileHash": "165EF7A2BD345EEB5AFBC3BC70C38502657B066F739A7EB3128C96CEB78E714D",
       "FileSize": 713,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzMarkdown\\CHANGELOG.md": {
       "RelativePath": "Source\\OzzMarkdown\\CHANGELOG.md",
-      "LastWriteTime": "2026-09-22T22:30:29.907515+03:00",
-      "FileSize": 6362,
+      "LastWriteTime": "2026-10-19T07:56:39.1673734+03:00",
+      "FileHash": "FB144ED42E20DBB404626F9AFB30825CD73950D819725CF507975C2EBC52CC76",
+      "FileSize": 6568,
       "ContextNote": "This file is a markdown document and may not contain source code.",
       "PackingMode": 10
     },
     "Source\\OzzMarkdown\\README.md": {
       "RelativePath": "Source\\OzzMarkdown\\README.md",
       "LastWriteTime": "2026-09-22T22:30:39.501377+03:00",
+      "FileHash": "3621A113F9D22D68FF29256F39E824CB2CC54239FB4324637D7A567840F31C5A",
       "FileSize": 5878,
       "ContextNote": "This file is a markdown document and may not contain source code.",
       "PackingMode": 10
@@ -401,41 +463,47 @@
     "Source\\OzzMarkdown\\.github\\copilot-instructions.md": {
       "RelativePath": "Source\\OzzMarkdown\\.github\\copilot-instructions.md",
       "LastWriteTime": "2026-09-22T22:30:53.53873+03:00",
+      "FileHash": "99BC90D3CEA0E16F426490DD1308140E2F42E742C2FEE949C79CD8ECBE7D3BF3",
       "FileSize": 8868,
       "ContextNote": "This file is a markdown document and may not contain source code.",
       "PackingMode": 10
     },
     "Source\\OzzMarkdown\\Installers\\OzzMarkdown.Setup.iss": {
       "RelativePath": "Source\\OzzMarkdown\\Installers\\OzzMarkdown.Setup.iss",
-      "LastWriteTime": "2026-09-22T22:36:50.4112302+03:00",
-      "FileSize": 4842,
+      "LastWriteTime": "2026-10-19T07:34:39.2145466+03:00",
+      "FileHash": "F0DDDEBDFA0D36B3E0D0B91BEB45EA6E26C99634EDAB9132E0DA9335032E455E",
+      "FileSize": 4852,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzMarkdown\\Installers\\OzzMarkdown\\OzzMarkdown.WPF.deps.json": {
       "RelativePath": "Source\\OzzMarkdown\\Installers\\OzzMarkdown\\OzzMarkdown.WPF.deps.json",
-      "LastWriteTime": "2026-09-22T22:36:39.5317975+03:00",
-      "FileSize": 5416,
+      "LastWriteTime": "2026-10-19T07:26:43.3853595+03:00",
+      "FileHash": "A614DEFA0FB99C86B29AF51F937FF0429B48283B50146EEA7F09E4F32C44B111",
+      "FileSize": 5435,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzMarkdown\\Installers\\OzzMarkdown\\OzzMarkdown.WPF.runtimeconfig.json": {
       "RelativePath": "Source\\OzzMarkdown\\Installers\\OzzMarkdown\\OzzMarkdown.WPF.runtimeconfig.json",
-      "LastWriteTime": "2026-09-22T22:36:39.5476879+03:00",
+      "LastWriteTime": "2026-10-19T07:26:43.3874439+03:00",
+      "FileHash": "96BC2946DFF8790400D652EC7F8DE7BB043E954980D59470C112788B68A1FBD3",
       "FileSize": 519,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\OzzMarkdown.Core.csproj": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\OzzMarkdown.Core.csproj",
-      "LastWriteTime": "2026-09-22T22:24:01.9141513+03:00",
-      "FileSize": 1797,
+      "LastWriteTime": "2026-10-19T07:21:21.5562328+03:00",
+      "FileHash": "7E3F1766D51CFF124ECE17BF7504318413D2B10E93FF4492102A7AAA9AFC2F79",
+      "FileSize": 1798,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\bundleconfig.json": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\bundleconfig.json",
       "LastWriteTime": "2026-07-22T19:15:51.2313697+03:00",
+      "FileHash": "C96772A93D263502EE3B97996EE9071B32EB5FC883241AB33084D51240F3C631",
       "FileSize": 1423,
       "ContextNote": "",
       "PackingMode": 20
@@ -443,6 +511,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\MarkdownHtmlRenderer.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\MarkdownHtmlRenderer.cs",
       "LastWriteTime": "2026-07-23T23:05:29.9424462+03:00",
+      "FileHash": "216E1F683D761E515ACE7925AE30F650AF33E588F674870F9F26DAEFECE4D3FF",
       "FileSize": 8317,
       "ContextNote": "",
       "PackingMode": 20
@@ -450,6 +519,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\MarkdownTheme.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\MarkdownTheme.cs",
       "LastWriteTime": "2026-07-22T19:15:51.2313697+03:00",
+      "FileHash": "7BA2A64C9A27A30C97CF04ACB2821297D294E1774CE3F66E52FC22F23ADB631D",
       "FileSize": 254,
       "ContextNote": "",
       "PackingMode": 20
@@ -457,6 +527,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\MarkdownThemeProvider.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\MarkdownThemeProvider.cs",
       "LastWriteTime": "2026-07-26T16:55:21.036349+03:00",
+      "FileHash": "719CA7AD540622F36168ACE37472786121BA59D18E5D6A97DA3102D544E4D68D",
       "FileSize": 4412,
       "ContextNote": "",
       "PackingMode": 20
@@ -464,6 +535,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-coy.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-coy.css",
       "LastWriteTime": "2026-07-22T19:15:51.2229906+03:00",
+      "FileHash": "491475A7904386C5BD527D97CFDEC67615AF2616949FE0D7B91ABA0C2682284F",
       "FileSize": 6967,
       "ContextNote": "",
       "PackingMode": 20
@@ -471,6 +543,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-coy.min.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-coy.min.css",
       "LastWriteTime": "2026-07-22T19:15:51.2229906+03:00",
+      "FileHash": "F10D8F74B9A32BC8DA70FA019A73A8FFF405AB9A7CAB61C75D66E4C15EE1D237",
       "FileSize": 4911,
       "ContextNote": "",
       "PackingMode": 20
@@ -478,6 +551,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-dark.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-dark.css",
       "LastWriteTime": "2026-07-22T19:15:51.2271629+03:00",
+      "FileHash": "FC677F421C523F761BB6310B3F3DBE9C988F193B61757C8287281D7C15438577",
       "FileSize": 4917,
       "ContextNote": "",
       "PackingMode": 20
@@ -485,6 +559,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-dark.min.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-dark.min.css",
       "LastWriteTime": "2026-07-22T19:15:51.2271629+03:00",
+      "FileHash": "92CAC9006909522CFEF8F7C7CE05407ACEA596F1775957BF93628D902C6387FE",
       "FileSize": 3431,
       "ContextNote": "",
       "PackingMode": 20
@@ -492,6 +567,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-duotone-light.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-duotone-light.css",
       "LastWriteTime": "2026-07-22T19:15:51.2271629+03:00",
+      "FileHash": "356F0E78B6AD40D8B6868B341057140F5BA7B06780A3BFCD183B4F0076414152",
       "FileSize": 3510,
       "ContextNote": "",
       "PackingMode": 20
@@ -499,6 +575,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-duotone-light.min.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-duotone-light.min.css",
       "LastWriteTime": "2026-07-22T19:15:51.2271629+03:00",
+      "FileHash": "CEAED14CCEBCA70D10DFB0B284ED80D53276BFA39A9F41EB40BD47D6A8FE1904",
       "FileSize": 2401,
       "ContextNote": "",
       "PackingMode": 20
@@ -506,6 +583,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-ghcolors.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-ghcolors.css",
       "LastWriteTime": "2026-07-22T19:15:51.2271629+03:00",
+      "FileHash": "33E3017EA1BD8CFB9FF081F8BCECBEFCA40903145CC93F786C3DE86419F0DF55",
       "FileSize": 2231,
       "ContextNote": "",
       "PackingMode": 20
@@ -513,6 +591,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-ghcolors.min.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-ghcolors.min.css",
       "LastWriteTime": "2026-07-22T19:15:51.2271629+03:00",
+      "FileHash": "D3440165DA621F906F53AE3544B119012CB384C3DD0B84E8249D6A30D3B1646D",
       "FileSize": 1706,
       "ContextNote": "",
       "PackingMode": 20
@@ -520,6 +599,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-material-light.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-material-light.css",
       "LastWriteTime": "2026-07-22T19:15:51.2271629+03:00",
+      "FileHash": "4A0536E722C913AB68AFCA73B66E19E2C17D1EFAAF7A6A15856BA25EC42E2CC9",
       "FileSize": 2741,
       "ContextNote": "",
       "PackingMode": 20
@@ -527,6 +607,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-material-light.min.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-material-light.min.css",
       "LastWriteTime": "2026-07-22T19:15:51.2271629+03:00",
+      "FileHash": "D68CF73F6D7AFFAEFEBC368A553230D8F1C8FF24E352A5E85FE09A2A1150E948",
       "FileSize": 2092,
       "ContextNote": "",
       "PackingMode": 20
@@ -534,6 +615,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-solarized-light.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-solarized-light.css",
       "LastWriteTime": "2026-07-22T19:15:51.2271629+03:00",
+      "FileHash": "85F72055724788F8C78ECB0293C92D5A8AF03921AC86D45102F7D4CF7F8B83B9",
       "FileSize": 5484,
       "ContextNote": "",
       "PackingMode": 20
@@ -541,6 +623,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-solarized-light.min.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-solarized-light.min.css",
       "LastWriteTime": "2026-07-22T19:15:51.2271629+03:00",
+      "FileHash": "68EF2E71A03AADEB596A71AD6275FC19E0D7A4A347C2E942A1323E914A90C002",
       "FileSize": 3428,
       "ContextNote": "",
       "PackingMode": 20
@@ -548,6 +631,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-tomorrow-night.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-tomorrow-night.css",
       "LastWriteTime": "2026-07-22T19:15:51.2271629+03:00",
+      "FileHash": "BF63D32B2026F807A3F5B848DCAD38B9424286524FE2E678F9229BEC58987C35",
       "FileSize": 4610,
       "ContextNote": "",
       "PackingMode": 20
@@ -555,6 +639,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-tomorrow-night.min.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-tomorrow-night.min.css",
       "LastWriteTime": "2026-07-22T19:15:51.2271629+03:00",
+      "FileHash": "797B69F6BF2A79B73A40CF305188F478C8840B6E68D0FF17525586D0A8A193E9",
       "FileSize": 3139,
       "ContextNote": "",
       "PackingMode": 20
@@ -562,6 +647,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-vs.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-vs.css",
       "LastWriteTime": "2026-07-22T19:15:51.2271629+03:00",
+      "FileHash": "243EAAF7F1CD4B1182C031A1BA31AE05F18FAD9965EC2DD72B4050D15281CF5D",
       "FileSize": 3196,
       "ContextNote": "",
       "PackingMode": 20
@@ -569,6 +655,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-vs.min.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism-vs.min.css",
       "LastWriteTime": "2026-07-22T19:15:51.2271629+03:00",
+      "FileHash": "F0FC845B7D7A6724DAA6BF830A558B6CCAE09F5EA4DADF83A8D71776ECDDEA8E",
       "FileSize": 2300,
       "ContextNote": "",
       "PackingMode": 20
@@ -576,6 +663,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism.css",
       "LastWriteTime": "2026-07-26T16:31:46.832382+03:00",
+      "FileHash": "69F6F781EEDBEC71A19E2F0ABB69DE616270F5CB045C15DC805430E8D37DF99E",
       "FileSize": 4951,
       "ContextNote": "",
       "PackingMode": 20
@@ -583,6 +671,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism.js": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism.js",
       "LastWriteTime": "2026-07-26T16:31:45.5806225+03:00",
+      "FileHash": "7AAAB67C0CDBA0F385B649F04EBF4B74E9E446E44EB877C876FA4C5F6A8EF46D",
       "FileSize": 122458,
       "ContextNote": "",
       "PackingMode": 20
@@ -590,6 +679,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism.min.css": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism.min.css",
       "LastWriteTime": "2026-07-26T16:32:34.8426745+03:00",
+      "FileHash": "A990F3F900CB5E398DDC67231CC2D4E355EDC4708F64E98B7E6528E47D19C915",
       "FileSize": 3634,
       "ContextNote": "",
       "PackingMode": 20
@@ -597,6 +687,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism.min.js": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Assets\\prism.min.js",
       "LastWriteTime": "2026-07-26T16:32:39.2114882+03:00",
+      "FileHash": "D2FCAD16C847FBC7FE260ED319F42E5627EAA7A4BA924FBEE8DB618E068CCAF1",
       "FileSize": 57887,
       "ContextNote": "",
       "PackingMode": 20
@@ -604,6 +695,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Extensions\\ReleaseSourceExtensions.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Extensions\\ReleaseSourceExtensions.cs",
       "LastWriteTime": "2026-08-04T13:15:09.0771178+03:00",
+      "FileHash": "6E1C0978B701F170F7BD87F52F3BFE3E5313F7F68856A14DB0794508FE4C4F0F",
       "FileSize": 1843,
       "ContextNote": "",
       "PackingMode": 20
@@ -611,6 +703,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Helpers\\ResourceLoader.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Helpers\\ResourceLoader.cs",
       "LastWriteTime": "2026-07-22T19:15:51.2313697+03:00",
+      "FileHash": "14D2ED09A668E4A5A4B2C9F7D9B76DFAEBA0EDFC6F27879833F069DE46763846",
       "FileSize": 506,
       "ContextNote": "",
       "PackingMode": 20
@@ -618,6 +711,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Models\\AbstractAppSettings.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Models\\AbstractAppSettings.cs",
       "LastWriteTime": "2026-09-22T13:36:17.4890208+03:00",
+      "FileHash": "DFEE7054565BF00FCB24E26002F8E82A6610E88AA52F385C6DF0F555236A9390",
       "FileSize": 2264,
       "ContextNote": "",
       "PackingMode": 20
@@ -625,6 +719,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Models\\AppVersion.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Models\\AppVersion.cs",
       "LastWriteTime": "2026-07-27T15:22:35.9280952+03:00",
+      "FileHash": "F395570347970B3EFF4F71F544EC3D93708A765224E0068BE7C7C4C9E49CF4D4",
       "FileSize": 1706,
       "ContextNote": "",
       "PackingMode": 20
@@ -632,6 +727,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Models\\GitHubAsset.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Models\\GitHubAsset.cs",
       "LastWriteTime": "2026-07-28T12:58:47.6350864+03:00",
+      "FileHash": "4724FBD9E8BC9BD942592E4DC65C8427AEDB2191FA8EA8874B812B857AA5F39C",
       "FileSize": 288,
       "ContextNote": "",
       "PackingMode": 20
@@ -639,6 +735,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Models\\GitHubRelease.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Models\\GitHubRelease.cs",
       "LastWriteTime": "2026-08-04T13:16:55.2603438+03:00",
+      "FileHash": "9BEC72747705BC185908EA81C324DC616370591DCF46135B84203B69B305DA5F",
       "FileSize": 571,
       "ContextNote": "",
       "PackingMode": 20
@@ -646,48 +743,55 @@
     "Source\\OzzMarkdown\\OzzMarkdown.Core\\Models\\IReleaseSource.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.Core\\Models\\IReleaseSource.cs",
       "LastWriteTime": "2026-07-28T16:15:18.7233881+03:00",
+      "FileHash": "19AC8D11DCE745D5D11B2F8404AD6AABF010A1CA3F4999AEA4AA9A31C709DF7C",
       "FileSize": 725,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzMarkdown\\OzzMarkdown.i18n\\OzzMarkdown.i18n.csproj": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.i18n\\OzzMarkdown.i18n.csproj",
-      "LastWriteTime": "2026-09-22T22:24:12.1686252+03:00",
-      "FileSize": 680,
+      "LastWriteTime": "2026-10-19T07:21:10.5317858+03:00",
+      "FileHash": "29A4818293EA5AF1C166ED375D184250F4BE458C6CBE801065C86FBA84FA6944",
+      "FileSize": 681,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzMarkdown\\OzzMarkdown.i18n\\LocalizedStrings.Designer.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.i18n\\LocalizedStrings.Designer.cs",
-      "LastWriteTime": "2026-09-22T16:33:55.0532363+03:00",
-      "FileSize": 6843,
+      "LastWriteTime": "2026-10-19T07:13:41.1064698+03:00",
+      "FileHash": "BBEAC413FA9849EC1DEDC83201CE316758BB594B5B9F438A14C8275DB8DDE1FF",
+      "FileSize": 7471,
       "ContextNote": "This file is auto-generated and contains designer code.",
       "PackingMode": 10
     },
     "Source\\OzzMarkdown\\OzzMarkdown.i18n\\LocalizedStrings.resx": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.i18n\\LocalizedStrings.resx",
-      "LastWriteTime": "2026-09-22T16:33:40.8864606+03:00",
-      "FileSize": 7144,
+      "LastWriteTime": "2026-10-19T07:13:09.8419666+03:00",
+      "FileHash": "3A95EF598C3C17C0278BC8119850F8C4539305F9C32A50BC02E0BDD4957DE95F",
+      "FileSize": 7354,
       "ContextNote": "This file contains localizable resources.",
       "PackingMode": 10
     },
     "Source\\OzzMarkdown\\OzzMarkdown.i18n\\LocalizedStrings.tr.resx": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.i18n\\LocalizedStrings.tr.resx",
-      "LastWriteTime": "2026-09-22T16:33:55.0689284+03:00",
-      "FileSize": 7186,
+      "LastWriteTime": "2026-10-19T07:13:41.1085139+03:00",
+      "FileHash": "6B0E59F53B55AAC209A87AEEE3296B29B27E19549EEB25B5FB907022971F6788",
+      "FileSize": 7395,
       "ContextNote": "This file contains localizable resources.",
       "PackingMode": 10
     },
     "Source\\OzzMarkdown\\OzzMarkdown.WPF\\OzzMarkdown.WPF.csproj": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.WPF\\OzzMarkdown.WPF.csproj",
-      "LastWriteTime": "2026-09-22T22:23:33.1764696+03:00",
-      "FileSize": 1076,
+      "LastWriteTime": "2026-10-19T07:21:00.2773424+03:00",
+      "FileHash": "03830E8AA4D8B498DF17A35BAE43590C956B95C610E1F5D5D4B675F7D777DD59",
+      "FileSize": 1077,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzMarkdown\\OzzMarkdown.WPF\\App.xaml": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.WPF\\App.xaml",
       "LastWriteTime": "2026-08-05T08:41:39.0185005+03:00",
+      "FileHash": "D6A7320212E39A02B6538CFBA4B24F86DDC702E3250254F3EC6C30367CC7D3DF",
       "FileSize": 738,
       "ContextNote": "",
       "PackingMode": 20
@@ -695,6 +799,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.WPF\\App.xaml.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.WPF\\App.xaml.cs",
       "LastWriteTime": "2026-08-05T08:43:35.9000428+03:00",
+      "FileHash": "7AB5DA9A5CAD4DBEBBC7D05B0E18DF729D506C0153C70FC1911B2B7F66F957F2",
       "FileSize": 527,
       "ContextNote": "",
       "PackingMode": 20
@@ -702,6 +807,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.WPF\\AssemblyInfo.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.WPF\\AssemblyInfo.cs",
       "LastWriteTime": "2026-07-22T19:15:51.2313697+03:00",
+      "FileHash": "1D31ED3C7E4AAF76FABB82E330208385CB70685E9B7C577764493A4D169BCA61",
       "FileSize": 644,
       "ContextNote": "",
       "PackingMode": 20
@@ -709,6 +815,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.WPF\\MainWindow.xaml": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.WPF\\MainWindow.xaml",
       "LastWriteTime": "2026-09-22T22:20:57.6013335+03:00",
+      "FileHash": "FDC57FE8BE1FFF0EA000CC404DF43C4047A406BCA712033013A7F8DE62DE305C",
       "FileSize": 7837,
       "ContextNote": "",
       "PackingMode": 20
@@ -716,6 +823,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.WPF\\MainWindow.xaml.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.WPF\\MainWindow.xaml.cs",
       "LastWriteTime": "2026-09-22T22:04:31.5057676+03:00",
+      "FileHash": "74EAADC6782A19931DBA91DFCC9031B15AF2F7A0AC3BD81528F6B6065D821C67",
       "FileSize": 3212,
       "ContextNote": "",
       "PackingMode": 20
@@ -723,6 +831,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.WPF\\Models\\AppSettings.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.WPF\\Models\\AppSettings.cs",
       "LastWriteTime": "2026-08-04T13:51:21.5948364+03:00",
+      "FileHash": "9EBA4E5D7313568D37810D060DDD9F5A851B42ECA56D471F087EE886AB0AF117",
       "FileSize": 1941,
       "ContextNote": "",
       "PackingMode": 20
@@ -730,6 +839,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.WPF\\Models\\ReleaseSource.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.WPF\\Models\\ReleaseSource.cs",
       "LastWriteTime": "2026-08-04T12:28:43.2580385+03:00",
+      "FileHash": "FDF12BC84280A8D12ACC1E7D5DDF6518CCB01668DF8FA192BE4EF4388D10BA65",
       "FileSize": 409,
       "ContextNote": "",
       "PackingMode": 20
@@ -737,6 +847,7 @@
     "Source\\OzzMarkdown\\OzzMarkdown.WPF\\Services\\IFileDialogService.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.WPF\\Services\\IFileDialogService.cs",
       "LastWriteTime": "2026-07-22T19:15:51.2396927+03:00",
+      "FileHash": "C457156A6866474A193F484D32AE92D4307870A00B4104A5A5EA92C8A0ED963C",
       "FileSize": 448,
       "ContextNote": "",
       "PackingMode": 20
@@ -744,41 +855,47 @@
     "Source\\OzzMarkdown\\OzzMarkdown.WPF\\Services\\Win32FileDialogService.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.WPF\\Services\\Win32FileDialogService.cs",
       "LastWriteTime": "2026-07-22T19:15:51.2396927+03:00",
+      "FileHash": "0A7F24A3D42253E367124D9CD29F6F7050E3451F8C0B6C16C18F9871CD6B3F52",
       "FileSize": 500,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzMarkdown\\OzzMarkdown.WPF\\ViewModels\\MainViewModel.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzMarkdown.WPF\\ViewModels\\MainViewModel.cs",
-      "LastWriteTime": "2026-09-22T22:20:42.1730449+03:00",
-      "FileSize": 5760,
+      "LastWriteTime": "2026-10-19T07:18:30.7006353+03:00",
+      "FileHash": "82232ABD6567BDDC992D266531BAA5BBC4BE7B21D9767A8CAFBA8937336E4515",
+      "FileSize": 6201,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzMarkdown\\OzzTools\\OzzMarkdown.ctxgen": {
       "RelativePath": "Source\\OzzMarkdown\\OzzTools\\OzzMarkdown.ctxgen",
-      "LastWriteTime": "2026-10-18T16:20:05.1340503+03:00",
-      "FileSize": 21732,
+      "LastWriteTime": "2026-10-19T06:56:03.5419608+03:00",
+      "FileHash": "DED10EA21373D37BC5AE78B2881C010635D3BA50DE26C8854035AB2E0948F5AB",
+      "FileSize": 28059,
       "ContextNote": "OzzContextGen file for source code pack of OzzMarkdown",
       "PackingMode": 10
     },
     "Source\\OzzMarkdown\\OzzTools\\OzzMarkdownRepoStructure.ctxgen": {
       "RelativePath": "Source\\OzzMarkdown\\OzzTools\\OzzMarkdownRepoStructure.ctxgen",
-      "LastWriteTime": "2026-10-18T16:20:57.1798339+03:00",
-      "FileSize": 21708,
+      "LastWriteTime": "2026-10-19T06:56:23.2347112+03:00",
+      "FileHash": "7FC7CFF9E0638B233A1ABF4FEE27A0093D7A8CD825B585D42A019A7C4727BCD8",
+      "FileSize": 28035,
       "ContextNote": "OzzContextGen file for repository structure report of OzzMarkdown",
       "PackingMode": 10
     },
     "Source\\OzzMarkdown\\OzzWpf.Core\\OzzWpf.Core.csproj": {
       "RelativePath": "Source\\OzzMarkdown\\OzzWpf.Core\\OzzWpf.Core.csproj",
-      "LastWriteTime": "2026-09-22T22:24:33.0033377+03:00",
-      "FileSize": 569,
+      "LastWriteTime": "2026-10-19T07:20:51.2209589+03:00",
+      "FileHash": "94615706B63CA3F0327BF202ED74C08DA6D75F97989EE51BE29D26B18EF23402",
+      "FileSize": 570,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzMarkdown\\OzzWpf.Core\\Commands\\AbstractCommand.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzWpf.Core\\Commands\\AbstractCommand.cs",
       "LastWriteTime": "2026-07-25T23:26:59.43105+03:00",
+      "FileHash": "D7402B5F23EEC88B5C8E95318F08A3DB582A1784AC186764F6314EE86E9CA9E9",
       "FileSize": 440,
       "ContextNote": "",
       "PackingMode": 20
@@ -786,6 +903,7 @@
     "Source\\OzzMarkdown\\OzzWpf.Core\\Commands\\RelayCommand.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzWpf.Core\\Commands\\RelayCommand.cs",
       "LastWriteTime": "2026-07-22T19:15:51.243827+03:00",
+      "FileHash": "38EB10556A84208F1972D924130CA6D0D5C8C854F9ECBD831F2202264BC3749F",
       "FileSize": 762,
       "ContextNote": "",
       "PackingMode": 20
@@ -793,6 +911,7 @@
     "Source\\OzzMarkdown\\OzzWpf.Core\\Controls\\MarkdownViewer.xaml": {
       "RelativePath": "Source\\OzzMarkdown\\OzzWpf.Core\\Controls\\MarkdownViewer.xaml",
       "LastWriteTime": "2026-07-22T19:15:51.243827+03:00",
+      "FileHash": "7BB6BBBA3AB20933377C35FA692BE25A56D54E0EF85EE1EE9EA53F30CDF5AE71",
       "FileSize": 858,
       "ContextNote": "",
       "PackingMode": 20
@@ -800,6 +919,7 @@
     "Source\\OzzMarkdown\\OzzWpf.Core\\Controls\\MarkdownViewer.xaml.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzWpf.Core\\Controls\\MarkdownViewer.xaml.cs",
       "LastWriteTime": "2026-07-27T15:18:28.2766893+03:00",
+      "FileHash": "1307CE642085061206C345413DEADC58BD006FD6EB0E2AE1DDAE7073D905D0D6",
       "FileSize": 4241,
       "ContextNote": "",
       "PackingMode": 20
@@ -807,6 +927,7 @@
     "Source\\OzzMarkdown\\OzzWpf.Core\\Converters\\FileNameConverter.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzWpf.Core\\Converters\\FileNameConverter.cs",
       "LastWriteTime": "2026-09-22T16:28:37.7220139+03:00",
+      "FileHash": "5D0F0FE4673555388A0350E21540E75D9B161CF55C74CAD2D265B32CA64DDF96",
       "FileSize": 775,
       "ContextNote": "",
       "PackingMode": 20
@@ -814,6 +935,7 @@
     "Source\\OzzMarkdown\\OzzWpf.Core\\Dialogs\\AboutDialog.xaml": {
       "RelativePath": "Source\\OzzMarkdown\\OzzWpf.Core\\Dialogs\\AboutDialog.xaml",
       "LastWriteTime": "2026-07-25T23:48:54.2737362+03:00",
+      "FileHash": "039D99B59AC6E081E9A53BF7D2BC7644EDBB514BAD88AC9DDE546FCA3EA7AA01",
       "FileSize": 3481,
       "ContextNote": "",
       "PackingMode": 20
@@ -821,6 +943,7 @@
     "Source\\OzzMarkdown\\OzzWpf.Core\\Dialogs\\AboutDialog.xaml.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzWpf.Core\\Dialogs\\AboutDialog.xaml.cs",
       "LastWriteTime": "2026-08-04T12:03:26.1714441+03:00",
+      "FileHash": "0053FCB30A58BF4F59F171CE0D6E3543B6F46AC9D5D5AA9FE078103A4703B8E2",
       "FileSize": 2956,
       "ContextNote": "",
       "PackingMode": 20
@@ -828,6 +951,7 @@
     "Source\\OzzMarkdown\\OzzWpf.Core\\Helpers\\BindingProxy.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzWpf.Core\\Helpers\\BindingProxy.cs",
       "LastWriteTime": "2026-07-22T19:15:51.243827+03:00",
+      "FileHash": "045F5708BFF37F1A3259BFA88202F6CCA744DC5C7AA3024DABCCE68503678586",
       "FileSize": 654,
       "ContextNote": "",
       "PackingMode": 20
@@ -835,6 +959,7 @@
     "Source\\OzzMarkdown\\OzzWpf.Core\\Models\\WindowPosition.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzWpf.Core\\Models\\WindowPosition.cs",
       "LastWriteTime": "2026-07-22T19:15:51.243827+03:00",
+      "FileHash": "71E7EAC5F41302C3EE6EEF90205800FCCA4D1DFB9E390E21348C51F12FE0FEC8",
       "FileSize": 7816,
       "ContextNote": "",
       "PackingMode": 20
@@ -842,6 +967,7 @@
     "Source\\OzzMarkdown\\OzzWpf.Core\\Resources\\BootstrapIcons.xaml": {
       "RelativePath": "Source\\OzzMarkdown\\OzzWpf.Core\\Resources\\BootstrapIcons.xaml",
       "LastWriteTime": "2026-07-22T19:15:51.2396927+03:00",
+      "FileHash": "DD0149CF1B553F79870422290B5352A65A84001D21C6742D65E81EFBB04DDCAD",
       "FileSize": 1904956,
       "ContextNote": "Bootstrap Icons asset attribution from https://icons.getbootstrap.com  v1.13.1",
       "PackingMode": 10
@@ -849,6 +975,7 @@
     "Source\\OzzMarkdown\\OzzWpf.Core\\Resources\\Styles.xaml": {
       "RelativePath": "Source\\OzzMarkdown\\OzzWpf.Core\\Resources\\Styles.xaml",
       "LastWriteTime": "2026-07-25T14:09:51.2388303+03:00",
+      "FileHash": "80CE95FA5C0D940665AB49F1A73DE308BB8D8BC8975E4307B8B5BA4C1A493B97",
       "FileSize": 10643,
       "ContextNote": "",
       "PackingMode": 20
@@ -856,20 +983,23 @@
     "Source\\OzzMarkdown\\OzzWpf.Core\\ViewModels\\AbstractViewModel.cs": {
       "RelativePath": "Source\\OzzMarkdown\\OzzWpf.Core\\ViewModels\\AbstractViewModel.cs",
       "LastWriteTime": "2026-07-22T19:15:51.2479736+03:00",
+      "FileHash": "75F6A7E2A56D43CD44CA540FD309F6154E009D61BD2191A180C888A8B0F93ED4",
       "FileSize": 469,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzMarkdown\\Scripts\\OzzMarkdown.Setup.iss": {
       "RelativePath": "Source\\OzzMarkdown\\Scripts\\OzzMarkdown.Setup.iss",
-      "LastWriteTime": "2026-08-05T08:23:20.484041+03:00",
-      "FileSize": 4854,
+      "LastWriteTime": "2026-10-19T07:34:12.0395381+03:00",
+      "FileHash": "F068ECA287D55B213989685E6E5B3F87CBD363CE5390553A689050FB9B565CA3",
+      "FileSize": 4863,
       "ContextNote": "",
       "PackingMode": 20
     },
     "Source\\OzzMarkdown\\Scripts\\PrepareInstallerFiles.bat": {
       "RelativePath": "Source\\OzzMarkdown\\Scripts\\PrepareInstallerFiles.bat",
       "LastWriteTime": "2026-08-05T08:34:57.635687+03:00",
+      "FileHash": "4AD3728FE9EEF7752E34F148EC2F410D5584D711362EC0162D915A468A699220",
       "FileSize": 1357,
       "ContextNote": "",
       "PackingMode": 20
@@ -877,6 +1007,7 @@
     "Source\\OzzMarkdown\\Scripts\\TagRelease.bat": {
       "RelativePath": "Source\\OzzMarkdown\\Scripts\\TagRelease.bat",
       "LastWriteTime": "2026-07-26T12:44:49.8279558+03:00",
+      "FileHash": "D0ECC791E526A89E595B696EA4BA36DA50A2B72ADF22E3740D76F8D3306E2A28",
       "FileSize": 937,
       "ContextNote": "",
       "PackingMode": 20

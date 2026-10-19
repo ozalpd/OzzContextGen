@@ -142,6 +142,15 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit Excluded Folders.
         /// </summary>
         public static string EditExcludedFolders {
@@ -205,6 +214,15 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Files Only.
+        /// </summary>
+        public static string FilesOnly {
+            get {
+                return ResourceManager.GetString("FilesOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Total found C# files, {0}. Starting to package....
         /// </summary>
         public static string FoundFiles {
@@ -255,6 +273,24 @@ namespace OzzContextGen.i18n {
         public static string InvalidSourceFolder {
             get {
                 return ResourceManager.GetString("InvalidSourceFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License:.
+        /// </summary>
+        public static string License {
+            get {
+                return ResourceManager.GetString("License", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LLM &amp; Prompts.
+        /// </summary>
+        public static string LlmAndPrompts {
+            get {
+                return ResourceManager.GetString("LlmAndPrompts", resourceCulture);
             }
         }
         
@@ -349,6 +385,15 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open Source.
+        /// </summary>
+        public static string OpenSource {
+            get {
+                return ResourceManager.GetString("OpenSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Operation completed successfully.
         /// </summary>
         public static string OperationCompleted {
@@ -417,6 +462,15 @@ namespace OzzContextGen.i18n {
         public static string PackingMode {
             get {
                 return ResourceManager.GetString("PackingMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pack Layout:.
+        /// </summary>
+        public static string PackLayout {
+            get {
+                return ResourceManager.GetString("PackLayout", resourceCulture);
             }
         }
         
@@ -493,6 +547,42 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The file &apos;{0}&apos; does not exist..
+        /// </summary>
+        public static string ProjectFileNotExist {
+            get {
+                return ResourceManager.GetString("ProjectFileNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project File Not Found.
+        /// </summary>
+        public static string ProjectFileNotFound {
+            get {
+                return ResourceManager.GetString("ProjectFileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project Info.
+        /// </summary>
+        public static string ProjectInfo {
+            get {
+                return ResourceManager.GetString("ProjectInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prompt Presets.
+        /// </summary>
+        public static string PromptPresets {
+            get {
+                return ResourceManager.GetString("PromptPresets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ready.
         /// </summary>
         public static string Ready {
@@ -525,6 +615,15 @@ namespace OzzContextGen.i18n {
         public static string RemoveDeletedFiles {
             get {
                 return ResourceManager.GetString("RemoveDeletedFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repo URL:.
+        /// </summary>
+        public static string RepoUrl {
+            get {
+                return ResourceManager.GetString("RepoUrl", resourceCulture);
             }
         }
         
@@ -610,6 +709,15 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Selected File.
+        /// </summary>
+        public static string SelectedFile {
+            get {
+                return ResourceManager.GetString("SelectedFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Target....
         /// </summary>
         public static string SelectTarget {
@@ -691,6 +799,15 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to System Prompt.
+        /// </summary>
+        public static string SystemPrompt {
+            get {
+                return ResourceManager.GetString("SystemPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Heuristic token estimate of the generated markdown pack. ASCII: {0:N0}, Extended Latin: {1:N0}, CJK: {2:N0}, Other: {3:N0} characters. Actual token count depends on the target model&apos;s tokenizer..
         /// </summary>
         public static string TokenEstimateTooltip {
@@ -705,6 +822,24 @@ namespace OzzContextGen.i18n {
         public static string TokenSize {
             get {
                 return ResourceManager.GetString("TokenSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Structure &amp; Files.
+        /// </summary>
+        public static string TreeAndFiles {
+            get {
+                return ResourceManager.GetString("TreeAndFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Structure Only.
+        /// </summary>
+        public static string TreeOnly {
+            get {
+                return ResourceManager.GetString("TreeOnly", resourceCulture);
             }
         }
         
@@ -741,123 +876,6 @@ namespace OzzContextGen.i18n {
         public static string UsageExample01 {
             get {
                 return ResourceManager.GetString("UsageExample01", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Project Info.
-        /// </summary>
-        public static string ProjectInfo {
-            get {
-                return ResourceManager.GetString("ProjectInfo", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Repo URL:.
-        /// </summary>
-        public static string RepoUrl {
-            get {
-                return ResourceManager.GetString("RepoUrl", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to License:.
-        /// </summary>
-        public static string License {
-            get {
-                return ResourceManager.GetString("License", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Open Source.
-        /// </summary>
-        public static string OpenSource {
-            get {
-                return ResourceManager.GetString("OpenSource", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Description.
-        /// </summary>
-        public static string Description {
-            get {
-                return ResourceManager.GetString("Description", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to System Prompt.
-        /// </summary>
-        public static string SystemPrompt {
-            get {
-                return ResourceManager.GetString("SystemPrompt", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to LLM &amp; Prompts.
-        /// </summary>
-        public static string LlmAndPrompts {
-            get {
-                return ResourceManager.GetString("LlmAndPrompts", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Selected File.
-        /// </summary>
-        public static string SelectedFile {
-            get {
-                return ResourceManager.GetString("SelectedFile", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Prompt Presets.
-        /// </summary>
-        public static string PromptPresets {
-            get {
-                return ResourceManager.GetString("PromptPresets", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Pack Layout:.
-        /// </summary>
-        public static string PackLayout {
-            get {
-                return ResourceManager.GetString("PackLayout", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Files Only.
-        /// </summary>
-        public static string FilesOnly {
-            get {
-                return ResourceManager.GetString("FilesOnly", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Structure Only.
-        /// </summary>
-        public static string TreeOnly {
-            get {
-                return ResourceManager.GetString("TreeOnly", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Structure &amp; Files.
-        /// </summary>
-        public static string TreeAndFiles {
-            get {
-                return ResourceManager.GetString("TreeAndFiles", resourceCulture);
             }
         }
     }
