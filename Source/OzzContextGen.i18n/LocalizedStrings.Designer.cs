@@ -97,6 +97,24 @@ namespace OzzContextGen.i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bulk Packing Mode Edit.
+        /// </summary>
+        public static string BulkPackingModeEdit {
+            get {
+                return ResourceManager.GetString("BulkPackingModeEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply packing mode to.
+        /// </summary>
+        public static string BulkPackingModeEditDescription {
+            get {
+                return ResourceManager.GetString("BulkPackingModeEditDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
@@ -201,6 +219,15 @@ namespace OzzContextGen.i18n {
         public static string FilePath {
             get {
                 return ResourceManager.GetString("FilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to file(s)..
+        /// </summary>
+        public static string Files {
+            get {
+                return ResourceManager.GetString("Files", resourceCulture);
             }
         }
         

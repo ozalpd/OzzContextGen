@@ -1,0 +1,57 @@
+<Window x:Class="OzzContextGen.WPF.Views.BulkPackingModeEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i18n="clr-namespace:OzzContextGen.i18n;assembly=OzzContextGen.i18n"
+        xmlns:viewmodels="clr-namespace:OzzContextGen.WPF.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=viewmodels:BulkPackingModeEditVM}"
+        Title="{x:Static i18n:LocalizedStrings.BulkPackingModeEdit}"
+        Height="180" Width="360" MinWidth="300" MinHeight="160"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Icon="/Assets/CtxGen-Icon.ico">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Description -->
+        <TextBlock Grid.Row="0" Margin="0,0,0,12" TextWrapping="Wrap">
+            <Run Text="{x:Static i18n:LocalizedStrings.BulkPackingModeEditDescription}"/>
+            <Run Text="{Binding AffectedCount, Mode=OneTime}" FontWeight="SemiBold"/>
+            <Run Text="{x:Static i18n:LocalizedStrings.Files}"/>
+        </TextBlock>
+
+        <!-- Packing Mode picker -->
+        <Grid Grid.Row="1" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="{x:Static i18n:LocalizedStrings.PackingMode}"
+                       VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <ComboBox Grid.Column="1"
+                      ItemsSource="{Binding PackingModeValues}"
+                      DisplayMemberPath="DisplayValue"
+                      SelectedValuePath="Value"
+                      SelectedValue="{Binding SelectedMode, Mode=TwoWay}"/>
+        </Grid>
+
+        <!-- OK / Cancel -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="{x:Static i18n:LocalizedStrings.OK}"
+                    Command="{Binding ApplyCommand}"
+                    Padding="16,4" Margin="0,0,8,0"
+                    FontWeight="SemiBold" IsDefault="True"/>
+            <Button Content="{x:Static i18n:LocalizedStrings.Cancel}"
+                    Command="{Binding CancelCommand}"
+                    Padding="12,4" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

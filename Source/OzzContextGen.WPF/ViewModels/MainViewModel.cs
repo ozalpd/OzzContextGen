@@ -40,6 +40,7 @@ public class MainViewModel : AbstractViewModel
         SaveProfileCommand = new RelayCommand(async () => await SaveProfileAsync(), CanSaveProfile);
         EditExcludedFoldersCommand = new RelayCommand(EditExcludedFolders, CanEditExcludedFolders);
         ToggleAllSelectedCommand = new RelayCommand(ToggleAllSelected, CanToggleAllSelected);
+        BulkEditPackingModeCommand = new RelayCommand(BulkEditPackingMode, CanBulkEditPackingMode);
 
         CheckForUpdatesCommand = new RelayCommand(async () => await CheckForUpdatesAsync());
         ShowAboutCommand = new RelayCommand(ShowAboutDialog);
@@ -76,6 +77,7 @@ public class MainViewModel : AbstractViewModel
     public RelayCommand CheckForUpdatesCommand { get; }
     public RelayCommand ShowAboutCommand { get; }
     public RelayCommand ToggleAllSelectedCommand { get; }
+    public RelayCommand BulkEditPackingModeCommand { get; }
 
 
     public IEnumerable<EnumValueItem<PackingMode>> PackingModeModeValues { get; private set; } = Array.Empty<EnumValueItem<PackingMode>>();
@@ -334,6 +336,7 @@ public class MainViewModel : AbstractViewModel
                 _searchText = value;
                 RaisePropertyChanged(nameof(SearchText));
                 FilteredFiles.Refresh();
+                BulkEditPackingModeCommand.RaiseCanExecuteChanged();
             }
         }
     }
@@ -636,6 +639,33 @@ public class MainViewModel : AbstractViewModel
         RaisePropertyChanged(nameof(IsAllSelected));
     }
 
+    private bool CanBulkEditPackingMode()
+    {
+        return !string.IsNullOrWhiteSpace(SearchText)
+            && FilteredFiles.Cast<FileChangeViewModel>().Any();
+    }
+
+    private void BulkEditPackingMode()
+    {
+        var filtered = FilteredFiles.Cast<FileChangeViewModel>().ToList();
+        if (filtered.Count == 0)
+            return;
+
+        var firstMode = filtered[0].PackingMode;
+        var vm = new BulkPackingModeEditVM(filtered.Count, firstMode);
+        var dialog = new BulkPackingModeEdit
+        {
+            Owner = System.Windows.Application.Current.MainWindow,
+            DataContext = vm
+        };
+
+        if (dialog.ShowDialog() == true)
+        {
+            foreach (var file in filtered)
+                file.PackingMode = vm.SelectedMode;
+        }
+    }
+
     private void OnTrackedFilesCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (e.OldItems != null)
@@ -663,6 +693,7 @@ public class MainViewModel : AbstractViewModel
         PackCommand.RaiseCanExecuteChanged();
         ToggleAllSelectedCommand.RaiseCanExecuteChanged();
         RemoveDeletedFilesCommand.RaiseCanExecuteChanged();
+        BulkEditPackingModeCommand.RaiseCanExecuteChanged();
     }
 
     private void OnFileItemPropertyChanged(object? sender, PropertyChangedEventArgs e)

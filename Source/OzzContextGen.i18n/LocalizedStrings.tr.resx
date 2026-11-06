@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -389,5 +389,14 @@
   </data>
   <data name="ProjectFileNotFound" xml:space="preserve">
     <value>Proje Dosyası Bulunamadı</value>
+  </data>
+  <data name="BulkPackingModeEdit" xml:space="preserve">
+    <value>Toplu Paketleme Modu Düzenleme</value>
+  </data>
+  <data name="BulkPackingModeEditDescription" xml:space="preserve">
+    <value>Paketleme modunu uygula:</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>dosya.</value>
   </data>
 </root>
