@@ -487,7 +487,9 @@
 
                             <TextBlock Text="{x:Static i18n:LocalizedStrings.ContextNote}" Grid.Row="7" Grid.Column="0" FontWeight="Bold" Margin="0,2"/>
                             <TextBlock Text=":" Grid.Row="7" Grid.Column="1" Margin="2"/>
-                            <TextBox Text="{Binding ContextNote, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" Margin="1" TextWrapping="Wrap"/>
+                            <TextBox Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" Margin="1"
+                                     AcceptsReturn="True" TextWrapping="Wrap" 
+                                     Text="{Binding ContextNote, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
                     </Border>
                 </TabItem>

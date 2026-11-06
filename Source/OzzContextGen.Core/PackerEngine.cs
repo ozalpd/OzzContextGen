@@ -129,18 +129,9 @@ public class PackerEngine
 
                 sb.AppendLine($"### FILE: {relativePath}");
 
-                if (!string.IsNullOrWhiteSpace(file.ContextNote))
-                {
-                    sb.AppendLine($"**Note:** {file.ContextNote}");
-                }
-
+                AppendContextNote(sb, file);
                 if (file.PackingMode == PackingMode.MetadataOnly)
                 {
-                    if (string.IsNullOrWhiteSpace(file.ContextNote))
-                    {
-                        sb.AppendLine($"**Packing Mode:** Metadata Only");
-                        sb.AppendLine();
-                    }
                     continue; // Skip reading the file content
                 }
 
@@ -182,6 +173,49 @@ public class PackerEngine
 
         progressAction?.Invoke(LocalizedStrings.PackagingCompleted);
         return sb.ToString();
+    }
+
+    private static void AppendContextNote(StringBuilder sb, FileContextEntry file)
+    {
+        if (string.IsNullOrWhiteSpace(file.ContextNote))
+        {
+            if (file.PackingMode == PackingMode.MetadataOnly)
+                AppendPackingMode(sb);
+            return;
+        }
+
+        if (!file.ContextNote.StartsWith('#') || file.ContextNote.StartsWith("**"))
+        {
+            sb.AppendLine($"**Note:** {file.ContextNote}");
+            return;
+        }
+
+        if (file.PackingMode == PackingMode.MetadataOnly)
+        {
+            AppendPackingMode(sb);
+        }
+
+        if (file.ContextNote.StartsWith("**"))
+        {
+            sb.AppendLine(file.ContextNote);
+        }
+        else // Starts with '#' but not with '**'
+        {
+            int countHash = file.ContextNote.TakeWhile(c => c == '#').Count();
+            if (countHash > 3)
+            {
+                sb.AppendLine(file.ContextNote);
+            }
+            else
+            {
+                sb.AppendLine($"#### {file.ContextNote.TrimStart('#').Trim()}");
+            }
+        }
+    }
+
+    private static void AppendPackingMode(StringBuilder sb)
+    {
+        sb.AppendLine($"**Packing Mode:** Metadata Only");
     }
 
     private class TreeNode
