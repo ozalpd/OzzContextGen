@@ -1,4 +1,4 @@
-﻿<Window x:Class="OzzContextGen.WPF.MainWindow"
+<Window x:Class="OzzContextGen.WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -328,10 +328,36 @@
                 <ColumnDefinition Width="3*" MinWidth="400"/>
                 <ColumnDefinition Width="2*" MinWidth="240"/>
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="FileGrid" AlternatingRowBackground="#F5F5F5" GridLinesVisibility="Horizontal"
-                      ItemsSource="{Binding TrackedFiles}"
-                      SelectedItem="{Binding SelectedFile, Mode=TwoWay}"
-                      AutoGenerateColumns="False" CanUserAddRows="False">
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="0" Margin="0,0,0,4"
+                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                         Tag="🔍 Filter by path…">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <VisualBrush Stretch="None" AlignmentX="Left">
+                                                <VisualBrush.Visual>
+                                                    <TextBlock Text="🔍  Filter by path…" Foreground="Gray" Margin="4,0,0,0"/>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+                <DataGrid x:Name="FileGrid" Grid.Row="1" AlternatingRowBackground="#F5F5F5" GridLinesVisibility="Horizontal"
+                          ItemsSource="{Binding FilteredFiles}"
+                          SelectedItem="{Binding SelectedFile, Mode=TwoWay}"
+                          AutoGenerateColumns="False" CanUserAddRows="False">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" Width="80">
                         <DataGridCheckBoxColumn.Header>
@@ -361,6 +387,7 @@
                                         Binding="{Binding RelativePath}" Width="*" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
+            </Grid>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Left"
                           VerticalAlignment="Stretch"
                           Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"/>

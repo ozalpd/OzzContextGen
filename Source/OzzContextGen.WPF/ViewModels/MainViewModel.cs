@@ -1,4 +1,4 @@
-﻿using OzzContextGen.Core;
+using OzzContextGen.Core;
 using OzzContextGen.Core.Helpers;
 using OzzContextGen.Core.Models;
 using OzzContextGen.i18n;
@@ -12,6 +12,7 @@ using OzzWpf.Core.ViewModels;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Windows.Data;
 using System.IO;
 using System.Windows;
 using static OzzContextGen.Core.Helpers.EnumExtensions;
@@ -48,6 +49,12 @@ public class MainViewModel : AbstractViewModel
 
         PropertyChanged += OnPropertyChanged;
         TrackedFiles.CollectionChanged += OnTrackedFilesCollectionChanged;
+
+        FilteredFiles = CollectionViewSource.GetDefaultView(TrackedFiles);
+        FilteredFiles.Filter = obj =>
+            obj is FileChangeViewModel vm &&
+            (string.IsNullOrEmpty(_searchText) ||
+             vm.RelativePath.Contains(_searchText, StringComparison.OrdinalIgnoreCase));
 
         var settings = AppSettings.GetAppSettings();
         foreach (var path in settings.RecentFiles.Where(File.Exists))
@@ -314,6 +321,23 @@ public class MainViewModel : AbstractViewModel
 
 
     public ObservableCollection<FileChangeViewModel> TrackedFiles { get; } = new();
+
+    public ICollectionView FilteredFiles { get; }
+
+    public string SearchText
+    {
+        get => _searchText;
+        set
+        {
+            if (_searchText != value)
+            {
+                _searchText = value;
+                RaisePropertyChanged(nameof(SearchText));
+                FilteredFiles.Refresh();
+            }
+        }
+    }
+    private string _searchText = string.Empty;
 
     public string ResolvedSourcePath
     {
