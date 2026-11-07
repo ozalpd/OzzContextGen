@@ -326,6 +326,8 @@ public class MainViewModel : AbstractViewModel
 
     public ICollectionView FilteredFiles { get; }
 
+    public int FilteredFilesCount => FilteredFiles.Cast<FileChangeViewModel>().Count();
+
     public string SearchText
     {
         get => _searchText;
@@ -336,6 +338,7 @@ public class MainViewModel : AbstractViewModel
                 _searchText = value;
                 RaisePropertyChanged(nameof(SearchText));
                 FilteredFiles.Refresh();
+                RaisePropertyChanged(nameof(FilteredFilesCount));
                 BulkEditPackingModeCommand.RaiseCanExecuteChanged();
             }
         }
@@ -423,6 +426,7 @@ public class MainViewModel : AbstractViewModel
         {
             StatusMessage = $"{LocalizedStrings.InvalidSourceFolder}";
         }
+        RaisePropertyChanged(nameof(FilteredFilesCount));
     }
 
     private bool CanAnalyzeChanges() => !string.IsNullOrEmpty(SourcePath) && Directory.Exists(ResolvedSourcePath);
@@ -641,8 +645,7 @@ public class MainViewModel : AbstractViewModel
 
     private bool CanBulkEditPackingMode()
     {
-        return !string.IsNullOrWhiteSpace(SearchText)
-            && FilteredFiles.Cast<FileChangeViewModel>().Any();
+        return !string.IsNullOrWhiteSpace(SearchText) && FilteredFilesCount > 0;
     }
 
     private void BulkEditPackingMode()

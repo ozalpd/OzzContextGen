@@ -1,8 +1,8 @@
 ﻿{
   "ProfileName": "Default Profile",
   "TargetSourcePath": "..\\..\\OzzContextGen",
-  "LatestSourceWriteAt": "2026-10-19T08:09:18.0891099+03:00",
-  "LastPackedAt": "2026-10-19T08:09:54.8399979+03:00",
+  "LatestSourceWriteAt": "2026-11-07T07:53:06.2282192+03:00",
+  "LastPackedAt": "2026-11-07T07:54:12.3373027+03:00",
   "RepoUrl": "https://github.com/ozalpd/OzzContextGen",
   "License": "MIT",
   "IsOpenSource": null,
@@ -62,17 +62,17 @@
     },
     "OzzTools\\OzzContextGen.ctxgen": {
       "RelativePath": "OzzTools\\OzzContextGen.ctxgen",
-      "LastWriteTime": "2026-10-19T08:09:18.0891099+03:00",
-      "FileHash": "DDDD2706AC76B2958AE6B03130D55D1277FFAB1B9E319D2C7853A6A25F776349",
-      "FileSize": 45991,
+      "LastWriteTime": "2026-11-07T07:53:06.2282192+03:00",
+      "FileHash": "758A7A3CE8368D21C46A132DF24E08A6263B8BB62F26430FC7523E67F95CA1F2",
+      "FileSize": 47370,
       "ContextNote": "OzzContextGen file for source code pack",
       "PackingMode": 10
     },
     "OzzTools\\OzzContextGenStructure.ctxgen": {
       "RelativePath": "OzzTools\\OzzContextGenStructure.ctxgen",
-      "LastWriteTime": "2026-10-19T06:57:33.5167473+03:00",
-      "FileHash": "9091FBCD6A5DFD7555215C1E9D2730F6115910BF8352639B28F0BCA63EB76596",
-      "FileSize": 48531,
+      "LastWriteTime": "2026-10-19T08:09:54.8404551+03:00",
+      "FileHash": "E51E8CD44D6EEEB3363325DD676041CDD45847DAA55B200738CEE1858D070B0F",
+      "FileSize": 48533,
       "ContextNote": "OzzContextGen file for structure of this repository",
       "PackingMode": 10
     },
@@ -134,9 +134,9 @@
     },
     "Source\\OzzContextGen.Core\\PackerEngine.cs": {
       "RelativePath": "Source\\OzzContextGen.Core\\PackerEngine.cs",
-      "LastWriteTime": "2026-10-05T22:51:31.3236353+03:00",
-      "FileHash": "4479F8863D64BE1E93BDE265C223FEB39B6DB5469BA0DDA481AA921CBB9F9D5E",
-      "FileSize": 10454,
+      "LastWriteTime": "2026-11-06T21:43:11.2346213+03:00",
+      "FileHash": "A7DE36EEA345C7A7EA753A92F1DBAF7709FE74BFFF94D916E02233714897CBA9",
+      "FileSize": 11354,
       "ContextNote": "",
       "PackingMode": 20
     },
@@ -246,25 +246,25 @@
     },
     "Source\\OzzContextGen.i18n\\LocalizedStrings.Designer.cs": {
       "RelativePath": "Source\\OzzContextGen.i18n\\LocalizedStrings.Designer.cs",
-      "LastWriteTime": "2026-10-19T08:02:03.4756591+03:00",
-      "FileHash": "99A8CBA09F7CDD4C30179D57CFA8CDAB0AF65D22B9CD608B960B9899C2D97EEC",
-      "FileSize": 31256,
+      "LastWriteTime": "2026-11-06T23:11:52.0927077+03:00",
+      "FileHash": "5B670F0EFB19314886D885F913C2B11E47264DC1A2AB09CCC15FDA061CD0CF56",
+      "FileSize": 32204,
       "ContextNote": "This file is auto-generated and contains designer code.",
       "PackingMode": 10
     },
     "Source\\OzzContextGen.i18n\\LocalizedStrings.resx": {
       "RelativePath": "Source\\OzzContextGen.i18n\\LocalizedStrings.resx",
-      "LastWriteTime": "2026-10-19T08:02:03.4546775+03:00",
-      "FileHash": "0BC3BF9CEBCEEE9061606A92649B9330DA578AB5F4F00649F5477B457DCB5973",
-      "FileSize": 15552,
+      "LastWriteTime": "2026-11-06T23:07:13.5235842+03:00",
+      "FileHash": "85CC48D1D26A4A4D568D92D6E8C75D4BCCAE9F45DDA4CD281A414E71F54F21BB",
+      "FileSize": 15867,
       "ContextNote": "This file contains localizable resources.",
       "PackingMode": 10
     },
     "Source\\OzzContextGen.i18n\\LocalizedStrings.tr.resx": {
       "RelativePath": "Source\\OzzContextGen.i18n\\LocalizedStrings.tr.resx",
-      "LastWriteTime": "2026-10-19T08:01:58.3591418+03:00",
-      "FileHash": "4E2F62504E78D23ECAC170B3CB0D5B1732559B0E13B12DCE57DB4F8DC7F8D7A6",
-      "FileSize": 15877,
+      "LastWriteTime": "2026-11-06T23:07:13.5747085+03:00",
+      "FileHash": "653ECA53FB15B0E8F4918BDDE003B1B0BA572C610DDD205D67C55109BF055A9D",
+      "FileSize": 16202,
       "ContextNote": "This file contains localizable resources.",
       "PackingMode": 10
     },
@@ -302,9 +302,9 @@
     },
     "Source\\OzzContextGen.WPF\\MainWindow.xaml": {
       "RelativePath": "Source\\OzzContextGen.WPF\\MainWindow.xaml",
-      "LastWriteTime": "2026-10-04T17:04:11.700988+03:00",
-      "FileHash": "65177FD6B7957D4E14DA2FABE1D007D58E4CA89DB3982B16AB13CBA6B189D696",
-      "FileSize": 33655,
+      "LastWriteTime": "2026-11-06T23:29:38.2770291+03:00",
+      "FileHash": "CA97E577FC6F6E7963F43B3016C2F25F97DC93857FEBC4E037C115D6CB4BF736",
+      "FileSize": 36207,
       "ContextNote": "",
       "PackingMode": 20
     },
@@ -380,6 +380,14 @@
       "ContextNote": "",
       "PackingMode": 20
     },
+    "Source\\OzzContextGen.WPF\\ViewModels\\BulkPackingModeEditVM.cs": {
+      "RelativePath": "Source\\OzzContextGen.WPF\\ViewModels\\BulkPackingModeEditVM.cs",
+      "LastWriteTime": "2026-11-06T23:07:12.5641745+03:00",
+      "FileHash": "BFED466F1FC78FD9187B7FA49C31FA9F1D650887B4093DC730C57BCA0FF0CC59",
+      "FileSize": 1584,
+      "ContextNote": "",
+      "PackingMode": 20
+    },
     "Source\\OzzContextGen.WPF\\ViewModels\\ExcludedFoldersEditVM.cs": {
       "RelativePath": "Source\\OzzContextGen.WPF\\ViewModels\\ExcludedFoldersEditVM.cs",
       "LastWriteTime": "2026-09-25T19:19:14.8604531+03:00",
@@ -398,9 +406,25 @@
     },
     "Source\\OzzContextGen.WPF\\ViewModels\\MainViewModel.cs": {
       "RelativePath": "Source\\OzzContextGen.WPF\\ViewModels\\MainViewModel.cs",
-      "LastWriteTime": "2026-10-19T08:05:00.8232658+03:00",
-      "FileHash": "467FE846D84A2202A379FCD312A807758FB859FE84C90CA0CF88E5704A384057",
-      "FileSize": 23577,
+      "LastWriteTime": "2026-11-06T23:31:53.2898599+03:00",
+      "FileHash": "F50C4F70BB6E9970CF2D0B7F65B30B3561E737B2E74FD5AFA0332184C7D26E12",
+      "FileSize": 25439,
+      "ContextNote": "",
+      "PackingMode": 20
+    },
+    "Source\\OzzContextGen.WPF\\Views\\BulkPackingModeEdit.xaml": {
+      "RelativePath": "Source\\OzzContextGen.WPF\\Views\\BulkPackingModeEdit.xaml",
+      "LastWriteTime": "2026-11-06T23:26:21.9963267+03:00",
+      "FileHash": "3D2BE8CE4BBAA157519830F9FD6B0A8BE0B43034CF44EAADFAB9A91459A1B49F",
+      "FileSize": 2780,
+      "ContextNote": "",
+      "PackingMode": 20
+    },
+    "Source\\OzzContextGen.WPF\\Views\\BulkPackingModeEdit.xaml.cs": {
+      "RelativePath": "Source\\OzzContextGen.WPF\\Views\\BulkPackingModeEdit.xaml.cs",
+      "LastWriteTime": "2026-11-06T23:07:12.9895332+03:00",
+      "FileHash": "04127941150D88B831E01CD8EA9588147A5F75EE54D4528C5AC287089C3FC587",
+      "FileSize": 932,
       "ContextNote": "",
       "PackingMode": 20
     },

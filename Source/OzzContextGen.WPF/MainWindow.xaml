@@ -337,6 +337,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBox Margin="0,0,0,4"
                              Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
@@ -359,7 +360,9 @@
                             </Style>
                         </TextBox.Style>
                     </TextBox>
-                    <Button Grid.Column="1" ToolTip="Bulk Edit PackingMode"
+                    <TextBlock Grid.Column="1" Margin="4,0,0,4" VerticalAlignment="Center"
+                               Text="{Binding FilteredFilesCount, StringFormat={}{0} files}"/>
+                    <Button Grid.Column="2" ToolTip="Bulk Edit PackingMode"
                             Command="{Binding BulkEditPackingModeCommand}"
                             Style="{StaticResource IconButtonStyle-28x24}"
                             Margin="4,0,0,4">
