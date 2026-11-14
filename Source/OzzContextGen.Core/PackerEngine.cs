@@ -135,7 +135,6 @@ public class PackerEngine
                     continue; // Skip reading the file content
                 }
 
-
                 string fullPath = Path.Combine(sourcePath, relativePath);
                 if (!File.Exists(fullPath))
                 {
@@ -151,12 +150,18 @@ public class PackerEngine
                 {
                     // Read the file asynchronously to prevent UI blocking in large projects
                     string content = await File.ReadAllTextAsync(fullPath, Encoding.UTF8);
-                    string backTicks = new('`', Math.Max(3, GetLongestBacktickRun(content) + 1));
-
-                    // Exceptions likely to be thrown during files are being read, so we put fence after reading the file
-                    sb.AppendLine($"{backTicks}{fence}");
-                    sb.AppendLine(content.TrimEnd('\r', '\n'));
-                    sb.AppendLine(backTicks);
+                    int backtickCount = GetLongestBacktickRun(content);
+                    if (string.IsNullOrWhiteSpace(content))
+                    {
+                        sb.AppendLine("*(Empty file)*");
+                    }
+                    else
+                    {
+                        string backTicks = new('`', Math.Max(3, backtickCount + 1));
+                        sb.AppendLine($"{backTicks}{fence}");
+                        sb.AppendLine(content.TrimEnd('\r', '\n'));
+                        sb.AppendLine(backTicks);
+                    }
                 }
                 catch (Exception ex)
                 {
