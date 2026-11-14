@@ -151,11 +151,12 @@ public class PackerEngine
                 {
                     // Read the file asynchronously to prevent UI blocking in large projects
                     string content = await File.ReadAllTextAsync(fullPath, Encoding.UTF8);
+                    string backTicks = new('`', Math.Max(3, GetLongestBacktickRun(content) + 1));
 
                     // Exceptions likely to be thrown during files are being read, so we put fence after reading the file
-                    sb.AppendLine($"```{fence}");
+                    sb.AppendLine($"{backTicks}{fence}");
                     sb.AppendLine(content.TrimEnd('\r', '\n'));
-                    sb.AppendLine("```");
+                    sb.AppendLine(backTicks);
                 }
                 catch (Exception ex)
                 {
@@ -173,6 +174,27 @@ public class PackerEngine
 
         progressAction?.Invoke(LocalizedStrings.PackagingCompleted);
         return sb.ToString();
+    }
+
+    private static int GetLongestBacktickRun(string content)
+    {
+        int longestRun = 0;
+        int currentRun = 0;
+
+        foreach (char character in content)
+        {
+            if (character == '`')
+            {
+                currentRun++;
+                longestRun = Math.Max(longestRun, currentRun);
+            }
+            else
+            {
+                currentRun = 0;
+            }
+        }
+
+        return longestRun;
     }
 
     private static void AppendContextNote(StringBuilder sb, FileContextEntry file)
