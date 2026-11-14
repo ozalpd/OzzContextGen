@@ -84,6 +84,13 @@ public static class SourceLanguages
         MarkdownFence = "json"
     };
 
+    public static readonly SourceLanguage Yaml = new()
+    {
+        Suffix = ".yaml",
+        MarkdownFence = "yaml",
+        LineComment = "#"
+    };
+
     public static readonly SourceLanguage Xml = new()
     {
         Suffix = ".xml",
@@ -379,6 +386,10 @@ public static class SourceLanguages
             [".ts"]     = TypeScript,
             [".css"]    = Css,
             [".json"]   = Json,
+            [".jsonc"]  = Json,
+            [".postman_collection"]  = Json,
+            [".yaml"]   = Yaml,
+            [".yml"]    = Yaml,
             [".xml"]    = Xml,
             [".md"]     = Markdown,
             [".py"]     = Python,
