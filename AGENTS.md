@@ -24,11 +24,11 @@ Source/
 │   └── Models/
 │       ├── ChangeAnalysis.cs          # AnalyzeChangesAsync result: List<FileChangeSummary> + LatestSourceWriteAt
 │       ├── ContextStateProfile.cs     # Root profile record; includes TrackedFiles, ExcludedFolders, LatestSourceWriteAt, metadata & prompts
-│       ├── Enums.cs                   # ChangeType (New/Modified/Unchanged/Deleted) + FileInclusionMode (FullPack/MetadataOnly/Excluded)
-│       ├── FileChangeSummary.cs       # Diff result record; inherits FileContextEntry
-│       ├── FileContextEntry.cs        # Per-file metadata: RelativePath, LastWriteTime, FileHash (SHA-256 hex, authoritative change detector), FileSize, ContextNote, PackingMode (lazy-defaults by size)
+│       ├── Enums.cs                   # ChangeType (New/Modified/Unchanged/Deleted) + PackingMode (Excluded/MetadataOnly/FullPack) + PackLayout (FilesOnly/TreeOnly/TreeAndFiles)
+│       ├── FileChangeSummary.cs       # Diff result record; inherits FileContextEntry; adds AbsolutePath and ChangeType
+│       ├── FileContextEntry.cs        # Per-file metadata: RelativePath, LastWriteTime, FileHash (SHA-256 hex, authoritative change detector), FileSize, ContextNote, PackingMode (lazy-defaults to FullPack/MetadataOnly based on size)
 │       ├── SourceLanguage.cs          # Record: Suffix, MarkdownFence, comment delimiters, XmlDocPrefix
-│       ├── SourceLanguages.cs         # Static registry of 41 built-in SourceLanguage definitions
+│       ├── SourceLanguages.cs         # Static registry of 45 built-in SourceLanguage definitions
 │       └── TokenEstimate.cs           # Heuristic token breakdown record (Ascii, Extended Latin, CJK, Other)
 ├── OzzContextGen.CLI/         # Console frontend (-s, -o, -c, -n flags)
 ├── OzzContextGen.WPF/         # WPF MVVM frontend
@@ -42,8 +42,9 @@ Source/
 │   │   ├── AppSettings.cs             # Singleton; persists UiCulture, MainWindowPosition, RecentFiles to %AppData%/OzzContextGen/wpfsettings.json
 │   │   └── ReleaseSource.cs           # GitHub release info provider for update checks
 │   ├── Resources/                     # Styles.xaml, Converters.xaml
-│   ├── ViewModels/                    # ExcludedFoldersEditVM, FileChangeViewModel, MainViewModel (inherits AbstractViewModel from OzzWpf.Core)
+│   ├── ViewModels/                    # BulkPackingModeEditVM, ExcludedFoldersEditVM, FileChangeViewModel, MainViewModel (inherits AbstractViewModel from OzzWpf.Core)
 │   └── Views/
+│       ├── BulkPackingModeEdit.xaml   # Bulk packing mode editor dialog (applies a single PackingMode to all currently-filtered files)
 │       ├── ExcludedFoldersEdit.xaml   # Profile folder exclusions editor dialog
 │       └── MarkdownView.xaml          # Markdown pack preview window (hosts MarkdownViewer from OzzWpf.Core)
 ├── OzzMarkdown/               # Git submodule — github.com/ozalpd/OzzMarkdown
@@ -85,12 +86,14 @@ Source/
 ## Implemented Features
 
 - Recursive source file scanning with configurable suffixes and excluded folder list (`CodeCrawler`)
-- `SourceLanguage` record + `SourceLanguages` static registry — 41 built-in file type definitions mapping suffix → Markdown fence + comment delimiters + `XmlDocPrefix`
+- `SourceLanguage` record + `SourceLanguages` static registry — 45 built-in file type definitions mapping suffix → Markdown fence + comment delimiters + `XmlDocPrefix`
 - Single Markdown output with per-file fenced code blocks; fence language resolved dynamically via `SourceLanguages.TryGet` (`PackerEngine`)
 - Profile-aware `PackerEngine` overload — uses `ContextStateProfile.SelectedSuffixes` (falls back to all registered suffixes when empty)
 - `.ctxgen` JSON profile files with `SelectedSuffixes` persisting the user’s file-type selection between sessions (`StateService`, `ContextStateProfile`)
 - File-change diff analysis: New / Modified / Unchanged / Deleted (`StateService.AnalyzeChangesAsync`); content-based via SHA-256 `FileHash` (size + timestamp are only a fast path); `LatestSourceWriteAt` on the profile records the newest file write time observed, for comparison with `LastPackedAt`; per-file state stored as `FileContextEntry` (includes `ContextNote` for optional per-file annotations)
 - WPF MVVM GUI: browse source, open/save profile, analyze changes, pack context; round-trips `ProfileName` and `SelectedSuffixes` on save
+- Per-file `RelativePath` filtering in the DataGrid via `SearchText` property and `FilteredFiles` (`ICollectionView`) in `MainViewModel`; filter is case-insensitive substring match, refreshed on every keystroke
+- Bulk packing mode editor (`BulkPackingModeEdit` dialog + `BulkPackingModeEditVM`): applies a chosen `PackingMode` to all currently-filtered files at once; command is only enabled when the filter produces at least one result
 - Per-profile folder exclusions with dialog editor (`ExcludedFoldersEdit`) and fallback defaults (`CtxDefaults`)
 - Profile metadata & system prompts: `RepoUrl`, `License`, `IsOpenSource`, `Description`, and `SystemPrompt` support with sample prompt presets
 - Dedicated tabbed detail view in WPF separating LLM prompt/description editing from per-file details

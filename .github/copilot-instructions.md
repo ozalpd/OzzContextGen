@@ -26,12 +26,12 @@ OzzContextGen is a .NET 10 developer utility that scans source code files and ge
 | `CtxDefaults` | Static class holding default fallback configurations (`ExcludedFolders`, `PrioritySuffixes`, `PriorityFileNames`), default system prompt, and curated sample system prompts. |
 | `PackerEngine` | Produces a single Markdown document with fenced code blocks and relative-path headers. Resolves the fence language via `SourceLanguages.TryGet`. Generates an optional token-efficient plain indented project hierarchy based on `ContextStateProfile.Layout` (`FilesOnly`, `TreeOnly`, `TreeAndFiles`). Profile-aware overload uses `ContextStateProfile.SelectedSuffixes`. Planned: `TrimComments` and `TrimXmlDocs` flags for source trimming. |
 | `SourceLanguage` | Immutable record describing one file type: `Suffix`, `MarkdownFence`, `LineComment`, `BlockCommentStart`, `BlockCommentEnd`, `XmlDocPrefix`. |
-| `SourceLanguages` | Static registry of 44 built-in `SourceLanguage` definitions, keyed by suffix (case-insensitive). Exposes `All` dictionary and `TryGet(suffix)`. |
+| `SourceLanguages` | Static registry of 45 built-in `SourceLanguage` definitions, keyed by suffix (case-insensitive). Exposes `All` dictionary and `TryGet(suffix)`. |
 | `StateService` | Loads/saves `.ctxgen` JSON profile files and computes `FileChangeSummary` diffs (`AnalyzeChangesAsync`; content-based via SHA-256 `FileHash`). |
 | `ChangeAnalysis` | Result of `AnalyzeChangesAsync`: `Changes` list + `LatestSourceWriteAt` (newest file write time observed on disk). |
 | `ContextStateProfile` | Root profile model (record, own file). Contains `TrackedFiles`, `SelectedSuffixes` (persisted suffix selection), `ExcludedFolders` (custom folder exclusions), `Layout` (`PackLayout`), `LayoutHeader` (custom tree section header), `ProfileName`, `TargetSourcePath`, `LastPackedAt`, `LatestSourceWriteAt`, `RepoUrl`, `License`, `IsOpenSource`, `Description`, `SystemPrompt`. |
-| `FileContextEntry` | Per-file metadata record: `RelativePath`, `LastWriteTime`, `FileHash` (SHA-256 hex, authoritative change detector), `FileSize`, `ContextNote`, `InclusionMode` (lazy-defaults to `FullPack` / `MetadataOnly` based on file size). |
-| `FileChangeSummary` | Diff result per file: `ChangeType` (New / Modified / Unchanged / Deleted) + `InclusionMode`. Inherits `FileContextEntry`. |
+| `FileContextEntry` | Per-file metadata record: `RelativePath`, `LastWriteTime`, `FileHash` (SHA-256 hex, authoritative change detector), `FileSize`, `ContextNote`, `PackingMode` (lazy-defaults to `FullPack` / `MetadataOnly` based on file size). |
+| `FileChangeSummary` | Diff result per file: `AbsolutePath`, `ChangeType` (New / Modified / Unchanged / Deleted). Inherits `FileContextEntry` (and therefore `PackingMode`). |
 | `EnumValueItem<T>` | Pairs an enum value with its localized display string; used for binding enum collections to UI controls. |
 | `EnumExtensions` | Extension methods on `Enum`: `GetDisplayValue`, `GetAttribute<T>`, `GetValues<T>`, `GetOrderedValues<T>`, `GetDisplayOrder`. All are `this Enum` extensions. |
 | `FileExtensions` | Extension methods on `int`/`long`: `ToFileSize()` — formats bytes to human-readable string (Bytes / KB / MB / GB). |
@@ -65,6 +65,17 @@ Scan state is persisted as `.ctxgen` files (JSON). `StateService.LoadProfileAsyn
 - `AppVersion` (`OzzMarkdown.Core/Models/AppVersion.cs`): Static class in `OzzMarkdown.Core` (namespace `OzzMarkdown.Core.Models`); exposes `Version`, `FullVersion`, `Product`, `Copyright`, `Description` read from assembly metadata. Uses `Assembly.GetEntryAssembly()` (falling back to `Assembly.GetExecutingAssembly()`) so the reported version is the running application's (e.g. `OzzContextGen.WPF`), not `OzzMarkdown.Core`'s own assembly.
 - `AppSettings` (`Models/AppSettings.cs`): Singleton (thread-safe lazy init); persists `UiCulture`, `MainWindowPosition`, and `RecentFiles` as JSON to `%AppData%/OzzContextGen/wpfsettings.json`. Call `GetAppSettings()` to read, `Save()` to write.
 - `WindowPosition` (`OzzWpf.Core/Models/WindowPosition.cs`): Holds window geometry (`Top`, `Left`, `Width`, `Height`). `GetWindowPositions(window)` captures current state; `SetWindowPositions(window)` restores it with virtual-screen boundary clamping. Namespace: `OzzWpf.Core.Models`.
+
+### WPF Views & ViewModels
+
+| View | ViewModel | Purpose |
+|---|---|---|
+| *(MainWindow.xaml)* | `MainViewModel` | Main application window. Hosts the file DataGrid with `SearchText` / `FilteredFiles` filtering and all primary commands. |
+| `BulkPackingModeEdit` | `BulkPackingModeEditVM` | Dialog that applies a single `PackingMode` to all currently-filtered `FileChangeViewModel` items. `BulkEditPackingModeCommand` is only enabled when `SearchText` is non-empty and at least one filtered file exists. |
+| `ExcludedFoldersEdit` | `ExcludedFoldersEditVM` | Dialog for editing the per-profile excluded folder list. |
+| `MarkdownView` | *(no dedicated VM)* | Preview window that renders the generated Markdown pack via `MarkdownViewer` (WebView2 wrapper from `OzzWpf.Core`). |
+
+All dialogs use the `RequestClose` / `DialogResult` event pattern: the ViewModel fires `RequestClose`, the code-behind sets `DialogResult` and calls `Close()`.
 
 ## MAUI Frontend Notes (Planned)
 

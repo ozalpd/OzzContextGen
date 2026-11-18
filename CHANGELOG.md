@@ -31,9 +31,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added an About button to the main toolbar with a localized tooltip.
 - Added Batch and Pascal language definitions to PrismJS for improved code block highlighting. Updated minified assets accordingly.
 - Added support for opening a profile file passed by the OS (e.g. via double-click on an associated `.md` file): `App.OnStartup` now reads the launch arguments and passes the file path to a new `MainWindow(string? filePathToOpen)` constructor overload, which loads it through a new `MainViewModel.OpenProfile` method once the view model is initialized.
+- Added JSONC (`.jsonc`), Postman collection (`.postman_collection`), and YAML (`.yaml`, `.yml`) suffixes to the built-in source registry.
+- Added live relative-path filtering and a filtered-file count to the WPF file list, with bulk packing-mode editing for filtered files.
+- Added a separate Markdown preview window for each generated pack.
 
 ### Changed
 - `MainViewModel`: Packing allowed if files are selected; prompts for output path if missing.
+- File-change analysis now uses SHA-256 content hashes as the authoritative change detector, with size and timestamp checks as a fast path.
+- JSON, JSONC, and Postman collection files default to metadata-only packing with an explanatory context note.
+- Generated code fences now exceed the longest backtick run in the source; empty files receive an explicit marker instead of an empty code block.
+- Refined how per-file context notes are rendered in Markdown.
 - Refined link colors in all built-in Markdown themes for better consistency and accessibility.
 - Added `.iss` (Inno Setup) and `.bat` (Batch) to SourceLanguages, expanding built-in types to 32.
 - Moved AppVersion to OzzWpf.Core/Models, improved version reporting using Assembly.GetEntryAssembly() with fallback.
@@ -41,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replaced old icons with new `CtxGen-Icon.ico` and `CtxGen-Icon-832.png`. Updated project and window to use the new `.ico` file as the application icon.
 
 ### Fixed
+- The recent-profile picker now warns when a profile file is missing and removes the invalid entry.
 - Fixed `AppVersion` (in `OzzWpf.Core`) reporting its own assembly's version instead of the hosting application's; now uses `Assembly.GetEntryAssembly()` with a fallback to `Assembly.GetExecutingAssembly()`.
 
 ### Planned
@@ -153,7 +161,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CLI entry point with `--source` and `--output` startup parameters
 - Localization support (English and Turkish) via `OzzContextGen.i18n`
 
-[Unreleased]: https://github.com/ozalpd/OzzContextGen/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/ozalpd/OzzContextGen/compare/v0.1.6...HEAD
 [0.1.0]: https://github.com/ozalpd/OzzContextGen/compare/v0.0.3...v0.1.0
 [0.0.3]: https://github.com/ozalpd/OzzContextGen/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/ozalpd/OzzContextGen/compare/v0.0.1...v0.0.2

@@ -39,6 +39,7 @@ OzzContextGen/
 │   │   │   ├── EnumExtensions.cs
 │   │   │   └── FileExtensions.cs
 │   │   └── Models/
+│   │       ├── ChangeAnalysis.cs
 │   │       ├── ContextStateProfile.cs
 │   │       ├── Enums.cs
 │   │       ├── FileChangeSummary.cs
@@ -63,10 +64,12 @@ OzzContextGen/
 │   │   │   ├── Converters.xaml
 │   │   │   └── Styles.xaml
 │   │   ├── ViewModels/
+│   │   │   ├── BulkPackingModeEditVM.cs
 │   │   │   ├── ExcludedFoldersEditVM.cs
 │   │   │   ├── FileChangeViewModel.cs
 │   │   │   └── MainViewModel.cs
 │   │   └── Views/
+│   │       ├── BulkPackingModeEdit.xaml
 │   │       ├── ExcludedFoldersEdit.xaml
 │   │       └── MarkdownView.xaml
 │   ├── OzzMarkdown/              # Git submodule — github.com/ozalpd/OzzMarkdown
@@ -100,21 +103,23 @@ OzzContextGen/
 ## Features
 
 - Select a solution directory or local repository as the source
-- Scan code files by folder, extension, or naming pattern
-- Group files into context categories via `.ctxgen` profile files
-- Generate a single Markdown file with fenced code blocks per file
-- Include relative file paths as section headers
+- Scan registered file suffixes recursively, with per-profile suffix selection and configurable excluded folders; default exclusions cover common .NET, Node, Unity, and build-cache directories
+- Save scan state and per-file settings in `.ctxgen` profiles; file changes are detected by SHA-256 content hashes, with size and timestamp checks used as a fast path
+- Choose per-file `FullPack`, `MetadataOnly`, or `Excluded` packing modes and add context notes; large files and selected generated/configuration formats default to metadata-only
+- Generate a single Markdown file with a safe-length code fence for each non-empty file and an explicit marker for empty files
+- Include relative file paths as section headers; WPF displays a Markdown preview after generating the output
 - Per-profile file type selection — choose which suffixes each `.ctxgen` profile scans; persisted between sessions
+- WPF live filtering by relative file path, a filtered-result count, and bulk packing-mode changes for filtered files
 - WPF toolbar picker for up to 10 recently opened or saved `.ctxgen` profiles, persisted in application settings; displays the active profile's filename
 - Profile-relative source paths — a profile's source path may be stored relative to the `.ctxgen` file and is resolved to an absolute path at runtime, keeping profiles portable
-- Per-profile folder exclusion management with dedicated editor dialog and centralized sensible defaults (including .NET, Node, Unity, and build cache exclusions)
+- Per-profile folder exclusion management with dedicated editor dialog and centralized sensible defaults
 - Project metadata and LLM directives — configure Repo URL, License, Open Source flag, Description, and System Prompts per profile with curated preset templates
 - Pack layout options — output source files only, an LLM-optimized plain indented folder structure tree (2 spaces per depth level, trailing slashes, no box characters), or both, with customizable tree section header
 - Prioritized file ordering — project definitions (`.slnx`, `.sln`, `.csproj`, `.asmdef`, etc.) and package manifests (`package.json`, `tsconfig.json`, `manifest.json`) are automatically positioned first within directory listings for optimal LLM context loading
 
 ## Supported File Types
 
-OzzContextGen recognises the following file types out of the box. Each is scanned automatically and wrapped in the correct Markdown fence in the output. Comment delimiters are stored for the planned **source trimming** feature.
+OzzContextGen recognises the following file types. All registered suffixes are scanned by default; a `.ctxgen` profile can restrict the selection. Files are wrapped in the corresponding Markdown fence. Comment delimiters are stored for the planned **source trimming** feature.
 
 | Suffix | Markdown Fence | Line Comment | Block Comment | XML Doc |
 |---|---|---|---|---|
@@ -123,6 +128,10 @@ OzzContextGen recognises the following file types out of the box. Each is scanne
 | `.css` | `css` | — | `/* */` | — |
 | `.js` | `javascript` | `//` | `/* */` | — |
 | `.json` | `json` | — | — | — |
+| `.jsonc` | `json` | — | — | — |
+| `.postman_collection` | `json` | — | — | — |
+| `.yaml` | `yaml` | `#` | — | — |
+| `.yml` | `yaml` | `#` | — | — |
 | `.html` | `html` | — | `<!-- -->` | — |
 | `.sql` | `sql` | `--` | `/* */` | — |
 | `.ts` | `typescript` | `//` | `/* */` | `///` |
@@ -136,7 +145,7 @@ OzzContextGen recognises the following file types out of the box. Each is scanne
 | `.resx` | `xml` | — | `<!-- -->` | — |
 | `.sln` | `text` | — | — | — |
 | `.slnx` | `xml` | — | `<!-- -->` | — |
-| `.OzzGen` | `xml` | — | `<!-- -->` | — |
+| `.ozzgen` | `xml` | — | `<!-- -->` | — |
 | `.settings` | `xml` | — | `<!-- -->` | — |
 | `.cpp` | `cpp` | `//` | `/* */` | — |
 | `.h` | `cpp` | `//` | `/* */` | — |
@@ -165,8 +174,8 @@ OzzContextGen recognises the following file types out of the box. Each is scanne
 
 ## Planned Features
 
-- Configurable include and exclude rules
-- Preview generated context before saving
+- Configurable include rules and file-pattern exclusions beyond the existing suffix selection and folder exclusions
+- Live preview of generated context before writing the output file
 - Regenerate context files automatically when source code changes
 - **Source trimming** — optionally strip comments (`TrimComments`) and/or XML documentation lines (`TrimXmlDocs`) from packed output to reduce file size and token count
 
